@@ -1,0 +1,33 @@
+type Customer {
+    custCode: ID!
+    custName: String!
+    custCity:  String
+    workingArea: String!
+    custCounty: String!
+    grade: Int
+    openingAMT: Float!
+    receiveAMT: Float!
+    paymentAMT: Float!
+    outstandingAMT: Float!
+    phoneNO: String!
+    agentCode: ID!
+}
+
+type Agent {
+    custCode: ID!
+    agentName: String
+    workingArea: String
+    commision: Float
+    phoneNO: String
+    country: String
+}
+
+type Order {
+    ordNUM: ID!
+    ordAMT: Float
+    advanceAMT: Float
+    ordDate: String
+    agentCode: ID
+    custCode: ID
+    ordDescription: String
+}
