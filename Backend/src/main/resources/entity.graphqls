@@ -1,3 +1,9 @@
+type Query {
+    customerById(custCode: ID): Customer
+    AgentById(agentCode: ID): Agent
+    OrderById(ordNum: ID): Order
+}
+
 type Customer {
     custCode: ID!
     custName: String!
@@ -14,7 +20,7 @@ type Customer {
 }
 
 type Agent {
-    custCode: ID!
+    agentCode: ID!
     agentName: String
     workingArea: String
     commision: Float
@@ -23,7 +29,7 @@ type Agent {
 }
 
 type Order {
-    ordNUM: ID!
+    ordNum: ID!
     ordAMT: Float
     advanceAMT: Float
     ordDate: String
