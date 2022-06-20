@@ -1,0 +1,5 @@
+type Query {
+    customerById(custCode: ID): Customer
+    AgentById(agentCode: ID): Agent
+    OrderById(ordNum: ID): Order
+}

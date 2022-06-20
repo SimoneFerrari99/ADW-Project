@@ -1,0 +1,14 @@
+type Customer {
+    custCode: ID!
+    custName: String!
+    custCity:  String
+    workingArea: String!
+    custCounty: String!
+    grade: Int
+    openingAMT: Float!
+    receiveAMT: Float!
+    paymentAMT: Float!
+    outstandingAMT: Float!
+    phoneNO: String!
+    agentCode: ID!
+}
