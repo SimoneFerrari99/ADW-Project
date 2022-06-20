@@ -2,7 +2,6 @@ package com.adwProject.Backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -13,9 +12,22 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
+	/*
 	@GetMapping("/hello")
 	public String hello(){
 		return String.format("Ciao!");
 	}
+	*/
+	/*
+	curl -X POST \
+			--data '{"query": "query { agents(agent_code: A007)}"}' \
+			-H "Content-Type: application/json" \
+	http://localhost:8081/graphql
+
+	curl -X POST -H "Content-Type: application/json" \
+			-d '{"agent_code": "A007"}' \
+	http://localhost:8081/graphql
+
+	 */
 
 }

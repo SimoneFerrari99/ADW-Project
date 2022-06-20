@@ -17,6 +17,13 @@
 		<java.version>17</java.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>clojars.org</id>
+			<url>https://repo.clojars.org</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,6 +58,22 @@
 			<artifactId>spring-graphql-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.graphqlize/graphqlize-java -->
+		<dependency>
+			<groupId>org.graphqlize</groupId>
+			<artifactId>graphqlize-java</artifactId>
+			<version>0.1.0-alpha20</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.4.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
