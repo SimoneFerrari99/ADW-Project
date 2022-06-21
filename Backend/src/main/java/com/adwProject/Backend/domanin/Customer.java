@@ -13,7 +13,7 @@ public class Customer {
     String custCity;
     String workingArea;
     String custCountry;
-    Integer grade;
+    int grade;
     Float openingAMT;
     Float receiveAMT;
     Float paymentAMT;

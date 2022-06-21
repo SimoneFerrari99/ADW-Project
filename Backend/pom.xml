@@ -15,6 +15,7 @@
 	<description>Backend del progetto per il corso ADW</description>
 	<properties>
 		<java.version>17</java.version>
+		<kotlin.version>1.5.0</kotlin.version>
 	</properties>
 
 	<repositories>
@@ -57,13 +58,6 @@
 			<groupId>org.springframework.graphql</groupId>
 			<artifactId>spring-graphql-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.graphqlize/graphqlize-java -->
-		<dependency>
-			<groupId>org.graphqlize</groupId>
-			<artifactId>graphqlize-java</artifactId>
-			<version>0.1.0-alpha20</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
