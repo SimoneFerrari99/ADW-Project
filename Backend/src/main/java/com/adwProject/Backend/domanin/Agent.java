@@ -11,7 +11,7 @@ public class Agent {
     UUID agentCode;
     String agentName;
     String workingArea;
-    Float commision;
+    float commision;
     String phoneNO;
     String country;
 }

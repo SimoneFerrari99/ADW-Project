@@ -9,8 +9,8 @@ import java.util.UUID;
 @Value
 public class Order {
     UUID ordNum;
-    Float ordAMT;
-    Float advanceAMT;
+    float ordAMT;
+    float advanceAMT;
     String ordDate;
     UUID agentCode;
     UUID custCode;

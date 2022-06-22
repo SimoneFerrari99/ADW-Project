@@ -14,10 +14,10 @@ public class Customer {
     String workingArea;
     String custCountry;
     int grade;
-    Float openingAMT;
-    Float receiveAMT;
-    Float paymentAMT;
-    Float outstandingAMT;
+    float openingAMT;
+    float receiveAMT;
+    float paymentAMT;
+    float outstandingAMT;
     String phoneNO;
     UUID agentCode;
 }

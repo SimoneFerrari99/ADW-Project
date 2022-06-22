@@ -1,6 +1,7 @@
 package com.adwProject.Backend.resolver;
 
 import com.adwProject.Backend.domanin.Agent;
+import com.adwProject.Backend.domanin.Customer;
 import com.adwProject.Backend.domanin.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,11 @@ public class OrderResolver {
                 .custCode(UUID.randomUUID())
                 .ordDescription("prova")
                 .build();
+    }
+    public Customer customerById(UUID custCode) {
+        return Customer.builder().custCode(custCode).build();
+    }
+    public Agent agentById(UUID agentCode) {
+        return Agent.builder().agentCode(agentCode).build();
     }
 }

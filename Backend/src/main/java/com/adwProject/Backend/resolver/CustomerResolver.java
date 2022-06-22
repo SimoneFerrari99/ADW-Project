@@ -29,11 +29,13 @@ public class CustomerResolver implements GraphQLQueryResolver {
                 .agentCode(UUID.randomUUID())
                 .build();
     }
-
     public Agent agentById(UUID agentCode) {
         return Agent.builder().agentCode(agentCode).build();
     }
     public Order orderById(UUID ordNum) {
         return Order.builder().ordNum(ordNum).build();
+    }
+    public Customer getcustCounty() {
+        return Customer.builder().build();
     }
 }
