@@ -1,4 +1,4 @@
-package com.adwProject.Backend.Models;
+package com.adwProject.Backend.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

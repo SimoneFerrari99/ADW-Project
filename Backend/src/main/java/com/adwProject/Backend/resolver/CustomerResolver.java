@@ -1,17 +1,17 @@
 package com.adwProject.Backend.resolver;
 
-import com.adwProject.Backend.domanin.Agent;
-import com.adwProject.Backend.domanin.Customer;
-import com.adwProject.Backend.domanin.Order;
+import com.adwProject.Backend.entity.Agent;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @Slf4j
+@AllArgsConstructor
 public class CustomerResolver implements GraphQLQueryResolver {
-    public Customer customerById(long id) {
+    /*public Customer customerById(long id) {
         log.info("Retrieving customer id: {}", id);
 
         return Customer.builder()
@@ -37,5 +37,9 @@ public class CustomerResolver implements GraphQLQueryResolver {
     }
     public Customer getcustCounty() {
         return Customer.builder().build();
+    }*/
+    private final CustomerService customerService;
+    public Agent customerById(long id) {
+        return CustomerService.getById(id);
     }
 }
