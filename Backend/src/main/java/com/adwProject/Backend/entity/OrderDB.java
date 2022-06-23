@@ -1,8 +1,15 @@
 package com.adwProject.Backend.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.UUID;
 
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "orders", schema= "public")
 public class OrderDB {

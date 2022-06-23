@@ -3,6 +3,7 @@ package com.adwProject.Backend.resolver;
 import com.adwProject.Backend.domanin.Agent;
 import com.adwProject.Backend.domanin.Customer;
 import com.adwProject.Backend.domanin.Order;
+import com.adwProject.Backend.entity.CustomerDB;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Component
 @Slf4j
 public class CustomerResolver implements GraphQLQueryResolver {
+
     public Customer customerById(UUID id) {
         log.info("Retrieving customer id: {}", id);
 
