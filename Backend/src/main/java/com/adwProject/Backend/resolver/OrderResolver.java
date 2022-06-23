@@ -1,8 +1,7 @@
 package com.adwProject.Backend.resolver;
 
-import com.adwProject.Backend.domanin.Agent;
-import com.adwProject.Backend.domanin.Customer;
-import com.adwProject.Backend.domanin.Order;
+import com.adwProject.Backend.entity.Agent;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +9,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
+@AllArgsConstructor
 public class OrderResolver {
-    public Order orderById(long id) {
+    /*public Order orderById(long id) {
         log.info("Retrieving order id: {}", id);
 
         return Order.builder()
@@ -29,5 +29,10 @@ public class OrderResolver {
     }
     public Agent agentById(long agentCode) {
         return Agent.builder().agentCode(agentCode).build();
+    }*/
+    private final OrderService orderService;
+    public Agent orderById(long id) {
+        return OrderService.getById(id);
     }
+}
 }

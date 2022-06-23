@@ -1,6 +1,6 @@
 package com.adwProject.Backend;
 
-import com.adwProject.Backend.Models.Customer;
+import com.adwProject.Backend.entity.Customer;
 import com.adwProject.Backend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
