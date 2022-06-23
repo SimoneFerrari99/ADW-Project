@@ -8,12 +8,16 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
+
 @Component
 @Slf4j
 public class CustomerResolver implements GraphQLQueryResolver {
+<<<<<<< Updated upstream
 
     public Customer customerById(UUID id) {
+=======
+    public Customer customerById(long id) {
+>>>>>>> Stashed changes
         log.info("Retrieving customer id: {}", id);
 
         return Customer.builder()
@@ -28,13 +32,13 @@ public class CustomerResolver implements GraphQLQueryResolver {
                 .paymentAMT(5.5f)
                 .outstandingAMT(5.5f)
                 .phoneNO("test")
-                .agentCode(UUID.randomUUID())
+                .agentCode(1)
                 .build();
     }
-    public Agent agentById(UUID agentCode) {
+    public Agent agentById(long agentCode) {
         return Agent.builder().agentCode(agentCode).build();
     }
-    public Order orderById(UUID ordNum) {
+    public Order orderById(long ordNum) {
         return Order.builder().ordNum(ordNum).build();
     }
     public Customer getcustCounty() {

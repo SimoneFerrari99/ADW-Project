@@ -1,12 +1,12 @@
 package com.adwProject.Backend.repository;
 
-import com.adwProject.Backend.entity.AgentDB;
+import com.adwProject.Backend.Models.Agent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
+
 
 @Repository
-public interface AgentRepository extends JpaRepository<AgentDB, UUID> {
+public interface AgentRepository extends JpaRepository<Agent, Long> {
 
 }

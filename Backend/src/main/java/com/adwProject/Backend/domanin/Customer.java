@@ -3,12 +3,12 @@ package com.adwProject.Backend.domanin;
 import lombok.Builder;
 import lombok.Value;
 
-import java.util.UUID;
+
 
 @Value
 @Builder
 public class Customer {
-    UUID custCode;
+    long custCode;
     String custName;
     String custCity;
     String workingArea;
@@ -19,5 +19,5 @@ public class Customer {
     float paymentAMT;
     float outstandingAMT;
     String phoneNO;
-    UUID agentCode;
+    long agentCode;
 }

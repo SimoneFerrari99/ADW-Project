@@ -1,21 +1,22 @@
-package com.adwProject.Backend.entity;
+package com.adwProject.Backend.Models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.UUID;
+
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "customer", schema= "public")
-public class CustomerDB {
+public class Customer {
     @Id
-    private UUID custCode;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, name = "CUST_CODE")
+    private long custCode;
 
     @Column(name = "CUST_NAME")
     private String custName;
@@ -28,44 +29,28 @@ public class CustomerDB {
     @Column(name = "GRADE")
     private int grade;
     @Column(name = "OPENING_AMT")
-    private Float openingAMT;
+    private float openingAMT;
     @Column(name = "RECEIVE_AMT")
-    private Float receiveAMT;
+    private float receiveAMT;
     @Column(name = "PAYMENT_AMT")
-    private Float paymentAMT;
+    private float paymentAMT;
     @Column(name = "OUTSTANDING_AMT")
-    private Float outstandingAMT;
+    private float outstandingAMT;
     @Column(name = "PHONE_NO")
     private String phoneNO;
     @ManyToOne
     @JoinColumn(name = "agentCode")
-    private AgentDB agentCode;
-    @OneToMany(mappedBy = "custCode")
-    private List<OrderDB> order;
+    private Agent agentCode;
 
-    @Override
-    public String toString() {
-        return "CustomerDB{" +
-                "custCode=" + custCode +
-                ", custName='" + custName + '\'' +
-                ", custCity='" + custCity + '\'' +
-                ", workingArea='" + workingArea + '\'' +
-                ", custCountry='" + custCountry + '\'' +
-                ", grade=" + grade +
-                ", openingAMT=" + openingAMT +
-                ", receiveAMT=" + receiveAMT +
-                ", paymentAMT=" + paymentAMT +
-                ", outstandingAMT=" + outstandingAMT +
-                ", phoneNO='" + phoneNO + '\'' +
-                ", agentCode=" + agentCode +
-                '}';
-    }
+    /*@OneToMany(mappedBy = "custCode")
+    private List<OrderDB> order;*/
 
-    public UUID getCustCode() {
+
+    public long getCustCode() {
         return custCode;
     }
 
-    public void setCustCode(UUID custCode) {
+    public void setCustCode(long custCode) {
         this.custCode = custCode;
     }
 
@@ -109,35 +94,35 @@ public class CustomerDB {
         this.grade = grade;
     }
 
-    public Float getOpeningAMT() {
+    public float getOpeningAMT() {
         return openingAMT;
     }
 
-    public void setOpeningAMT(Float openingAMT) {
+    public void setOpeningAMT(float openingAMT) {
         this.openingAMT = openingAMT;
     }
 
-    public Float getReceiveAMT() {
+    public float getReceiveAMT() {
         return receiveAMT;
     }
 
-    public void setReceiveAMT(Float receiveAMT) {
+    public void setReceiveAMT(float receiveAMT) {
         this.receiveAMT = receiveAMT;
     }
 
-    public Float getPaymentAMT() {
+    public float getPaymentAMT() {
         return paymentAMT;
     }
 
-    public void setPaymentAMT(Float paymentAMT) {
+    public void setPaymentAMT(float paymentAMT) {
         this.paymentAMT = paymentAMT;
     }
 
-    public Float getOutstandingAMT() {
+    public float getOutstandingAMT() {
         return outstandingAMT;
     }
 
-    public void setOutstandingAMT(Float outstandingAMT) {
+    public void setOutstandingAMT(float outstandingAMT) {
         this.outstandingAMT = outstandingAMT;
     }
 
@@ -149,11 +134,30 @@ public class CustomerDB {
         this.phoneNO = phoneNO;
     }
 
-    public AgentDB getAgentCode() {
+    public Agent getAgentCode() {
         return agentCode;
     }
 
-    public void setAgentCode(AgentDB agentCode) {
+    public void setAgentCode(Agent agentCode) {
         this.agentCode = agentCode;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerDB{" +
+                "custCode=" + custCode +
+                ", custName='" + custName + '\'' +
+                ", custCity='" + custCity + '\'' +
+                ", workingArea='" + workingArea + '\'' +
+                ", custCountry='" + custCountry + '\'' +
+                ", grade=" + grade +
+                ", openingAMT=" + openingAMT +
+                ", receiveAMT=" + receiveAMT +
+                ", paymentAMT=" + paymentAMT +
+                ", outstandingAMT=" + outstandingAMT +
+                ", phoneNO='" + phoneNO + '\'' +
+                ", agentCode=" + agentCode +
+                '}';
+    }
+
 }

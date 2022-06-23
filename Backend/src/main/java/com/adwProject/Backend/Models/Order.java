@@ -1,20 +1,22 @@
-package com.adwProject.Backend.entity;
+package com.adwProject.Backend.Models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.UUID;
+
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "orders", schema= "public")
-public class OrderDB {
+public class Order {
     @Id
-    private UUID ordNum;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, name = "ORD_NUM")
+    private long ordNum;
 
     @Column(name = "ORD_AMOUNT")
     private float ordAMT;
@@ -26,34 +28,22 @@ public class OrderDB {
     @MapsId
     @ManyToOne
     @JoinColumn(name = "agentCode")
-    private AgentDB agentCode;
+    private Agent agentCode;
 
     @MapsId
     @ManyToOne
     @JoinColumn(name = "custCode")
-    private CustomerDB custCode;
+    private Customer custCode;
 
     @Column(name = "ORD_DESCRIPTION")
     private String ordDescription;
 
-    @Override
-    public String toString() {
-        return "OrderDB{" +
-                "ordNum=" + ordNum +
-                ", ordAMT=" + ordAMT +
-                ", advanceAMT=" + advanceAMT +
-                ", ordDate='" + ordDate + '\'' +
-                ", agentCode=" + agentCode +
-                ", custCode=" + custCode +
-                ", ordDescription='" + ordDescription + '\'' +
-                '}';
-    }
 
-    public UUID getOrdNum() {
+    public long getOrdNum() {
         return ordNum;
     }
 
-    public void setOrdNum(UUID ordNum) {
+    public void setOrdNum(long ordNum) {
         this.ordNum = ordNum;
     }
 
@@ -81,19 +71,19 @@ public class OrderDB {
         this.ordDate = ordDate;
     }
 
-    public AgentDB getAgentCode() {
+    public Agent getAgentCode() {
         return agentCode;
     }
 
-    public void setAgentCode(AgentDB agentCode) {
+    public void setAgentCode(Agent agentCode) {
         this.agentCode = agentCode;
     }
 
-    public CustomerDB getCustCode() {
+    public Customer getCustCode() {
         return custCode;
     }
 
-    public void setCustCode(CustomerDB custCode) {
+    public void setCustCode(Customer custCode) {
         this.custCode = custCode;
     }
 
@@ -103,5 +93,18 @@ public class OrderDB {
 
     public void setOrdDescription(String ordDescription) {
         this.ordDescription = ordDescription;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDB{" +
+                "ordNum=" + ordNum +
+                ", ordAMT=" + ordAMT +
+                ", advanceAMT=" + advanceAMT +
+                ", ordDate='" + ordDate + '\'' +
+                ", agentCode=" + agentCode +
+                ", custCode=" + custCode +
+                ", ordDescription='" + ordDescription + '\'' +
+                '}';
     }
 }

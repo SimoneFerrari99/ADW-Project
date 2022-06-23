@@ -3,16 +3,16 @@ package com.adwProject.Backend.domanin;
 import lombok.Builder;
 import lombok.Value;
 
-import java.util.UUID;
+
 
 @Builder
 @Value
 public class Order {
-    UUID ordNum;
+    long ordNum;
     float ordAMT;
     float advanceAMT;
     String ordDate;
-    UUID agentCode;
-    UUID custCode;
+    long agentCode;
+    long custCode;
     String ordDescription;
 }

@@ -1,21 +1,22 @@
-package com.adwProject.Backend.entity;
+package com.adwProject.Backend.Models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.UUID;
+
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "agents", schema= "public")
-public class AgentDB {
+public class Agent {
     @Id
-    private UUID agentCode;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, name = "AGENT_CODE")
+    private long agentCode;
     @Column(name = "AGENT_NAME")
     private String agentName;
     @Column(name = "WORKING_AREA")
@@ -26,26 +27,16 @@ public class AgentDB {
     private String phoneNO;
     @Column(name = "COUNTRY")
     private String country;
-    @OneToMany(mappedBy = "agentCode")
-    private List<CustomerDB> customer;
+    /*@OneToMany(mappedBy = "agentCode")
+    private List<CustomerDB> customer;*/
 
-    @Override
-    public String toString() {
-        return "AgentDB{" +
-                "agentCode=" + agentCode +
-                ", agentName='" + agentName + '\'' +
-                ", workingArea='" + workingArea + '\'' +
-                ", commision=" + commission +
-                ", phoneNO='" + phoneNO + '\'' +
-                ", country='" + country + '\'' +
-                '}';
-    }
 
-    public UUID getAgentCode() {
+
+    public long getAgentCode() {
         return agentCode;
     }
 
-    public void setAgentCode(UUID agentCode) {
+    public void setAgentCode(long agentCode) {
         this.agentCode = agentCode;
     }
 
@@ -87,5 +78,17 @@ public class AgentDB {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return "AgentDB{" +
+                "agentCode=" + agentCode +
+                ", agentName='" + agentName + '\'' +
+                ", workingArea='" + workingArea + '\'' +
+                ", commision=" + commission +
+                ", phoneNO='" + phoneNO + '\'' +
+                ", country='" + country + '\'' +
+                '}';
     }
 }

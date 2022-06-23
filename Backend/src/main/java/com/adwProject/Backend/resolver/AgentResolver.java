@@ -6,12 +6,12 @@ import com.adwProject.Backend.domanin.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
+
 
 @Component
 @Slf4j
 public class AgentResolver {
-    public Agent agentById(UUID id) {
+    public Agent agentById(long id) {
         log.info("Retrieving agent id: {}", id);
 
         return Agent.builder()
@@ -23,10 +23,10 @@ public class AgentResolver {
                 .country("Svizzera")
                 .build();
     }
-    public Customer customerById(UUID custCode) {
+    public Customer customerById(long custCode) {
         return Customer.builder().custCode(custCode).build();
     }
-    public Order orderById(UUID ordNum) {
+    public Order orderById(long ordNum) {
         return Order.builder().ordNum(ordNum).build();
     }
 }
