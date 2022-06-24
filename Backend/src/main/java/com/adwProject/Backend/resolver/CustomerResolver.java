@@ -1,6 +1,8 @@
 package com.adwProject.Backend.resolver;
 
 import com.adwProject.Backend.entity.Agent;
+import com.adwProject.Backend.entity.Customer;
+import com.adwProject.Backend.service.customer.CustomerService;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +41,7 @@ public class CustomerResolver implements GraphQLQueryResolver {
         return Customer.builder().build();
     }*/
     private final CustomerService customerService;
-    public Agent customerById(long id) {
-        return CustomerService.getById(id);
+    public Customer customerById(long custCode) {
+        return customerService.getById(custCode);
     }
 }

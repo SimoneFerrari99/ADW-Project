@@ -1,6 +1,9 @@
 package com.adwProject.Backend.resolver;
 
 import com.adwProject.Backend.entity.Agent;
+import com.adwProject.Backend.entity.Order;
+import com.adwProject.Backend.service.order.OrderService;
+import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -10,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @AllArgsConstructor
-public class OrderResolver {
+public class OrderResolver implements GraphQLQueryResolver {
     /*public Order orderById(long id) {
         log.info("Retrieving order id: {}", id);
 
@@ -31,8 +34,7 @@ public class OrderResolver {
         return Agent.builder().agentCode(agentCode).build();
     }*/
     private final OrderService orderService;
-    public Agent orderById(long id) {
-        return OrderService.getById(id);
+    public Order orderById(long ordNum) {
+        return orderService.getById(ordNum);
     }
-}
 }

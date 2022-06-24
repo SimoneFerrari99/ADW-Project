@@ -2,7 +2,7 @@ type Agent {
     agentCode: ID!
     agentName: String
     workingArea: String
-    commision: Float
+    commission: Float
     phoneNO: String
     country: String
 }

@@ -3,6 +3,7 @@ package com.adwProject.Backend.helper.map;
 import com.adwProject.Backend.domanin.AgentInput;
 import com.adwProject.Backend.entity.Agent;
 
+// For Mutation
 public class MapAgent {
     public Agent mapInputToAgent(AgentInput agentInput) {
         Agent agent = new Agent();

@@ -3,7 +3,7 @@ type Customer {
     custName: String!
     custCity:  String
     workingArea: String!
-    custCounty: String!
+    custCountry: String!
     grade: Int
     openingAMT: Float!
     receiveAMT: Float!
