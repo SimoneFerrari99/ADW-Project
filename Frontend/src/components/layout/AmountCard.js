@@ -13,11 +13,9 @@ import ReceiptRoundedIcon from "@mui/icons-material/ReceiptRounded";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ STYLES IMPORT */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GRAPHQL QUERY */
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ COMPONENT */
-const euros = 100;
-
 const getIconFromName = (iconName) => {
 	switch (iconName) {
 		case "opening":
@@ -33,7 +31,7 @@ const getIconFromName = (iconName) => {
 	}
 };
 
-export default function AmountCard({ title, bgColor, iconName }) {
+export default function AmountCard({ title, amtValue, bgColor, iconName }) {
 	return (
 		<Card sx={{ boxShadow: 4, backgroundColor: `${bgColor}` }}>
 			<CardContent
@@ -50,8 +48,8 @@ export default function AmountCard({ title, bgColor, iconName }) {
 						{title}
 					</Typography>
 
-					<Typography variant="p" component="div" align="center">
-						<Box>€{euros}</Box>
+					<Typography variant="p" component="div" align="center" sx={{ fontSize: "1.5rem" }}>
+						<Box>€{amtValue}</Box>
 					</Typography>
 				</Box>
 			</CardContent>
