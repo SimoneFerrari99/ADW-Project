@@ -1,4 +1,4 @@
-package com.adwProject.Backend.domanin;
+package com.adwProject.Backend.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -11,11 +11,11 @@ import lombok.Value;
 @Builder
 @Value
 public class OrderInput {
-    long ordNum;
+    String ordNum;
     float ordAMT;
     float advanceAMT;
     String ordDate;
-    long agentCode;
-    long custCode;
+    String agentCode;
+    String custCode;
     String ordDescription;
 }

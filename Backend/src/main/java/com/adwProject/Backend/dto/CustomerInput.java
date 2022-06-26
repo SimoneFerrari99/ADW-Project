@@ -1,4 +1,4 @@
-package com.adwProject.Backend.domanin;
+package com.adwProject.Backend.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Value;
 @Value
 @Builder
 public class CustomerInput {
-    long custCode;
+    String custCode;
     String custName;
     String custCity;
     String workingArea;
@@ -22,5 +22,5 @@ public class CustomerInput {
     float paymentAMT;
     float outstandingAMT;
     String phoneNO;
-    long agentCode;
+    String agentCode;
 }

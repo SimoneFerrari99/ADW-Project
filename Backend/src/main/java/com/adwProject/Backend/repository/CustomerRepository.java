@@ -10,10 +10,10 @@ import java.util.Optional;
 
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, String> {
 
-    Optional<Customer> findById(Long id);
+    Optional<Customer> findById(String id);
 
-    @Query(value = "SELECT * FROM public.listing ORDER BY created_at OFFSET ?1*?2 LIMIT ?2", nativeQuery = true)
+    @Query(value = "SELECT * FROM public.CUSTOMER", nativeQuery = true)
     List<Customer> get(Integer skip, Integer take);
 }

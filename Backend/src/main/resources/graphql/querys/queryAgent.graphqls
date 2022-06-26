@@ -3,5 +3,5 @@ schema {
 }
 
 type Query {
-    agentById(agentCode: ID!): Agent
+    agentById(agentCode: String!): Agent
 }

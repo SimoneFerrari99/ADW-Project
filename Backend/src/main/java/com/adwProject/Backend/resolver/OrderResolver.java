@@ -34,7 +34,7 @@ public class OrderResolver implements GraphQLQueryResolver {
         return Agent.builder().agentCode(agentCode).build();
     }*/
     private final OrderService orderService;
-    public Order orderById(long ordNum) {
+    public Order orderById(String ordNum) {
         return orderService.getById(ordNum);
     }
 }

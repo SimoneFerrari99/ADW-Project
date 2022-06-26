@@ -1,6 +1,6 @@
 package com.adwProject.Backend.helper.map;
 
-import com.adwProject.Backend.domanin.CustomerInput;
+import com.adwProject.Backend.dto.CustomerInput;
 import com.adwProject.Backend.entity.Agent;
 import com.adwProject.Backend.entity.Customer;
 import org.springframework.stereotype.Component;

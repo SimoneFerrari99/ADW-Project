@@ -1,4 +1,4 @@
-package com.adwProject.Backend.domanin;
+package com.adwProject.Backend.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Value;
 @Value
 @Builder
 public class AgentInput {
-    long agentCode;
+    String agentCode;
     String agentName;
     String workingArea;
     float commission;

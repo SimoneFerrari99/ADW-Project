@@ -41,7 +41,7 @@ public class CustomerResolver implements GraphQLQueryResolver {
         return Customer.builder().build();
     }*/
     private final CustomerService customerService;
-    public Customer customerById(long custCode) {
+    public Customer customerById(String custCode) {
         return customerService.getById(custCode);
     }
 }

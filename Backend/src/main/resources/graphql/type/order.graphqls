@@ -1,9 +1,9 @@
 type Order {
-    ordNum: ID!
+    ordNum: String!
     ordAMT: Float
     advanceAMT: Float
     ordDate: String
-    agentCode: ID!
-    custCode: ID!
+    agentCode: String!
+    custCode: String!
     ordDescription: String
 }

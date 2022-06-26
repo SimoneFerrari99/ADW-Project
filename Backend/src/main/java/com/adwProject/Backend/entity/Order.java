@@ -1,6 +1,7 @@
 package com.adwProject.Backend.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -10,12 +11,13 @@ import javax.persistence.*;
 @Setter
 @Entity
 @ToString
-@Table(name = "orders", schema= "public")
+@Table(name = "ORDERS", schema= "public")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, name = "ORD_NUM")
-    private long ordNum;
+    //@Type(type="org.hibernate.type.UUIDCharType")
+    private String ordNum;
 
     @Column(name = "ORD_AMOUNT")
     private float ordAMT;

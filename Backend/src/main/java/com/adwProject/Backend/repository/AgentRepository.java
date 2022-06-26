@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface AgentRepository extends JpaRepository<Agent, Long> {
+public interface AgentRepository extends JpaRepository<Agent, String> {
 
-    Optional<Agent> findById(Long id);
+    Optional<Agent> findById(String id);
 
-    @Query(value = "SELECT * FROM public.AGENTS ORDER BY created_at OFFSET ?1*?2 LIMIT ?2", nativeQuery = true)
+    @Query(value = "SELECT * FROM public.AGENTS", nativeQuery = true)
     List<Agent> get(Integer skip, Integer take);
 }

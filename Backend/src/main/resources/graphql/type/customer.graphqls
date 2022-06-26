@@ -1,5 +1,5 @@
 type Customer {
-    custCode: ID!
+    custCode: String!
     custName: String!
     custCity:  String
     workingArea: String!
@@ -10,5 +10,5 @@ type Customer {
     paymentAMT: Float!
     outstandingAMT: Float!
     phoneNO: String!
-    agentCode: ID!
+    agentCode: String!
 }

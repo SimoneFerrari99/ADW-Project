@@ -1,6 +1,6 @@
 package com.adwProject.Backend.helper.map;
 
-import com.adwProject.Backend.domanin.AgentInput;
+import com.adwProject.Backend.dto.AgentInput;
 import com.adwProject.Backend.entity.Agent;
 
 // For Mutation
