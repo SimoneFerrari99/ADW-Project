@@ -27,12 +27,10 @@ public class Order {
     @Column(name = "ord_date")
     private String ordDate;
 
-    @MapsId
     @ManyToOne
     @JoinColumn(name = "agent_code")
     private Agent agent;
 
-    @MapsId
     @ManyToOne
     @JoinColumn(name = "cust_code")
     private Customer customer;
