@@ -11,10 +11,10 @@ import lombok.Value;
 @Value
 @Builder
 public class AgentInput {
-    String agentCode;
-    String agentName;
-    String workingArea;
-    float commission;
-    String phoneNO;
-    String country;
+    private String agentCode;
+    private String agentName;
+    private String workingArea;
+    private float commission;
+    private String phoneNO;
+    private String country;
 }

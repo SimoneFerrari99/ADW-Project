@@ -1,6 +1,6 @@
 package com.adwProject.Backend.repository;
 
-import com.adwProject.Backend.entity.Order;
+import com.adwProject.Backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,12 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-
 @Repository
-public interface OrderRepository extends JpaRepository<Order, String> {
+public interface UserRepository extends JpaRepository<User, String> {
 
-    Optional<Order> findById(String id);
+    Optional<User> findById(String id);
 
-    @Query(value = "SELECT * FROM public.orders", nativeQuery = true)
-    List<Order> get(Integer skip, Integer take);
+    @Query(value = "SELECT * FROM public.users", nativeQuery = true)
+    List<User> get(Integer skip, Integer take);
 }

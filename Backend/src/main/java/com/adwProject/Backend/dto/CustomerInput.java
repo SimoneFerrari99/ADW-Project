@@ -11,16 +11,16 @@ import lombok.Value;
 @Value
 @Builder
 public class CustomerInput {
-    String custCode;
-    String custName;
-    String custCity;
-    String workingArea;
-    String custCountry;
-    int grade;
-    float openingAMT;
-    float receiveAMT;
-    float paymentAMT;
-    float outstandingAMT;
-    String phoneNO;
-    String agentCode;
+    private String custCode;
+    private String custName;
+    private String custCity;
+    private String workingArea;
+    private String custCountry;
+    private int grade;
+    private float openingAMT;
+    private float receiveAMT;
+    private float paymentAMT;
+    private float outstandingAMT;
+    private String phoneNO;
+    private String agentCode;
 }
