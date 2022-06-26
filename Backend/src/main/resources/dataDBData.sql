@@ -1,18 +1,18 @@
 -- Dati AGENTI
 INSERT INTO AGENTS (AGENT_NAME,WORKING_AREA,COMMISSION,PHONE_NO,COUNTRY)
 VALUES
-('Subbarao', 'Bangalore', '0.14', '077-12346674', ''),
-('Mukesh', 'Mumbai', '0.11', '029-12358964', ''),
-('Alex ', 'London', '0.13', '075-12458969', ''),
-('Ivan', 'Torento', '0.15', '008-22544166', ''),
-('Anderson', 'Brisban', '0.13', '045-21447739', ''),
-('McDen', 'London', '0.15', '078-22255588', ''),
-('Ramasundar', 'Bangalore', '0.15', '077-25814763', ''),
-('Alford', 'New York', '0.12', '044-25874365', ''),
-('Benjamin', 'Hampshair', '0.11', '008-22536178', ''),
-('Santakumar', 'Chennai', '0.14', '007-22388644', ''),
-('Ravi Kumar', 'Bangalore', '0.15', '077-45625874', ''),
-('Lucida', 'San Jose', '0.12', '044-52981425', '');
+('Subbarao', 'Bangalore', '0.14', '077-12346674', 'IT'),
+('Mukesh', 'Mumbai', '0.11', '029-12358964', 'USA'),
+('Alex ', 'London', '0.13', '075-12458969', 'FR'),
+('Ivan', 'Torento', '0.15', '008-22544166', 'DE'),
+('Anderson', 'Brisban', '0.13', '045-21447739', 'CH'),
+('McDen', 'London', '0.15', '078-22255588', 'USA'),
+('Ramasundar', 'Bangalore', '0.15', '077-25814763', 'IT'),
+('Alford', 'New York', '0.12', '044-25874365', 'ES'),
+('Benjamin', 'Hampshair', '0.11', '008-22536178', 'ES'),
+('Santakumar', 'Chennai', '0.14', '007-22388644', 'USA'),
+('Ravi Kumar', 'Bangalore', '0.15', '077-45625874', 'IT'),
+('Lucida', 'San Jose', '0.12', '044-52981425', 'IT');
 
 
 -- Dati CLIENTI
