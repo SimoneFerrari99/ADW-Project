@@ -13,11 +13,11 @@ import lombok.Value;
 @Builder
 @Value
 public class OrderInput {
-    String ordNum;
-    float ordAMT;
-    float advanceAMT;
-    String ordDate;
-    Agent agent;
-    Customer customer;
-    String ordDescription;
+    private String ordNum;
+    private float ordAMT;
+    private float advanceAMT;
+    private String ordDate;
+    private Agent agent;
+    private Customer customer;
+    private String ordDescription;
 }
