@@ -11,36 +11,36 @@ import javax.persistence.*;
 @Setter
 @Entity
 @ToString
-@Table(name = "CUSTOMER", schema= "public")
+@Table(name = "customers", schema= "public")
 public class Customer {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, name = "CUST_CODE")
+    @Column(unique = true, name = "cust_code")
     //@Type(type="org.hibernate.type.UUIDCharType")
     private String custCode;
 
-    @Column(name = "CUST_NAME")
+    @Column(name = "cust_name")
     private String custName;
-    @Column(name = "CUST_CITYE")
+    @Column(name = "cust_city")
     private String custCity;
-    @Column(name = "WORKING_AREA")
+    @Column(name = "working_area")
     private String workingArea;
-    @Column(name = "CUST_COUNTRY")
+    @Column(name = "cust_country")
     private String custCountry;
-    @Column(name = "GRADE")
+    @Column(name = "grade")
     private int grade;
-    @Column(name = "OPENING_AMT")
+    @Column(name = "opening_amt")
     private float openingAMT;
-    @Column(name = "RECEIVE_AMT")
+    @Column(name = "receive_amt")
     private float receiveAMT;
-    @Column(name = "PAYMENT_AMT")
+    @Column(name = "payment_amt")
     private float paymentAMT;
-    @Column(name = "OUTSTANDING_AMT")
+    @Column(name = "outstanding_amt")
     private float outstandingAMT;
-    @Column(name = "PHONE_NO")
+    @Column(name = "phone_no")
     private String phoneNO;
     @ManyToOne
-    @JoinColumn(name = "agentCode")
+    @JoinColumn(name = "agent_code")
     private Agent agentCode;
 
     /*@OneToMany(mappedBy = "custCode")
