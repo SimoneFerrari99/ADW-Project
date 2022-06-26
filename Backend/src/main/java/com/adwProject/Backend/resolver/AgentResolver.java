@@ -12,24 +12,6 @@ import org.springframework.stereotype.Component;
 //@Slf4j
 @AllArgsConstructor
 public class AgentResolver implements GraphQLQueryResolver {
-/*    public Agent agentById(long id) {
-        log.info("Retrieving agent id: {}", id);
-
-        return Agent.builder()
-                .agentCode(id)
-                .agentName("Tony")
-                .workingArea("IT")
-                .commision(5.5f)
-                .phoneNO("test1")
-                .country("Svizzera")
-                .build();
-    }
-    public Customer customerById(long custCode) {
-        return Customer.builder().custCode(custCode).build();
-    }
-    public OrderInput orderById(long ordNum) {
-        return OrderInput.builder().ordNum(ordNum).build();
-    }*/
     private final AgentService agentService;
 
     public Agent agentById(String agentCode) {
