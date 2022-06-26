@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 
 import { React, Fragment } from "react";
 import AmountRow from "./components/layout/AmountRow";
-import DataTable from "./components/layout/Table";
+import CustomTable from "./components/layout/CustomTable";
 
 export default function App() {
 	return (
@@ -19,7 +19,7 @@ export default function App() {
 							<AmountRow />
 						</Box>
 						<Box sx={{ mt: { xs: 2, sm: 3 } }}>
-							<DataTable />
+							<CustomTable />
 						</Box>
 					</Container>
 				</div>

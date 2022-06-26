@@ -79,7 +79,7 @@ export default function MenuAppBar() {
 					</Typography>
 					{auth && (
 						<div>
-							<AccountMenu></AccountMenu>
+							<AccountMenu />
 						</div>
 					)}
 				</Toolbar>

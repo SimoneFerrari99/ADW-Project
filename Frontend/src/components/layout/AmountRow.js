@@ -23,22 +23,9 @@ const amounts = gql`
 export default function AmountRow() {
 	const { data, loading, error } = useQuery(amounts);
 
-	// if (loading) {
-	// 	return (
-	// 		<Box sx={{ display: "grid", gap: 2, gridTemplateColumns: { xs: "repeat(2, 1fr)", md: "repeat(4, 1fr)" } }}>
-	// 			<Skeleton />
-	// 			<Skeleton />
-	// 			<Skeleton />
-	// 			<Skeleton />
-	// 		</Box>
-	// 	);
-	// }
-
 	if (error) {
 		return <div>{error}</div>;
 	}
-
-	//const { openingAMT, receiveAMT, paymentAMT, outstandingAMT } = data.customerById;
 
 	return (
 		<Box sx={{ display: "grid", gap: 2, gridTemplateColumns: { xs: "repeat(2, 1fr)", md: "repeat(4, 1fr)" } }}>
