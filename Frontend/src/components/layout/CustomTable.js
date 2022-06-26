@@ -17,21 +17,25 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import { visuallyHidden } from "@mui/utils";
+import Skeleton from "@mui/material/Skeleton";
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GRAPHQL QUERY */
 const customerOrders = gql`
 	query GetOrdersByCustomerId {
-		ordersByCustomerId(custCode: "C00001") {
-			openingAMT
-			receiveAMT
-			paymentAMT
-			outstandingAMT
+		ordersByCustomerCustCode(custCode: "C00008") {
+			ordNum
+			ordAMT
+			ordDate
+			agent {
+				agentCode
+			}
+			ordDescription
 		}
 	}
 `;
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ COMPONENT */
-function createData(ordNum, ordAMT, ordDate, agent, description) {
+/*function createData(ordNum, ordAMT, ordDate, agent, description) {
 	return {
 		ordNum,
 		ordAMT,
@@ -55,7 +59,7 @@ const rows = [
 	createData(11, 318, "26-06-2022", "Nome Cognome A006", "Descrizione dell'ordine"),
 	createData(12, 360, "26-06-2022", "Nome Cognome A007", "Descrizione dell'ordine"),
 	createData(13, 437, "26-06-2022", "Nome Cognome A001", "Descrizione dell'ordine"),
-];
+];*/
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -166,6 +170,17 @@ export default function CustomTable() {
 		setPage(0);
 	};
 
+	const { data, loading, error } = useQuery(customerOrders);
+
+	if (error) {
+		return <div>{error}</div>;
+	}
+
+	if (loading) {
+		return <Skeleton sx={{ width: "100%", height: 400 }} />;
+	}
+	const rows = data.ordersByCustomerCustCode;
+
 	// Avoid a layout jump when reaching the last page with empty rows.
 	const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -205,7 +220,7 @@ export default function CustomTable() {
 											<TableCell align="center">{row.ordAMT}</TableCell>
 											<TableCell align="center">{row.ordDate}</TableCell>
 											<TableCell align="center">
-												<Link href="#">{row.agent}</Link>
+												<Link href="#">{row.agent.agentCode}</Link>
 											</TableCell>
 											<TableCell align="center">{row.description}</TableCell>
 										</TableRow>
