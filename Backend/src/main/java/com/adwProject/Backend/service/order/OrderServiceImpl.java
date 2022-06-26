@@ -14,12 +14,12 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order getById(String id) {
-        return orderRepository.findById(id).get();
+        return orderRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Order> getByCustomerCustCode(String custCode) {
-        List<Order> a = orderRepository.findByCustomerCustCode(custCode).get();
+        List<Order> a = orderRepository.findByCustomerCustCode(custCode).orElse(null);
         System.out.println(a);                                                          //TODO: to be removed
         return a;
     }

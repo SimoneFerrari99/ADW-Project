@@ -12,7 +12,7 @@ public class AgentServiceImpl implements AgentService {
 
     @Override
     public Agent getById(String id) {
-        return agentRepository.findById(id).get();
+        return agentRepository.findById(id).orElse(null);
     }
 
 }

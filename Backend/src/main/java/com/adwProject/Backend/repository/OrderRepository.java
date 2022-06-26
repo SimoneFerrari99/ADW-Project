@@ -14,7 +14,7 @@ public interface OrderRepository extends JpaRepository<Order, String> {
 
     Optional<Order> findById(String id);
 
-    @Query(value = "SELECT * FROM public.orders", nativeQuery = true)
+    @Query(value = "SELECT * FROM public.ORDERS", nativeQuery = true)
     List<Order> get(Integer skip, Integer take);
 
     Optional<List<Order>> findByCustomerCustCode(String custCode);

@@ -14,6 +14,6 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 
     Optional<Customer> findById(String id);
 
-    @Query(value = "SELECT * FROM public.CUSTOMER", nativeQuery = true)
+    @Query(value = "SELECT * FROM public.CUSTOMERS", nativeQuery = true)
     List<Customer> get(Integer skip, Integer take);
 }

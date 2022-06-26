@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @AllArgsConstructor
 public class UserResolver implements GraphQLQueryResolver {
-
     private final UserService userService;
+
     public User userById(String code) {
         return userService.getById(code);
     }

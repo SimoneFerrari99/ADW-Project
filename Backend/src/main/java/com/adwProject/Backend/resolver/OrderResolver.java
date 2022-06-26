@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderResolver implements GraphQLQueryResolver {
     private final OrderService orderService;
+
     public Order orderById(String ordNum) {
         return orderService.getById(ordNum);
     }

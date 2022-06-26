@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class CustomerResolver implements GraphQLQueryResolver {
     private final CustomerService customerService;
+
     public Customer customerById(String custCode) {
         return customerService.getById(custCode);
     }
