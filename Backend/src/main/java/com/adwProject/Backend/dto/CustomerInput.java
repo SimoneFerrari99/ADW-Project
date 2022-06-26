@@ -1,5 +1,6 @@
 package com.adwProject.Backend.dto;
 
+import com.adwProject.Backend.entity.Agent;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +23,5 @@ public class CustomerInput {
     float paymentAMT;
     float outstandingAMT;
     String phoneNO;
-    String agentCode;
+    Agent agent;
 }

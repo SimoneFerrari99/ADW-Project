@@ -14,8 +14,8 @@ public class MapOrder {
         order.setOrdNum(orderInput.getOrdNum());
         order.setOrdAMT(orderInput.getOrdAMT());
         order.setAdvanceAMT(orderInput.getAdvanceAMT());
-        order.setCustCode(customer);
-        order.setAgentCode(agent);
+        order.setCustomer(customer);
+        order.setAgent(agent);
         order.setOrdDescription(orderInput.getOrdDescription());
 
         return order;

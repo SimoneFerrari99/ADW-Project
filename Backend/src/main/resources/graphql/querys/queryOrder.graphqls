@@ -1,3 +1,4 @@
 extend type Query {
     orderById(ordNum: String!): Order
+    ordersByCustomerCustCode(custCode: String!): [Order]
 }

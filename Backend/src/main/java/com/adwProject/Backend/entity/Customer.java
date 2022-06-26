@@ -41,7 +41,7 @@ public class Customer {
     private String phoneNO;
     @ManyToOne
     @JoinColumn(name = "agent_code")
-    private Agent agentCode;
+    private Agent agent;
 
     /*@OneToMany(mappedBy = "custCode")
     private List<OrderDB> order;*/

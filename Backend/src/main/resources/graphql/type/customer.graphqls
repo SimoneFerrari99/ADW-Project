@@ -10,5 +10,5 @@ type Customer {
     paymentAMT: Float!
     outstandingAMT: Float!
     phoneNO: String!
-    agentCode: String!
+    agent: Agent!
 }

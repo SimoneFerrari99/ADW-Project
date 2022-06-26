@@ -29,12 +29,12 @@ public class Order {
     @MapsId
     @ManyToOne
     @JoinColumn(name = "agent_code")
-    private Agent agentCode;
+    private Agent agent;
 
     @MapsId
     @ManyToOne
     @JoinColumn(name = "cust_code")
-    private Customer custCode;
+    private Customer customer;
 
     @Column(name = "ord_description")
     private String ordDescription;

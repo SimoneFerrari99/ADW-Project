@@ -3,7 +3,7 @@ type Order {
     ordAMT: Float
     advanceAMT: Float
     ordDate: String
-    agentCode: String!
-    custCode: String!
+    agent: Agent!
+    customer: Customer!
     ordDescription: String
 }

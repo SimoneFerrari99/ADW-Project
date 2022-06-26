@@ -1,5 +1,7 @@
 package com.adwProject.Backend.dto;
 
+import com.adwProject.Backend.entity.Agent;
+import com.adwProject.Backend.entity.Customer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +17,7 @@ public class OrderInput {
     float ordAMT;
     float advanceAMT;
     String ordDate;
-    String agentCode;
-    String custCode;
+    Agent agent;
+    Customer customer;
     String ordDescription;
 }

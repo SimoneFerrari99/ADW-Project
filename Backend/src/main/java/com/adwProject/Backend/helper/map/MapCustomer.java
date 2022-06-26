@@ -21,7 +21,7 @@ public class MapCustomer {
         customer.setPaymentAMT(customerInput.getPaymentAMT());
         customer.setOutstandingAMT(customerInput.getOutstandingAMT());
         customer.setPhoneNO(customerInput.getPhoneNO());
-        customer.setAgentCode(agent);
+        customer.setAgent(agent);
 
         return customer;
     }
