@@ -19,6 +19,7 @@ import Link from "@mui/material/Link";
 import { visuallyHidden } from "@mui/utils";
 import Skeleton from "@mui/material/Skeleton";
 import LoadingError from "./LoadingError";
+import PersonInfoDialog from "./PersonInfoDialog";
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GRAPHQL QUERY */
 const customerOrders = gql`
@@ -36,37 +37,17 @@ const customerOrders = gql`
 `;
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ COMPONENT */
-/*function createData(ordNum, ordAMT, ordDate, agent, description) {
-	return {
-		ordNum,
-		ordAMT,
-		ordDate,
-		agent,
-		description,
-	};
-}
-
-const rows = [
-	createData(1, 305, "24-06-2022", "Nome Cognome A001", "Descrizione dell'ordine"),
-	createData(2, 452, "24-06-2022", "Nome Cognome A004", "Descrizione dell'ordine"),
-	createData(3, 262, "25-06-2022", "Nome Cognome A002", "Descrizione dell'ordine"),
-	createData(4, 159, "25-06-2022", "Nome Cognome A001", "Descrizione dell'ordine"),
-	createData(5, 356, "25-06-2022", "Nome Cognome A006", "Descrizione dell'ordine"),
-	createData(6, 408, "25-06-2022", "Nome Cognome A001", "Descrizione dell'ordine"),
-	createData(7, 237, "25-06-2022", "Nome Cognome A008", "Descrizione dell'ordine"),
-	createData(8, 375, "25-06-2022", "Nome Cognome A003", "Descrizione dell'ordine"),
-	createData(9, 518, "25-06-2022", "Nome Cognome A004", "Descrizione dell'ordine"),
-	createData(10, 392, "26-06-2022", "Nome Cognome A004", "Descrizione dell'ordine"),
-	createData(11, 318, "26-06-2022", "Nome Cognome A006", "Descrizione dell'ordine"),
-	createData(12, 360, "26-06-2022", "Nome Cognome A007", "Descrizione dell'ordine"),
-	createData(13, 437, "26-06-2022", "Nome Cognome A001", "Descrizione dell'ordine"),
-];*/
-
 function descendingComparator(a, b, orderBy) {
-	if (b[orderBy] < a[orderBy]) {
+	const myArray = orderBy.split(".");
+	for (let i = 0; i < myArray.length; i++) {
+		b = b[myArray[i]];
+		a = a[myArray[i]];
+	}
+
+	if (b < a) {
 		return -1;
 	}
-	if (b[orderBy] > a[orderBy]) {
+	if (b > a) {
 		return 1;
 	}
 	return 0;
@@ -90,17 +71,16 @@ const headCells = [
 		label: "Data ordine",
 	},
 	{
-		id: "agent",
+		id: "agent.agentCode",
 		label: "Agente",
 	},
 	{
-		id: "description",
+		id: "ordDescription",
 		label: "Descrizione",
 	},
 ];
 
-function CustomTableHead(props) {
-	const { order, orderBy, onRequestSort } = props;
+function CustomTableHead({ order, orderBy, onRequestSort }) {
 	const createSortHandler = (property) => (event) => {
 		onRequestSort(event, property);
 	};
@@ -124,7 +104,7 @@ function CustomTableHead(props) {
 							{headCell.label}
 							{orderBy === headCell.id ? (
 								<Box component="span" sx={visuallyHidden}>
-									{order === "desc" ? "Ordine descrescente" : "Ordine crescente"}
+									{order === "desc" ? "Ordine decrescente" : "Ordine crescente"}
 								</Box>
 							) : null}
 						</TableSortLabel>
@@ -203,7 +183,7 @@ export default function CustomTable() {
 									const labelId = `RigaOrdine-${index}`;
 
 									return (
-										<TableRow hover tabIndex={-1} key={row.name}>
+										<TableRow hover tabIndex={-1} key={row.ordNum}>
 											<TableCell
 												component="th"
 												id={labelId}
@@ -217,9 +197,9 @@ export default function CustomTable() {
 											<TableCell align="center">{row.ordAMT}</TableCell>
 											<TableCell align="center">{row.ordDate}</TableCell>
 											<TableCell align="center">
-												<Link href="#">{row.agent.agentCode}</Link>
+												<PersonInfoDialog codeToShow={row.agent.agentCode} />
 											</TableCell>
-											<TableCell align="center">{row.description}</TableCell>
+											<TableCell align="center">{row.ordDescription}</TableCell>
 										</TableRow>
 									);
 								})}
