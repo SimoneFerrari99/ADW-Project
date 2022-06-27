@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 
     Optional<Customer> findById(String id);
-
-    @Query(value = "SELECT * FROM public.CUSTOMERS", nativeQuery = true)
+    
+    @Query(value = "SELECT * FROM public.customers", nativeQuery = true)
     List<Customer> get(Integer skip, Integer take);
 }

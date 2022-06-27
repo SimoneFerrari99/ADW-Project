@@ -12,6 +12,6 @@ public interface AgentRepository extends JpaRepository<Agent, String> {
 
     Optional<Agent> findById(String id);
 
-    @Query(value = "SELECT * FROM public.AGENTS", nativeQuery = true)
+    @Query(value = "SELECT * FROM public.agents", nativeQuery = true)
     List<Agent> get(Integer skip, Integer take);
 }
