@@ -2,10 +2,10 @@ import * as React from "react";
 
 import { Container, Box } from "@mui/material";
 
-import AmountRow from "../components/layout/AmountComponents/AmountRow";
-import CustomTable from "../components/layout/TableComponents/CustomTable";
+import AmountRow from "../../components/layout/AmountComponents/AmountRow";
+import CustomerTable from "./components/CustomerTable";
 
-export default function ClientPage() {
+export default function CustomerPage() {
 	return (
 		<main>
 			<Container maxWidth="xl">
@@ -13,7 +13,7 @@ export default function ClientPage() {
 					<AmountRow />
 				</Box>
 				<Box sx={{ mt: { xs: 2, sm: 3 } }}>
-					<CustomTable />
+					<CustomerTable />
 				</Box>
 			</Container>
 		</main>

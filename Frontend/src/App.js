@@ -1,7 +1,7 @@
 import { React, Fragment } from "react";
 import { CssBaseline } from "@mui/material";
 
-import ClientPage from "./pages/ClientPage";
+import ClientPage from "./pages/customer/CustomerPage";
 
 import MenuAppBar from "./components/layout/AppbarComponents/MenuAppBar";
 

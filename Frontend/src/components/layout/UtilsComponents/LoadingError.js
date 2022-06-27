@@ -4,7 +4,6 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import Skeleton from "@mui/material/Skeleton";
 
 export default function LoadingError() {
 	const [open, setOpen] = React.useState(true);
