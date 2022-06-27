@@ -1,12 +1,9 @@
-import * as React from "react";
+import { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
+
 import AccountMenu from "./AccountMenu";
-import Skeleton from "@mui/material/Skeleton";
 import LoadingError from "../UtilsComponents/LoadingError";
 
 const name = gql`
@@ -17,7 +14,7 @@ const name = gql`
 	}
 `;
 export default function MenuAppBar({ user }) {
-	const [auth, setAuth] = React.useState(true);
+	const [auth, setAuth] = useState(true);
 
 	const { data, loading, error } = useQuery(name);
 
@@ -28,8 +25,19 @@ export default function MenuAppBar({ user }) {
 					{/* <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
 						<MenuIcon />
 					</IconButton> */}
-					<Typography variant="h6" component="div" sx={{ flexGrow: 1, display: "flex" }}>
-						Ciao, {loading ? <Skeleton sx={{ width: 100, ml: 1 }} /> : error ? <LoadingError /> : data.customerById.custName}
+					<Typography
+						variant="h6"
+						component="div"
+						sx={{ flexGrow: 1, display: "flex" }}
+					>
+						Ciao,{" "}
+						{loading ? (
+							<Skeleton sx={{ width: 100, ml: 1 }} />
+						) : error ? (
+							<LoadingError />
+						) : (
+							data.customerById.custName
+						)}
 					</Typography>
 					{auth && (
 						<div>

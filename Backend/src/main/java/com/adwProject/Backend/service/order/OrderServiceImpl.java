@@ -19,9 +19,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public List<Order> getByCustomerCustCode(String custCode) {
-        List<Order> a = orderRepository.findByCustomerCustCode(custCode).orElse(null);
-        System.out.println(a);                                                          //TODO: to be removed
-        return a;
+        return orderRepository.findByCustomerCustCode(custCode).orElse(null);
     }
 
 

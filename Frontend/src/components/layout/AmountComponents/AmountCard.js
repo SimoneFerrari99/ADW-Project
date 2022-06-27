@@ -1,9 +1,6 @@
-import * as React from "react";
+import { useState } from "react";
 
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import CardContent from "@mui/material/CardContent";
+import { Box, Card, Typography, CardContent } from "@mui/material";
 
 import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
 import AssuredWorkloadRoundedIcon from "@mui/icons-material/AssuredWorkloadRounded";
@@ -15,9 +12,13 @@ import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 const getIconFromName = (iconName) => {
 	switch (iconName) {
 		case "opening":
-			return <AttachMoneyRoundedIcon sx={{ fontSize: { xs: 25, sm: 30, md: 40 } }} />;
+			return (
+				<AttachMoneyRoundedIcon sx={{ fontSize: { xs: 25, sm: 30, md: 40 } }} />
+			);
 		case "receive":
-			return <AssuredWorkloadRoundedIcon sx={{ fontSize: { xs: 25, sm: 30, md: 40 } }} />;
+			return (
+				<AssuredWorkloadRoundedIcon sx={{ fontSize: { xs: 25, sm: 30, md: 40 } }} />
+			);
 		case "payment":
 			return <ReceiptRoundedIcon sx={{ fontSize: { xs: 25, sm: 30, md: 40 } }} />;
 		case "outstanding":
@@ -38,13 +39,25 @@ export default function AmountCard({ title, amtValue, bgColor, iconName }) {
 					justifyContent: { xs: "center", sm: "space-evenly" },
 				}}
 			>
-				<Box sx={{ display: "flex", alignItems: "center" }}>{getIconFromName(iconName)}</Box>
+				<Box sx={{ display: "flex", alignItems: "center" }}>
+					{getIconFromName(iconName)}
+				</Box>
 				<Box>
-					<Typography variant="h6" component="div" align="center" sx={{ fontWeight: "bold" }}>
+					<Typography
+						variant="h6"
+						component="div"
+						align="center"
+						sx={{ fontWeight: "bold" }}
+					>
 						{title}
 					</Typography>
 
-					<Typography variant="p" component="div" align="center" sx={{ fontSize: "1.5rem" }}>
+					<Typography
+						variant="p"
+						component="div"
+						align="center"
+						sx={{ fontSize: "1.5rem" }}
+					>
 						<Box>€{amtValue}</Box>
 					</Typography>
 				</Box>

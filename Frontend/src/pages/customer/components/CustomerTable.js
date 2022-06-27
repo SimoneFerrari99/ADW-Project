@@ -1,37 +1,14 @@
-import { useQuery } from "@apollo/client";
 import { Fragment, useState } from "react";
+import { useQuery } from "@apollo/client";
 
-import { Box, TableCell } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import Skeleton from "@mui/material/Skeleton";
-import TableRow from "@mui/material/TableRow";
+import { Box, TableCell, Paper, Skeleton, TableRow } from "@mui/material";
+
 import PersonInfoDialog from "../../../components/layout/DialogComponents/PersonInfoDialog";
 import LoadingError from "../../../components/layout/UtilsComponents/LoadingError";
 import CustomTable from "../../../components/layout/CustomerTableComponents/CustomTable";
 
 import { customerOrders } from "../graphql/customerOrders";
-
-function descendingComparator(a, b, orderBy) {
-	const myArray = orderBy.split(".");
-	for (let i = 0; i < myArray.length; i++) {
-		b = b[myArray[i]];
-		a = a[myArray[i]];
-	}
-
-	if (b < a) {
-		return -1;
-	}
-	if (b > a) {
-		return 1;
-	}
-	return 0;
-}
-
-function getComparator(order, orderBy) {
-	return order === "desc"
-		? (a, b) => descendingComparator(a, b, orderBy)
-		: (a, b) => -descendingComparator(a, b, orderBy);
-}
+import { getComparator } from "../../../utils/functions/sorting";
 
 const headCells = [
 	{

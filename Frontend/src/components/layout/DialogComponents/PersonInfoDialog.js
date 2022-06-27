@@ -1,16 +1,18 @@
-import * as React from "react";
-import PropTypes from "prop-types";
+import { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
-import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
+import {
+	Button,
+	Dialog,
+	DialogTitle,
+	DialogContent,
+	DialogActions,
+	IconButton,
+	Typography,
+} from "@mui/material";
+
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 
 const agentInfo = gql`
 	query GetAgentInfoByAgentId {
@@ -58,13 +60,8 @@ const BootstrapDialogTitle = (props) => {
 	);
 };
 
-BootstrapDialogTitle.propTypes = {
-	children: PropTypes.node,
-	onClose: PropTypes.func.isRequired,
-};
-
 export default function PersonInfoDialog({ codeToShow }) {
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -76,25 +73,35 @@ export default function PersonInfoDialog({ codeToShow }) {
 
 	return (
 		<div>
-			<Button variant="outlined" sx={{ textDecoration: "underline" }} onClick={handleClickOpen}>
+			<Button
+				variant="outlined"
+				sx={{ textDecoration: "underline" }}
+				onClick={handleClickOpen}
+			>
 				{codeToShow}
 			</Button>
-			<BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+			<BootstrapDialog
+				onClose={handleClose}
+				aria-labelledby="customized-dialog-title"
+				open={open}
+			>
 				<BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
 					Dettagli agente
 				</BootstrapDialogTitle>
 				<DialogContent dividers>
 					<Typography gutterBottom>
-						Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-						risus, porta ac consectetur ac, vestibulum at eros.
+						Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus
+						ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur
+						ac, vestibulum at eros.
 					</Typography>
 					<Typography gutterBottom>
-						Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
-						dolor auctor.
+						Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+						Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
 					</Typography>
 					<Typography gutterBottom>
-						Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed
-						odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+						Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+						magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+						ullamcorper nulla non metus auctor fringilla.
 					</Typography>
 				</DialogContent>
 				<DialogActions>
