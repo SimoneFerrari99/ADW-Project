@@ -70,7 +70,7 @@ const CustomTableToolbar = ({ title }) => {
 	);
 };
 
-export default function CustomTable({
+export default function HomepageTable({
 	headCells,
 	title,
 	tableBody,

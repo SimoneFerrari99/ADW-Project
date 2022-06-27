@@ -3,9 +3,9 @@ import { useQuery } from "@apollo/client";
 
 import { Box, TableCell, Paper, Skeleton, TableRow } from "@mui/material";
 
-import PersonInfoDialog from "../../../components/layout/DialogComponents/PersonInfoDialog";
-import LoadingError from "../../../components/layout/UtilsComponents/LoadingError";
-import CustomTable from "../../../components/layout/CustomerTableComponents/CustomTable";
+import PersonInfoDialog from "../../../components/layout/Dialog/PersonInfoDialog";
+import LoadingError from "../../../components/layout/Utils/LoadingError";
+import CustomTable from "../../../components/layout/Table/HomepageTable";
 
 import { customerOrders } from "../graphql/customerOrders";
 import { getComparator } from "../../../utils/functions/sorting";

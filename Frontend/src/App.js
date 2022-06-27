@@ -3,7 +3,7 @@ import { CssBaseline } from "@mui/material";
 
 import ClientPage from "./pages/customer/CustomerPage";
 
-import MenuAppBar from "./components/layout/AppbarComponents/MenuAppBar";
+import MenuAppBar from "./components/layout/Appbar/MenuAppBar";
 
 const userType = "C";
 

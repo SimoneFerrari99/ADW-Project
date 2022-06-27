@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Container, Box } from "@mui/material";
 
-import AmountRow from "../../components/layout/AmountComponents/AmountRow";
+import AmountRow from "../../components/layout/Amount/AmountRow";
 import CustomerTable from "./components/CustomerTable";
 
 export default function CustomerPage() {
