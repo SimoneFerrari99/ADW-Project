@@ -1,8 +1,6 @@
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ MODULES IMPORT */
 import * as React from "react";
 import { useQuery, gql } from "@apollo/client";
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ COMPONENTS IMPORT */
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -18,10 +16,9 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import { visuallyHidden } from "@mui/utils";
 import Skeleton from "@mui/material/Skeleton";
-import LoadingError from "./LoadingError";
-import PersonInfoDialog from "./PersonInfoDialog";
+import LoadingError from "../UtilsComponents/LoadingError";
+import PersonInfoDialog from "../DialogComponents/PersonInfoDialog";
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GRAPHQL QUERY */
 const customerOrders = gql`
 	query GetOrdersByCustomerId {
 		ordersByCustomerCustCode(custCode: "C00008") {
@@ -36,7 +33,6 @@ const customerOrders = gql`
 	}
 `;
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ COMPONENT */
 function descendingComparator(a, b, orderBy) {
 	const myArray = orderBy.split(".");
 	for (let i = 0; i < myArray.length; i++) {

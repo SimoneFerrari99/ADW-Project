@@ -1,14 +1,11 @@
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ MODULES IMPORT */
 import * as React from "react";
 import { useQuery, gql } from "@apollo/client";
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ COMPONENTS IMPORT */
 import AmountCard from "./AmountCard";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
-import LoadingError from "./LoadingError";
+import LoadingError from "../UtilsComponents/LoadingError";
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GRAPHQL QUERY */
 const amounts = gql`
 	query GetAmounts {
 		customerById(custCode: "C00026") {
@@ -20,7 +17,6 @@ const amounts = gql`
 	}
 `;
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ COMPONENT */
 export default function AmountRow() {
 	const { data, loading, error } = useQuery(amounts);
 
