@@ -18,6 +18,7 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import { visuallyHidden } from "@mui/utils";
 import Skeleton from "@mui/material/Skeleton";
+import LoadingError from "./LoadingError";
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GRAPHQL QUERY */
 const customerOrders = gql`
@@ -172,12 +173,8 @@ export default function CustomTable() {
 
 	const { data, loading, error } = useQuery(customerOrders);
 
-	if (error) {
-		return <div>{error}</div>;
-	}
-
 	if (loading) {
-		return <Skeleton sx={{ width: "100%", height: 400 }} />;
+		return error ? <LoadingError /> : <Skeleton variant="rectangular" animation="wave" width={"100%"} height={200} sx={{ borderRadius: 2 }} />;
 	}
 	const rows = data.ordersByCustomerCustCode;
 

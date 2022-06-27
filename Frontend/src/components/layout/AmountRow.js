@@ -6,6 +6,7 @@ import { useQuery, gql } from "@apollo/client";
 import AmountCard from "./AmountCard";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
+import LoadingError from "./LoadingError";
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GRAPHQL QUERY */
 const amounts = gql`
@@ -23,16 +24,36 @@ const amounts = gql`
 export default function AmountRow() {
 	const { data, loading, error } = useQuery(amounts);
 
-	if (error) {
-		return <div>{error}</div>;
-	}
-
 	return (
 		<Box sx={{ display: "grid", gap: 2, gridTemplateColumns: { xs: "repeat(2, 1fr)", md: "repeat(4, 1fr)" } }}>
-			{loading ? <Skeleton /> : <AmountCard title="Opening" amtValue={data.customerById.openingAMT} iconName="opening" />}
-			{loading ? <Skeleton /> : <AmountCard title="Receive" amtValue={data.customerById.receiveAMT} iconName="receive" />}
-			{loading ? <Skeleton /> : <AmountCard title="Payment" amtValue={data.customerById.paymentAMT} iconName="payment" />}
-			{loading ? <Skeleton /> : <AmountCard title="Outstanding" amtValue={data.customerById.outstandingAMT} iconName="outstanding" />}
+			{loading ? (
+				<Skeleton variant="rectangular" animation="wave" height={100} sx={{ borderRadius: 2 }} />
+			) : error ? (
+				<LoadingError />
+			) : (
+				<AmountCard title="Opening" amtValue={data.customerById.openingAMT} iconName="opening" />
+			)}
+			{loading ? (
+				<Skeleton variant="rectangular" animation="wave" height={100} sx={{ borderRadius: 2 }} />
+			) : error ? (
+				<LoadingError />
+			) : (
+				<AmountCard title="Receive" amtValue={data.customerById.receiveAMT} iconName="receive" />
+			)}
+			{loading ? (
+				<Skeleton variant="rectangular" animation="wave" height={100} sx={{ borderRadius: 2 }} />
+			) : error ? (
+				<LoadingError />
+			) : (
+				<AmountCard title="Payment" amtValue={data.customerById.paymentAMT} iconName="payment" />
+			)}
+			{loading ? (
+				<Skeleton variant="rectangular" animation="wave" height={100} sx={{ borderRadius: 2 }} />
+			) : error ? (
+				<LoadingError />
+			) : (
+				<AmountCard title="Outstanding" amtValue={data.customerById.outstandingAMT} iconName="outstanding" />
+			)}
 		</Box>
 	);
 }
