@@ -43,28 +43,28 @@ export default function AmountRow() {
 				loading={loading}
 				error={error}
 				title={openingAmountCardLabel}
-				data={loading ? null : error ? null : data.customerById.openingAMT}
+				data={!loading && !error && data.customerById.openingAMT}
 				icon={<AttachMoneyRounded sx={iconStyle} />}
 			/>
 			<AmountCard
 				loading={loading}
 				error={error}
 				title={receiveAmountCardLabel}
-				data={loading ? null : error ? null : data.customerById.receiveAMT}
+				data={!loading && !error && data.customerById.receiveAMT}
 				icon={<AssuredWorkloadRounded sx={iconStyle} />}
 			/>
 			<AmountCard
 				loading={loading}
 				error={error}
 				title={paymentAmountCardLabel}
-				data={loading ? null : error ? null : data.customerById.paymentAMT}
+				data={!loading && !error && data.customerById.paymentAMT}
 				icon={<ReceiptRounded sx={iconStyle} />}
 			/>
 			<AmountCard
 				loading={loading}
 				error={error}
 				title={outstandingAmountCardLabel}
-				data={loading ? null : error ? null : data.customerById.outstandingAMT}
+				data={!loading && !error && data.customerById.outstandingAMT}
 				icon={<AccessTime sx={iconStyle} />}
 			/>
 		</Box>

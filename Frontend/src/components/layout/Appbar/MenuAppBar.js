@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
@@ -13,9 +12,7 @@ const name = gql`
 		}
 	}
 `;
-export default function MenuAppBar({ user }) {
-	const [auth, setAuth] = useState(true);
-
+export default function MenuAppBar({ user, auth, setAuth }) {
 	const { data, loading, error } = useQuery(name);
 
 	return (

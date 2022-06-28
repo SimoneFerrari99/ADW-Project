@@ -47,50 +47,54 @@ export default function AgentInfoDialog({
 			error={error}
 			personInfoDialogBody={
 				<Fragment>
-					<Box
-						sx={{
-							display: "flex",
-							justifyContent: "space-between",
-							alignItems: "center",
-						}}
-					>
-						<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
-							{loading ? null : error ? null : data.agentById.agentName}
-						</Typography>
+					{!loading && !error && (
+						<Fragment>
+							<Box
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+									{data.agentById.agentName}
+								</Typography>
 
-						<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
-							{loading ? null : error ? null : data.agentById.agentCode}
-						</Typography>
-					</Box>
-					<Typography sx={{ fontSize: "1rem" }}>
-						{loading ? null : error ? null : data.agentById.workingArea}
-					</Typography>
-					<Box sx={{ display: "flex", alignItems: "center", pt: 3 }}>
-						<Tooltip title={phoneNumberTooltipLabel}>
-							<CallRounded sx={{ mr: 2 }} />
-						</Tooltip>
-						{loading ? null : error ? null : data.agentById.phoneNO}
-					</Box>
-					<Box
-						sx={{
-							display: "flex",
-							justifyContent: "space-between",
-							alignItems: "center",
-						}}
-					>
-						<Box sx={{ display: "flex", alignItems: "center", pt: 1 }}>
-							<Tooltip title={countryTooltipLabel}>
-								<LanguageRounded sx={{ mr: 2 }} />
-							</Tooltip>
-							{loading ? null : error ? null : data.agentById.country}
-						</Box>
-						<Box sx={{ display: "flex", alignItems: "center", pt: 1 }}>
-							<Tooltip title={commissionTooltipLabel}>
-								<CurrencyExchangeRounded fontSize="small" sx={{ mr: 1 }} />
-							</Tooltip>
-							{loading ? null : error ? null : data.agentById.commission}
-						</Box>
-					</Box>
+								<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+									{data.agentById.agentCode}
+								</Typography>
+							</Box>
+							<Typography sx={{ fontSize: "1rem" }}>
+								{data.agentById.workingArea}
+							</Typography>
+							<Box sx={{ display: "flex", alignItems: "center", pt: 3 }}>
+								<Tooltip title={phoneNumberTooltipLabel}>
+									<CallRounded sx={{ mr: 2 }} />
+								</Tooltip>
+								{data.agentById.phoneNO}
+							</Box>
+							<Box
+								sx={{
+									display: "flex",
+									justifyContent: "space-between",
+									alignItems: "center",
+								}}
+							>
+								<Box sx={{ display: "flex", alignItems: "center", pt: 1 }}>
+									<Tooltip title={countryTooltipLabel}>
+										<LanguageRounded sx={{ mr: 2 }} />
+									</Tooltip>
+									{data.agentById.country}
+								</Box>
+								<Box sx={{ display: "flex", alignItems: "center", pt: 1 }}>
+									<Tooltip title={commissionTooltipLabel}>
+										<CurrencyExchangeRounded fontSize="small" sx={{ mr: 1 }} />
+									</Tooltip>
+									{data.agentById.commission}
+								</Box>
+							</Box>
+						</Fragment>
+					)}
 				</Fragment>
 			}
 		/>
