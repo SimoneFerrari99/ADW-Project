@@ -4,7 +4,7 @@ import { Box, Avatar, IconButton, Tooltip } from "@mui/material";
 
 import ProfileMenu from "./ProfileMenu";
 
-export default function AccountMenu() {
+export default function AccountMenu({ setAuth }) {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event) => {
@@ -29,7 +29,12 @@ export default function AccountMenu() {
 					</IconButton>
 				</Tooltip>
 			</Box>
-			<ProfileMenu anchorEl={anchorEl} open={open} handleClose={handleClose} />
+			<ProfileMenu
+				anchorEl={anchorEl}
+				open={open}
+				handleClose={handleClose}
+				setAuth={setAuth}
+			/>
 		</Fragment>
 	);
 }

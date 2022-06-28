@@ -1,8 +1,10 @@
 import { Menu, MenuItem, ListItemIcon, Divider, Avatar } from "@mui/material";
 
-import { Settings, Logout } from "@mui/icons-material";
+import { Settings } from "@mui/icons-material";
 
-export default function ProfileMenu({ anchorEl, open, handleClose }) {
+import Logout from "../../../pages/login/components/Logout";
+
+export default function ProfileMenu({ anchorEl, open, handleClose, setAuth }) {
 	return (
 		<Menu
 			anchorEl={anchorEl}
@@ -24,12 +26,7 @@ export default function ProfileMenu({ anchorEl, open, handleClose }) {
 				</ListItemIcon>
 				Tema chiaro/scuro
 			</MenuItem>
-			<MenuItem>
-				<ListItemIcon>
-					<Logout fontSize="small" />
-				</ListItemIcon>
-				Logout
-			</MenuItem>
+			<Logout setAuth={setAuth} />
 		</Menu>
 	);
 }

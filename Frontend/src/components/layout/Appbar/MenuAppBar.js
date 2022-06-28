@@ -38,7 +38,7 @@ export default function MenuAppBar({ user, auth, setAuth }) {
 					</Typography>
 					{auth && (
 						<div>
-							<AccountMenu />
+							<AccountMenu setAuth={setAuth} />
 						</div>
 					)}
 				</Toolbar>
