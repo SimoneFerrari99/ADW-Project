@@ -1,7 +1,3 @@
-schema {
-    query: Query
-}
-
 extend type Query {
     agentById(agentCode: String!): Agent
 }
