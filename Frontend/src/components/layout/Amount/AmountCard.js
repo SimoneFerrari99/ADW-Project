@@ -1,8 +1,7 @@
-import { useState } from "react";
-
 import { Box, Card, Typography, CardContent, Skeleton } from "@mui/material";
 
-import LoadingError from "../Utils/LoadingError";
+import LoadingError from "../Error/LoadingError";
+import { connectionError } from "../../../utils/strings";
 
 export default function AmountCard({ title, icon, data, loading, error }) {
 	return (
@@ -32,13 +31,16 @@ export default function AmountCard({ title, icon, data, loading, error }) {
 						sx={{ fontSize: "1.5rem" }}
 					>
 						{loading ? (
-							<Skeleton
-								variant="text"
-								animation="wave"
-								sx={{ borderRadius: 2, ml: 1, width: "100%" }}
-							/>
+							<Box sx={{ display: "flex" }}>
+								€
+								<Skeleton
+									variant="text"
+									animation="wave"
+									sx={{ borderRadius: 2, ml: 1, width: "100%" }}
+								/>
+							</Box>
 						) : error ? (
-							<LoadingError />
+							<LoadingError text={connectionError} severity="error" variant="filled" />
 						) : (
 							`€ ${data}`
 						)}

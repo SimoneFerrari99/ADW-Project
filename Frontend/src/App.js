@@ -1,7 +1,7 @@
 import { React, Fragment } from "react";
 import { CssBaseline } from "@mui/material";
 
-import ClientPage from "./pages/customer/CustomerPage";
+import CustomerContent from "./pages/customer/CustomerContent";
 
 import MenuAppBar from "./components/layout/Appbar/MenuAppBar";
 
@@ -12,7 +12,7 @@ export default function App() {
 		<Fragment>
 			<CssBaseline />
 			<MenuAppBar user={userType} />
-			<ClientPage />
+			<CustomerContent />
 		</Fragment>
 	);
 }

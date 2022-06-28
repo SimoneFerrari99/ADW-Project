@@ -3,12 +3,17 @@ import { useQuery } from "@apollo/client";
 
 import { Box, TableCell, Paper, Skeleton, TableRow } from "@mui/material";
 
-import PersonInfoDialog from "../../../components/layout/Dialog/PersonInfoDialog";
-import LoadingError from "../../../components/layout/Utils/LoadingError";
+import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/OpenPersonInfoDialogButton";
+import LoadingError from "../../../components/layout/Error/LoadingError";
 import CustomTable from "../../../components/layout/Table/HomepageTable";
 
 import { customerOrders } from "../graphql/customerOrders";
 import { getComparator } from "../../../utils/functions/sorting";
+import {
+	connectionError,
+	customerTitleTable,
+	customerTablePaginationLabel,
+} from "../../../utils/strings";
 
 const headCells = [
 	{
@@ -57,9 +62,7 @@ export default function CustomerTable() {
 	const { data, loading, error } = useQuery(customerOrders);
 
 	if (loading) {
-		return error ? (
-			<LoadingError />
-		) : (
+		return (
 			<Skeleton
 				variant="rectangular"
 				animation="wave"
@@ -69,6 +72,17 @@ export default function CustomerTable() {
 			/>
 		);
 	}
+
+	if (error) {
+		return (
+			<Box sx={{ width: "100%", boxShadow: 4 }}>
+				<Paper sx={{ width: "100%", mb: 2 }}>
+					<LoadingError text={connectionError} severity="error" variant="filled" />{" "}
+				</Paper>
+			</Box>
+		);
+	}
+
 	const rows = data.ordersByCustomerCustCode;
 
 	// Avoid a layout jump when reaching the last page with empty rows.
@@ -79,7 +93,7 @@ export default function CustomerTable() {
 		<Box sx={{ width: "100%", boxShadow: 4 }}>
 			<Paper sx={{ width: "100%", mb: 2 }}>
 				<CustomTable
-					title={"I miei ordini"}
+					title={customerTitleTable}
 					headCells={headCells}
 					order={order}
 					orderBy={orderBy}
@@ -109,7 +123,7 @@ export default function CustomerTable() {
 											<TableCell align="center">{row.ordAMT}</TableCell>
 											<TableCell align="center">{row.ordDate}</TableCell>
 											<TableCell align="center">
-												<PersonInfoDialog codeToShow={row.agent.agentCode} />
+												<OpenPersonInfoDialogButton agentCode={row.agent.agentCode} />
 											</TableCell>
 											<TableCell align="center">{row.ordDescription}</TableCell>
 										</TableRow>
@@ -126,7 +140,7 @@ export default function CustomerTable() {
 							)}
 						</Fragment>
 					}
-					paginationLabel={"Ordini per pagina"}
+					paginationLabel={customerTablePaginationLabel}
 					rowsPerPage={rowsPerPage}
 					page={page}
 					onPageChange={handleChangePage}

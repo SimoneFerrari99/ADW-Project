@@ -8,8 +8,14 @@ import {
 	AccessTime,
 } from "@mui/icons-material";
 
-import AmountCard from "./AmountCard";
-import LoadingError from "../Utils/LoadingError";
+import AmountCard from "../../../components/layout/Amount/AmountCard";
+
+import {
+	openingAmountCardLabel,
+	receiveAmountCardLabel,
+	paymentAmountCardLabel,
+	outstandingAmountCardLabel,
+} from "../../../utils/strings";
 
 const amounts = gql`
 	query GetAmounts {
@@ -36,28 +42,28 @@ export default function AmountRow() {
 			<AmountCard
 				loading={loading}
 				error={error}
-				title="Opening"
+				title={openingAmountCardLabel}
 				data={loading ? null : error ? null : data.customerById.openingAMT}
 				icon={<AttachMoneyRounded sx={iconStyle} />}
 			/>
 			<AmountCard
 				loading={loading}
 				error={error}
-				title="Receive"
+				title={receiveAmountCardLabel}
 				data={loading ? null : error ? null : data.customerById.receiveAMT}
 				icon={<AssuredWorkloadRounded sx={iconStyle} />}
 			/>
 			<AmountCard
 				loading={loading}
 				error={error}
-				title="Payment"
+				title={paymentAmountCardLabel}
 				data={loading ? null : error ? null : data.customerById.paymentAMT}
 				icon={<ReceiptRounded sx={iconStyle} />}
 			/>
 			<AmountCard
 				loading={loading}
 				error={error}
-				title="Outstanding"
+				title={outstandingAmountCardLabel}
 				data={loading ? null : error ? null : data.customerById.outstandingAMT}
 				icon={<AccessTime sx={iconStyle} />}
 			/>

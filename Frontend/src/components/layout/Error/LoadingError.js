@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
-export default function LoadingError() {
+export default function LoadingError({ text, variant, severity }) {
 	const [open, setOpen] = useState(true);
 
 	const handleClose = () => {
@@ -16,11 +16,11 @@ export default function LoadingError() {
 			<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
 				<Alert
 					onClose={handleClose}
-					variant="filled"
-					severity="error"
+					variant={variant}
+					severity={severity}
 					sx={{ width: "100%" }}
 				>
-					Ouch, qualcosa è andato storto! Controlla la tua connessione internet.
+					{text}
 				</Alert>
 			</Snackbar>
 		</Box>

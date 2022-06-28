@@ -4,7 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
 
 import AccountMenu from "./AccountMenu";
-import LoadingError from "../Utils/LoadingError";
+import LoadingError from "../Error/LoadingError";
 
 const name = gql`
 	query GetName {

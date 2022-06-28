@@ -2,10 +2,10 @@ import * as React from "react";
 
 import { Container, Box } from "@mui/material";
 
-import AmountRow from "../../components/layout/Amount/AmountRow";
+import AmountRow from "./components/AmountRow";
 import CustomerTable from "./components/CustomerTable";
 
-export default function CustomerPage() {
+export default function CustomerContent() {
 	return (
 		<main>
 			<Container maxWidth="xl">
