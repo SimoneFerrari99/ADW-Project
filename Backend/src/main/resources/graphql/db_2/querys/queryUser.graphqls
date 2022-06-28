@@ -1,3 +1,6 @@
+schema {
+    query: Query
+}
 type Query {
     userById(code: String!): User
 }
