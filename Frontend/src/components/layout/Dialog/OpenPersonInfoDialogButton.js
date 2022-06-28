@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button } from "@mui/material";
 
-import PersonDialog from "./PersonDialog";
+import AgentInfoDialog from "./AgentInfoDialog";
 
 export default function OpenPersonInfoDialogButton({ agentCode }) {
 	const [open, setOpen] = useState(false);
@@ -25,10 +25,11 @@ export default function OpenPersonInfoDialogButton({ agentCode }) {
 				{agentCode}
 			</Button>
 			{open ? (
-				<PersonDialog
+				<AgentInfoDialog
 					title="Dettagli agente"
 					open={open}
 					handleClose={handleClose}
+					agentCode={agentCode}
 				/>
 			) : null}
 		</div>
