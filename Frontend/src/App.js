@@ -16,7 +16,7 @@ export default function App() {
 			{auth ? (
 				<Fragment>
 					<CssBaseline />
-					<MenuAppBar auth={auth} setAuth={setAuth} user={userType} />
+					<MenuAppBar setAuth={setAuth} user={userType} />
 					<CustomerContent />
 				</Fragment>
 			) : (
