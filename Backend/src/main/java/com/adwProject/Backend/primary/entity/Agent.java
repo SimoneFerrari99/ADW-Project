@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class Agent {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, name = "agent_code")
     private String agentCode;
 
