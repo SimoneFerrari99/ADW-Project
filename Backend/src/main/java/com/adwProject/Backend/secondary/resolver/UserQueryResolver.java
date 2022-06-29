@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @AllArgsConstructor
-public class UserResolver implements GraphQLQueryResolver {
+public class UserQueryResolver implements GraphQLQueryResolver {
     private final UserService userService;
 
     public User userById(String code) {
         return userService.getById(code);
     }
 
-    public User userByEmail(String email) {
-        return userService.getByEmail(email);
+    public User userAuth(String email, String password) {
+        return userService.userAuth(email, password);
     }
 }

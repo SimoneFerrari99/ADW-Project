@@ -12,10 +12,9 @@ import javax.persistence.Enumerated;
 
 @Setter
 @Getter
-@Builder
-@Value
+//@Builder
+//@Value
 public class UserInput {
-    private String code;
     @Enumerated(EnumType.STRING)
     @Column(length = 3)
     private Typology typology;

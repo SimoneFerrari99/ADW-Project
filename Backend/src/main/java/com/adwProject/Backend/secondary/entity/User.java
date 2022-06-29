@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, name = "code")
     private String code;
 
