@@ -5,10 +5,9 @@ import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
 import AccountMenu from "./AccountMenu";
 import LoadingError from "../Error/LoadingError";
 
-const userType = "C";
-const code = "C00002";
-
-const getUserName = gql`
+export default function MenuAppBar({ userType, code, auth, setAuth }) {
+	console.log(userType, code);
+	const getUserName = gql`
 	query GetName {${userType === "C" ? "customerById" : "agentById"}(
 		${userType === "C" ? "custCode" : "agentCode"}: ${'"' + code + '"'}) {
 			${userType === "C" ? "custName" : "agentName"}
@@ -16,7 +15,6 @@ const getUserName = gql`
 	}
 `;
 
-export default function MenuAppBar({ user, auth, setAuth }) {
 	const { data, loading, error } = useQuery(getUserName);
 
 	return (

@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import { ReactSession } from "react-client-session";
 import { CssBaseline } from "@mui/material";
 
 import LoginContent from "./pages/login/LoginContent";
@@ -6,21 +7,23 @@ import CustomerContent from "./pages/customer/CustomerContent";
 
 import MenuAppBar from "./components/layout/Appbar/MenuAppBar";
 
-const userType = "C";
-
 export default function App() {
-	const [auth, setAuth] = useState(true);
+	ReactSession.setStoreType("localStorage");
+	const [auth, setAuth] = useState(ReactSession.get("auth"));
+
+	const userType = String(ReactSession.get("userType"));
+	const code = String(ReactSession.get("code"));
 
 	return (
 		<Fragment>
 			{auth ? (
 				<Fragment>
 					<CssBaseline />
-					<MenuAppBar setAuth={setAuth} user={userType} />
+					<MenuAppBar setAuth={setAuth} userType={userType} code={code} />
 					<CustomerContent />
 				</Fragment>
 			) : (
-				<LoginContent />
+				<LoginContent setAuth={setAuth} />
 			)}
 		</Fragment>
 	);
