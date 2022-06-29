@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
@@ -6,17 +5,17 @@ import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
 import AccountMenu from "./AccountMenu";
 import LoadingError from "../Error/LoadingError";
 
-const name = gql`
-	query GetName {
-		customerById(custCode: "C00026") {
-			custName
+export default function MenuAppBar({ userType, code, auth, setAuth }) {
+	console.log(userType, code);
+	const getUserName = gql`
+	query GetName {${userType === "C" ? "customerById" : "agentById"}(
+		${userType === "C" ? "custCode" : "agentCode"}: ${'"' + code + '"'}) {
+			${userType === "C" ? "custName" : "agentName"}
 		}
 	}
 `;
-export default function MenuAppBar({ user }) {
-	const [auth, setAuth] = useState(true);
 
-	const { data, loading, error } = useQuery(name);
+	const { data, loading, error } = useQuery(getUserName);
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
@@ -35,15 +34,15 @@ export default function MenuAppBar({ user }) {
 							<Skeleton sx={{ width: 100, ml: 1 }} />
 						) : error ? (
 							<LoadingError />
-						) : (
+						) : userType === "C" ? (
 							data.customerById.custName
+						) : (
+							data.agentById.agentName
 						)}
 					</Typography>
-					{auth && (
-						<div>
-							<AccountMenu />
-						</div>
-					)}
+					<div>
+						<AccountMenu setAuth={setAuth} />
+					</div>
 				</Toolbar>
 			</AppBar>
 		</Box>
