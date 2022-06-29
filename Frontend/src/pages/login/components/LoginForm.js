@@ -34,11 +34,13 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 
 	const handleEmailChange = (event) => {
 		setLoginError(false);
+		setUserDisabled(false);
 		setEmail(event.target.value);
 	};
 
 	const handlePasswordChange = (event) => {
 		setLoginError(false);
+		setUserDisabled(false);
 		setPassword(event.target.value);
 	};
 
@@ -56,8 +58,6 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 		const { data } = await client.query({
 			query: userAuthQuery,
 		});
-		console.log(email, password);
-		console.log(data);
 
 		if (data.userAuth) {
 			if (data.userAuth.active) {
