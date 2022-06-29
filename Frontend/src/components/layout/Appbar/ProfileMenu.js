@@ -20,12 +20,12 @@ export default function ProfileMenu({ anchorEl, open, handleClose, setAuth }) {
 				<Avatar /> Il mio profilo
 			</MenuItem>
 			<Divider />
-			<MenuItem>
+			{/* <MenuItem>
 				<ListItemIcon>
 					<Settings fontSize="small" />
 				</ListItemIcon>
 				Tema chiaro/scuro
-			</MenuItem>
+			</MenuItem> */}
 			<Logout setAuth={setAuth} />
 		</Menu>
 	);

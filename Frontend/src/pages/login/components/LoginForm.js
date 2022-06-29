@@ -14,7 +14,7 @@ import {
 
 import { AlternateEmailRounded, PasswordRounded } from "@mui/icons-material";
 
-export default function LoginForm({ setAuth }) {
+export default function LoginForm({ setAuth, darkModeButton }) {
 	const loginButton = () => {
 		ReactSession.set("auth", true);
 		ReactSession.set("code", "C00008");
@@ -28,6 +28,7 @@ export default function LoginForm({ setAuth }) {
 			<Box
 				sx={{
 					display: "flex",
+					flexDirection: "column",
 					alignItems: "center",
 					justifyContent: "center",
 					height: "100vh",
@@ -73,6 +74,9 @@ export default function LoginForm({ setAuth }) {
 						</Button>
 					</CardActions>
 				</Card>
+				<Box sx={{ position: "absolute", top: "1rem", right: "1rem" }}>
+					{darkModeButton}
+				</Box>
 			</Box>
 		</Fragment>
 	);

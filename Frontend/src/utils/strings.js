@@ -1,6 +1,9 @@
 /* GENERAL TEXT */
 export const connectionError =
 	"Qualcosa è andato storto! Controlla la tua connessione internet e riprova.";
+export const modeLabel = "Modalità";
+export const lightModeLabel = "chiara";
+export const darkModeLabel = "scura";
 
 /* CUSTOMER LABEL */
 // Table

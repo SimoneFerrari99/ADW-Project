@@ -5,7 +5,13 @@ import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
 import AccountMenu from "./AccountMenu";
 import LoadingError from "../Error/LoadingError";
 
-export default function MenuAppBar({ userType, code, auth, setAuth }) {
+export default function MenuAppBar({
+	userType,
+	code,
+	auth,
+	setAuth,
+	darkModeButton,
+}) {
 	console.log(userType, code);
 	const getUserName = gql`
 	query GetName {${userType === "C" ? "customerById" : "agentById"}(
@@ -40,6 +46,7 @@ export default function MenuAppBar({ userType, code, auth, setAuth }) {
 							data.agentById.agentName
 						)}
 					</Typography>
+					<div>{darkModeButton}</div>
 					<div>
 						<AccountMenu setAuth={setAuth} />
 					</div>
