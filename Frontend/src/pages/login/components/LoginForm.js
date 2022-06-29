@@ -30,6 +30,7 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 	const [password, setPassword] = useState("");
 
 	const [loginError, setLoginError] = useState(false);
+	const [userDisabled, setUserDisabled] = useState(false);
 
 	const handleEmailChange = (event) => {
 		setLoginError(false);
@@ -45,7 +46,6 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 		query UserAuth {
 			userAuth(email: "${email}", password: "${password}") {
 				code
-				pw
 				typology
 				active
 			}
@@ -60,10 +60,14 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 		console.log(data);
 
 		if (data.userAuth) {
-			ReactSession.set("auth", true);
-			ReactSession.set("code", String(data.userByEmail.code));
-			ReactSession.set("userType", String(data.userByEmail.typology));
-			setAuth(true);
+			if (data.userAuth.active) {
+				ReactSession.set("auth", true);
+				ReactSession.set("code", String(data.userAuth.code));
+				ReactSession.set("userType", String(data.userAuth.typology));
+				setAuth(true);
+			} else {
+				setUserDisabled(true);
+			}
 		} else {
 			setLoginError(true);
 			setEmail("");
@@ -143,13 +147,13 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 					severity={"error"}
 				/>
 			)}
-			{/* {!loading && error && (
+			{userDisabled && (
 				<LoadingError
-					text={connectionError}
+					text={userDisabledAlertText}
 					variant={"filled"}
-					severity={"error"}
+					severity={"warning"}
 				/>
-			)} */}
+			)}
 		</Fragment>
 	);
 }
