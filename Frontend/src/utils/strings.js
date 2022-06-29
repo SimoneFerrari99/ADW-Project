@@ -1,6 +1,12 @@
 /* GENERAL TEXT */
 export const connectionError =
 	"Qualcosa è andato storto! Controlla la tua connessione internet e riprova.";
+export const loginErrorAlertText = "Email o password errati!";
+export const userDisabledAlertText =
+	"Il tuo account non è più attivo! Contattaci a info@ADWProject.com per maggiorni informazioni.";
+export const wrongEmailLabel = "Email errata.";
+export const wrongPasswordLabel = "Password errata.";
+
 export const modeLabel = "Modalità";
 export const lightModeLabel = "chiara";
 export const darkModeLabel = "scura";

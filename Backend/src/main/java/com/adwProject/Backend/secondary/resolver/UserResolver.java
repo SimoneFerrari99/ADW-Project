@@ -16,4 +16,8 @@ public class UserResolver implements GraphQLQueryResolver {
     public User userById(String code) {
         return userService.getById(code);
     }
+
+    public User userByEmail(String email) {
+        return userService.getByEmail(email);
+    }
 }

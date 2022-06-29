@@ -5,4 +5,5 @@ import com.adwProject.Backend.secondary.entity.User;
 public interface UserService {
 
     User getById(String id);
+    User getByEmail(String email);
 }

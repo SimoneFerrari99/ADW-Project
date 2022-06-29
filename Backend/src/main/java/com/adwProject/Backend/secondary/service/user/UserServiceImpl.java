@@ -16,4 +16,11 @@ public class UserServiceImpl implements UserService{
     public User getById(String id) {
         return userRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+
+
 }

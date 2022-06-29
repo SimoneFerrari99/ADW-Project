@@ -12,7 +12,6 @@ export default function MenuAppBar({
 	setAuth,
 	darkModeButton,
 }) {
-	console.log(userType, code);
 	const getUserName = gql`
 	query GetName {${userType === "C" ? "customerById" : "agentById"}(
 		${userType === "C" ? "custCode" : "agentCode"}: ${'"' + code + '"'}) {
