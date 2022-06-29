@@ -92,7 +92,7 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 			>
 				{" "}
 				<Box component="form">
-					<Card>
+					<Card sx={{ boxShadow: 8 }}>
 						<CardHeader
 							title="Accedi ad ADW Project!"
 							subheader="Non hai un account? Scrivici a info@ADWProject.it"
