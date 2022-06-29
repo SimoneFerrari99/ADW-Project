@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Container, Box } from "@mui/material";
 
 import AmountRow from "./components/AmountRow";

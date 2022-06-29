@@ -7,13 +7,14 @@ import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/OpenPe
 import LoadingError from "../../../components/layout/Error/LoadingError";
 import CustomTable from "../../../components/layout/Table/HomepageTable";
 
-import { customerOrders } from "../graphql/customerOrders";
 import { getComparator } from "../../../utils/functions/sorting";
 import {
 	connectionError,
 	customerTitleTable,
 	customerTablePaginationLabel,
 } from "../../../utils/strings";
+
+import { customerOrders } from "../graphql/customerOrders";
 
 const headCells = [
 	{

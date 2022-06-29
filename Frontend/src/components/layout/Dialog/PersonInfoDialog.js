@@ -1,14 +1,14 @@
-import { styled } from "@mui/material/styles";
 import {
 	Dialog,
 	DialogTitle,
 	DialogContent,
 	IconButton,
 	Skeleton,
-	Typography,
 } from "@mui/material";
 
 import { CloseRounded } from "@mui/icons-material";
+
+import { styled } from "@mui/material/styles";
 
 import LoadingError from "../Error/LoadingError";
 

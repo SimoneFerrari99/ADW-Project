@@ -1,16 +1,14 @@
 import { Fragment, useState, useContext } from "react";
 import { ReactSession } from "react-client-session";
-import { CssBaseline } from "@mui/material";
 
 import LoginContent from "./pages/login/LoginContent";
 import CustomerContent from "./pages/customer/CustomerContent";
 
 import MenuAppBar from "./components/layout/Appbar/MenuAppBar";
-
-import { useTheme } from "@mui/material/styles";
-
-import { modeLabel } from "./utils/strings";
 import ToggleColorModeButton from "./components/layout/Button/ToggleColorModeButton";
+
+import { CssBaseline } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 export default function App({ ColorModeContext }) {
 	ReactSession.setStoreType("localStorage");

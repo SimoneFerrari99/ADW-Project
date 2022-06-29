@@ -1,6 +1,4 @@
-import { Menu, MenuItem, ListItemIcon, Divider, Avatar } from "@mui/material";
-
-import { Settings } from "@mui/icons-material";
+import { Menu, MenuItem, Divider, Avatar } from "@mui/material";
 
 import Logout from "../../../pages/login/components/Logout";
 

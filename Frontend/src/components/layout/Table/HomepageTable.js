@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import { visuallyHidden } from "@mui/utils";
+
 import {
 	Table,
 	TableBody,
@@ -13,7 +15,6 @@ import {
 	Typography,
 	Box,
 } from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
 
 function CustomTableHead({ order, orderBy, onRequestSort, headCells }) {
 	const createSortHandler = (property) => (event) => {
