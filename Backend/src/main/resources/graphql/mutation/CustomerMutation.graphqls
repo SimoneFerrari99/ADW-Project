@@ -1,0 +1,4 @@
+type Mutation {
+    updateAllFields(id: String, customer: AllCustomerInput): Customer
+    updateDataFields(id: String, customer: CustomerInput): Customer
+}

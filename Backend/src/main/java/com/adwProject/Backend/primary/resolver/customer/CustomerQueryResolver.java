@@ -1,4 +1,4 @@
-package com.adwProject.Backend.primary.resolver;
+package com.adwProject.Backend.primary.resolver.customer;
 
 import com.adwProject.Backend.primary.entity.Customer;
 import com.adwProject.Backend.primary.service.customer.CustomerService;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @AllArgsConstructor
-public class CustomerResolver implements GraphQLQueryResolver {
+public class CustomerQueryResolver implements GraphQLQueryResolver {
     private final CustomerService customerService;
 
     public Customer customerById(String custCode) {

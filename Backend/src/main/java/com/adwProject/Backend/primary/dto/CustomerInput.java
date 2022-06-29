@@ -9,10 +9,8 @@ import lombok.Value;
 
 @Setter
 @Getter
-@Value
-@Builder
+//@Value
 public class CustomerInput {
-    private String custCode;
     private String custName;
     private String custCity;
     private String workingArea;
@@ -23,5 +21,5 @@ public class CustomerInput {
     private float paymentAMT;
     private float outstandingAMT;
     private String phoneNO;
-    private Agent agent;
+    private String agent;
 }

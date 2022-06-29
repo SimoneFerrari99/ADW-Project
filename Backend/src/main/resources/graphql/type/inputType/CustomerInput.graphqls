@@ -1,0 +1,22 @@
+input AllCustomerInput {
+    custName: String!
+    custCity:  String
+    workingArea: String!
+    custCountry: String!
+    grade: Int
+    openingAMT: Float!
+    receiveAMT: Float!
+    paymentAMT: Float!
+    outstandingAMT: Float!
+    phoneNO: String!
+    agent: String!
+}
+
+input CustomerInput {
+    custName: String!
+    custCity:  String
+    workingArea: String!
+    custCountry: String!
+    grade: Int
+    phoneNO: String!
+}
