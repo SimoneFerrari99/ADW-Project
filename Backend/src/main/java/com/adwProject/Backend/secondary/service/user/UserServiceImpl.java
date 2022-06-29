@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Service
@@ -27,6 +29,21 @@ public class UserServiceImpl implements UserService{
     @Override
     public User userAuth(String email, String password) {
         User user = userRepository.findByEmail(email).orElse(null);
+
+        try{
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(password.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+            }
+            password = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        System.out.println(password);
+
         if(user!=null && password.equals(user.getPw())) {
             return user;
         }
