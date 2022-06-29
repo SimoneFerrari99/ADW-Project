@@ -21,6 +21,7 @@ import {
 	wrongEmailLabel,
 	wrongPasswordLabel,
 	userDisabledAlertText,
+	connectionError,
 } from "../../../utils/strings";
 
 export default function LoginForm({ setAuth, darkModeButton }) {
@@ -56,7 +57,7 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 	const { data, error, loading } = useQuery(getUserByEmail);
 
 	const loginButton = () => {
-		if (data.userByEmail != null) {
+		if (!loading && !error && data.userByEmail != null) {
 			let userPassword = data.userByEmail.pw;
 			if (data.userByEmail.active) {
 				if (password === userPassword) {
@@ -90,7 +91,6 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 					height: "100vh",
 				}}
 			>
-				{" "}
 				<Box component="form">
 					<Card sx={{ boxShadow: 8 }}>
 						<CardHeader
@@ -157,6 +157,13 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 					text={userDisabledAlertText}
 					variant={"filled"}
 					severity={"warning"}
+				/>
+			)}
+			{!loading && error && (
+				<LoadingError
+					text={connectionError}
+					variant={"filled"}
+					severity={"error"}
 				/>
 			)}
 		</Fragment>

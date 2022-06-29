@@ -11,7 +11,6 @@ import { CssBaseline } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 export default function App({ ColorModeContext }) {
-	ReactSession.setStoreType("localStorage");
 	const [auth, setAuth] = useState(ReactSession.get("auth"));
 
 	const userType = String(ReactSession.get("userType"));
