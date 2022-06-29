@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { ReactSession } from "react-client-session";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery, useApolloClient } from "@apollo/client";
 
 import {
 	Button,
@@ -25,27 +25,25 @@ import {
 } from "../../../utils/strings";
 
 export default function LoginForm({ setAuth, darkModeButton }) {
+	const client = useApolloClient();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const [loginError, setLoginError] = useState(false);
-	const [userDisabled, setUserDisabled] = useState(false);
 
 	const handleEmailChange = (event) => {
 		setLoginError(false);
-		setUserDisabled(false);
 		setEmail(event.target.value);
 	};
 
 	const handlePasswordChange = (event) => {
 		setLoginError(false);
-		setUserDisabled(false);
 		setPassword(event.target.value);
 	};
 
-	const getUserByEmail = gql`
-		query GetUserByEmail {
-			userByEmail(email: "${email}") {
+	const userAuthQuery = gql`
+		query UserAuth {
+			userAuth(email: "${email}", password: "${password}") {
 				code
 				pw
 				typology
@@ -54,30 +52,23 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 		}
 	`;
 
-	const { data, error, loading } = useQuery(getUserByEmail);
+	const loginButton = async () => {
+		const { data } = await client.query({
+			query: userAuthQuery,
+		});
+		console.log(email, password);
+		console.log(data);
 
-	const loginButton = () => {
-		if (!loading && !error && data.userByEmail != null) {
-			let userPassword = data.userByEmail.pw;
-			if (data.userByEmail.active) {
-				if (password === userPassword) {
-					ReactSession.set("auth", true);
-					ReactSession.set("code", String(data.userByEmail.code));
-					ReactSession.set("userType", String(data.userByEmail.typology));
-					setAuth(true);
-					return;
-				}
-			} else {
-				setUserDisabled(true);
-				setEmail("");
-				setPassword("");
-				return;
-			}
+		if (data.userAuth) {
+			ReactSession.set("auth", true);
+			ReactSession.set("code", String(data.userByEmail.code));
+			ReactSession.set("userType", String(data.userByEmail.typology));
+			setAuth(true);
+		} else {
+			setLoginError(true);
+			setEmail("");
+			setPassword("");
 		}
-		setLoginError(true);
-		setEmail("");
-		setPassword("");
-		return;
 	};
 
 	return (
@@ -152,20 +143,13 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 					severity={"error"}
 				/>
 			)}
-			{userDisabled && (
-				<LoadingError
-					text={userDisabledAlertText}
-					variant={"filled"}
-					severity={"warning"}
-				/>
-			)}
-			{!loading && error && (
+			{/* {!loading && error && (
 				<LoadingError
 					text={connectionError}
 					variant={"filled"}
 					severity={"error"}
 				/>
-			)}
+			)} */}
 		</Fragment>
 	);
 }
