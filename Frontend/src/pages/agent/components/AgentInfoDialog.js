@@ -9,7 +9,7 @@ import {
 	CurrencyExchangeRounded,
 } from "@mui/icons-material";
 
-import PersonInfoDialog from "./PersonInfoDialog";
+import PersonInfoDialog from "../../../components/layout/Dialog/PersonInfoDialog";
 
 import {
 	commissionTooltipLabel,

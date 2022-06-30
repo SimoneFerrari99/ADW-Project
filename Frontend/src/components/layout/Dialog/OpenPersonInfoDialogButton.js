@@ -2,9 +2,14 @@ import { useState } from "react";
 
 import { Button } from "@mui/material";
 
-import AgentInfoDialog from "./AgentInfoDialog";
+import AgentInfoDialog from "../../../pages/agent/components/AgentInfoDialog";
 
-export default function OpenPersonInfoDialogButton({ agentCode }) {
+import { agentInfoDialogTitle } from "../../../utils/strings";
+
+export default function OpenPersonInfoDialogButton({
+	agentCode = null,
+	custCode = null,
+}) {
 	const [open, setOpen] = useState(false);
 
 	const handleClickOpen = () => {
@@ -24,14 +29,25 @@ export default function OpenPersonInfoDialogButton({ agentCode }) {
 			>
 				{agentCode}
 			</Button>
-			{open ? (
+			{open && agentCode && !custCode && (
 				<AgentInfoDialog
-					title="Dettagli agente"
+					title={agentInfoDialogTitle}
 					open={open}
 					handleClose={handleClose}
 					agentCode={agentCode}
 				/>
-			) : null}
+			)}
+			{open &&
+				!agentCode &&
+				custCode &&
+				{
+					/* <AgentInfoDialog
+					title={agentInfoDialogTitle}
+					open={open}
+					handleClose={handleClose}
+					agentCode={agentCode}
+				/> */
+				}}
 		</div>
 	);
 }

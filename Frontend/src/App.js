@@ -3,6 +3,10 @@ import { ReactSession } from "react-client-session";
 
 import LoginContent from "./pages/login/LoginContent";
 import CustomerContent from "./pages/customer/CustomerContent";
+import AgentContent from "./pages/agent/AgentContent";
+import DirigentContent from "./pages/dirigent/DirigentContent";
+
+import LoadingError from "./components/layout/Error/LoadingError";
 
 import MenuAppBar from "./components/layout/Appbar/MenuAppBar";
 import ToggleColorModeButton from "./components/layout/Button/ToggleColorModeButton";
@@ -21,9 +25,9 @@ export default function App({ ColorModeContext }) {
 
 	return (
 		<Fragment>
+			<CssBaseline />
 			{auth ? (
 				<Fragment>
-					<CssBaseline />
 					<MenuAppBar
 						setAuth={setAuth}
 						userType={userType}
@@ -32,11 +36,21 @@ export default function App({ ColorModeContext }) {
 							<ToggleColorModeButton theme={theme} colorMode={colorMode} />
 						}
 					/>
-					<CustomerContent />
+					{userType === "C" ? (
+						<CustomerContent />
+					) : userType === "A" ? (
+						<AgentContent />
+					) : userType === "D" ? (
+						<DirigentContent />
+					) : (
+						() => {
+							setAuth(false);
+							return <LoadingError />;
+						}
+					)}
 				</Fragment>
 			) : (
 				<Fragment>
-					<CssBaseline />
 					<LoginContent
 						setAuth={setAuth}
 						darkModeButton={

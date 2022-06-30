@@ -2,6 +2,8 @@ import { Menu, MenuItem, Divider, Avatar } from "@mui/material";
 
 import Logout from "../../../pages/login/components/Logout";
 
+import { myProfileLabel } from "../../../utils/strings";
+
 export default function ProfileMenu({ anchorEl, open, handleClose, setAuth }) {
 	return (
 		<Menu
@@ -15,15 +17,9 @@ export default function ProfileMenu({ anchorEl, open, handleClose, setAuth }) {
 			anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
 		>
 			<MenuItem>
-				<Avatar /> Il mio profilo
+				<Avatar /> {myProfileLabel}
 			</MenuItem>
 			<Divider />
-			{/* <MenuItem>
-				<ListItemIcon>
-					<Settings fontSize="small" />
-				</ListItemIcon>
-				Tema chiaro/scuro
-			</MenuItem> */}
 			<Logout setAuth={setAuth} />
 		</Menu>
 	);

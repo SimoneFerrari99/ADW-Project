@@ -12,6 +12,9 @@ export const lightModeLabel = "chiara";
 export const darkModeLabel = "scura";
 
 /* CUSTOMER LABEL */
+// Appbar
+export const myProfileLabel = "Il mio profilo";
+
 // Table
 export const customerTitleTable = "I miei ordini";
 export const customerTablePaginationLabel = "Ordini per pagina";
@@ -26,3 +29,7 @@ export const outstandingAmountCardLabel = "Outstanding";
 export const commissionTooltipLabel = "Commissione";
 export const phoneNumberTooltipLabel = "Numero di telefono";
 export const countryTooltipLabel = "Nazionalità";
+
+/* AGENT LABEL */
+// Dialog
+export const agentInfoDialogTitle = "Dettagli agente";
