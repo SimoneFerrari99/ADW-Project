@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
@@ -5,10 +6,14 @@ import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
 import AccountMenu from "./AccountMenu";
 import LoadingError from "../Error/LoadingError";
 
+import AgentInfoDialog from "../../../pages/agent/components/AgentInfoDialog";
+import CustomerInfoDialog from "../../../pages/customer/components/CustomerInfoDialog";
+
+import { myProfileLabel } from "../../../utils/strings";
+
 export default function MenuAppBar({
 	userType,
 	code,
-	auth,
 	setAuth,
 	darkModeButton,
 }) {
@@ -19,6 +24,15 @@ export default function MenuAppBar({
 		}
 	}
 `;
+	const [myProfileDialogOpened, setMyProfileDialogOpened] = useState(false);
+
+	const handleOpenMyProfileDialog = () => {
+		setMyProfileDialogOpened(true);
+	};
+
+	const handleCloseMyProfileDialog = () => {
+		setMyProfileDialogOpened(false);
+	};
 
 	const { data, loading, error } = useQuery(getUserName);
 
@@ -47,10 +61,30 @@ export default function MenuAppBar({
 					</Typography>
 					<div>{darkModeButton}</div>
 					<div>
-						<AccountMenu setAuth={setAuth} />
+						<AccountMenu
+							setAuth={setAuth}
+							handleOpenMyProfileDialog={handleOpenMyProfileDialog}
+						/>
 					</div>
 				</Toolbar>
 			</AppBar>
+
+			{myProfileDialogOpened && userType === "C" && (
+				<CustomerInfoDialog
+					title={myProfileLabel}
+					open={myProfileDialogOpened}
+					handleClose={handleCloseMyProfileDialog}
+					custCode={String(code)}
+				/>
+			)}
+			{myProfileDialogOpened && userType !== "C" && (
+				<AgentInfoDialog
+					title={myProfileLabel}
+					open={myProfileDialogOpened}
+					handleClose={handleCloseMyProfileDialog}
+					agentCode={String(code)}
+				/>
+			)}
 		</Box>
 	);
 }

@@ -29,6 +29,12 @@ export const outstandingAmountCardLabel = "Outstanding";
 export const commissionTooltipLabel = "Commissione";
 export const phoneNumberTooltipLabel = "Numero di telefono";
 export const countryTooltipLabel = "Nazionalità";
+export const gradeTooltipLabel = "Grado";
+export const agentTooltipLabel = "Agente di riferimento";
+
+// My profile dialog
+export const editPasswordLabel = "Modifica password";
+export const passwordMismatchLabel = "Le password non corrispondono";
 
 /* AGENT LABEL */
 // Dialog

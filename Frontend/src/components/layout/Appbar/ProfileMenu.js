@@ -4,7 +4,13 @@ import Logout from "../../../pages/login/components/Logout";
 
 import { myProfileLabel } from "../../../utils/strings";
 
-export default function ProfileMenu({ anchorEl, open, handleClose, setAuth }) {
+export default function ProfileMenu({
+	anchorEl,
+	open,
+	handleClose,
+	setAuth,
+	handleOpenMyProfileDialog,
+}) {
 	return (
 		<Menu
 			anchorEl={anchorEl}
@@ -16,7 +22,7 @@ export default function ProfileMenu({ anchorEl, open, handleClose, setAuth }) {
 			transformOrigin={{ horizontal: "right", vertical: "top" }}
 			anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
 		>
-			<MenuItem>
+			<MenuItem onClick={handleOpenMyProfileDialog}>
 				<Avatar /> {myProfileLabel}
 			</MenuItem>
 			<Divider />

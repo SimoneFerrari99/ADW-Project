@@ -9,6 +9,7 @@ export default function Logout({ setAuth }) {
 		//TODO: logica di eliminazione localstorage
 		ReactSession.set("auth", false);
 		ReactSession.set("code", null);
+		ReactSession.set("email", null);
 		ReactSession.set("userType", null);
 		setAuth(false);
 	};

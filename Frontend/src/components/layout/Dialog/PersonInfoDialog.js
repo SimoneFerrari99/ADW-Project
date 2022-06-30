@@ -34,22 +34,23 @@ const BootstrapDialogTitle = ({ children, onClose, ...other }) => {
 	);
 };
 
-export default function PersonInfoDialog({
+export default function InfoDialog({
 	title,
 	open,
 	handleClose,
 	loading,
 	error,
-	personInfoDialogBody,
+	InfoDialogBody,
+	dialogActions = null,
 }) {
 	return (
 		<BootstrapDialog
 			onClose={handleClose}
-			aria-labelledby="personInfo-dialog-title"
+			aria-labelledby="Info-dialog-title"
 			open={open}
 			fullWidth
 		>
-			<BootstrapDialogTitle id="personInfo-dialog-title" onClose={handleClose}>
+			<BootstrapDialogTitle id="Info-dialog-title" onClose={handleClose}>
 				{title}
 			</BootstrapDialogTitle>
 			<DialogContent dividers>
@@ -58,9 +59,10 @@ export default function PersonInfoDialog({
 				) : error ? (
 					<LoadingError />
 				) : (
-					personInfoDialogBody
+					InfoDialogBody
 				)}
 			</DialogContent>
+			{dialogActions}
 		</BootstrapDialog>
 	);
 }

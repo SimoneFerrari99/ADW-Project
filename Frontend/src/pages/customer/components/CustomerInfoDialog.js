@@ -1,42 +1,50 @@
 import { Fragment } from "react";
 import { useQuery, gql } from "@apollo/client";
 
-import { Typography, Box, Tooltip } from "@mui/material";
+import { Typography, Box, Tooltip, DialogActions, Button } from "@mui/material";
 
 import {
 	CallRounded,
 	LanguageRounded,
-	CurrencyExchangeRounded,
+	EmojiEventsRounded,
+	PersonRounded,
 } from "@mui/icons-material";
 
 import InfoDialog from "../../../components/layout/Dialog/PersonInfoDialog";
+import OpenEditPasswordDialogButton from "../../../components/layout/Dialog/OpenEditPasswordDialogButton";
 
 import {
-	commissionTooltipLabel,
 	countryTooltipLabel,
 	phoneNumberTooltipLabel,
+	gradeTooltipLabel,
+	agentTooltipLabel,
 } from "../../../utils/strings";
 
-export default function AgentInfoDialog({
+export default function CustomerInfoDialog({
 	title,
 	open,
 	handleClose,
-	agentCode,
+	custCode,
 }) {
-	const agentInfo = gql`
-		query GetAgentInfoByAgentId {
-			agentById(agentCode: "${agentCode}") {
-				agentCode
-				agentName
+	const customerInfo = gql`
+		query getCustomerProfileInfo {
+			customerById(custCode: "${custCode}") {
+				custName
+				custCity
 				workingArea
-				commission
+				custCountry
+				grade
 				phoneNO
-				country
+				agent {
+					agentCode
+					agentName
+					phoneNO
+				}
 			}
 		}
 	`;
 
-	const { data, loading, error } = useQuery(agentInfo);
+	const { data, loading, error } = useQuery(customerInfo);
 
 	return (
 		<InfoDialog
@@ -57,21 +65,28 @@ export default function AgentInfoDialog({
 								}}
 							>
 								<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
-									{data.agentById.agentName}
+									{data.customerById.custName}
 								</Typography>
 
 								<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
-									{data.agentById.agentCode}
+									{custCode}
 								</Typography>
 							</Box>
 							<Typography sx={{ fontSize: "1rem" }}>
-								{data.agentById.workingArea}
+								{data.customerById.workingArea}
 							</Typography>
+							<Box sx={{ display: "flex", alignItems: "center", pt: 3 }}>
+								<Tooltip title={agentTooltipLabel}>
+									<PersonRounded sx={{ mr: 2 }} />
+								</Tooltip>
+								{data.customerById.agent.agentCode}, {data.customerById.agent.agentName}{" "}
+								({data.customerById.agent.phoneNO})
+							</Box>
 							<Box sx={{ display: "flex", alignItems: "center", pt: 3 }}>
 								<Tooltip title={phoneNumberTooltipLabel}>
 									<CallRounded sx={{ mr: 2 }} />
 								</Tooltip>
-								{data.agentById.phoneNO}
+								{data.customerById.phoneNO}
 							</Box>
 							<Box
 								sx={{
@@ -84,18 +99,23 @@ export default function AgentInfoDialog({
 									<Tooltip title={countryTooltipLabel}>
 										<LanguageRounded sx={{ mr: 2 }} />
 									</Tooltip>
-									{data.agentById.country}
+									{data.customerById.custCity}, {data.customerById.custCountry}
 								</Box>
 								<Box sx={{ display: "flex", alignItems: "center", pt: 1 }}>
-									<Tooltip title={commissionTooltipLabel}>
-										<CurrencyExchangeRounded fontSize="small" sx={{ mr: 1 }} />
+									<Tooltip title={gradeTooltipLabel}>
+										<EmojiEventsRounded fontSize="small" sx={{ mr: 1 }} />
 									</Tooltip>
-									{data.agentById.commission}
+									{data.customerById.grade}
 								</Box>
 							</Box>
 						</Fragment>
 					)}
 				</Fragment>
+			}
+			dialogActions={
+				<DialogActions>
+					<OpenEditPasswordDialogButton />
+				</DialogActions>
 			}
 		/>
 	);

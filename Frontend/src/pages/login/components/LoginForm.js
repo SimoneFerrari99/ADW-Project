@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { ReactSession } from "react-client-session";
-import { gql, useLazyQuery, useApolloClient } from "@apollo/client";
+import { gql, useApolloClient } from "@apollo/client";
 
 import {
 	Button,
@@ -21,7 +21,6 @@ import {
 	wrongEmailLabel,
 	wrongPasswordLabel,
 	userDisabledAlertText,
-	connectionError,
 } from "../../../utils/strings";
 
 export default function LoginForm({ setAuth, darkModeButton }) {
@@ -54,7 +53,8 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 		}
 	`;
 
-	const loginButton = async () => {
+	const loginButton = async (event) => {
+		event.preventDefault();
 		const { data } = await client.query({
 			query: userAuthQuery,
 		});
@@ -63,6 +63,7 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 			if (data.userAuth.active) {
 				ReactSession.set("auth", true);
 				ReactSession.set("code", String(data.userAuth.code));
+				ReactSession.set("email", String(email));
 				ReactSession.set("userType", String(data.userAuth.typology));
 				setAuth(true);
 			} else {
@@ -86,51 +87,58 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 					height: "100vh",
 				}}
 			>
-				<Box component="form">
+				<Box>
 					<Card sx={{ boxShadow: 8 }}>
 						<CardHeader
 							title="Accedi ad ADW Project!"
 							subheader="Non hai un account? Scrivici a info@ADWProject.it"
 						/>
 						<CardContent>
-							<Stack spacing={2}>
-								<Box sx={{ display: "flex", alignItems: "flex-end" }}>
-									<AlternateEmailRounded
-										sx={{ color: "action.active", mr: 1, my: 0.5 }}
-									/>
-									<TextField
-										id="email"
-										label="Email"
-										variant="standard"
-										type="text"
-										error={loginError}
-										helperText={loginError && wrongEmailLabel}
-										required
-										fullWidth
-										autoFocus
-										value={email}
-										onChange={handleEmailChange}
-									/>
-								</Box>
-								<Box sx={{ display: "flex", alignItems: "flex-end" }}>
-									<PasswordRounded sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-									<TextField
-										id="password"
-										label="Password"
-										variant="standard"
-										type="password"
-										error={loginError}
-										helperText={loginError && wrongPasswordLabel}
-										required
-										fullWidth
-										value={password}
-										onChange={handlePasswordChange}
-									/>
-								</Box>
-							</Stack>
+							<Box id="accessForm" component="form">
+								<Stack spacing={2}>
+									<Box sx={{ display: "flex", alignItems: "flex-end" }}>
+										<AlternateEmailRounded
+											sx={{ color: "action.active", mr: 1, my: 0.5 }}
+										/>
+										<TextField
+											id="email"
+											label="Email"
+											variant="standard"
+											type="text"
+											error={loginError}
+											helperText={loginError && wrongEmailLabel}
+											required
+											fullWidth
+											autoFocus
+											value={email}
+											onChange={handleEmailChange}
+										/>
+									</Box>
+									<Box sx={{ display: "flex", alignItems: "flex-end" }}>
+										<PasswordRounded sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+										<TextField
+											id="password"
+											label="Password"
+											variant="standard"
+											type="password"
+											error={loginError}
+											helperText={loginError && wrongPasswordLabel}
+											required
+											fullWidth
+											value={password}
+											onChange={handlePasswordChange}
+										/>
+									</Box>
+								</Stack>
+							</Box>
 						</CardContent>
 						<CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
-							<Button variant="contained" onClick={loginButton}>
+							<Button
+								variant="contained"
+								onClick={loginButton}
+								type="submit"
+								form="accessForm"
+							>
 								Accedi
 							</Button>
 						</CardActions>
