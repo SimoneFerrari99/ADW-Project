@@ -6,11 +6,12 @@ import { Box, DialogActions, Button, Stack, TextField } from "@mui/material";
 
 import { PasswordRounded } from "@mui/icons-material";
 
-import InfoDialog from "./PersonInfoDialog";
+import InfoDialog from "./InfoDialog";
 
 import {
 	wrongPasswordLabel,
 	passwordMismatchLabel,
+	confirmChangePasswordLabel,
 } from "../../../utils/strings";
 
 export default function EditPasswordDialog({ title, open, handleClose }) {
@@ -63,7 +64,7 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 		} else if (newPassword1 === "" || newPassword1 !== newPassword2) {
 			setPasswordMismatch(true);
 		} else {
-			// INVIA NUOVA PASSWORD
+			// TODO INVIA NUOVA PASSWORD
 			handleClose();
 		}
 	};
@@ -136,7 +137,7 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 						form="changePasswordForm"
 						onClick={handleChangePassword}
 					>
-						CONFERMA CAMBIO PASSWORD
+						{confirmChangePasswordLabel}
 					</Button>
 				</DialogActions>
 			}

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ReactSession } from "react-client-session";
 
 import { Button } from "@mui/material";
 import { LockReset } from "@mui/icons-material/";
@@ -35,7 +34,6 @@ export default function OpenEditPasswordDialogButton({ handleClose }) {
 					title={editPasswordLabel}
 					open={open}
 					handleClose={handleClickClose}
-					custCode={String(ReactSession.get("code"))}
 				/>
 			)}
 		</div>

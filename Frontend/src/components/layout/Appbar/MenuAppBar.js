@@ -6,8 +6,7 @@ import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
 import AccountMenu from "./AccountMenu";
 import LoadingError from "../Error/LoadingError";
 
-import AgentInfoDialog from "../../../pages/agent/components/AgentInfoDialog";
-import CustomerInfoDialog from "../../../pages/customer/components/CustomerInfoDialog";
+import SpecificPersonInfoDialog from "../Dialog/SpecificPersonInfoDialog";
 
 import { myProfileLabel } from "../../../utils/strings";
 
@@ -70,7 +69,7 @@ export default function MenuAppBar({
 			</AppBar>
 
 			{myProfileDialogOpened && userType === "C" && (
-				<CustomerInfoDialog
+				<SpecificPersonInfoDialog
 					title={myProfileLabel}
 					open={myProfileDialogOpened}
 					handleClose={handleCloseMyProfileDialog}
@@ -79,7 +78,7 @@ export default function MenuAppBar({
 				/>
 			)}
 			{myProfileDialogOpened && userType !== "C" && (
-				<AgentInfoDialog
+				<SpecificPersonInfoDialog
 					title={myProfileLabel}
 					open={myProfileDialogOpened}
 					handleClose={handleCloseMyProfileDialog}

@@ -17,44 +17,59 @@ import {
 	ContentCopyRounded,
 } from "@mui/icons-material";
 
-import InfoDialog from "../../../components/layout/Dialog/PersonInfoDialog";
-import OpenEditPasswordDialogButton from "../../../components/layout/Dialog/OpenEditPasswordDialogButton";
+import InfoDialog from "./InfoDialog";
+import OpenEditPasswordDialogButton from "./OpenEditPasswordDialogButton";
 
 import {
 	countryTooltipLabel,
 	phoneNumberTooltipLabel,
 	gradeTooltipLabel,
+	commissionTooltipLabel,
 	agentTooltipLabel,
 } from "../../../utils/strings";
 
 import { copy } from "../../../utils/functions/copy";
 
-export default function CustomerInfoDialog({
+export default function SpecificPersonInfoDialog({
 	title,
 	open,
 	handleClose,
-	custCode,
+	custCode = null,
+	agentCode = null,
 	myProfileInfo = false,
 }) {
-	const customerInfo = gql`
-		query getCustomerProfileInfo {
-			customerById(custCode: "${custCode}") {
-				custName
-				custCity
-				workingArea
-				custCountry
-				grade
-				phoneNO
-				agent {
-					agentCode
-					agentName
-					phoneNO
-				}
-			}
+	const getAgentProfileInfoQuery = gql`query GetAgentInfoByAgentId {
+		agentById(agentCode: "${agentCode}") {
+			agentCode
+			agentName
+			workingArea
+			commission
+			phoneNO
+			country
 		}
+	}
 	`;
 
-	const { data, loading, error } = useQuery(customerInfo);
+	const getCustomerProfileInfoQuery = gql`query getCustomerProfileInfo {
+		customerById(custCode: "${custCode}") {
+			custName
+			custCity
+			workingArea
+			custCountry
+			grade
+			phoneNO
+			agent {
+				agentCode
+				agentName
+				phoneNO
+			}
+		}
+	}`;
+
+	const { data, loading, error } = useQuery(
+		(custCode && getCustomerProfileInfoQuery) ||
+			(agentCode && getAgentProfileInfoQuery)
+	);
 
 	return (
 		<InfoDialog
@@ -75,28 +90,35 @@ export default function CustomerInfoDialog({
 								}}
 							>
 								<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
-									{data.customerById.custName}
+									{(custCode && data.customerById.custName) ||
+										(agentCode && data.agentById.agentName)}
 								</Typography>
 
 								<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
-									{custCode}
+									{custCode || agentCode}
 								</Typography>
 							</Box>
 							<Typography sx={{ fontSize: "1rem" }}>
-								{data.customerById.workingArea}
+								{(custCode && data.customerById.workingArea) ||
+									(agentCode && data.agentById.workingArea)}
 							</Typography>
-							<Box sx={{ display: "flex", alignItems: "center", pt: 3 }}>
-								<Tooltip title={agentTooltipLabel}>
-									<PersonRounded sx={{ mr: 2 }} />
-								</Tooltip>
-								{data.customerById.agent.agentCode}, {data.customerById.agent.agentName}{" "}
-								({data.customerById.agent.phoneNO})
-							</Box>
+							{custCode && (
+								<Box sx={{ display: "flex", alignItems: "center", pt: 3 }}>
+									<Tooltip title={agentTooltipLabel}>
+										<PersonRounded sx={{ mr: 2 }} />
+									</Tooltip>
+									{data.customerById.agent.agentCode},{" "}
+									{data.customerById.agent.agentName} ({data.customerById.agent.phoneNO})
+								</Box>
+							)}
 							<Box sx={{ display: "flex", alignItems: "center", pt: 3 }}>
 								<Tooltip title={phoneNumberTooltipLabel}>
 									<CallRounded sx={{ mr: 2 }} />
 								</Tooltip>
-								<span id="phone">{data.customerById.phoneNO}</span>
+								<span id="phone">
+									{(custCode && data.customerById.phoneNO) ||
+										(agentCode && data.agentById.phoneNO)}
+								</span>
 								<IconButton onClick={() => copy("phone")}>
 									<ContentCopyRounded />
 								</IconButton>
@@ -112,13 +134,20 @@ export default function CustomerInfoDialog({
 									<Tooltip title={countryTooltipLabel}>
 										<LanguageRounded sx={{ mr: 2 }} />
 									</Tooltip>
-									{data.customerById.custCity}, {data.customerById.custCountry}
+									{(custCode &&
+										data.customerById.custCity + ", " + data.customerById.custCountry) ||
+										(agentCode && data.agentById.agentCountry)}
 								</Box>
 								<Box sx={{ display: "flex", alignItems: "center", pt: 1 }}>
-									<Tooltip title={gradeTooltipLabel}>
+									<Tooltip
+										title={
+											(custCode && gradeTooltipLabel) ||
+											(agentCode && commissionTooltipLabel)
+										}
+									>
 										<EmojiEventsRounded fontSize="small" sx={{ mr: 1 }} />
 									</Tooltip>
-									{data.customerById.grade}
+									{(custCode && data.customerById.grade) || data.agentById.commission}
 								</Box>
 							</Box>
 						</Fragment>

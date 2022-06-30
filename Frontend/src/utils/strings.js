@@ -39,6 +39,7 @@ export const agentTooltipLabel = "Agente di riferimento";
 // My profile dialog
 export const editPasswordLabel = "Cambia password";
 export const passwordMismatchLabel = "Le password non sono valide";
+export const confirmChangePasswordLabel = "Conferma cambio password";
 
 /* AGENT LABEL */
 // Dialog

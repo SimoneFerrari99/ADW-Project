@@ -1,11 +1,11 @@
 import { Fragment, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 import { Box, TableCell, Paper, Skeleton, TableRow } from "@mui/material";
 
 import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/OpenPersonInfoDialogButton";
 import LoadingError from "../../../components/layout/Error/LoadingError";
-import CustomTable from "../../../components/layout/Table/HomepageTable";
+import HomepageTable from "../../../components/layout/Table/HomepageTable";
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
@@ -13,8 +13,6 @@ import {
 	customerTitleTable,
 	customerTablePaginationLabel,
 } from "../../../utils/strings";
-
-import { customerOrders } from "../graphql/customerOrders";
 
 const headCells = [
 	{
@@ -44,6 +42,20 @@ export default function CustomerTable() {
 	const [orderBy, setOrderBy] = useState("ordNum");
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
+
+	const customerOrders = gql`
+		query GetOrdersByCustomerId {
+			ordersByCustomerCustCode(custCode: "C00008") {
+				ordNum
+				ordAMT
+				ordDate
+				agent {
+					agentCode
+				}
+				ordDescription
+			}
+		}
+	`;
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
@@ -93,7 +105,7 @@ export default function CustomerTable() {
 	return (
 		<Box sx={{ width: "100%", boxShadow: 4 }}>
 			<Paper sx={{ width: "100%", mb: 2 }}>
-				<CustomTable
+				<HomepageTable
 					title={customerTitleTable}
 					headCells={headCells}
 					order={order}
@@ -146,7 +158,7 @@ export default function CustomerTable() {
 					page={page}
 					onPageChange={handleChangePage}
 					onRowsPerPageChange={handleChangeRowsPerPage}
-				></CustomTable>
+				></HomepageTable>
 			</Paper>
 		</Box>
 	);

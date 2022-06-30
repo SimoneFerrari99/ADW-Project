@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button } from "@mui/material";
 
-import AgentInfoDialog from "../../../pages/agent/components/AgentInfoDialog";
+import SpecificPersonInfoDialog from "./SpecificPersonInfoDialog";
 
 import { agentInfoDialogTitle } from "../../../utils/strings";
 
@@ -30,7 +30,7 @@ export default function OpenPersonInfoDialogButton({
 				{agentCode}
 			</Button>
 			{open && agentCode && !custCode && (
-				<AgentInfoDialog
+				<SpecificPersonInfoDialog
 					title={agentInfoDialogTitle}
 					open={open}
 					handleClose={handleClose}
