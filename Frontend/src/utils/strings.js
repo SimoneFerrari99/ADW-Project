@@ -33,7 +33,7 @@ export const gradeTooltipLabel = "Grado";
 export const agentTooltipLabel = "Agente di riferimento";
 
 // My profile dialog
-export const editPasswordLabel = "Modifica password";
+export const editPasswordLabel = "Cambia password";
 export const passwordMismatchLabel = "Le password non corrispondono";
 
 /* AGENT LABEL */

@@ -131,6 +131,7 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 				<DialogActions>
 					<Button
 						type="submit"
+						variant="contained"
 						form="changePasswordForm"
 						onClick={handleChangePassword}
 					>

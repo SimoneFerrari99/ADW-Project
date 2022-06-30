@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { Button } from "@mui/material";
+import { LockReset } from "@mui/icons-material/";
 
 import EditPasswordDialog from "./EditPasswordDialog";
 
@@ -19,7 +20,12 @@ export default function OpenEditPasswordDialogButton({ handleClose }) {
 
 	return (
 		<div>
-			<Button autoFocus onClick={handleClickOpen}>
+			<Button
+				autoFocus
+				variant="contained"
+				startIcon={<LockReset />}
+				onClick={handleClickOpen}
+			>
 				{editPasswordLabel}
 			</Button>
 
