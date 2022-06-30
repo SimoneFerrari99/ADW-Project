@@ -1,13 +1,20 @@
 import { Fragment } from "react";
 import { useQuery, gql } from "@apollo/client";
 
-import { Typography, Box, Tooltip, DialogActions, Button } from "@mui/material";
+import {
+	Typography,
+	Box,
+	Tooltip,
+	DialogActions,
+	IconButton,
+} from "@mui/material";
 
 import {
 	CallRounded,
 	LanguageRounded,
 	EmojiEventsRounded,
 	PersonRounded,
+	ContentCopyRounded,
 } from "@mui/icons-material";
 
 import InfoDialog from "../../../components/layout/Dialog/PersonInfoDialog";
@@ -20,11 +27,14 @@ import {
 	agentTooltipLabel,
 } from "../../../utils/strings";
 
+import { copy } from "../../../utils/functions/copy";
+
 export default function CustomerInfoDialog({
 	title,
 	open,
 	handleClose,
 	custCode,
+	myProfileInfo = false,
 }) {
 	const customerInfo = gql`
 		query getCustomerProfileInfo {
@@ -86,7 +96,10 @@ export default function CustomerInfoDialog({
 								<Tooltip title={phoneNumberTooltipLabel}>
 									<CallRounded sx={{ mr: 2 }} />
 								</Tooltip>
-								{data.customerById.phoneNO}
+								<span id="phone">{data.customerById.phoneNO}</span>
+								<IconButton onClick={() => copy("phone")}>
+									<ContentCopyRounded />
+								</IconButton>
 							</Box>
 							<Box
 								sx={{
@@ -113,9 +126,11 @@ export default function CustomerInfoDialog({
 				</Fragment>
 			}
 			dialogActions={
-				<DialogActions>
-					<OpenEditPasswordDialogButton />
-				</DialogActions>
+				myProfileInfo && (
+					<DialogActions>
+						<OpenEditPasswordDialogButton />
+					</DialogActions>
+				)
 			}
 		/>
 	);

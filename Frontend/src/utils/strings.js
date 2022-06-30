@@ -11,6 +11,10 @@ export const modeLabel = "Modalità";
 export const lightModeLabel = "chiara";
 export const darkModeLabel = "scura";
 
+export const loginTitle = "Accedi ad ADW Project!";
+export const loginSubtitle =
+	"Non hai un account? Scrivici a info@ADWProject.it";
+
 /* CUSTOMER LABEL */
 // Appbar
 export const myProfileLabel = "Il mio profilo";
@@ -34,7 +38,7 @@ export const agentTooltipLabel = "Agente di riferimento";
 
 // My profile dialog
 export const editPasswordLabel = "Cambia password";
-export const passwordMismatchLabel = "Le password non corrispondono";
+export const passwordMismatchLabel = "Le password non sono valide";
 
 /* AGENT LABEL */
 // Dialog

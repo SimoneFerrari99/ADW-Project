@@ -52,14 +52,15 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 
 	const handleChangePassword = async (event) => {
 		event.preventDefault();
-
+		console.log(email, actualPassword);
 		const { data } = await client.query({
 			query: userAuthQuery,
 		});
+		console.log(data);
 
 		if (data.userAuth === null) {
 			setWrongPassword(true);
-		} else if (newPassword1 !== newPassword2) {
+		} else if (newPassword1 === "" || newPassword1 !== newPassword2) {
 			setPasswordMismatch(true);
 		} else {
 			// INVIA NUOVA PASSWORD

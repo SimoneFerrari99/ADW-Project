@@ -1,15 +1,23 @@
 import { Fragment } from "react";
 import { useQuery, gql } from "@apollo/client";
 
-import { Typography, Box, Tooltip } from "@mui/material";
+import {
+	Typography,
+	Box,
+	Tooltip,
+	DialogActions,
+	IconButton,
+} from "@mui/material";
 
 import {
 	CallRounded,
 	LanguageRounded,
 	CurrencyExchangeRounded,
+	ContentCopyRounded,
 } from "@mui/icons-material";
 
 import InfoDialog from "../../../components/layout/Dialog/PersonInfoDialog";
+import OpenEditPasswordDialogButton from "../../../components/layout/Dialog/OpenEditPasswordDialogButton";
 
 import {
 	commissionTooltipLabel,
@@ -17,11 +25,14 @@ import {
 	phoneNumberTooltipLabel,
 } from "../../../utils/strings";
 
+import { copy } from "../../../utils/functions/copy";
+
 export default function AgentInfoDialog({
 	title,
 	open,
 	handleClose,
 	agentCode,
+	myProfileInfo = false,
 }) {
 	const agentInfo = gql`
 		query GetAgentInfoByAgentId {
@@ -71,7 +82,10 @@ export default function AgentInfoDialog({
 								<Tooltip title={phoneNumberTooltipLabel}>
 									<CallRounded sx={{ mr: 2 }} />
 								</Tooltip>
-								{data.agentById.phoneNO}
+								<span id="phone">{data.agentById.phoneNO}</span>
+								<IconButton onClick={() => copy("phone")}>
+									<ContentCopyRounded />
+								</IconButton>
 							</Box>
 							<Box
 								sx={{
@@ -96,6 +110,13 @@ export default function AgentInfoDialog({
 						</Fragment>
 					)}
 				</Fragment>
+			}
+			dialogActions={
+				myProfileInfo && (
+					<DialogActions>
+						<OpenEditPasswordDialogButton />
+					</DialogActions>
+				)
 			}
 		/>
 	);

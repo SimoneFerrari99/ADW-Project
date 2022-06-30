@@ -75,6 +75,7 @@ export default function MenuAppBar({
 					open={myProfileDialogOpened}
 					handleClose={handleCloseMyProfileDialog}
 					custCode={String(code)}
+					myProfileInfo={true}
 				/>
 			)}
 			{myProfileDialogOpened && userType !== "C" && (
@@ -83,6 +84,7 @@ export default function MenuAppBar({
 					open={myProfileDialogOpened}
 					handleClose={handleCloseMyProfileDialog}
 					agentCode={String(code)}
+					myProfileInfo={true}
 				/>
 			)}
 		</Box>

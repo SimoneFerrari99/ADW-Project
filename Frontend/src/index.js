@@ -6,7 +6,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import ToggleColorMode from "./ToggleColorMode";
 
 const client = new ApolloClient({
-	uri: "http://localhost:4000/graphql",
+	uri: "http://192.168.1.9:4000/graphql",
 	cache: new InMemoryCache(),
 });
 
