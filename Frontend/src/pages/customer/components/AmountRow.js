@@ -1,3 +1,4 @@
+import { ReactSession } from "react-client-session";
 import { useQuery, gql } from "@apollo/client";
 
 import { Box } from "@mui/material/";
@@ -20,7 +21,7 @@ import {
 
 const amounts = gql`
 	query GetAmounts {
-		customerById(custCode: "C00026") {
+		customerById(custCode: "C00001") {
 			openingAMT
 			receiveAMT
 			paymentAMT
@@ -31,7 +32,6 @@ const amounts = gql`
 
 export default function AmountRow() {
 	const { data, loading, error } = useQuery(amounts);
-
 	return (
 		<Box
 			sx={{
