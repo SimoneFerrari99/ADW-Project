@@ -15,6 +15,7 @@ import {
 	EmojiEventsRounded,
 	PersonRounded,
 	ContentCopyRounded,
+	CurrencyExchangeRounded,
 } from "@mui/icons-material";
 
 import InfoDialog from "./InfoDialog";
@@ -136,7 +137,7 @@ export default function SpecificPersonInfoDialog({
 									</Tooltip>
 									{(custCode &&
 										data.customerById.custCity + ", " + data.customerById.custCountry) ||
-										(agentCode && data.agentById.agentCountry)}
+										(agentCode && data.agentById.country)}
 								</Box>
 								<Box sx={{ display: "flex", alignItems: "center", pt: 1 }}>
 									<Tooltip
@@ -145,7 +146,12 @@ export default function SpecificPersonInfoDialog({
 											(agentCode && commissionTooltipLabel)
 										}
 									>
-										<EmojiEventsRounded fontSize="small" sx={{ mr: 1 }} />
+										{(custCode && (
+											<EmojiEventsRounded fontSize="small" sx={{ mr: 1 }} />
+										)) ||
+											(agentCode && (
+												<CurrencyExchangeRounded fontSize="small" sx={{ mr: 1 }} />
+											))}
 									</Tooltip>
 									{(custCode && data.customerById.grade) || data.agentById.commission}
 								</Box>

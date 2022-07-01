@@ -39,7 +39,7 @@ const headCells = [
 		label: "Data",
 	},
 	{
-		id: "customer.customerCode",
+		id: "customer.custCode",
 		label: "Cliente",
 	},
 	{
@@ -58,19 +58,19 @@ export default function AgentTable() {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
-	// const agentOrders = gql`
-	// 	query GetOrdersByAgentId {
-	// 		ordersByAgentAgentCode(agentCode: "${ReactSession.get("code")}") {
-	// 			ordNum
-	// 			ordAMT
-	// 			ordDate
-	// 			agent {
-	// 				agentCode
-	// 			}
-	// 			ordDescription
-	// 		}
-	// 	}
-	// `;
+	const agentOrders = gql`
+		query GetOrdersByAgentId {
+			ordersByAgentAgentCode(agentCode: "${ReactSession.get("code")}") {
+				ordNum
+				ordAMT
+				ordDate
+				customer {
+					custCode
+				}
+				ordDescription
+			}
+		}
+	`;
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
@@ -87,24 +87,24 @@ export default function AgentTable() {
 		setPage(0);
 	};
 
-	// const { data, loading, error } = useQuery("agentOrders");
-	const data = {
-		ordersByAgentAgentCode: [
-			{
-				__typename: "Order",
-				ordNum: 200101,
-				ordAMT: 3000,
-				ordDate: "2008-07-15",
-				customer: {
-					__typename: "Agent",
-					custCode: "C00014",
-				},
-				ordDescription: "SOD",
-			},
-		],
-	};
-	const loading = false;
-	const error = false;
+	const { data, loading, error } = useQuery(agentOrders);
+	// const data = {
+	// 	ordersByAgentAgentCode: [
+	// 		{
+	// 			__typename: "Order",
+	// 			ordNum: 200101,
+	// 			ordAMT: 3000,
+	// 			ordDate: "2008-07-15",
+	// 			customer: {
+	// 				__typename: "Agent",
+	// 				custCode: "C00014",
+	// 			},
+	// 			ordDescription: "SOD",
+	// 		},
+	// 	],
+	// };
+	// const loading = false;
+	// const error = false;
 
 	if (loading) {
 		return (

@@ -74,7 +74,6 @@ export default function CustomerTable() {
 	};
 
 	const { data, loading, error } = useQuery(customerOrders);
-	if (!loading && !error) console.log(data);
 	if (loading) {
 		return (
 			<Skeleton

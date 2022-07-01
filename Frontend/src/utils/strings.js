@@ -12,8 +12,7 @@ export const lightModeLabel = "chiara";
 export const darkModeLabel = "scura";
 
 export const loginTitle = "Accedi ad ADW Project!";
-export const loginSubtitle =
-	"Non hai un account? Scrivici a info@ADWProject.it";
+export const loginSubtitle = "Non hai un account? Scrivici a info@ADWProject.it";
 
 /* CUSTOMER LABEL */
 // Appbar
