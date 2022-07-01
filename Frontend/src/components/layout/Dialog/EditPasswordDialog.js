@@ -42,32 +42,70 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 	const email = ReactSession.get("email");
 
 	const userAuthQuery = gql`
-		query UserAuth {
-			userAuth(email: "${email}", password: "${actualPassword}") {
+		query UserAuth($email: String!, $password: String!) {
+			userAuth(email: $email, password: $password) {
 				code
-				typology
 				active
 			}
 		}
 	`;
 
-	const handleChangePassword = async (event) => {
+	const changePasswordMutation = async (event) => {
 		event.preventDefault();
-		console.log(email, actualPassword);
-		const { data } = await client.query({
-			query: userAuthQuery,
-		});
-		console.log(data);
 
-		if (data.userAuth === null) {
-			setWrongPassword(true);
-		} else if (newPassword1 === "" || newPassword1 !== newPassword2) {
-			setPasswordMismatch(true);
+		if (newPassword1 !== "" && newPassword1 === newPassword2) {
+			const { data } = await client.query({
+				query: userAuthQuery,
+				variables: {
+					email: email,
+					password: actualPassword,
+				},
+			});
+			if (data.userAuth !== null) {
+				const updatePsw = gql`
+					mutation ChangePassword($code: String!, $password: String!) {
+						updatePsw(code: $code, password: $password)
+					}
+				`;
+				const { data } = await client.mutate({
+					mutation: updatePsw,
+					variables: {
+						code: ReactSession.get("code"),
+						password: newPassword1,
+					},
+				});
+				console.log(data);
+				if (data.updatePsw) {
+					handleClose();
+				}
+			} else {
+				setWrongPassword(true);
+			}
 		} else {
-			// TODO INVIA NUOVA PASSWORD
-			handleClose();
+			setPasswordMismatch(true);
 		}
 	};
+
+	// const handleChangePassword = async (event) => {
+	// 	event.preventDefault();
+	// 	const { data } = await client.query({
+	// 		query: userAuthQuery,
+	// 	});
+
+	// 	if (data.userAuth === null) {
+	// 		setWrongPassword(true);
+	// 	} else if (
+	// 		newPassword1 === "" ||
+	// 		newPassword1 !== newPassword2 ||
+	// 		newPassword1 === actualPassword
+	// 	) {
+	// 		setPasswordMismatch(true);
+	// 	} else {
+	// 		// TODO INVIA NUOVA PASSWORD
+	// 		changePasswordMutation();
+	// 		handleClose();
+	// 	}
+	// };
 
 	return (
 		<InfoDialog
@@ -135,7 +173,7 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 						type="submit"
 						variant="contained"
 						form="changePasswordForm"
-						onClick={handleChangePassword}
+						onClick={changePasswordMutation}
 					>
 						{confirmChangePasswordLabel}
 					</Button>
