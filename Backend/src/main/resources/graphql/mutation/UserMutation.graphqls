@@ -1,3 +1,4 @@
 extend type Mutation {
     updatePsw(code: String!, password: String!): Boolean!
+    toggleActive(code: String!): Boolean!
 }

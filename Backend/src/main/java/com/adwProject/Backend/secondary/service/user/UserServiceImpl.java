@@ -52,4 +52,18 @@ public class UserServiceImpl implements UserService{
         }
         return false;
     }
+
+    @Override
+    public Boolean toggleActive(String code) {
+        Optional<User> optionalUser = userRepository.findById(code);
+        User user;
+
+        if(optionalUser.isPresent()) {
+            user = optionalUser.get();
+            user.setActive(!user.isActive());
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
 }
