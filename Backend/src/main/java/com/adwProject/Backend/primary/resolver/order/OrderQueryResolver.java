@@ -1,4 +1,4 @@
-package com.adwProject.Backend.primary.resolver;
+package com.adwProject.Backend.primary.resolver.order;
 
 import com.adwProject.Backend.primary.entity.Order;
 import com.adwProject.Backend.primary.service.order.OrderService;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 @Slf4j
 @AllArgsConstructor
-public class OrderResolver implements GraphQLQueryResolver {
+public class OrderQueryResolver implements GraphQLQueryResolver {
     private final OrderService orderService;
 
     public Order orderById(String ordNum) {

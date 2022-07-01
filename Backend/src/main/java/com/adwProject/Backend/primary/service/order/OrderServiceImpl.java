@@ -30,5 +30,14 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.findByAgentAgentCode(agentCode).orElse(null);
     }
 
+    @Override
+    public Boolean deleteOrder(String code) {
+        if(orderRepository.existsById(code)) {
+            orderRepository.deleteById(code);
+            return true;
+        }
+        return false;
+    }
+
 
 }
