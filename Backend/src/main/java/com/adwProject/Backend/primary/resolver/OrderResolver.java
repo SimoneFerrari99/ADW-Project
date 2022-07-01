@@ -23,4 +23,8 @@ public class OrderResolver implements GraphQLQueryResolver {
         return orderService.getByCustomerCustCode(custCode);
     }
 
+    public List<Order> ordersByAgentAgentCode(String agentCode) {
+        return orderService.getByAgentAgentCode(agentCode);
+    }
+
 }

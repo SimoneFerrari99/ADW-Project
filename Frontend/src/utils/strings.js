@@ -44,3 +44,4 @@ export const confirmChangePasswordLabel = "Conferma cambio password";
 /* AGENT LABEL */
 // Dialog
 export const agentInfoDialogTitle = "Dettagli agente";
+export const customerInfoDialogTitle = "Dettagli cliente";

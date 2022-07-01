@@ -18,4 +18,6 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     List<Order> get(Integer skip, Integer take);
 
     Optional<List<Order>> findByCustomerCustCode(String custCode);
+
+    Optional<List<Order>> findByAgentAgentCode(String agentCode);
 }

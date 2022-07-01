@@ -51,22 +51,25 @@ function CustomTableHead({ order, orderBy, onRequestSort, headCells }) {
 	);
 }
 
-const CustomTableToolbar = ({ title }) => {
+const CustomTableToolbar = ({ title, headerButtons }) => {
 	return (
 		<Toolbar
 			sx={{
 				pl: { sm: 2 },
 				pr: { xs: 1, sm: 1 },
+				display: "flex",
+				justifyContent: "space-between",
 			}}
 		>
 			<Typography
-				sx={{ flex: "1 1 100%", fontWeight: "bold" }}
+				sx={{ fontWeight: "bold" }}
 				variant="h5"
 				id="tableTitle"
 				component="div"
 			>
 				{title}
 			</Typography>
+			{headerButtons}
 		</Toolbar>
 	);
 };
@@ -75,6 +78,7 @@ export default function HomepageTable({
 	headCells,
 	title,
 	tableBody,
+	headerButtons,
 	order,
 	orderBy,
 	rows,
@@ -87,7 +91,7 @@ export default function HomepageTable({
 }) {
 	return (
 		<Fragment>
-			<CustomTableToolbar title={title} />
+			<CustomTableToolbar title={title} headerButtons={headerButtons} />
 			<TableContainer>
 				<Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
 					<CustomTableHead

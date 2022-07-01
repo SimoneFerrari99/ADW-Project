@@ -2,7 +2,17 @@ import { Fragment, useState } from "react";
 import { ReactSession } from "react-client-session";
 import { gql, useQuery } from "@apollo/client";
 
-import { Box, TableCell, Paper, Skeleton, TableRow } from "@mui/material";
+import {
+	Box,
+	TableCell,
+	Paper,
+	Skeleton,
+	TableRow,
+	IconButton,
+	Button,
+} from "@mui/material";
+
+import { EditRounded, DeleteRounded, AddRounded } from "@mui/icons-material";
 
 import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/OpenPersonInfoDialogButton";
 import LoadingError from "../../../components/layout/Error/LoadingError";
@@ -29,34 +39,38 @@ const headCells = [
 		label: "Data",
 	},
 	{
-		id: "agent.agentCode",
-		label: "Agente",
+		id: "customer.customerCode",
+		label: "Cliente",
 	},
 	{
 		id: "ordDescription",
 		label: "Descrizione",
 	},
+	{
+		id: "actions",
+		label: "Azioni",
+	},
 ];
 
-export default function CustomerTable() {
+export default function AgentTable() {
 	const [order, setOrder] = useState("asc");
 	const [orderBy, setOrderBy] = useState("ordNum");
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
-	const customerOrders = gql`
-		query GetOrdersByCustomerId {
-			ordersByCustomerCustCode(custCode: "${ReactSession.get("code")}") {
-				ordNum
-				ordAMT
-				ordDate
-				agent {
-					agentCode
-				}
-				ordDescription
-			}
-		}
-	`;
+	// const agentOrders = gql`
+	// 	query GetOrdersByAgentId {
+	// 		ordersByAgentAgentCode(agentCode: "${ReactSession.get("code")}") {
+	// 			ordNum
+	// 			ordAMT
+	// 			ordDate
+	// 			agent {
+	// 				agentCode
+	// 			}
+	// 			ordDescription
+	// 		}
+	// 	}
+	// `;
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
@@ -73,8 +87,25 @@ export default function CustomerTable() {
 		setPage(0);
 	};
 
-	const { data, loading, error } = useQuery(customerOrders);
-	if (!loading && !error) console.log(data);
+	// const { data, loading, error } = useQuery("agentOrders");
+	const data = {
+		ordersByAgentAgentCode: [
+			{
+				__typename: "Order",
+				ordNum: 200101,
+				ordAMT: 3000,
+				ordDate: "2008-07-15",
+				customer: {
+					__typename: "Agent",
+					custCode: "C00014",
+				},
+				ordDescription: "SOD",
+			},
+		],
+	};
+	const loading = false;
+	const error = false;
+
 	if (loading) {
 		return (
 			<Skeleton
@@ -97,7 +128,7 @@ export default function CustomerTable() {
 		);
 	}
 
-	const rows = data.ordersByCustomerCustCode;
+	const rows = data.ordersByAgentAgentCode;
 
 	// Avoid a layout jump when reaching the last page with empty rows.
 	const emptyRows =
@@ -113,6 +144,11 @@ export default function CustomerTable() {
 					orderBy={orderBy}
 					handleRequestSort={handleRequestSort}
 					rows={rows}
+					headerButtons={
+						<Button variant="contained" color="success" startIcon={<AddRounded />}>
+							Nuovo ordine
+						</Button>
+					}
 					tableBody={
 						<Fragment>
 							{rows
@@ -137,9 +173,19 @@ export default function CustomerTable() {
 											<TableCell align="center">{row.ordAMT}</TableCell>
 											<TableCell align="center">{row.ordDate}</TableCell>
 											<TableCell align="center">
-												<OpenPersonInfoDialogButton agentCode={row.agent.agentCode} />
+												<OpenPersonInfoDialogButton custCode={row.customer.custCode} />
 											</TableCell>
 											<TableCell align="center">{row.ordDescription}</TableCell>
+											<TableCell align="center">
+												<Box sx={{ display: "flex" }}>
+													<IconButton aria-label="delete">
+														<EditRounded color="primary" />
+													</IconButton>
+													<IconButton aria-label="delete">
+														<DeleteRounded color="error" />
+													</IconButton>
+												</Box>
+											</TableCell>
 										</TableRow>
 									);
 								})}

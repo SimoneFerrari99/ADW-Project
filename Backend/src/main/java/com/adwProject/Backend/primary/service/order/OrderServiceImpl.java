@@ -25,5 +25,10 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.findByCustomerCustCode(custCode).orElse(null);
     }
 
+    @Override
+    public List<Order> getByAgentAgentCode(String agentCode) {
+        return orderRepository.findByAgentAgentCode(agentCode).orElse(null);
+    }
+
 
 }

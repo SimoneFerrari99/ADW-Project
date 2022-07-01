@@ -4,7 +4,10 @@ import { Button } from "@mui/material";
 
 import SpecificPersonInfoDialog from "./SpecificPersonInfoDialog";
 
-import { agentInfoDialogTitle } from "../../../utils/strings";
+import {
+	agentInfoDialogTitle,
+	customerInfoDialogTitle,
+} from "../../../utils/strings";
 
 export default function OpenPersonInfoDialogButton({
 	agentCode = null,
@@ -27,7 +30,7 @@ export default function OpenPersonInfoDialogButton({
 				sx={{ textDecoration: "underline" }}
 				onClick={handleClickOpen}
 			>
-				{agentCode}
+				{agentCode || custCode}
 			</Button>
 			{open && agentCode && !custCode && (
 				<SpecificPersonInfoDialog
@@ -37,17 +40,14 @@ export default function OpenPersonInfoDialogButton({
 					agentCode={agentCode}
 				/>
 			)}
-			{open &&
-				!agentCode &&
-				custCode &&
-				{
-					/* <AgentInfoDialog
-					title={agentInfoDialogTitle}
+			{open && !agentCode && custCode && (
+				<SpecificPersonInfoDialog
+					title={customerInfoDialogTitle}
 					open={open}
 					handleClose={handleClose}
-					agentCode={agentCode}
-				/> */
-				}}
+					custCode={custCode}
+				/>
+			)}
 		</div>
 	);
 }

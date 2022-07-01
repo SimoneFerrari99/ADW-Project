@@ -102,7 +102,7 @@ export default function SpecificPersonInfoDialog({
 								{(custCode && data.customerById.workingArea) ||
 									(agentCode && data.agentById.workingArea)}
 							</Typography>
-							{custCode && (
+							{custCode && myProfileInfo && (
 								<Box sx={{ display: "flex", alignItems: "center", pt: 3 }}>
 									<Tooltip title={agentTooltipLabel}>
 										<PersonRounded sx={{ mr: 2 }} />
