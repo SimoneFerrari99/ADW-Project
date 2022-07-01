@@ -12,8 +12,6 @@ import javax.persistence.Enumerated;
 
 @Setter
 @Getter
-//@Builder
-//@Value
 public class UserInput {
     @Enumerated(EnumType.STRING)
     @Column(length = 3)

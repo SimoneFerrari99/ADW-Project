@@ -12,4 +12,8 @@ public class UserMutationResolver implements GraphQLMutationResolver {
 
     private final UserService userService;
 
+    public Boolean updatePsw(String code, String password) {
+        return userService.updatePassword(code, password);
+    }
+
 }

@@ -20,7 +20,7 @@ public class User {
     private String code;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 3)
+    @Column(name = "typology", columnDefinition="text")
     private Typology typology;
 
     @Column(name = "active")

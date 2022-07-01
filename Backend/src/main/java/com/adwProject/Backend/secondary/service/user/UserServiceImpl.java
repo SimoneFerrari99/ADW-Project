@@ -42,11 +42,25 @@ public class UserServiceImpl implements UserService{
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println(password);
 
         if(user!=null && password.equals(user.getPw())) {
             return user;
         }
         return null;
+    }
+
+    @RequestMapping(value="/secondary")
+    @Override
+    public Boolean updatePassword(String code, String password) {
+        Optional<User> optionalUser = userRepository.findById(code);
+        User user;
+
+        if(optionalUser.isPresent()) {
+            user = optionalUser.get();
+            user.setPw(password);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 }

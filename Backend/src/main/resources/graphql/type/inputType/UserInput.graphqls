@@ -1,0 +1,6 @@
+input UserInput {
+    typology: Typology!
+    active: Boolean!
+    email: String!
+    pw: String!
+}

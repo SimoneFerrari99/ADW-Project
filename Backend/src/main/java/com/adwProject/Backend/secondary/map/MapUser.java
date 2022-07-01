@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MapUser {
-    public User mapInputToUser(UserInput userInput) {
-        User user = new User();
+    public User mapInputToUser(UserInput userInput, User user) {
 
         user.setTypology(userInput.getTypology());
         user.setActive(userInput.isActive());

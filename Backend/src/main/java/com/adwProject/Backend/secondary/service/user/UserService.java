@@ -7,4 +7,5 @@ public interface UserService {
 
     User getById(String id);
     User userAuth(String email, String password);
+    Boolean updatePassword(String code, String password);
 }

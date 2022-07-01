@@ -1,0 +1,3 @@
+extend type Mutation {
+    updatePsw(code: String!, password: String!): Boolean!
+}
