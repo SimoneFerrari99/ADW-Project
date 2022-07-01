@@ -9,7 +9,6 @@ import lombok.Value;
 
 @Setter
 @Getter
-//@Value
 public class CustomerInput {
     private String custName;
     private String custCity;

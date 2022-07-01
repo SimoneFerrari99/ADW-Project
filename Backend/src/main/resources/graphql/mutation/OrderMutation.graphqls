@@ -1,3 +1,4 @@
 extend type Mutation {
     deleteOrder(code: String!): Boolean!
+    createOrder(order: OrderInput!): Order
 }

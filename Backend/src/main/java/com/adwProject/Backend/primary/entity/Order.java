@@ -16,7 +16,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, name = "ord_num")
-    private String ordNum;
+    private int ordNum;
 
     @Column(name = "ord_amt")
     private float ordAMT;

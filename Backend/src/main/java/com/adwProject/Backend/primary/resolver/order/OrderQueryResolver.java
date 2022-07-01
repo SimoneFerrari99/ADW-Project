@@ -19,6 +19,7 @@ public class OrderQueryResolver implements GraphQLQueryResolver {
     public Order orderById(String ordNum) {
         return orderService.getById(ordNum);
     }
+
     public List<Order> ordersByCustomerCustCode(String custCode) {
         return orderService.getByCustomerCustCode(custCode);
     }

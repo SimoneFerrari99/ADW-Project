@@ -10,14 +10,10 @@ import lombok.Value;
 
 @Setter
 @Getter
-@Builder
-@Value
 public class OrderInput {
-    private String ordNum;
     private float ordAMT;
     private float advanceAMT;
-    private String ordDate;
-    private Agent agent;
-    private Customer customer;
+    private String agentId;
+    private String customerId;
     private String ordDescription;
 }

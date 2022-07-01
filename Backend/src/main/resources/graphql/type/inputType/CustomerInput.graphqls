@@ -9,7 +9,7 @@ input AllCustomerInput {
     paymentAMT: Float!
     outstandingAMT: Float!
     phoneNO: String!
-    agent: String!
+    agentId: String!
 }
 
 input CustomerInput {
