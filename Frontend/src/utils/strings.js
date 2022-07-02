@@ -12,7 +12,8 @@ export const lightModeLabel = "chiara";
 export const darkModeLabel = "scura";
 
 export const loginTitle = "Accedi ad ADW Project!";
-export const loginSubtitle = "Non hai un account? Scrivici a info@ADWProject.it";
+export const loginSubtitle =
+	"Non hai un account? Scrivici a info@ADWProject.it";
 
 /* CUSTOMER LABEL */
 // Appbar
@@ -44,3 +45,8 @@ export const confirmChangePasswordLabel = "Conferma cambio password";
 // Dialog
 export const agentInfoDialogTitle = "Dettagli agente";
 export const customerInfoDialogTitle = "Dettagli cliente";
+export const confirmationDeleteTitle = "Conferma eliminazione";
+export const confirmationDeleteText =
+	"Sei sicuro di voler eliminare questo elemento?";
+export const cancelLabel = "Annulla";
+export const confirmDeleteLabel = "Elimina";

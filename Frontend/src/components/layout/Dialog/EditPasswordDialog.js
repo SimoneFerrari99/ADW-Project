@@ -74,7 +74,6 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 						password: newPassword1,
 					},
 				});
-				console.log(data);
 				if (data.updatePsw) {
 					handleClose();
 				}
@@ -85,27 +84,6 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 			setPasswordMismatch(true);
 		}
 	};
-
-	// const handleChangePassword = async (event) => {
-	// 	event.preventDefault();
-	// 	const { data } = await client.query({
-	// 		query: userAuthQuery,
-	// 	});
-
-	// 	if (data.userAuth === null) {
-	// 		setWrongPassword(true);
-	// 	} else if (
-	// 		newPassword1 === "" ||
-	// 		newPassword1 !== newPassword2 ||
-	// 		newPassword1 === actualPassword
-	// 	) {
-	// 		setPasswordMismatch(true);
-	// 	} else {
-	// 		// TODO INVIA NUOVA PASSWORD
-	// 		changePasswordMutation();
-	// 		handleClose();
-	// 	}
-	// };
 
 	return (
 		<InfoDialog

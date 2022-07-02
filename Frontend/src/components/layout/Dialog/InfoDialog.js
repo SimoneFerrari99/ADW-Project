@@ -42,13 +42,14 @@ export default function InfoDialog({
 	error,
 	InfoDialogBody,
 	dialogActions = null,
+	fullWidth = true,
 }) {
 	return (
 		<BootstrapDialog
 			onClose={handleClose}
 			aria-labelledby="Info-dialog-title"
 			open={open}
-			fullWidth
+			fullWidth={fullWidth}
 		>
 			<BootstrapDialogTitle id="Info-dialog-title" onClose={handleClose}>
 				{title}

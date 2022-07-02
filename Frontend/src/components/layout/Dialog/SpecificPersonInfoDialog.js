@@ -120,7 +120,10 @@ export default function SpecificPersonInfoDialog({
 									{(custCode && data.customerById.phoneNO) ||
 										(agentCode && data.agentById.phoneNO)}
 								</span>
-								<IconButton onClick={() => copy("phone")}>
+								<IconButton
+									aria-label="copia numero telefono"
+									onClick={() => copy("phone")}
+								>
 									<ContentCopyRounded />
 								</IconButton>
 							</Box>
