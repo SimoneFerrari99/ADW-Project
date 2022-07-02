@@ -19,7 +19,7 @@ import {
 } from "@mui/icons-material";
 
 import InfoDialog from "./InfoDialog";
-import OpenEditPasswordDialogButton from "./OpenEditPasswordDialogButton";
+import OpenEditPasswordDialogButton from "./DialogOpener/OpenEditPasswordDialogButton";
 
 import {
 	countryTooltipLabel,

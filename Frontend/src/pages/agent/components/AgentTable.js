@@ -2,16 +2,9 @@ import { useState } from "react";
 import { ReactSession } from "react-client-session";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 
-import {
-	Box,
-	TableCell,
-	Paper,
-	TableRow,
-	IconButton,
-	Button,
-} from "@mui/material";
+import { Box, TableCell, Paper, TableRow, Button } from "@mui/material";
 
-import { EditRounded, DeleteRounded, AddRounded } from "@mui/icons-material";
+import { DeleteRounded, AddRounded } from "@mui/icons-material";
 
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
 import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
@@ -26,6 +19,7 @@ import {
 	cancelLabel,
 	confirmDeleteLabel,
 } from "../../../utils/strings";
+import OpenEditOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditOrderDialogButton";
 
 const headCells = [
 	{
@@ -134,9 +128,7 @@ export default function AgentTable() {
 										<TableCell align="center">{row.ordDescription}</TableCell>
 										<TableCell align="center">
 											<Box sx={{ display: "flex" }}>
-												<IconButton aria-label="delete">
-													<EditRounded color="primary" />
-												</IconButton>
+												<OpenEditOrderDialogButton />
 												<OpenConfirmationDialogButton
 													iconButton={<DeleteRounded color="error" />}
 													ariaLabel="elimina"

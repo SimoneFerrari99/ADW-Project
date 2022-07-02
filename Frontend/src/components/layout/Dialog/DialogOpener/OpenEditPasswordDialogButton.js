@@ -3,9 +3,9 @@ import { useState } from "react";
 import { Button } from "@mui/material";
 import { LockReset } from "@mui/icons-material/";
 
-import EditPasswordDialog from "./EditPasswordDialog";
+import EditPasswordDialog from "../EditPasswordDialog";
 
-import { editPasswordLabel } from "../../../utils/strings";
+import { editPasswordLabel } from "../../../../utils/strings";
 
 export default function OpenEditPasswordDialogButton({ handleClose }) {
 	const [open, setOpen] = useState(false);
