@@ -63,6 +63,12 @@ export default function MenuAppBar({
 						<AccountMenu
 							setAuth={setAuth}
 							handleOpenMyProfileDialog={handleOpenMyProfileDialog}
+							userName={
+								!loading &&
+								!error &&
+								((userType === "C" && data.customerById.custName) ||
+									(userType !== "C" && data.agentById.agentName))
+							}
 						/>
 					</div>
 				</Toolbar>

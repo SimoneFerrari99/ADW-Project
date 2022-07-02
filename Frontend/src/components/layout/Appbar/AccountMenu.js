@@ -4,7 +4,11 @@ import { Box, Avatar, IconButton, Tooltip } from "@mui/material";
 
 import ProfileMenu from "./ProfileMenu";
 
-export default function AccountMenu({ setAuth, handleOpenMyProfileDialog }) {
+export default function AccountMenu({
+	setAuth,
+	handleOpenMyProfileDialog,
+	userName,
+}) {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 	const handleClick = (event) => {
@@ -13,6 +17,7 @@ export default function AccountMenu({ setAuth, handleOpenMyProfileDialog }) {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
 	return (
 		<Fragment>
 			<Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -25,7 +30,9 @@ export default function AccountMenu({ setAuth, handleOpenMyProfileDialog }) {
 						aria-haspopup="true"
 						aria-expanded={open ? "true" : undefined}
 					>
-						<Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+						<Avatar sx={{ width: 32, height: 32 }}>
+							{userName && userName.charAt(0).toUpperCase()}
+						</Avatar>
 					</IconButton>
 				</Tooltip>
 			</Box>
