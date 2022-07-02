@@ -1,5 +1,5 @@
 extend type Query {
-    orderById(ordNum: String!): Order
+    orderById(ordNum: Int!): Order
     ordersByCustomerCustCode(custCode: String!): [Order]
     ordersByAgentAgentCode(agentCode: String!): [Order]
 }

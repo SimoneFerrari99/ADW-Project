@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 public class OrderMutationResolver implements GraphQLMutationResolver {
     private final OrderService orderService;
 
-    public Boolean deleteOrder(String code) {
-        return orderService.deleteOrder(code);
+    public Boolean deleteOrder(int ordNum) {
+        return orderService.deleteOrder(ordNum);
     }
     public Order createOrder(OrderInput orderInput) {
         return orderService.createOrder(orderInput);

@@ -25,8 +25,8 @@ public class OrderServiceImpl implements OrderService{
 
     @RequestMapping(value="/primary")
     @Override
-    public Order getById(String id) {
-        return orderRepository.findById(id).orElse(null);
+    public Order getById(int ordNum) {
+        return orderRepository.findById(ordNum).orElse(null);
     }
 
     @RequestMapping(value="/primary")
@@ -43,9 +43,9 @@ public class OrderServiceImpl implements OrderService{
 
     @RequestMapping(value="/primary")
     @Override
-    public Boolean deleteOrder(String code) {
-        if(orderRepository.existsById(code)) {
-            orderRepository.deleteById(code);
+    public Boolean deleteOrder(int ordNum) {
+        if(orderRepository.existsById(ordNum)) {
+            orderRepository.deleteById(ordNum);
             return true;
         }
         return false;

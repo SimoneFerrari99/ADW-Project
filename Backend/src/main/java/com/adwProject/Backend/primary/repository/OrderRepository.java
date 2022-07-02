@@ -10,9 +10,9 @@ import java.util.Optional;
 
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, String> {
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-    Optional<Order> findById(String id);
+    Optional<Order> findById(int ordNum);
 
     Optional<List<Order>> findByCustomerCustCode(String custCode);
 

@@ -6,9 +6,9 @@ import com.adwProject.Backend.primary.entity.Order;
 import java.util.List;
 
 public interface OrderService {
-    Order getById(String id);
+    Order getById(int ordNum);
     List<Order> getByCustomerCustCode(String custCode);
     List<Order> getByAgentAgentCode(String agentCode);
-    Boolean deleteOrder(String code);
+    Boolean deleteOrder(int ordNum);
     Order createOrder(OrderInput orderInput);
 }
