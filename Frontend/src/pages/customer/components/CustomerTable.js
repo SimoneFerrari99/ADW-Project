@@ -5,7 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import { Box, Paper, TableCell, TableRow } from "@mui/material";
 
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
-import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/OpenPersonInfoDialogButton";
+import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
