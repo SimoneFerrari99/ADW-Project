@@ -63,8 +63,8 @@ export default function AgentTable() {
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
 	const agentOrders = gql`
-		query GetOrdersByAgentId {
-			ordersByAgentAgentCode(agentCode: "${ReactSession.get("code")}") {
+		query GetOrdersByAgentId($agentCode: String!) {
+			ordersByAgentAgentCode(agentCode: $agentCode) {
 				ordNum
 				ordAMT
 				ordDate
@@ -77,12 +77,16 @@ export default function AgentTable() {
 	`;
 
 	const deleteOrder = gql`
-		mutation DeleteOrder($code: String!) {
-			deleteOrder(code: $code)
+		mutation DeleteOrder($ordNum: Int!) {
+			deleteOrder(ordNum: $ordNum)
 		}
 	`;
 
-	const { data, loading, error, refetch } = useQuery(agentOrders);
+	const { data, loading, error, refetch } = useQuery(agentOrders, {
+		variables: {
+			agentCode: ReactSession.get("code"),
+		},
+	});
 
 	const rows = !loading && !error && data.ordersByAgentAgentCode;
 
@@ -142,7 +146,7 @@ export default function AgentTable() {
 														await client.mutate({
 															mutation: deleteOrder,
 															variables: {
-																code: row.ordNum,
+																ordNum: row.ordNum,
 															},
 														});
 														refetch();

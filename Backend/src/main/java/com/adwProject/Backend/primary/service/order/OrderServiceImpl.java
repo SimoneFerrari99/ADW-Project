@@ -60,7 +60,7 @@ public class OrderServiceImpl implements OrderService{
 
     @RequestMapping(value="/primary")
     private Customer findCustomerById(String id) {
-        Customer customer = customerRepository.findById(id).get();
+        Customer customer = customerRepository.findById(id).orElse(null);
         if (customer == null)
             throw new GraphQLException("There is no Customer according with id: " + id);
 
@@ -69,7 +69,7 @@ public class OrderServiceImpl implements OrderService{
 
     @RequestMapping(value="/primary")
     private Agent findAgentById(String id) {
-        Agent agent = agentRepository.findById(id).get();
+        Agent agent = agentRepository.findById(id).orElse(null);
         if (agent == null)
             throw new GraphQLException("There is no Agent according with id: " + id);
 

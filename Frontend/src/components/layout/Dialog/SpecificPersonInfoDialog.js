@@ -39,37 +39,50 @@ export default function SpecificPersonInfoDialog({
 	agentCode = null,
 	myProfileInfo = false,
 }) {
-	const getAgentProfileInfoQuery = gql`query GetAgentInfoByAgentId {
-		agentById(agentCode: "${agentCode}") {
-			agentCode
-			agentName
-			workingArea
-			commission
-			phoneNO
-			country
-		}
-	}
-	`;
-
-	const getCustomerProfileInfoQuery = gql`query getCustomerProfileInfo {
-		customerById(custCode: "${custCode}") {
-			custName
-			custCity
-			workingArea
-			custCountry
-			grade
-			phoneNO
-			agent {
+	const getAgentProfileInfoQuery = gql`
+		query GetAgentInfoByAgentId($agentCode: String!) {
+			agentById(agentCode: $agentCode) {
 				agentCode
 				agentName
+				workingArea
+				commission
 				phoneNO
+				country
 			}
 		}
-	}`;
+	`;
+
+	const getCustomerProfileInfoQuery = gql`
+		query getCustomerProfileInfo($custCode: String!) {
+			customerById(custCode: $custCode) {
+				custName
+				custCity
+				workingArea
+				custCountry
+				grade
+				phoneNO
+				agent {
+					agentCode
+					agentName
+					phoneNO
+				}
+			}
+		}
+	`;
 
 	const { data, loading, error } = useQuery(
 		(custCode && getCustomerProfileInfoQuery) ||
-			(agentCode && getAgentProfileInfoQuery)
+			(agentCode && getAgentProfileInfoQuery),
+		(custCode && {
+			variables: {
+				custCode: custCode,
+			},
+		}) ||
+			(agentCode && {
+				variables: {
+					agentCode: agentCode,
+				},
+			})
 	);
 
 	return (
