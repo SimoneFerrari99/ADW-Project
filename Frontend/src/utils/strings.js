@@ -46,7 +46,24 @@ export const confirmChangePasswordLabel = "Conferma cambio password";
 export const agentInfoDialogTitle = "Dettagli agente";
 export const customerInfoDialogTitle = "Dettagli cliente";
 export const confirmationDeleteTitle = "Conferma eliminazione";
+export const editOrderTitle = "Modifica ordine";
+export const newOrderTitle = "Nuovo ordine";
 export const confirmationDeleteText =
 	"Sei sicuro di voler eliminare questo elemento?";
 export const cancelLabel = "Annulla";
+export const confirmEditLabel = "Modifica";
 export const confirmDeleteLabel = "Elimina";
+export const insertOrderLabel = "Crea ordine";
+
+export const newOrderButtonLabel = "Nuovo ordine";
+
+// Form label
+export const ordAmountLabel = "Totale";
+export const advanceAmountLabel = "Anticipo";
+export const custCodeLabel = "Cod. Cliente";
+export const agentCodeLabel = "Cod. Cgente";
+export const ordDescriptionLabel = "Descrizione ordine";
+
+export const requiredFieldLabel = "I campi evidenziati sono obbligatori";
+export const ordAmountAdvancedAmountErrorLabel =
+	"Il totale deve essere maggiore o uguale all'anticipo";

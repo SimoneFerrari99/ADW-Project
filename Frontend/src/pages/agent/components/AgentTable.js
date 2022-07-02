@@ -19,7 +19,9 @@ import {
 	cancelLabel,
 	confirmDeleteLabel,
 } from "../../../utils/strings";
+
 import OpenEditOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditOrderDialogButton";
+import OpenNewOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewOrderDialogButton";
 
 const headCells = [
 	{
@@ -29,6 +31,10 @@ const headCells = [
 	{
 		id: "ordAMT",
 		label: "Totale",
+	},
+	{
+		id: "advanceAMT",
+		label: "Anticipo",
 	},
 	{
 		id: "ordDate",
@@ -61,16 +67,20 @@ export default function AgentTable() {
 			ordersByAgentAgentCode(agentCode: $agentCode) {
 				ordNum
 				ordAMT
+				advanceAMT
 				ordDate
 				customer {
 					custCode
+				}
+				agent {
+					agentCode
 				}
 				ordDescription
 			}
 		}
 	`;
 
-	const deleteOrder = gql`
+	const DELETE_ORDER = gql`
 		mutation DeleteOrder($ordNum: Int!) {
 			deleteOrder(ordNum: $ordNum)
 		}
@@ -89,11 +99,7 @@ export default function AgentTable() {
 			<Paper sx={{ width: "100%", mb: 2 }}>
 				<HomepageTableBody
 					tableTitle={customerTitleTable}
-					headerButtons={
-						<Button variant="contained" color="success" startIcon={<AddRounded />}>
-							Nuovo ordine
-						</Button>
-					}
+					headerButtons={<OpenNewOrderDialogButton refetch={refetch} />}
 					headCells={headCells}
 					loading={loading}
 					error={error}
@@ -121,6 +127,7 @@ export default function AgentTable() {
 											{row.ordNum}
 										</TableCell>
 										<TableCell align="center">{row.ordAMT}</TableCell>
+										<TableCell align="center">{row.advanceAMT}</TableCell>
 										<TableCell align="center">{row.ordDate}</TableCell>
 										<TableCell align="center">
 											<OpenPersonInfoDialogButton custCode={row.customer.custCode} />
@@ -128,7 +135,7 @@ export default function AgentTable() {
 										<TableCell align="center">{row.ordDescription}</TableCell>
 										<TableCell align="center">
 											<Box sx={{ display: "flex" }}>
-												<OpenEditOrderDialogButton />
+												<OpenEditOrderDialogButton data={row} refetch={refetch} />
 												<OpenConfirmationDialogButton
 													iconButton={<DeleteRounded color="error" />}
 													ariaLabel="elimina"
@@ -136,7 +143,7 @@ export default function AgentTable() {
 													confirmationText={confirmationDeleteText}
 													handleConfirmation={async () => {
 														await client.mutate({
-															mutation: deleteOrder,
+															mutation: DELETE_ORDER,
 															variables: {
 																ordNum: row.ordNum,
 															},
