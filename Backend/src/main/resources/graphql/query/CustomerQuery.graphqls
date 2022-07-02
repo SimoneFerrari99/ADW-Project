@@ -1,3 +1,4 @@
 extend type Query {
     customerById(custCode: String!): Customer
+    customersByAgentCode(agentCode: String!): [Customer]
 }

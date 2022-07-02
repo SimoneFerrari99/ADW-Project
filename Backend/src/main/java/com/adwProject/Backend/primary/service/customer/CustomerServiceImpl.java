@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,9 +51,14 @@ public class CustomerServiceImpl implements CustomerService {
         return null;
     }
 
+    @Override
+    public List<Customer> getCustomersByAgentCode(String agentCode) {
+        return customerRepository.findAgentByAgentAgentCode(agentCode).orElse(null);
+    }
+
     @RequestMapping(value="/primary")
     private Agent findAgentById(String id) {
-        Agent agent = agentRepository.findById(id).get();
+        Agent agent = agentRepository.findById(id).orElse(null);
         if (agent == null)
             throw new GraphQLException("There is no Agent according with id: " + id);
 

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Component
 @Slf4j
@@ -17,4 +19,9 @@ public class CustomerQueryResolver implements GraphQLQueryResolver {
     public Customer customerById(String custCode) {
         return customerService.getById(custCode);
     }
+
+    public List<Customer> customersByAgentCode(String agentCode) {
+        return customerService.getCustomersByAgentCode(agentCode);
+    }
+
 }
