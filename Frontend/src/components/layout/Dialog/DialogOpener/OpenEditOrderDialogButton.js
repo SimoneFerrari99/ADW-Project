@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import { IconButton } from "@mui/material";
 
@@ -10,6 +10,7 @@ import {
 	cancelLabel,
 	confirmEditLabel,
 	editOrderTitle,
+	ofLabel,
 } from "../../../../utils/strings";
 
 export default function OpenEditOrderDialogButton({ data, refetch }) {
@@ -36,7 +37,11 @@ export default function OpenEditOrderDialogButton({ data, refetch }) {
 
 			{open && (
 				<OrderFormDialog
-					title={editOrderTitle + ": " + data.ordNum}
+					title={
+						<Fragment>
+							{editOrderTitle} {data.ordNum} {ofLabel} {data.ordDate}
+						</Fragment>
+					}
 					editMode={true}
 					dataFromRow={data}
 					open={open}

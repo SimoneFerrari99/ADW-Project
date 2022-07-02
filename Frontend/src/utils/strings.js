@@ -46,7 +46,8 @@ export const confirmChangePasswordLabel = "Conferma cambio password";
 export const agentInfoDialogTitle = "Dettagli agente";
 export const customerInfoDialogTitle = "Dettagli cliente";
 export const confirmationDeleteTitle = "Conferma eliminazione";
-export const editOrderTitle = "Modifica ordine";
+export const editOrderTitle = "Ordine numero";
+export const ofLabel = "del";
 export const newOrderTitle = "Nuovo ordine";
 export const confirmationDeleteText =
 	"Sei sicuro di voler eliminare questo elemento?";

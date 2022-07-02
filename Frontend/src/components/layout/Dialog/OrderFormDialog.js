@@ -153,8 +153,6 @@ export default function OrderFormDialog({
 			},
 		});
 
-		console.log(data);
-
 		handleClickYes();
 	};
 
@@ -186,7 +184,6 @@ export default function OrderFormDialog({
 							<Alert severity="error">{requiredFieldLabel}</Alert>
 						)}
 					</Stack>
-
 					<Stack spacing={2}>
 						<Stack direction="row" spacing={2}>
 							<TextField
@@ -216,12 +213,7 @@ export default function OrderFormDialog({
 
 						<Stack direction="row" spacing={2}>
 							<FormControl fullWidth>
-								<InputLabel
-									id="customerLabel"
-									color={called && custCode === "" && "error"}
-								>
-									{custCodeLabel}
-								</InputLabel>
+								<InputLabel id="customerLabel">{custCodeLabel}</InputLabel>
 								<Select
 									labelId="customerLabel"
 									id="customer"
@@ -241,12 +233,7 @@ export default function OrderFormDialog({
 								</Select>
 							</FormControl>
 							<FormControl fullWidth>
-								<InputLabel
-									id="agentLabel"
-									color={called && agentCode === "" && "error"}
-								>
-									{agentCodeLabel}
-								</InputLabel>
+								<InputLabel id="agentLabel">{agentCodeLabel}</InputLabel>
 								<Select
 									labelId="agentLabel"
 									id="agent"
