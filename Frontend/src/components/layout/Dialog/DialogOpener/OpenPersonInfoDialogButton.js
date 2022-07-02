@@ -2,12 +2,12 @@ import { useState } from "react";
 
 import { Button } from "@mui/material";
 
-import SpecificPersonInfoDialog from "./SpecificPersonInfoDialog";
+import SpecificPersonInfoDialog from "../SpecificPersonInfoDialog";
 
 import {
 	agentInfoDialogTitle,
 	customerInfoDialogTitle,
-} from "../../../utils/strings";
+} from "../../../../utils/strings";
 
 export default function OpenPersonInfoDialogButton({
 	agentCode = null,

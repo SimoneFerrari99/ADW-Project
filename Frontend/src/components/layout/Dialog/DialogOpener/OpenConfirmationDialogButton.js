@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { IconButton } from "@mui/material";
 
-import ConfirmationDialog from "./ConfirmationDialog";
+import ConfirmationDialog from "../ConfirmationDialog";
 
 export default function OpenConfirmationDialogButton({
 	iconButton,

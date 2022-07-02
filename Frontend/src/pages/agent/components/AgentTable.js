@@ -14,8 +14,8 @@ import {
 import { EditRounded, DeleteRounded, AddRounded } from "@mui/icons-material";
 
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
-import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/OpenPersonInfoDialogButton";
-import OpenConfirmationDialogButton from "../../../components/layout/Dialog/OpenConfirmationDialogButton";
+import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
+import OpenConfirmationDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenConfirmationDialogButton";
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
