@@ -112,6 +112,7 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 											autoFocus
 											value={email}
 											onChange={handleEmailChange}
+											autoComplete="email"
 										/>
 									</Box>
 									<Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -127,6 +128,7 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 											fullWidth
 											value={password}
 											onChange={handlePasswordChange}
+											autoComplete="current-password"
 										/>
 									</Box>
 								</Stack>

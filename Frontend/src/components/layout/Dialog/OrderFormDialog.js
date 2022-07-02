@@ -41,9 +41,11 @@ export default function OrderFormDialog({
 	const client = useApolloClient();
 	const [called, setCalled] = useState(false);
 
-	const [ordAMT, setOrdAMT] = useState((editMode && dataFromRow.ordAMT) || "");
+	const [ordAMT, setOrdAMT] = useState(
+		parseFloat(editMode && dataFromRow.ordAMT) || ""
+	);
 	const [advanceAMT, setAdvanceAMT] = useState(
-		(editMode && dataFromRow.advanceAMT) || ""
+		parseFloat(editMode && dataFromRow.advanceAMT) || ""
 	);
 	const [custCode, setCustCode] = useState(
 		(editMode && dataFromRow.customer.custCode) || ""
@@ -58,12 +60,12 @@ export default function OrderFormDialog({
 
 	const handleOrdAmountChange = (event) => {
 		setCalled(false);
-		setOrdAMT(event.target.value);
+		setOrdAMT(parseFloat(event.target.value));
 	};
 
 	const handleAdvanceAmountChange = (event) => {
 		setCalled(false);
-		setAdvanceAMT(event.target.value);
+		setAdvanceAMT(parseFloat(event.target.value));
 	};
 
 	const handleCustCodeChange = (event) => {

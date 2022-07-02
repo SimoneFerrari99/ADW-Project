@@ -85,7 +85,7 @@ export default function HomepageTableBody({
 										height: 73 * emptyRows,
 									}}
 								>
-									<TableCell colSpan={6} />
+									<TableCell colSpan={headCells.length} />
 								</TableRow>
 							)}
 						</Fragment>

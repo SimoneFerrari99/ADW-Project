@@ -109,6 +109,7 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 									fullWidth
 									value={actualPassword}
 									onChange={handleActualPasswordChange}
+									autoComplete="current-password"
 								/>
 							</Box>
 							<Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -124,6 +125,7 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 									fullWidth
 									value={newPassword1}
 									onChange={handlePassword1Change}
+									autoComplete="new-password"
 								/>
 							</Box>
 							<Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -139,6 +141,7 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 									fullWidth
 									value={newPassword2}
 									onChange={handlePassword2Change}
+									autoComplete="new-password"
 								/>
 							</Box>
 						</Stack>
