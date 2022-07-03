@@ -1,29 +1,29 @@
 import { Fragment, useState } from "react";
 import { ReactSession } from "react-client-session";
-import { gql, useQuery /*useApolloClient*/ } from "@apollo/client";
+import { gql, useQuery, useApolloClient } from "@apollo/client";
 
 import { Box, TableCell, Paper, TableRow } from "@mui/material";
 
-// import { DeleteRounded } from "@mui/icons-material";
+import { DeleteRounded } from "@mui/icons-material";
 
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
 import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
-// import OpenConfirmationDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenConfirmationDialogButton";
+import OpenConfirmationDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenConfirmationDialogButton";
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
 	customerTitleTable,
 	customerTablePaginationLabel,
-	// confirmationDeleteTitle,
-	// confirmationDeleteText,
-	// cancelLabel,
-	// confirmDeleteLabel,
+	confirmationDeleteTitle,
+	confirmationDeleteText,
+	cancelLabel,
+	confirmDeleteLabel,
 	deleteOrderSuccessSnackText,
 	actionCancelledSnackText,
 } from "../../../utils/strings";
 
 import OpenEditOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditOrderDialogButton";
-// import OpenNewOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewOrderDialogButton";
+import OpenNewOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewOrderDialogButton";
 import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
 const headCells = [
@@ -62,18 +62,18 @@ const headCells = [
 ];
 
 export default function ManagerOrdersTable() {
-	// const client = useApolloClient();
+	const client = useApolloClient();
 
 	const [order, setOrder] = useState("asc");
 	const [orderBy, setOrderBy] = useState("ordNum");
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
-	const [deleteResult /*setDeleteResult*/] = useState("");
+	const [deleteResult, setDeleteResult] = useState("");
 
-	const agentOrders = gql`
-		query GetOrdersByAgentId($agentCode: String!) {
-			ordersByAgentAgentCode(agentCode: $agentCode) {
+	const GET_ORDERS = gql`
+		query GetOrders {
+			getOrders {
 				ordNum
 				ordAMT
 				advanceAMT
@@ -89,19 +89,14 @@ export default function ManagerOrdersTable() {
 		}
 	`;
 
-	// const DELETE_ORDER = gql`
-	// 	mutation DeleteOrder($ordNum: Int!) {
-	// 		deleteOrder(ordNum: $ordNum)
-	// 	}
-	// `;
+	const DELETE_ORDER = gql`
+		mutation DeleteOrder($ordNum: Int!) {
+			deleteOrder(ordNum: $ordNum)
+		}
+	`;
 
-	const { data, loading, error, refetch } = useQuery(agentOrders, {
-		variables: {
-			agentCode: ReactSession.get("code"),
-		},
-	});
-
-	const rows = !loading && !error && data.ordersByAgentAgentCode;
+	const { data, loading, error, refetch } = useQuery(GET_ORDERS);
+	const rows = !loading && !error && data.getOrders;
 
 	return (
 		<Fragment>
@@ -149,7 +144,7 @@ export default function ManagerOrdersTable() {
 											<TableCell align="center">
 												<Box sx={{ display: "flex" }}>
 													<OpenEditOrderDialogButton data={row} refetch={refetch} />
-													{/* <OpenConfirmationDialogButton
+													<OpenConfirmationDialogButton
 														iconButton={<DeleteRounded color="error" />}
 														ariaLabel="elimina"
 														confirmationTitle={confirmationDeleteTitle}
@@ -167,7 +162,7 @@ export default function ManagerOrdersTable() {
 														yesText={confirmDeleteLabel}
 														startIconYes={<DeleteRounded />}
 														setResult={setDeleteResult}
-													/> */}
+													/>
 												</Box>
 											</TableCell>
 										</TableRow>
