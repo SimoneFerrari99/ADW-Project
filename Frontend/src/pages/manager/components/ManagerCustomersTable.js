@@ -3,22 +3,24 @@ import { gql, useQuery, useApolloClient } from "@apollo/client";
 
 import { Box, TableCell, Paper, TableRow } from "@mui/material";
 
-// import { DeleteRounded } from "@mui/icons-material";
+import { DeleteRounded } from "@mui/icons-material";
 
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
 import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
 import OpenEditCustomerDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditCustomerDialogButton";
 import OpenNewCustomerDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewCustomerDialogButton";
+import OpenConfirmationDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenConfirmationDialogButton";
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
 	allCustomerTitleTable,
 	customerTablePaginationLabel,
-	// confirmationDeleteTitle,
-	// confirmationDeleteText,
-	// cancelLabel,
-	// confirmDeleteLabel,
-	deleteOrderSuccessSnackText,
+	confirmationDeleteTitle,
+	confirmationDeleteText,
+	cancelLabel,
+	confirmDeleteLabel,
+	deleteCustomerSuccessSnackText,
+	deleteCustomerErrorSnackText,
 	actionCancelledSnackText,
 } from "../../../utils/strings";
 
@@ -78,11 +80,11 @@ export default function ManagerCustomersTable() {
 		}
 	`;
 
-	// const DELETE_CUSTOMER = gql`
-	// 	mutation DeleteCustomer($custCode: String!) {
-	// 		deleteCustomer(custCode: $custCode)
-	// 	}
-	// `;
+	const DELETE_CUSTOMER = gql`
+		mutation DeleteCustomer($custCode: String!) {
+			deleteCustomer(custCode: $custCode)
+		}
+	`;
 
 	const { data, loading, error, refetch } = useQuery(GET_CUSTOMERS);
 
@@ -129,25 +131,29 @@ export default function ManagerCustomersTable() {
 											<TableCell align="center">
 												<Box sx={{ display: "flex" }}>
 													<OpenEditCustomerDialogButton data={row} refetch={refetch} />
-													{/* <OpenConfirmationDialogButton
+													<OpenConfirmationDialogButton
 														iconButton={<DeleteRounded color="error" />}
 														ariaLabel="elimina"
 														confirmationTitle={confirmationDeleteTitle}
 														confirmationText={confirmationDeleteText}
 														handleConfirmation={async () => {
-															await client.mutate({
-																mutation: DELETE_ORDER,
+															const { data } = await client.mutate({
+																mutation: DELETE_CUSTOMER,
 																variables: {
-																	ordNum: row.ordNum,
+																	custCode: row.custCode,
 																},
 															});
-															refetch();
+															if (data.deleteCustomer) {
+																refetch();
+															} else {
+																setDeleteResult("error");
+															}
 														}}
 														noText={cancelLabel}
 														yesText={confirmDeleteLabel}
 														startIconYes={<DeleteRounded />}
 														setResult={setDeleteResult}
-													/> */}
+													/>
 												</Box>
 											</TableCell>
 										</TableRow>
@@ -168,7 +174,7 @@ export default function ManagerCustomersTable() {
 			</Box>
 			{deleteResult === "confirmed" && (
 				<SnackMessage
-					text={deleteOrderSuccessSnackText}
+					text={deleteCustomerSuccessSnackText}
 					variant="filled"
 					severity="success"
 				/>
@@ -178,6 +184,13 @@ export default function ManagerCustomersTable() {
 					text={actionCancelledSnackText}
 					variant="outlined"
 					severity="warning"
+				/>
+			)}
+			{deleteResult === "error" && (
+				<SnackMessage
+					text={deleteCustomerErrorSnackText}
+					variant="filled"
+					severity="error"
 				/>
 			)}
 		</Fragment>

@@ -77,14 +77,8 @@ export const editOrderSuccessSnackText = "Ordine modificato con successo!";
 export const editOrderErrorSnackText =
 	"Qualcosa è andato storto! L'ordine NON è stato modificato.";
 export const deleteOrderSuccessSnackText = "Ordine eliminato con successo!";
-export const deleteOrderErrorSnackText =
-	"Qualcosa è andato storto! L'ordine NON è stato eliminato.";
 export const actionCancelledSnackText = "Azione annullata.";
 export const passwordChangedSnackText = "Password cambiata con successo!";
-
-export const editCustomerSuccessSnackText = "Cliente modificato con successo!";
-export const editCustomerErrorSnackText =
-	"Qualcosa è andato storto! Il cliente NON è stato modificato.";
 
 /* MANAGER LABEL */
 // Customers table
@@ -103,3 +97,11 @@ export const openingAMTLabel = "Opening";
 export const receiveAMTLabel = "Receive";
 export const paymentAMTLabel = "Payment";
 export const outstandingAMTLabel = "Outstanding";
+
+// Snack text
+export const deleteCustomerErrorSnackText =
+	"Esistono ordini collegati a questo cliente. Non è possibile eliminarlo.";
+export const deleteCustomerSuccessSnackText = "Cliente eliminato con successo!";
+export const editCustomerSuccessSnackText = "Cliente modificato con successo!";
+export const editCustomerErrorSnackText =
+	"Qualcosa è andato storto! Il cliente NON è stato modificato.";
