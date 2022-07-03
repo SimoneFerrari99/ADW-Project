@@ -3,11 +3,14 @@ package com.adwProject.Backend.primary.service.customer;
 import com.adwProject.Backend.primary.dto.CustomerInput;
 import com.adwProject.Backend.primary.entity.Agent;
 import com.adwProject.Backend.primary.entity.Customer;
+import com.adwProject.Backend.primary.entity.Order;
 import com.adwProject.Backend.primary.map.MapCustomer;
 import com.adwProject.Backend.primary.repository.AgentRepository;
 import com.adwProject.Backend.primary.repository.CustomerRepository;
+import com.adwProject.Backend.primary.repository.OrderRepository;
 import graphql.GraphQLException;
 import lombok.AllArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,6 +22,7 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final AgentRepository agentRepository;
+    private final OrderRepository orderRepository;
     private final MapCustomer mapCustomer;
 
     @RequestMapping(value="/primary")
@@ -66,7 +70,11 @@ public class CustomerServiceImpl implements CustomerService {
     @RequestMapping(value="/primary")
     @Override
     public Boolean deleteCustomer(String custCode) {
-        if(customerRepository.existsById(custCode)) {
+        List<Order> orders = orderRepository.findByCustomerCustCode(custCode).orElse(null);
+        if(orders == null) {
+            throw new GraphQLException("There is no Customer according with id: " + custCode);
+        }
+        if(orders.isEmpty() && customerRepository.existsById(custCode)) {
             customerRepository.deleteById(custCode);
             return true;
         }
