@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         if(optCustomer.isPresent() && allFields) {
             customer = optCustomer.get();
-            Agent agent = findAgentById(customerInput.getAgent());
+            Agent agent = findAgentById(customerInput.getAgentCode());
             mapCustomer.updateAllCustomerFields(customer, customerInput, agent);
             customerRepository.save(customer);
             return true;

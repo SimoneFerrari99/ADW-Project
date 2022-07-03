@@ -55,7 +55,7 @@ public class OrderServiceImpl implements OrderService{
     @RequestMapping(value="/primary")
     @Override
     public Order createOrder(OrderInput orderInput) {
-        Order order = mapOrder.MapInputToOrder(orderInput, findCustomerById(orderInput.getCustomerId()), findAgentById(orderInput.getAgentId()));
+        Order order = mapOrder.MapInputToOrder(orderInput, findCustomerById(orderInput.getCustomerCode()), findAgentById(orderInput.getAgentCode()));
         return orderRepository.save(order);
     }
 
@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService{
 
         if(optionalOrder.isPresent()) {
             order = optionalOrder.orElse(null);
-            mapOrder.MapInputToModifyOrder(orderInput, findCustomerById(orderInput.getCustomerId()), findAgentById(orderInput.getAgentId()), order);
+            mapOrder.MapInputToModifyOrder(orderInput, findCustomerById(orderInput.getCustomerCode()), findAgentById(orderInput.getAgentCode()), order);
             orderRepository.save(order);
             return true;
         }

@@ -13,7 +13,7 @@ import lombok.Value;
 public class OrderInput {
     private float ordAMT;
     private float advanceAMT;
-    private String agentId;
-    private String customerId;
+    private String agentCode;
+    private String customerCode;
     private String ordDescription;
 }

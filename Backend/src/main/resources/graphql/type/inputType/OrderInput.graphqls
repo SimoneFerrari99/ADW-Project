@@ -1,7 +1,7 @@
 input OrderInput {
     ordAMT: Float!
     advanceAMT: Float!
-    agentId: String!
-    customerId: String!
+    agentCode: String!
+    customerCode: String!
     ordDescription: String!
 }

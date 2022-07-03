@@ -20,5 +20,5 @@ public class CustomerInput {
     private float paymentAMT;
     private float outstandingAMT;
     private String phoneNO;
-    private String agent;
+    private String agentCode;
 }
