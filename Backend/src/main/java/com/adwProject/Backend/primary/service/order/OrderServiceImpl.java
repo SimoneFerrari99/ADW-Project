@@ -75,6 +75,20 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @RequestMapping(value="/primary")
+    @Override
+    public List<Order> getOrders(String custCode, String agentCode) {
+        if(custCode == null && agentCode == null) {
+            return orderRepository.findAll();
+        }
+        else {
+            if(custCode != null && agentCode == null) {
+                return orderRepository.findByCustomerCustCode(custCode).orElse(null);
+            }
+            return orderRepository.findByAgentAgentCode(agentCode).orElse(null);
+        }
+    }
+
+    @RequestMapping(value="/primary")
     private Customer findCustomerById(String id) {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer == null)

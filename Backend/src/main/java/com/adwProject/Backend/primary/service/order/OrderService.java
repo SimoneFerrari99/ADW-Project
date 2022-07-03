@@ -12,4 +12,5 @@ public interface OrderService {
     Boolean deleteOrder(int ordNum);
     Order createOrder(OrderInput orderInput);
     Boolean modifyOrder(OrderInput orderInput, int ordNum);
+    List<Order> getOrders (String custCode, String agentCode);
 }
