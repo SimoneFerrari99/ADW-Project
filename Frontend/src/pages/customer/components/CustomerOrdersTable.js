@@ -23,6 +23,10 @@ const headCells = [
 		label: "Totale",
 	},
 	{
+		id: "advanceAMT",
+		label: "Anticipo",
+	},
+	{
 		id: "ordDate",
 		label: "Data",
 	},
@@ -47,6 +51,7 @@ export default function CustomerOrdersTable() {
 			ordersByCustomerCustCode(custCode: "${ReactSession.get("code")}") {
 				ordNum
 				ordAMT
+				advanceAMT
 				ordDate
 				agent {
 					agentCode
@@ -92,6 +97,7 @@ export default function CustomerOrdersTable() {
 											{row.ordNum}
 										</TableCell>
 										<TableCell align="center">{row.ordAMT}</TableCell>
+										<TableCell align="center">{row.advanceAMT}</TableCell>
 										<TableCell align="center">{row.ordDate}</TableCell>
 										<TableCell align="center">
 											<OpenPersonInfoDialogButton agentCode={row.agent.agentCode} />
