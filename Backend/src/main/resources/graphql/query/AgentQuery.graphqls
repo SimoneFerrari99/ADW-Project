@@ -1,3 +1,4 @@
 extend type Query {
     agentById(agentCode: String!): Agent
+    getAgents: [Agent]
 }

@@ -6,6 +6,7 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 
 
 @Component
@@ -17,4 +18,8 @@ public class AgentResolver implements GraphQLQueryResolver {
     public Agent agentById(String agentCode) {
         return agentService.getById(agentCode);
     }
+    public List<Agent> getAgents() {
+        return agentService.getAgents();
+    }
+
 }
