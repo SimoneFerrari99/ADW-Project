@@ -1,5 +1,4 @@
 import { Fragment, useState } from "react";
-import { ReactSession } from "react-client-session";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 
 import { Box, TableCell, Paper, TableRow } from "@mui/material";
@@ -23,7 +22,6 @@ import {
 } from "../../../utils/strings";
 
 import OpenEditOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditOrderDialogButton";
-import OpenNewOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewOrderDialogButton";
 import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
 const headCells = [
