@@ -1,4 +1,5 @@
 extend type Query {
+    getCustomers: [Customer]
     customerById(custCode: String!): Customer
     customersByAgentCode(agentCode: String!): [Customer]
 }

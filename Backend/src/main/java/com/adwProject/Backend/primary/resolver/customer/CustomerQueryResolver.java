@@ -16,6 +16,8 @@ import java.util.List;
 public class CustomerQueryResolver implements GraphQLQueryResolver {
     private final CustomerService customerService;
 
+    public List<Customer> getCustomers(){ return customerService.getCustomers();}
+
     public Customer customerById(String custCode) {
         return customerService.getById(custCode);
     }

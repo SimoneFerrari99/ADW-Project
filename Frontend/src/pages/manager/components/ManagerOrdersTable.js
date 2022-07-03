@@ -1,5 +1,4 @@
 import { Fragment, useState } from "react";
-import { ReactSession } from "react-client-session";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 
 import { Box, TableCell, Paper, TableRow } from "@mui/material";
@@ -23,7 +22,6 @@ import {
 } from "../../../utils/strings";
 
 import OpenEditOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditOrderDialogButton";
-import OpenNewOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewOrderDialogButton";
 import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
 const headCells = [
@@ -48,6 +46,10 @@ const headCells = [
 		label: "Cliente",
 	},
 	{
+		id: "agent.agentCode",
+		label: "Agente",
+	},
+	{
 		id: "ordDescription",
 		label: "Descrizione",
 	},
@@ -67,9 +69,9 @@ export default function ManagerOrdersTable() {
 
 	const [deleteResult, setDeleteResult] = useState("");
 
-	const agentOrders = gql`
-		query GetOrdersByAgentId($agentCode: String!) {
-			ordersByAgentAgentCode(agentCode: $agentCode) {
+	const GET_ORDERS = gql`
+		query GetOrders {
+			getOrders {
 				ordNum
 				ordAMT
 				advanceAMT
@@ -91,13 +93,8 @@ export default function ManagerOrdersTable() {
 		}
 	`;
 
-	const { data, loading, error, refetch } = useQuery(agentOrders, {
-		variables: {
-			agentCode: ReactSession.get("code"),
-		},
-	});
-
-	const rows = !loading && !error && data.ordersByAgentAgentCode;
+	const { data, loading, error, refetch } = useQuery(GET_ORDERS);
+	const rows = !loading && !error && data.getOrders;
 
 	return (
 		<Fragment>
@@ -105,7 +102,7 @@ export default function ManagerOrdersTable() {
 				<Paper sx={{ width: "100%", mb: 2 }}>
 					<HomepageTableBody
 						tableTitle={customerTitleTable}
-						headerButtons={<OpenNewOrderDialogButton refetch={refetch} />}
+						headerButtons={null}
 						headCells={headCells}
 						loading={loading}
 						error={error}
@@ -137,6 +134,9 @@ export default function ManagerOrdersTable() {
 											<TableCell align="center">{row.ordDate}</TableCell>
 											<TableCell align="center">
 												<OpenPersonInfoDialogButton custCode={row.customer.custCode} />
+											</TableCell>
+											<TableCell align="center">
+												<OpenPersonInfoDialogButton agentCode={row.agent.agentCode} />
 											</TableCell>
 											<TableCell align="center">{row.ordDescription}</TableCell>
 											<TableCell align="center">
