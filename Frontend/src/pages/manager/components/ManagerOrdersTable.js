@@ -11,7 +11,7 @@ import OpenConfirmationDialogButton from "../../../components/layout/Dialog/Dial
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
-	allCustomerTitleTable,
+	ordersTableTitle,
 	customerTablePaginationLabel,
 	confirmationDeleteTitle,
 	confirmationDeleteText,
@@ -101,7 +101,7 @@ export default function ManagerOrdersTable() {
 			<Box sx={{ width: "100%", boxShadow: 4 }}>
 				<Paper sx={{ width: "100%", mb: 2 }}>
 					<HomepageTableBody
-						tableTitle={allCustomerTitleTable}
+						tableTitle={ordersTableTitle}
 						headerButtons={null}
 						headCells={headCells}
 						loading={loading}

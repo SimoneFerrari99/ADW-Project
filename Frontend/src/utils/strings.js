@@ -81,6 +81,9 @@ export const actionCancelledSnackText = "Azione annullata.";
 export const passwordChangedSnackText = "Password cambiata con successo!";
 
 /* MANAGER LABEL */
+// Orders table
+export const ordersTableTitle = "Ordini";
+
 // Customers table
 export const allCustomerTitleTable = "Tutti i clienti";
 export const editCustomerTitle = "Modifica cliente";
