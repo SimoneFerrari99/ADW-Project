@@ -7,7 +7,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import java.util.List;
 
 public interface CustomerService {
-    Customer getById(String id);
-    Customer update(String id, CustomerInput customerInput, Boolean AllFields);
+    Customer getById(String custCode);
+    Customer update(String custCode, CustomerInput customerInput, Boolean AllFields);
     List<Customer> getCustomersByAgentCode(String agentCode);
 }

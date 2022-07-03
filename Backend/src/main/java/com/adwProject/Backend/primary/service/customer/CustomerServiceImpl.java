@@ -23,14 +23,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @RequestMapping(value="/primary")
     @Override
-    public Customer getById(String id) {
-        return customerRepository.findById(id).orElse(null);
+    public Customer getById(String custCode) {
+        return customerRepository.findById(custCode).orElse(null);
     }
 
     @RequestMapping(value="/primary")
     @Override
-    public Customer update(String id, CustomerInput customerInput, Boolean allFields) {
-        Optional<Customer> optCustomer = customerRepository.findById(id);
+    public Customer update(String custCode, CustomerInput customerInput, Boolean allFields) {
+        Optional<Customer> optCustomer = customerRepository.findById(custCode);
         Customer customer;
 
         if(optCustomer.isPresent() && allFields) {
@@ -57,10 +57,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @RequestMapping(value="/primary")
-    private Agent findAgentById(String id) {
-        Agent agent = agentRepository.findById(id).orElse(null);
+    private Agent findAgentById(String agentCode) {
+        Agent agent = agentRepository.findById(agentCode).orElse(null);
         if (agent == null)
-            throw new GraphQLException("There is no Agent according with id: " + id);
+            throw new GraphQLException("There is no Agent according with id: " + agentCode);
 
         return agent;
     }

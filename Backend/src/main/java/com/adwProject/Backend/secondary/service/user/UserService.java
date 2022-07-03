@@ -5,7 +5,7 @@ import com.adwProject.Backend.secondary.entity.User;
 
 public interface UserService {
 
-    User getById(String id);
+    User getById(String code);
     User userAuth(String email, String password);
     Boolean updatePassword(String code, String password);
     Boolean toggleActive(String code);
