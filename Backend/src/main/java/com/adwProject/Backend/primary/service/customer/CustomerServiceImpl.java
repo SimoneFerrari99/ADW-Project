@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @RequestMapping(value="/primary")
     @Override
-    public Customer update(String custCode, CustomerInput customerInput, Boolean allFields) {
+    public Boolean update(String custCode, CustomerInput customerInput, Boolean allFields) {
         Optional<Customer> optCustomer = customerRepository.findById(custCode);
         Customer customer;
 
@@ -44,17 +44,17 @@ public class CustomerServiceImpl implements CustomerService {
             Agent agent = findAgentById(customerInput.getAgent());
             mapCustomer.updateAllCustomerFields(customer, customerInput, agent);
             customerRepository.save(customer);
-            return customer;
+            return true;
         }
         else {
             if(optCustomer.isPresent() && !allFields) {
                 customer = optCustomer.get();
                 mapCustomer.updateCustomerFields(customer, customerInput);
                 customerRepository.save(customer);
-                return customer;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     @RequestMapping(value="/primary")

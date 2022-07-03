@@ -1,4 +1,4 @@
 type Mutation {
-    updateCustomerAllFields(custCode: String!, customer: AllCustomerInput!): Customer!
-    updateCustomerDataFields(custCode: String!, customer: CustomerInput!): Customer!
+    updateCustomerAllFields(custCode: String!, customer: AllCustomerInput!): Boolean!
+    updateCustomerDataFields(custCode: String!, customer: CustomerInput!): Boolean!
 }
