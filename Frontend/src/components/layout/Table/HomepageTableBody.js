@@ -82,7 +82,7 @@ export default function HomepageTableBody({
 							{emptyRows > 0 && (
 								<TableRow
 									style={{
-										height: 73 * emptyRows,
+										height: 69.5 * emptyRows,
 									}}
 								>
 									<TableCell colSpan={headCells.length} />

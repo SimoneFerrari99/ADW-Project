@@ -20,7 +20,7 @@ export const loginSubtitle =
 export const myProfileLabel = "Il mio profilo";
 
 // Table
-export const customerTitleTable = "I miei ordini";
+export const myOrdersTitleTable = "I miei ordini";
 export const customerTablePaginationLabel = "Ordini per pagina";
 
 // Amount Card
@@ -58,11 +58,11 @@ export const insertOrderLabel = "Crea ordine";
 
 export const newOrderButtonLabel = "Nuovo ordine";
 
-// Form label
+// Order Form label
 export const ordAmountLabel = "Totale";
 export const advanceAmountLabel = "Anticipo";
 export const custCodeLabel = "Cod. Cliente";
-export const agentCodeLabel = "Cod. Cgente";
+export const agentCodeLabel = "Cod. Agente";
 export const ordDescriptionLabel = "Descrizione ordine";
 
 export const requiredFieldLabel = "I campi evidenziati sono obbligatori";
@@ -81,3 +81,25 @@ export const deleteOrderErrorSnackText =
 	"Qualcosa è andato storto! L'ordine NON è stato eliminato.";
 export const actionCancelledSnackText = "Azione annullata.";
 export const passwordChangedSnackText = "Password cambiata con successo!";
+
+export const editCustomerSuccessSnackText = "Cliente modificato con successo!";
+export const editCustomerErrorSnackText =
+	"Qualcosa è andato storto! Il cliente NON è stato modificato.";
+
+/* MANAGER LABEL */
+// Customers table
+export const allCustomerTitleTable = "Tutti i clienti";
+export const editCustomerTitle = "Modifica cliente";
+export const newCustomerButtonLabel = "Nuovo cliente";
+
+// Customer form label
+export const custNameLabel = "Nome cliente";
+export const custCityLabel = "Città";
+export const workingAreaLabel = "Area lavoro";
+export const custCountryLabel = "Nazionalità";
+export const phoneNOLabel = "Telefono";
+export const gradeLabel = "Grado";
+export const openingAMTLabel = "Opening";
+export const receiveAMTLabel = "Receive";
+export const paymentAMTLabel = "Payment";
+export const outstandingAMTLabel = "Outstanding";
