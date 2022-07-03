@@ -37,6 +37,7 @@ export default function OrderFormDialog({
 	startIconYes,
 	noText,
 	yesText,
+	setResult,
 }) {
 	const client = useApolloClient();
 	const [called, setCalled] = useState(false);
@@ -50,7 +51,7 @@ export default function OrderFormDialog({
 	const [custCode, setCustCode] = useState(
 		(editMode && dataFromRow.customer.custCode) || ""
 	);
-	const [agentCode, setAgentCode] = useState(
+	const [agentCode /*, setAgentCode*/] = useState(
 		(editMode && dataFromRow.agent.agentCode) ||
 			(newMode && ReactSession.get("code"))
 	);
@@ -73,10 +74,10 @@ export default function OrderFormDialog({
 		setCustCode(event.target.value);
 	};
 
-	const handleAgentCodeChange = (event) => {
-		setCalled(false);
-		setAgentCode(event.target.value);
-	};
+	// const handleAgentCodeChange = (event) => {
+	// 	setCalled(false);
+	// 	setAgentCode(event.target.value);
+	// };
 
 	const handleOrdDescriptionChange = (event) => {
 		setCalled(false);
@@ -98,22 +99,52 @@ export default function OrderFormDialog({
 		}
 	};
 
-	const handleClickEditConfirm = (event) => {
+	const handleClickEditConfirm = async (event) => {
 		event.preventDefault();
 
 		setCalled(true);
+		if (formErrors()) return;
 
-		// TODO query che salva le modifiche
+		const MODIFY_ORDER = gql`
+			mutation modifyOrder(
+				$ordNum: Int!
+				$ordAMT: Float!
+				$advanceAMT: Float!
+				$agentId: String!
+				$customerId: String!
+				$ordDescription: String!
+			) {
+				modifyOrder(
+					ordNum: $ordNum
+					order: {
+						ordAMT: $ordAMT
+						advanceAMT: $advanceAMT
+						agentId: $agentId
+						customerId: $customerId
+						ordDescription: $ordDescription
+					}
+				)
+			}
+		`;
 
-		// const { data } = await client.mutate({
-		// 	mutation: updatePsw,
-		// 	variables: {
-		// 		code: ReactSession.get("code"),
-		// 		password: newPassword1,
-		// 	},
-		// });
+		const { data } = await client.mutate({
+			mutation: MODIFY_ORDER,
+			variables: {
+				ordNum: editMode && dataFromRow.ordNum,
+				ordAMT: ordAMT,
+				advanceAMT: advanceAMT,
+				agentId: agentCode,
+				customerId: custCode,
+				ordDescription: ordDescription,
+			},
+		});
 
-		handleClickYes();
+		if (data.modifyOrder) {
+			setResult("edited");
+			handleClickYes();
+		} else {
+			setResult("error");
+		}
 	};
 
 	const handleClickNewOrderConfirm = async (event) => {
@@ -155,7 +186,12 @@ export default function OrderFormDialog({
 			},
 		});
 
-		handleClickYes();
+		if (data.createOrder.ordNum) {
+			setResult("created");
+			handleClickYes();
+		} else {
+			setResult("error");
+		}
 	};
 
 	const GET_CUSTOMERS_BY_AGENTCODE = gql`

@@ -14,7 +14,12 @@ import {
 	confirmChangePasswordLabel,
 } from "../../../utils/strings";
 
-export default function EditPasswordDialog({ title, open, handleClose }) {
+export default function EditPasswordDialog({
+	title,
+	open,
+	handleClose,
+	setResult,
+}) {
 	const client = useApolloClient();
 	const [actualPassword, setActualPassword] = useState("");
 	const [newPassword1, setNewPassword1] = useState("");
@@ -75,6 +80,7 @@ export default function EditPasswordDialog({ title, open, handleClose }) {
 					},
 				});
 				if (data.updatePsw) {
+					setResult("success");
 					handleClose();
 				}
 			} else {

@@ -4,7 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 import { Box, AppBar, Toolbar, Typography, Skeleton } from "@mui/material/";
 
 import AccountMenu from "./AccountMenu";
-import LoadingError from "../Error/LoadingError";
+import SnackMessage from "../Snack/SnackMessage";
 
 import SpecificPersonInfoDialog from "../Dialog/SpecificPersonInfoDialog";
 
@@ -51,7 +51,7 @@ export default function MenuAppBar({
 						{loading ? (
 							<Skeleton sx={{ width: 100, ml: 1 }} />
 						) : error ? (
-							<LoadingError />
+							<SnackMessage />
 						) : userType === "C" ? (
 							data.customerById.custName
 						) : (

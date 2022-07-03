@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import { Box, TableCell, Paper, Skeleton, TableRow } from "@mui/material";
 
-import LoadingError from "../Error/LoadingError";
+import SnackMessage from "../Snack/SnackMessage";
 import HomepageTable from "./HomepageTable";
 
 import { connectionError } from "../../../utils/strings";
@@ -56,7 +56,7 @@ export default function HomepageTableBody({
 		return (
 			<Box sx={{ width: "100%", boxShadow: 4 }}>
 				<Paper sx={{ width: "100%", mb: 2 }}>
-					<LoadingError text={connectionError} severity="error" variant="filled" />{" "}
+					<SnackMessage text={connectionError} severity="error" variant="filled" />{" "}
 				</Paper>
 			</Box>
 		);

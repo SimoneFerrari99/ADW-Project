@@ -9,14 +9,20 @@ import OrderFormDialog from "../OrderFormDialog";
 import {
 	cancelLabel,
 	confirmEditLabel,
+	editOrderErrorSnackText,
+	editOrderSuccessSnackText,
+	actionCancelledSnackText,
 	editOrderTitle,
 	ofLabel,
 } from "../../../../utils/strings";
+import SnackMessage from "../../Snack/SnackMessage";
 
 export default function OpenEditOrderDialogButton({ data, refetch }) {
 	const [open, setOpen] = useState(false);
+	const [editOrderResult, setEditOrderResult] = useState(false);
 
 	const handleClickOpen = () => {
+		setEditOrderResult("");
 		setOpen(true);
 	};
 
@@ -26,6 +32,7 @@ export default function OpenEditOrderDialogButton({ data, refetch }) {
 	};
 
 	const handleClickNo = () => {
+		setEditOrderResult("cancelled");
 		setOpen(false);
 	};
 
@@ -50,6 +57,29 @@ export default function OpenEditOrderDialogButton({ data, refetch }) {
 					noText={cancelLabel}
 					yesText={confirmEditLabel}
 					startIconYes={<EditRounded />}
+					setResult={setEditOrderResult}
+				/>
+			)}
+
+			{editOrderResult === "edited" && (
+				<SnackMessage
+					text={editOrderSuccessSnackText}
+					variant="filled"
+					severity="success"
+				/>
+			)}
+			{editOrderResult === "error" && (
+				<SnackMessage
+					text={editOrderErrorSnackText}
+					variant="filled"
+					severity="error"
+				/>
+			)}
+			{editOrderResult === "cancelled" && (
+				<SnackMessage
+					text={actionCancelledSnackText}
+					variant="outlined"
+					severity="warning"
 				/>
 			)}
 		</div>

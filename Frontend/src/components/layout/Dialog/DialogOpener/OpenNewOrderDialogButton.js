@@ -5,20 +5,24 @@ import { Button } from "@mui/material";
 import { CheckRounded, AddRounded } from "@mui/icons-material";
 
 import OrderFormDialog from "../OrderFormDialog";
+import SnackMessage from "../../Snack/SnackMessage";
 
 import {
 	cancelLabel,
-	confirmEditLabel,
-	editOrderTitle,
 	newOrderButtonLabel,
 	newOrderTitle,
 	insertOrderLabel,
+	newOrderSuccessSnackText,
+	newOrderErrorSnackText,
+	actionCancelledSnackText,
 } from "../../../../utils/strings";
 
 export default function OpenNewOrderDialogButton({ data, refetch }) {
 	const [open, setOpen] = useState(false);
+	const [newOrderResult, setNewOrderResult] = useState(false);
 
 	const handleClickOpen = () => {
+		setNewOrderResult("");
 		setOpen(true);
 	};
 
@@ -28,6 +32,7 @@ export default function OpenNewOrderDialogButton({ data, refetch }) {
 	};
 
 	const handleClickNo = () => {
+		setNewOrderResult("cancelled");
 		setOpen(false);
 	};
 
@@ -52,6 +57,28 @@ export default function OpenNewOrderDialogButton({ data, refetch }) {
 					noText={cancelLabel}
 					yesText={insertOrderLabel}
 					startIconYes={<CheckRounded />}
+					setResult={setNewOrderResult}
+				/>
+			)}
+			{newOrderResult === "created" && (
+				<SnackMessage
+					text={newOrderSuccessSnackText}
+					variant="filled"
+					severity="success"
+				/>
+			)}
+			{newOrderResult === "error" && (
+				<SnackMessage
+					text={newOrderErrorSnackText}
+					variant="filled"
+					severity="error"
+				/>
+			)}
+			{newOrderResult === "cancelled" && (
+				<SnackMessage
+					text={actionCancelledSnackText}
+					variant="outlined"
+					severity="warning"
 				/>
 			)}
 		</div>

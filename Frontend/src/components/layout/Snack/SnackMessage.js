@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
-export default function LoadingError({ text, variant, severity }) {
+export default function SnackMessage({ text, variant, severity }) {
 	const [open, setOpen] = useState(true);
 
 	const handleClose = () => {

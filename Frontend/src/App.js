@@ -6,7 +6,7 @@ import CustomerContent from "./pages/customer/CustomerContent";
 import AgentContent from "./pages/agent/AgentContent";
 import DirigentContent from "./pages/dirigent/DirigentContent";
 
-import LoadingError from "./components/layout/Error/LoadingError";
+import SnackMessage from "./components/layout/Snack/SnackMessage";
 
 import MenuAppBar from "./components/layout/Appbar/MenuAppBar";
 import ToggleColorModeButton from "./components/layout/Button/ToggleColorModeButton";
@@ -45,7 +45,7 @@ export default function App({ ColorModeContext }) {
 					) : (
 						() => {
 							setAuth(false);
-							return <LoadingError />;
+							return <SnackMessage />;
 						}
 					)}
 				</Fragment>
