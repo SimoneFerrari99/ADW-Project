@@ -57,7 +57,7 @@ const headCells = [
 	},
 ];
 
-export default function AgentTable() {
+export default function AgentOrdersTable() {
 	const client = useApolloClient();
 
 	const [order, setOrder] = useState("asc");

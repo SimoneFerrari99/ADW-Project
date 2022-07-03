@@ -36,7 +36,7 @@ const headCells = [
 	},
 ];
 
-export default function CustomerTable() {
+export default function CustomerOrdersTable() {
 	const [order, setOrder] = useState("asc");
 	const [orderBy, setOrderBy] = useState("ordNum");
 	const [page, setPage] = useState(0);

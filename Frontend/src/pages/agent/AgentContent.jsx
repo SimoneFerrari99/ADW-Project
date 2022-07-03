@@ -1,13 +1,13 @@
 import { Container, Box } from "@mui/material";
 
-import AgentTable from "../agent/components/AgentTable";
+import AgentOrdersTable from "./components/AgentOrdersTable";
 
 export default function AgentContent() {
 	return (
 		<main>
 			<Container maxWidth="xl">
 				<Box sx={{ mt: { xs: 2, sm: 3 } }}>
-					<AgentTable />
+					<AgentOrdersTable />
 				</Box>
 			</Container>
 		</main>

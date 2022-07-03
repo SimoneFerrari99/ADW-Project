@@ -1,7 +1,7 @@
 import { Container, Box } from "@mui/material";
 
 import AmountRow from "./components/AmountRow";
-import CustomerTable from "./components/CustomerTable";
+import CustomerOrdersTable from "./components/CustomerOrdersTable";
 
 export default function CustomerContent() {
 	return (
@@ -11,7 +11,7 @@ export default function CustomerContent() {
 					<AmountRow />
 				</Box>
 				<Box sx={{ mt: { xs: 2, sm: 3 } }}>
-					<CustomerTable />
+					<CustomerOrdersTable />
 				</Box>
 			</Container>
 		</main>
