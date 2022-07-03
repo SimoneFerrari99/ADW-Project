@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { ReactSession } from "react-client-session";
 import { useQuery, gql } from "@apollo/client";
 
 import {
@@ -110,6 +111,7 @@ export default function SpecificPersonInfoDialog({
 
 								<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
 									{custCode || agentCode}
+									{ReactSession.get("userType") === "D" && " (Manager)"}
 								</Typography>
 							</Box>
 							<Typography sx={{ fontSize: "1rem" }}>

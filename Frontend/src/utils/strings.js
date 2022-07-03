@@ -68,3 +68,16 @@ export const ordDescriptionLabel = "Descrizione ordine";
 export const requiredFieldLabel = "I campi evidenziati sono obbligatori";
 export const ordAmountAdvancedAmountErrorLabel =
 	"Il totale deve essere maggiore o uguale all'anticipo";
+
+// Snack text
+export const newOrderSuccessSnackText = "Ordine creato con successo!";
+export const newOrderErrorSnackText =
+	"Qualcosa è andato storto! L'ordine NON è stato creato.";
+export const editOrderSuccessSnackText = "Ordine modificato con successo!";
+export const editOrderErrorSnackText =
+	"Qualcosa è andato storto! L'ordine NON è stato modificato.";
+export const deleteOrderSuccessSnackText = "Ordine eliminato con successo!";
+export const deleteOrderErrorSnackText =
+	"Qualcosa è andato storto! L'ordine NON è stato eliminato.";
+export const actionCancelledSnackText = "Azione annullata.";
+export const passwordChangedSnackText = "Password cambiata con successo!";

@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 
 import { AlternateEmailRounded, PasswordRounded } from "@mui/icons-material";
-import LoadingError from "../../../components/layout/Error/LoadingError";
+import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
 import {
 	loginErrorAlertText,
@@ -88,7 +88,7 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 				}}
 			>
 				<Box>
-					<Card sx={{ boxShadow: 8 }}>
+					<Card sx={{ boxShadow: 8, mx: 3 }}>
 						<CardHeader
 							title="Accedi ad ADW Project!"
 							subheader="Non hai un account? Scrivici a info@ADWProject.it"
@@ -151,14 +151,14 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 				</Box>
 			</Box>
 			{loginError && (
-				<LoadingError
+				<SnackMessage
 					text={loginErrorAlertText}
 					variant={"filled"}
 					severity={"error"}
 				/>
 			)}
 			{userDisabled && (
-				<LoadingError
+				<SnackMessage
 					text={userDisabledAlertText}
 					variant={"filled"}
 					severity={"warning"}

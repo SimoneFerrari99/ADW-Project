@@ -10,7 +10,7 @@ import { CloseRounded } from "@mui/icons-material";
 
 import { styled } from "@mui/material/styles";
 
-import LoadingError from "../Error/LoadingError";
+import SnackMessage from "../Snack/SnackMessage";
 
 const BootstrapDialogTitle = ({ children, onClose, ...other }) => {
 	return (
@@ -58,7 +58,7 @@ export default function InfoDialog({
 				{loading ? (
 					<Skeleton variant="rectangular" width={210} height={118} />
 				) : error ? (
-					<LoadingError />
+					<SnackMessage />
 				) : (
 					InfoDialogBody
 				)}

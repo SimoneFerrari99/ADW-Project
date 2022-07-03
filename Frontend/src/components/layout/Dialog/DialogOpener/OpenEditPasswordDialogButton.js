@@ -4,13 +4,19 @@ import { Button } from "@mui/material";
 import { LockReset } from "@mui/icons-material/";
 
 import EditPasswordDialog from "../EditPasswordDialog";
+import SnackMessage from "../../Snack/SnackMessage";
 
-import { editPasswordLabel } from "../../../../utils/strings";
+import {
+	editPasswordLabel,
+	passwordChangedSnackText,
+} from "../../../../utils/strings";
 
-export default function OpenEditPasswordDialogButton({ handleClose }) {
+export default function OpenEditPasswordDialogButton() {
 	const [open, setOpen] = useState(false);
+	const [editPasswordResult, setEditPasswordResult] = useState("");
 
 	const handleClickOpen = () => {
+		setEditPasswordResult("");
 		setOpen(true);
 	};
 
@@ -34,6 +40,14 @@ export default function OpenEditPasswordDialogButton({ handleClose }) {
 					title={editPasswordLabel}
 					open={open}
 					handleClose={handleClickClose}
+					setResult={setEditPasswordResult}
+				/>
+			)}
+			{editPasswordResult === "success" && (
+				<SnackMessage
+					text={passwordChangedSnackText}
+					variant="filled"
+					severity="success"
 				/>
 			)}
 		</div>

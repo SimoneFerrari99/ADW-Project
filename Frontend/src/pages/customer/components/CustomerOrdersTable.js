@@ -23,6 +23,10 @@ const headCells = [
 		label: "Totale",
 	},
 	{
+		id: "advanceAMT",
+		label: "Anticipo",
+	},
+	{
 		id: "ordDate",
 		label: "Data",
 	},
@@ -36,7 +40,7 @@ const headCells = [
 	},
 ];
 
-export default function CustomerTable() {
+export default function CustomerOrdersTable() {
 	const [order, setOrder] = useState("asc");
 	const [orderBy, setOrderBy] = useState("ordNum");
 	const [page, setPage] = useState(0);
@@ -47,6 +51,7 @@ export default function CustomerTable() {
 			ordersByCustomerCustCode(custCode: "${ReactSession.get("code")}") {
 				ordNum
 				ordAMT
+				advanceAMT
 				ordDate
 				agent {
 					agentCode
@@ -92,6 +97,7 @@ export default function CustomerTable() {
 											{row.ordNum}
 										</TableCell>
 										<TableCell align="center">{row.ordAMT}</TableCell>
+										<TableCell align="center">{row.advanceAMT}</TableCell>
 										<TableCell align="center">{row.ordDate}</TableCell>
 										<TableCell align="center">
 											<OpenPersonInfoDialogButton agentCode={row.agent.agentCode} />

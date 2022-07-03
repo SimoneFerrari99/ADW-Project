@@ -31,7 +31,7 @@ export default function ConfirmationDialog({
 					<Stack direction="row" spacing={1} sx={{ mr: 1 }}>
 						<Button
 							variant="outlined"
-							color="primary"
+							color="warning"
 							onClick={handleClickNo}
 							startIcon={startIconNo}
 						>

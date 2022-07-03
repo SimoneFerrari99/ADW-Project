@@ -1,6 +1,6 @@
 import { Box, Card, Typography, CardContent, Skeleton } from "@mui/material";
 
-import LoadingError from "../Error/LoadingError";
+import SnackMessage from "../Snack/SnackMessage";
 import { connectionError } from "../../../utils/strings";
 
 export default function AmountCard({ title, icon, data, loading, error }) {
@@ -40,7 +40,7 @@ export default function AmountCard({ title, icon, data, loading, error }) {
 								/>
 							</Box>
 						) : error ? (
-							<LoadingError text={connectionError} severity="error" variant="filled" />
+							<SnackMessage text={connectionError} severity="error" variant="filled" />
 						) : (
 							`€ ${data}`
 						)}

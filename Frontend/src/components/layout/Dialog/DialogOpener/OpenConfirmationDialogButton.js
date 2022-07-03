@@ -14,19 +14,23 @@ export default function OpenConfirmationDialogButton({
 	startIconYes = null,
 	noText = "no",
 	yesText = "yes",
+	setResult,
 }) {
 	const [open, setOpen] = useState(false);
 
 	const handleClickOpen = () => {
+		setResult("");
 		setOpen(true);
 	};
 
 	const handleClickYes = () => {
+		setResult("confirmed");
 		handleConfirmation();
 		setOpen(false);
 	};
 
 	const handleClickNo = () => {
+		setResult("cancelled");
 		setOpen(false);
 	};
 
