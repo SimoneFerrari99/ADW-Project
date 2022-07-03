@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ReactSession } from "react-client-session";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 
 import {

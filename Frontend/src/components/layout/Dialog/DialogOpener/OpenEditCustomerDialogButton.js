@@ -13,7 +13,6 @@ import {
 	editCustomerSuccessSnackText,
 	actionCancelledSnackText,
 	editCustomerTitle,
-	ofLabel,
 } from "../../../../utils/strings";
 import SnackMessage from "../../Snack/SnackMessage";
 
