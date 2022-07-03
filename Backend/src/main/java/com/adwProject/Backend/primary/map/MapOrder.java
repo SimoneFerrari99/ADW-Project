@@ -23,4 +23,16 @@ public class MapOrder {
 
         return order;
     }
+
+    public Order MapInputToModifyOrder(OrderInput orderInput, Customer customer, Agent agent, Order order) {
+
+        order.setOrdAMT(orderInput.getOrdAMT());
+        order.setAdvanceAMT(orderInput.getAdvanceAMT());
+        order.setOrdDate(Utility.getCurrentDate());
+        order.setCustomer(customer);
+        order.setAgent(agent);
+        order.setOrdDescription(orderInput.getOrdDescription());
+
+        return order;
+    }
 }

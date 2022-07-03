@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -59,6 +60,21 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @RequestMapping(value="/primary")
+    @Override
+    public Boolean modifyOrder(OrderInput orderInput, int ordNum) {
+        Optional<Order> optionalOrder = orderRepository.findById(ordNum);
+        Order order;
+
+        if(optionalOrder.isPresent()) {
+            order = optionalOrder.orElse(null);
+            mapOrder.MapInputToModifyOrder(orderInput, findCustomerById(orderInput.getCustomerId()), findAgentById(orderInput.getAgentId()), order);
+            orderRepository.save(order);
+            return true;
+        }
+        return false;
+    }
+
+    @RequestMapping(value="/primary")
     private Customer findCustomerById(String id) {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer == null)
@@ -75,6 +91,7 @@ public class OrderServiceImpl implements OrderService{
 
         return agent;
     }
+
 
 
 }
