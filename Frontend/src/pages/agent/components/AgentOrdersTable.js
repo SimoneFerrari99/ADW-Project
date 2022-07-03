@@ -12,7 +12,7 @@ import OpenConfirmationDialogButton from "../../../components/layout/Dialog/Dial
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
-	customerTitleTable,
+	myOrdersTitleTable,
 	customerTablePaginationLabel,
 	confirmationDeleteTitle,
 	confirmationDeleteText,
@@ -104,7 +104,7 @@ export default function AgentOrdersTable() {
 			<Box sx={{ width: "100%", boxShadow: 4 }}>
 				<Paper sx={{ width: "100%", mb: 2 }}>
 					<HomepageTableBody
-						tableTitle={customerTitleTable}
+						tableTitle={myOrdersTitleTable}
 						headerButtons={<OpenNewOrderDialogButton refetch={refetch} />}
 						headCells={headCells}
 						loading={loading}

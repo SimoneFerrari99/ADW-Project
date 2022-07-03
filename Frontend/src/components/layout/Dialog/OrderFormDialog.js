@@ -105,8 +105,8 @@ export default function OrderFormDialog({
 		setCalled(true);
 		if (formErrors()) return;
 
-		const MODIFY_ORDER = gql`
-			mutation modifyOrder(
+		const UPDATE_ORDER = gql`
+			mutation updateOrder(
 				$ordNum: Int!
 				$ordAMT: Float!
 				$advanceAMT: Float!
@@ -114,7 +114,7 @@ export default function OrderFormDialog({
 				$customerId: String!
 				$ordDescription: String!
 			) {
-				modifyOrder(
+				updateOrder(
 					ordNum: $ordNum
 					order: {
 						ordAMT: $ordAMT
@@ -128,7 +128,7 @@ export default function OrderFormDialog({
 		`;
 
 		const { data } = await client.mutate({
-			mutation: MODIFY_ORDER,
+			mutation: UPDATE_ORDER,
 			variables: {
 				ordNum: editMode && dataFromRow.ordNum,
 				ordAMT: ordAMT,
@@ -139,7 +139,7 @@ export default function OrderFormDialog({
 			},
 		});
 
-		if (data.modifyOrder) {
+		if (data.updateOrder) {
 			setResult("edited");
 			handleClickYes();
 		} else {

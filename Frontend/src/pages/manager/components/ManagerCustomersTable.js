@@ -3,55 +3,43 @@ import { gql, useQuery, useApolloClient } from "@apollo/client";
 
 import { Box, TableCell, Paper, TableRow } from "@mui/material";
 
-import { DeleteRounded } from "@mui/icons-material";
+// import { DeleteRounded } from "@mui/icons-material";
 
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
 import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
-import OpenConfirmationDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenConfirmationDialogButton";
+import OpenEditCustomerDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditCustomerDialogButton";
+import OpenNewCustomerDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewCustomerDialogButton";
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
 	allCustomerTitleTable,
 	customerTablePaginationLabel,
-	confirmationDeleteTitle,
-	confirmationDeleteText,
-	cancelLabel,
-	confirmDeleteLabel,
+	// confirmationDeleteTitle,
+	// confirmationDeleteText,
+	// cancelLabel,
+	// confirmDeleteLabel,
 	deleteOrderSuccessSnackText,
 	actionCancelledSnackText,
 } from "../../../utils/strings";
 
-import OpenEditOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditOrderDialogButton";
 import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
 const headCells = [
 	{
-		id: "ordNum",
-		label: "Ordine",
-	},
-	{
-		id: "ordAMT",
-		label: "Totale",
-	},
-	{
-		id: "advanceAMT",
-		label: "Anticipo",
-	},
-	{
-		id: "ordDate",
-		label: "Data",
-	},
-	{
-		id: "customer.custCode",
+		id: "custCode",
 		label: "Cliente",
+	},
+	{
+		id: "custName",
+		label: "Nome",
+	},
+	{
+		id: "phoneNO",
+		label: "Numero Telefono",
 	},
 	{
 		id: "agent.agentCode",
 		label: "Agente",
-	},
-	{
-		id: "ordDescription",
-		label: "Descrizione",
 	},
 	{
 		id: "actions",
@@ -59,7 +47,7 @@ const headCells = [
 	},
 ];
 
-export default function ManagerOrdersTable() {
+export default function ManagerCustomersTable() {
 	const client = useApolloClient();
 
 	const [order, setOrder] = useState("asc");
@@ -69,32 +57,36 @@ export default function ManagerOrdersTable() {
 
 	const [deleteResult, setDeleteResult] = useState("");
 
-	const GET_ORDERS = gql`
-		query GetOrders {
-			getOrders {
-				ordNum
-				ordAMT
-				advanceAMT
-				ordDate
-				customer {
-					custCode
-				}
+	const GET_CUSTOMERS = gql`
+		query GetCustomers {
+			getCustomers {
+				custCode
+				custName
+				phoneNO
+				custCity
+				workingArea
+				custCountry
+				grade
+				openingAMT
+				receiveAMT
+				paymentAMT
+				outstandingAMT
 				agent {
 					agentCode
 				}
-				ordDescription
 			}
 		}
 	`;
 
-	const DELETE_ORDER = gql`
-		mutation DeleteOrder($ordNum: Int!) {
-			deleteOrder(ordNum: $ordNum)
-		}
-	`;
+	// const DELETE_CUSTOMER = gql`
+	// 	mutation DeleteCustomer($custCode: String!) {
+	// 		deleteCustomer(custCode: $custCode)
+	// 	}
+	// `;
 
-	const { data, loading, error, refetch } = useQuery(GET_ORDERS);
-	const rows = !loading && !error && data.getOrders;
+	const { data, loading, error, refetch } = useQuery(GET_CUSTOMERS);
+
+	const rows = !loading && !error && data.getCustomers;
 
 	return (
 		<Fragment>
@@ -102,7 +94,7 @@ export default function ManagerOrdersTable() {
 				<Paper sx={{ width: "100%", mb: 2 }}>
 					<HomepageTableBody
 						tableTitle={allCustomerTitleTable}
-						headerButtons={null}
+						headerButtons={<OpenNewCustomerDialogButton refetch={refetch} />}
 						headCells={headCells}
 						loading={loading}
 						error={error}
@@ -115,10 +107,10 @@ export default function ManagerOrdersTable() {
 								.sort(getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
-									const labelId = `RigaOrdine-${index}`;
+									const labelId = `RigaCliente-${index}`;
 
 									return (
-										<TableRow hover tabIndex={-1} key={row.ordNum}>
+										<TableRow hover tabIndex={-1} key={row.custCode}>
 											<TableCell
 												component="th"
 												id={labelId}
@@ -127,22 +119,17 @@ export default function ManagerOrdersTable() {
 												align="center"
 												sx={{ fontWeight: "bold" }}
 											>
-												{row.ordNum}
+												{row.custCode}
 											</TableCell>
-											<TableCell align="center">{row.ordAMT}</TableCell>
-											<TableCell align="center">{row.advanceAMT}</TableCell>
-											<TableCell align="center">{row.ordDate}</TableCell>
-											<TableCell align="center">
-												<OpenPersonInfoDialogButton custCode={row.customer.custCode} />
-											</TableCell>
+											<TableCell align="center">{row.custName}</TableCell>
+											<TableCell align="center">{row.phoneNO}</TableCell>
 											<TableCell align="center">
 												<OpenPersonInfoDialogButton agentCode={row.agent.agentCode} />
 											</TableCell>
-											<TableCell align="center">{row.ordDescription}</TableCell>
 											<TableCell align="center">
 												<Box sx={{ display: "flex" }}>
-													<OpenEditOrderDialogButton data={row} refetch={refetch} />
-													<OpenConfirmationDialogButton
+													<OpenEditCustomerDialogButton data={row} refetch={refetch} />
+													{/* <OpenConfirmationDialogButton
 														iconButton={<DeleteRounded color="error" />}
 														ariaLabel="elimina"
 														confirmationTitle={confirmationDeleteTitle}
@@ -160,7 +147,7 @@ export default function ManagerOrdersTable() {
 														yesText={confirmDeleteLabel}
 														startIconYes={<DeleteRounded />}
 														setResult={setDeleteResult}
-													/>
+													/> */}
 												</Box>
 											</TableCell>
 										</TableRow>

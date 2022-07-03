@@ -9,7 +9,7 @@ import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/Dialog
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
-	customerTitleTable,
+	myOrdersTitleTable,
 	customerTablePaginationLabel,
 } from "../../../utils/strings";
 
@@ -69,7 +69,7 @@ export default function CustomerOrdersTable() {
 		<Box sx={{ width: "100%", boxShadow: 4 }}>
 			<Paper sx={{ width: "100%", mb: 2 }}>
 				<HomepageTableBody
-					tableTitle={customerTitleTable}
+					tableTitle={myOrdersTitleTable}
 					headCells={headCells}
 					loading={loading}
 					error={error}
