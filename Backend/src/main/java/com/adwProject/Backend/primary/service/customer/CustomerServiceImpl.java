@@ -25,9 +25,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer getById(String custCode) {
         return customerRepository.findById(custCode).orElse(null);
+    }
+
+    @RequestMapping(value="/primary")
+    @Override
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
-    }
     }
 
     @RequestMapping(value="/primary")
