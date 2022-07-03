@@ -57,7 +57,7 @@ const headCells = [
 	},
 ];
 
-export default function DirigentOrdersTable() {
+export default function ManagerOrdersTable() {
 	const client = useApolloClient();
 
 	const [order, setOrder] = useState("asc");

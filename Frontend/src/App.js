@@ -4,7 +4,7 @@ import { ReactSession } from "react-client-session";
 import LoginContent from "./pages/login/LoginContent";
 import CustomerContent from "./pages/customer/CustomerContent";
 import AgentContent from "./pages/agent/AgentContent";
-import DirigentContent from "./pages/dirigent/DirigentContent";
+import ManagerContent from "./pages/manager/ManagerContent";
 
 import SnackMessage from "./components/layout/Snack/SnackMessage";
 
@@ -41,7 +41,7 @@ export default function App({ ColorModeContext }) {
 					) : userType === "A" ? (
 						<AgentContent />
 					) : userType === "D" ? (
-						<DirigentContent />
+						<ManagerContent />
 					) : (
 						() => {
 							setAuth(false);

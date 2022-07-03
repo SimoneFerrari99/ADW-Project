@@ -2,7 +2,7 @@ import { Container, Box } from "@mui/material";
 
 import AgentOrdersTable from "../agent/components/AgentOrdersTable";
 
-export default function DirigentContent() {
+export default function ManagerContent() {
 	return (
 		<main>
 			<Container maxWidth="xl">
