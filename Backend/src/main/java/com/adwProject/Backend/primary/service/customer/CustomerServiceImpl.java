@@ -64,6 +64,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @RequestMapping(value="/primary")
+    @Override
+    public Boolean deleteCustomer(String custCode) {
+        if(customerRepository.existsById(custCode)) {
+            customerRepository.deleteById(custCode);
+            return true;
+        }
+        return false;
+    }
+
+    @RequestMapping(value="/primary")
     private Agent findAgentById(String agentCode) {
         Agent agent = agentRepository.findById(agentCode).orElse(null);
         if (agent == null)

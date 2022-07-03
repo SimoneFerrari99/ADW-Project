@@ -11,5 +11,6 @@ public interface CustomerService {
     Boolean update(String custCode, CustomerInput customerInput, Boolean AllFields);
     List<Customer> getCustomers();
     List<Customer> getCustomersByAgentCode(String agentCode);
+    Boolean deleteCustomer(String custCode);
 
 }
