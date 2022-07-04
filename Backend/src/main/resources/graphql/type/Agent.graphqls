@@ -5,4 +5,5 @@ type Agent {
     commission: Float
     phoneNO: String
     country: String
+    active: Boolean!
 }

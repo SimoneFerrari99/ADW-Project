@@ -21,6 +21,7 @@ public class MapCustomer {
         customer.setOutstandingAMT(customerInput.getOutstandingAMT());
         customer.setPhoneNO(customerInput.getPhoneNO());
         customer.setAgent(agent);
+        customer.setActive(customerInput.getActive());
 
         return customer;
     }

@@ -1,48 +1,48 @@
 -- Dati AGENTI
-INSERT INTO AGENTS (AGENT_NAME,WORKING_AREA,COMMISSION,PHONE_NO,COUNTRY)
+INSERT INTO AGENTS (AGENT_NAME,WORKING_AREA,COMMISSION,PHONE_NO,COUNTRY,ACTIVE)
 VALUES
-('Subbarao', 'Bangalore', '0.14', '077-12346674', 'IT'),
-('Mukesh', 'Mumbai', '0.11', '029-12358964', 'USA'),
-('Alex ', 'London', '0.13', '075-12458969', 'FR'),
-('Ivan', 'Torento', '0.15', '008-22544166', 'DE'),
-('Anderson', 'Brisban', '0.13', '045-21447739', 'CH'),
-('McDen', 'London', '0.15', '078-22255588', 'USA'),
-('Ramasundar', 'Bangalore', '0.15', '077-25814763', 'IT'),
-('Alford', 'New York', '0.12', '044-25874365', 'ES'),
-('Benjamin', 'Hampshair', '0.11', '008-22536178', 'ES'),
-('Santakumar', 'Chennai', '0.14', '007-22388644', 'USA'),
-('Ravi Kumar', 'Bangalore', '0.15', '077-45625874', 'IT'),
-('Lucida', 'San Jose', '0.12', '044-52981425', 'IT');
+('Subbarao', 'Bangalore', '0.14', '077-12346674', 'IT', 'true'),
+('Mukesh', 'Mumbai', '0.11', '029-12358964', 'USA', 'true'),
+('Alex ', 'London', '0.13', '075-12458969', 'FR', 'true'),
+('Ivan', 'Torento', '0.15', '008-22544166', 'DE', 'true'),
+('Anderson', 'Brisban', '0.13', '045-21447739', 'CH', 'true'),
+('McDen', 'London', '0.15', '078-22255588', 'USA', 'true'),
+('Ramasundar', 'Bangalore', '0.15', '077-25814763', 'IT', 'true'),
+('Alford', 'New York', '0.12', '044-25874365', 'ES', 'true'),
+('Benjamin', 'Hampshair', '0.11', '008-22536178', 'ES', 'true'),
+('Santakumar', 'Chennai', '0.14', '007-22388644', 'USA', 'true'),
+('Ravi Kumar', 'Bangalore', '0.15', '077-45625874', 'IT', 'true'),
+('Lucida', 'San Jose', '0.12', '044-52981425', 'IT', 'true');
 
 
 -- Dati CLIENTI
-INSERT INTO CUSTOMERS (CUST_NAME,CUST_CITY,WORKING_AREA,CUST_COUNTRY,GRADE,OPENING_AMT,RECEIVE_AMT,PAYMENT_AMT,OUTSTANDING_AMT,PHONE_NO,AGENT_CODE)
+INSERT INTO CUSTOMERS (CUST_NAME,CUST_CITY,WORKING_AREA,CUST_COUNTRY,GRADE,OPENING_AMT,RECEIVE_AMT,PAYMENT_AMT,OUTSTANDING_AMT,PHONE_NO,AGENT_CODE,ACTIVE)
 VALUES
-('Micheal','New York','New York','USA','2','3000.00','5000.00','2000.00','6000.00','3249036284','A001'),
-('Bolt','New York','New York','USA','3','5000.00','7000.00','9000.00','3000.00','4826471998','A008'),
-('Martin','Torento','Torento','Canada','2','8000.00','7000.00','7000.00','8000.00','3472316452','A004'),
-('Winston','Brisban','Brisban','Australia','1','5000.00','8000.00','7000.00','6000.00','2364729588','A005'),
-('Sasikant','Mumbai','Mumbai','India','1','7000.00','11000.00','7000.00','11000.00','3756477288','A002'),
-('Shilton','Torento','Torento','Canada','1','10000.00','7000.00','6000.00','11000.00','1372649384','A004'),
-('Ramanathan','Chennai','Chennai','India','1','7000.00','11000.00','9000.00','9000.00','1354349344','A010'),
-('Karolina','Torento','Torento','Canada','1','7000.00','7000.00','9000.00','5000.00','4857395760','A004'),
-('Ramesh','Mumbai','Mumbai','India','3','8000.00','7000.00','3000.00','12000.00','1726352647','A002'),
-('Charles','Hampshair','Hampshair','UK','3','6000.00','4000.00','5000.00','5000.00','1432345654','A009'),
-('Sundariya','Chennai','Chennai','India','3','7000.00','11000.00','7000.00','11000.00','3940593293','A010'),
-('Steven','San Jose','San Jose','USA','1','5000.00','7000.00','9000.00','3000.00','4837485746','A012'),
-('Holmes','London','London','UK','2','6000.00','5000.00','7000.00','4000.00','3647384738','A003'),
-('Rangarappa','Bangalore','Bangalore','India','2','8000.00','11000.00','7000.00','12000.00','8495948321','A001'),
-('Stuart','London','London','UK','1','6000.00','8000.00','3000.00','11000.00','2938403911','A003'),
-('Venkatpati','Bangalore','Bangalore','India','2','8000.00','11000.00','7000.00','12000.00','2938909489','A007'),
-('Srinivas','Bangalore','Bangalore','India','2','8000.00','4000.00','3000.00','9000.00','0983737483','A007'),
-('Fleming','Brisban','Brisban','Australia','2','7000.00','7000.00','9000.00','5000.00','3746823764','A005'),
-('Yearannaidu','Chennai','Chennai','India','1','8000.00','7000.00','7000.00','8000.00','2938746182','A010'),
-('Albert','New York','New York','USA','3','5000.00','7000.00','6000.00','6000.00','8374923564','A008'),
-('Jacks','Brisban','Brisban','Australia','1','7000.00','7000.00','7000.00','7000.00','8347623491','A005'),
-('Avinash','Mumbai','Mumbai','India','2','7000.00','11000.00','9000.00','9000.00','6583476321','A002'),
-('Karl','London','London','UK','0','4000.00','6000.00','7000.00','3000.00','3751746289','A006'),
-('Cook','London','London','UK','2','4000.00','9000.00','7000.00','6000.00','4719783254','A006'),
-('Ravindran','Bangalore','Bangalore','India','2','5000.00','7000.00','4000.00','8000.00','6453372865','A011');
+('Micheal','New York','New York','USA','2','3000.00','5000.00','2000.00','6000.00','3249036284','A001', 'true'),
+('Bolt','New York','New York','USA','3','5000.00','7000.00','9000.00','3000.00','4826471998','A008', 'true'),
+('Martin','Torento','Torento','Canada','2','8000.00','7000.00','7000.00','8000.00','3472316452','A004', 'true'),
+('Winston','Brisban','Brisban','Australia','1','5000.00','8000.00','7000.00','6000.00','2364729588','A005', 'true'),
+('Sasikant','Mumbai','Mumbai','India','1','7000.00','11000.00','7000.00','11000.00','3756477288','A002', 'true'),
+('Shilton','Torento','Torento','Canada','1','10000.00','7000.00','6000.00','11000.00','1372649384','A004', 'true'),
+('Ramanathan','Chennai','Chennai','India','1','7000.00','11000.00','9000.00','9000.00','1354349344','A010', 'true'),
+('Karolina','Torento','Torento','Canada','1','7000.00','7000.00','9000.00','5000.00','4857395760','A004', 'true'),
+('Ramesh','Mumbai','Mumbai','India','3','8000.00','7000.00','3000.00','12000.00','1726352647','A002', 'true'),
+('Charles','Hampshair','Hampshair','UK','3','6000.00','4000.00','5000.00','5000.00','1432345654','A009', 'true'),
+('Sundariya','Chennai','Chennai','India','3','7000.00','11000.00','7000.00','11000.00','3940593293','A010', 'true'),
+('Steven','San Jose','San Jose','USA','1','5000.00','7000.00','9000.00','3000.00','4837485746','A012', 'true'),
+('Holmes','London','London','UK','2','6000.00','5000.00','7000.00','4000.00','3647384738','A003', 'true'),
+('Rangarappa','Bangalore','Bangalore','India','2','8000.00','11000.00','7000.00','12000.00','8495948321','A001', 'true'),
+('Stuart','London','London','UK','1','6000.00','8000.00','3000.00','11000.00','2938403911','A003', 'true'),
+('Venkatpati','Bangalore','Bangalore','India','2','8000.00','11000.00','7000.00','12000.00','2938909489','A007', 'true'),
+('Srinivas','Bangalore','Bangalore','India','2','8000.00','4000.00','3000.00','9000.00','0983737483','A007', 'true'),
+('Fleming','Brisban','Brisban','Australia','2','7000.00','7000.00','9000.00','5000.00','3746823764','A005', 'true'),
+('Yearannaidu','Chennai','Chennai','India','1','8000.00','7000.00','7000.00','8000.00','2938746182','A010', 'true'),
+('Albert','New York','New York','USA','3','5000.00','7000.00','6000.00','6000.00','8374923564','A008', 'true'),
+('Jacks','Brisban','Brisban','Australia','1','7000.00','7000.00','7000.00','7000.00','8347623491','A005', 'true'),
+('Avinash','Mumbai','Mumbai','India','2','7000.00','11000.00','9000.00','9000.00','6583476321','A002', 'true'),
+('Karl','London','London','UK','0','4000.00','6000.00','7000.00','3000.00','3751746289','A006', 'true'),
+('Cook','London','London','UK','2','4000.00','9000.00','7000.00','6000.00','4719783254','A006', 'true'),
+('Ravindran','Bangalore','Bangalore','India','2','5000.00','7000.00','4000.00','8000.00','6453372865','A011', 'true');
 
 
 -- Dati ORDINI

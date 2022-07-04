@@ -82,14 +82,15 @@ public class CustomerServiceImpl implements CustomerService {
             throw new GraphQLException("There is no Customer according with id: " + custCode);
         }
         if(orders.isEmpty() && customerRepository.existsById(custCode)) {
+            Customer customer = customerRepository.findById(custCode).orElse(null);
             User user = userRepository.findById(custCode).orElse(null);
 
-            customerRepository.deleteById(custCode);
-            if(user != null) {
+            if(customer != null && user != null) {
+                customer.setActive(false);
+                customerRepository.save(customer);
                 user.setActive(false);
                 userRepository.save(user);
             }
-
             return true;
         }
         return false;

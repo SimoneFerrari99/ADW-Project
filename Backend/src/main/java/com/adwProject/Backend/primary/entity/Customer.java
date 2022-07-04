@@ -52,6 +52,7 @@ public class Customer {
     @JoinColumn(name = "agent_code")
     private Agent agent;
 
-    /*@OneToMany(mappedBy = "custCode")
-    private List<OrderDB> order;*/
+    @Column(name = "active")
+    private Boolean active;
+
 }

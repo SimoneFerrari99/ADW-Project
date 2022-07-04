@@ -15,4 +15,5 @@ public class AgentInput {
     private Float commission;
     private String phoneNO;
     private String country;
+    private Boolean active;
 }

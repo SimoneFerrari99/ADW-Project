@@ -54,14 +54,15 @@ public class AgentServiceImpl implements AgentService {
         }
 
         if(orders.isEmpty() && customers.isEmpty() && agentRepository.existsById(agentCode)) {
+            Agent agent = agentRepository.findById(agentCode).orElse(null);
             User user = userRepository.findById(agentCode).orElse(null);
 
-            agentRepository.deleteById(agentCode);
-            if(user != null) {
+            if(agent != null && user != null) {
+                agent.setActive(false);
+                agentRepository.save(agent);
                 user.setActive(false);
                 userRepository.save(user);
             }
-
             return true;
         }
         return false;

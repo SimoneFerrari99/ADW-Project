@@ -14,6 +14,7 @@ public class MapAgent {
         agent.setCommission(agentInput.getCommission());
         agent.setPhoneNO(agentInput.getPhoneNO());
         agent.setCountry(agentInput.getCountry());
+        agent.setActive(agentInput.getActive());
         return agent;
     }
 

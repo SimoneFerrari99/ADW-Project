@@ -18,4 +18,5 @@ public class CustomerInput {
     private Float outstandingAMT;
     private String phoneNO;
     private String agentCode;
+    private Boolean active;
 }

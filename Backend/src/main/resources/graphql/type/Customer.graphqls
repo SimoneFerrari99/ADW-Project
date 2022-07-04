@@ -11,4 +11,5 @@ type Customer {
     outstandingAMT: Float!
     phoneNO: String!
     agent: Agent!
+    active: Boolean!
 }

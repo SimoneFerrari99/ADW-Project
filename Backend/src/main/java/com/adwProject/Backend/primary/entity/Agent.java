@@ -34,4 +34,7 @@ public class Agent {
 
     @Column(name = "country")
     private String country;
+
+    @Column(name = "active")
+    private Boolean active;
 }
