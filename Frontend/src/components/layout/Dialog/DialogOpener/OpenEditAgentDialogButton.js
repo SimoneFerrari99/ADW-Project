@@ -77,7 +77,7 @@ export default function OpenEditAgentDialogButton({ data, refetch }) {
 			{editAgentResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
-					variant="outlined"
+					variant="filled"
 					severity="warning"
 				/>
 			)}

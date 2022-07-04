@@ -76,7 +76,7 @@ export default function OpenNewAgentDialogButton({ data, refetch }) {
 			{newAgentResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
-					variant="outlined"
+					variant="filled"
 					severity="warning"
 				/>
 			)}

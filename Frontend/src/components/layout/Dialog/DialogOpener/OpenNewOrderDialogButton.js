@@ -77,7 +77,7 @@ export default function OpenNewOrderDialogButton({ data, refetch }) {
 			{newOrderResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
-					variant="outlined"
+					variant="filled"
 					severity="warning"
 				/>
 			)}

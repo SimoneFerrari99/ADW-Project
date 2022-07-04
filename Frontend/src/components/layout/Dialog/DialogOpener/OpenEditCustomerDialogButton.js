@@ -16,7 +16,11 @@ import {
 } from "../../../../utils/strings";
 import SnackMessage from "../../Snack/SnackMessage";
 
-export default function OpenEditCustomerDialogButton({ data, refetch }) {
+export default function OpenEditCustomerDialogButton({
+	data,
+	refetch,
+	agentMode = false,
+}) {
 	const [open, setOpen] = useState(false);
 	const [editCustomerResult, setEditCustomerResult] = useState(false);
 
@@ -57,6 +61,7 @@ export default function OpenEditCustomerDialogButton({ data, refetch }) {
 					yesText={confirmEditLabel}
 					startIconYes={<EditRounded />}
 					setResult={setEditCustomerResult}
+					agentMode={agentMode}
 				/>
 			)}
 
@@ -77,7 +82,7 @@ export default function OpenEditCustomerDialogButton({ data, refetch }) {
 			{editCustomerResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
-					variant="outlined"
+					variant="filled"
 					severity="warning"
 				/>
 			)}

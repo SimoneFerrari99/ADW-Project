@@ -189,7 +189,7 @@ export default function AgentOrdersTable() {
 			{deleteResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
-					variant="outlined"
+					variant="filled"
 					severity="warning"
 				/>
 			)}
