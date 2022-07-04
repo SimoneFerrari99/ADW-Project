@@ -1,4 +1,4 @@
-package com.adwProject.Backend.primary.resolver;
+package com.adwProject.Backend.primary.resolver.agent;
 
 import com.adwProject.Backend.primary.entity.Agent;
 import com.adwProject.Backend.primary.service.agent.AgentService;
@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 //@Slf4j
 @AllArgsConstructor
-public class AgentResolver implements GraphQLQueryResolver {
+public class AgentQueryResolver implements GraphQLQueryResolver {
     private final AgentService agentService;
 
     public Agent agentById(String agentCode) {

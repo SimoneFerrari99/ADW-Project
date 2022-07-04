@@ -8,6 +8,8 @@ import com.adwProject.Backend.primary.map.MapCustomer;
 import com.adwProject.Backend.primary.repository.AgentRepository;
 import com.adwProject.Backend.primary.repository.CustomerRepository;
 import com.adwProject.Backend.primary.repository.OrderRepository;
+import com.adwProject.Backend.secondary.entity.User;
+import com.adwProject.Backend.secondary.repository.UserRepository;
 import graphql.GraphQLException;
 import lombok.AllArgsConstructor;
 import org.aspectj.weaver.ast.Or;
@@ -23,6 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final AgentRepository agentRepository;
     private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
     private final MapCustomer mapCustomer;
 
     @RequestMapping(value="/primary")
@@ -75,7 +78,10 @@ public class CustomerServiceImpl implements CustomerService {
             throw new GraphQLException("There is no Customer according with id: " + custCode);
         }
         if(orders.isEmpty() && customerRepository.existsById(custCode)) {
+            User user = userRepository.findById(custCode).orElse(null);
             customerRepository.deleteById(custCode);
+            user.setActive(false);
+            userRepository.save(user);
             return true;
         }
         return false;
