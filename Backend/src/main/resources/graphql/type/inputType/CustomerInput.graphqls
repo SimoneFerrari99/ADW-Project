@@ -4,10 +4,11 @@ input CustomerInput {
     workingArea: String!
     custCountry: String!
     grade: Int
-    openingAMT: Float # (null)
-    receiveAMT: Float # (null)
-    paymentAMT: Float # (null)
-    outstandingAMT: Float # (null)
+    openingAMT: Float
+    receiveAMT: Float
+    paymentAMT: Float
+    outstandingAMT: Float
     phoneNO: String!
     agentCode: String!
+    active: Boolean!
 }

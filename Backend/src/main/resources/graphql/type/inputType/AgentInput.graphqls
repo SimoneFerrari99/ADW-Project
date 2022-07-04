@@ -4,4 +4,5 @@ input AgentInput {
     commission: Float
     phoneNO: String
     country: String
+    active: Boolean!
 }
