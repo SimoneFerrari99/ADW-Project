@@ -9,6 +9,7 @@ export default function ToggleColorModeButton({ colorMode, theme }) {
 	return (
 		<Fragment>
 			<IconButton
+				aria-label="Cambia tema applicazione"
 				sx={{ ml: 1 }}
 				onClick={colorMode.toggleColorMode}
 				color="inherit"

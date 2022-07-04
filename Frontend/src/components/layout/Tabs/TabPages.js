@@ -29,8 +29,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
 	return {
-		id: `name-numero-${index}`,
-		"aria-labelledby": `name-numero-${index}`,
+		id: `tab-numero-${index}`,
+		"aria-labelledby": `tab-numero-${index}`,
 	};
 }
 
@@ -46,13 +46,7 @@ export default function TabPages({ tabs, names }) {
 			<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
 				<Tabs value={value} onChange={handleChange} aria-label="Tabs della pagina">
 					{names.map((name, index) => (
-						<Tab
-							label={name}
-							value={value}
-							index={index}
-							key={index}
-							{...a11yProps(index)}
-						/>
+						<Tab label={name} index={index} key={index} {...a11yProps(index)} />
 					))}
 				</Tabs>
 			</Box>
