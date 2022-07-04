@@ -90,8 +90,9 @@ public class CustomerServiceImpl implements CustomerService {
                 customerRepository.save(customer);
                 user.setActive(false);
                 userRepository.save(user);
+                return true;
             }
-            return true;
+            return false;
         }
         return false;
     }

@@ -107,6 +107,7 @@ export default function AgentFormDialog({
 					commission: $commission
 					phoneNO: $phoneNO
 					country: $country
+					active: true
 				}
 			) {
 				agentCode
@@ -173,11 +174,12 @@ export default function AgentFormDialog({
 			handleClose={handleClickNo}
 			InfoDialogBody={
 				<Box component="form" id="agentForm">
-					<Stack spacing={2} sx={{ mb: 3 }}>
-						{called && formErrors() && (
+					{called && formErrors() && (
+						<Stack spacing={2} sx={{ mb: 3 }}>
 							<Alert severity="error">{requiredFieldLabel}</Alert>
-						)}
-					</Stack>
+						</Stack>
+					)}
+
 					<Stack spacing={2}>
 						<Stack direction="row" spacing={2}>
 							<TextField
@@ -191,6 +193,7 @@ export default function AgentFormDialog({
 								autoFocus
 								value={agentName}
 								onChange={handleAgentNameChange}
+								autoComplete="name"
 							/>
 							<TextField
 								id="workingArea"
@@ -200,6 +203,7 @@ export default function AgentFormDialog({
 								fullWidth
 								value={workingArea}
 								onChange={handleWorkingAreaChange}
+								autoComplete="off"
 							/>
 						</Stack>
 
@@ -214,6 +218,7 @@ export default function AgentFormDialog({
 								error={called && phoneNO === ""}
 								value={phoneNO}
 								onChange={handlePhoneNOChange}
+								autoComplete="tel"
 							/>
 							<TextField
 								id="country"
@@ -232,7 +237,7 @@ export default function AgentFormDialog({
 								label={commissionLabel}
 								variant="outlined"
 								type="number"
-								InputProps={{ inputProps: { min: 0, max: 1 } }}
+								InputProps={{ inputProps: { min: 0, max: 1, step: 0.01 } }}
 								fullWidth
 								required
 								error={called && commission === ""}

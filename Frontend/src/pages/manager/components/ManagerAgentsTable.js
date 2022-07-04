@@ -68,6 +68,7 @@ export default function ManagerAgentsTable() {
 				commission
 				phoneNO
 				country
+				active
 			}
 		}
 	`;
@@ -92,11 +93,12 @@ export default function ManagerAgentsTable() {
 						headCells={headCells}
 						loading={loading}
 						error={error}
-						rows={rows}
+						rows={!loading && !error && rows.filter((row) => row.active === true)}
 						tableRows={
 							!loading &&
 							!error &&
 							rows
+								.filter((row) => row.active === true)
 								.slice()
 								.sort(getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

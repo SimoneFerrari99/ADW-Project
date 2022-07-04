@@ -76,6 +76,7 @@ export default function ManagerCustomersTable() {
 				agent {
 					agentCode
 				}
+				active
 			}
 		}
 	`;
@@ -100,11 +101,12 @@ export default function ManagerCustomersTable() {
 						headCells={headCells}
 						loading={loading}
 						error={error}
-						rows={rows}
+						rows={!loading && !error && rows.filter((row) => row.active === true)}
 						tableRows={
 							!loading &&
 							!error &&
 							rows
+								.filter((row) => row.active === true)
 								.slice()
 								.sort(getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

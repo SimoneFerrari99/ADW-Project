@@ -63,6 +63,7 @@ export const phoneNumberTooltipLabel = "Numero di telefono";
 export const countryTooltipLabel = "Nazionalità";
 export const gradeTooltipLabel = "Grado";
 export const agentTooltipLabel = "Agente di riferimento";
+export const userTypeLabel = "Tipo di utenza";
 
 // My profile dialog
 export const editPasswordLabel = "Cambia password";
@@ -108,6 +109,7 @@ export const editCustomerTitle = "Modifica cliente";
 export const newCustomerButtonLabel = "Nuovo cliente";
 
 // Customer form label
+export const newCustomerTitle = "Nuovo cliente";
 export const custNameLabel = "Nome cliente";
 export const custCityLabel = "Città";
 export const workingAreaLabel = "Area lavoro";
@@ -118,6 +120,8 @@ export const openingAMTLabel = "Opening";
 export const receiveAMTLabel = "Receive";
 export const paymentAMTLabel = "Payment";
 export const outstandingAMTLabel = "Outstanding";
+export const noEmailFoundLabel = "Nessun email trovata";
+export const noTypeFoundLabel = "Nessun tipo trovato";
 
 // Agents table
 export const allAgentTitleTable = "Tutti gli agenti";
@@ -126,6 +130,12 @@ export const editAgentTitle = "Modifica agente";
 export const newAgentButtonLabel = "Nuovo agente";
 
 // Agent form label
+export const insertCustomerLabel = "Inserisci cliente";
 export const agentNameLabel = "Nome agente";
 export const commissionLabel = "Commissione";
 export const countryLabel = "Nazionalità";
+
+// Snack text
+export const newCustomerErrorSnackText =
+	"Qualcosa è andato storto! Il cliente NON è stato creato.";
+export const newCustomerSuccessSnackText = "Cliente creato con successo!";

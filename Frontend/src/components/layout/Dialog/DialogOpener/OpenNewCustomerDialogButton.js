@@ -4,25 +4,25 @@ import { Button } from "@mui/material";
 
 import { CheckRounded, AddRounded } from "@mui/icons-material";
 
-import OrderFormDialog from "../OrderFormDialog";
+import CustomerFormDialog from "../CustomerFormDialog";
 import SnackMessage from "../../Snack/SnackMessage";
 
 import {
 	cancelLabel,
 	newCustomerButtonLabel,
-	newOrderTitle,
-	insertOrderLabel,
-	newOrderSuccessSnackText,
-	newOrderErrorSnackText,
+	newCustomerTitle,
+	insertCustomerLabel,
+	newCustomerSuccessSnackText,
+	newCustomerErrorSnackText,
 	actionCancelledSnackText,
 } from "../../../../utils/strings";
 
 export default function OpenNewCustomerDialogButton({ data, refetch }) {
 	const [open, setOpen] = useState(false);
-	const [newOrderResult, setNewOrderResult] = useState(false);
+	const [newCustomerResult, setNewCustomerResult] = useState(false);
 
 	const handleClickOpen = () => {
-		setNewOrderResult("");
+		setNewCustomerResult("");
 		setOpen(true);
 	};
 
@@ -32,7 +32,7 @@ export default function OpenNewCustomerDialogButton({ data, refetch }) {
 	};
 
 	const handleClickNo = () => {
-		setNewOrderResult("cancelled");
+		setNewCustomerResult("cancelled");
 		setOpen(false);
 	};
 
@@ -48,33 +48,33 @@ export default function OpenNewCustomerDialogButton({ data, refetch }) {
 			</Button>
 
 			{open && (
-				<OrderFormDialog
-					title={newOrderTitle}
+				<CustomerFormDialog
+					title={newCustomerTitle}
 					newMode={true}
 					open={open}
 					handleClickYes={handleClickYes}
 					handleClickNo={handleClickNo}
 					noText={cancelLabel}
-					yesText={insertOrderLabel}
+					yesText={insertCustomerLabel}
 					startIconYes={<CheckRounded />}
-					setResult={setNewOrderResult}
+					setResult={setNewCustomerResult}
 				/>
 			)}
-			{newOrderResult === "created" && (
+			{newCustomerResult === "created" && (
 				<SnackMessage
-					text={newOrderSuccessSnackText}
+					text={newCustomerSuccessSnackText}
 					variant="filled"
 					severity="success"
 				/>
 			)}
-			{newOrderResult === "error" && (
+			{newCustomerResult === "error" && (
 				<SnackMessage
-					text={newOrderErrorSnackText}
+					text={newCustomerErrorSnackText}
 					variant="filled"
 					severity="error"
 				/>
 			)}
-			{newOrderResult === "cancelled" && (
+			{newCustomerResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
 					variant="outlined"

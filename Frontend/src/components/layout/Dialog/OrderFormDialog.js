@@ -99,38 +99,40 @@ export default function OrderFormDialog({
 		}
 	};
 
+	const CREATE_OR_UPDATE_ORDER = gql`
+		mutation createOrUpdateOrder(
+			$ordNum: Int
+			$ordAMT: Float!
+			$advanceAMT: Float!
+			$agentCode: String!
+			$customerCode: String!
+			$ordDescription: String!
+		) {
+			createOrUpdateOrder(
+				ordNum: $ordNum
+				order: {
+					ordAMT: $ordAMT
+					advanceAMT: $advanceAMT
+					agentCode: $agentCode
+					customerCode: $customerCode
+					ordDescription: $ordDescription
+				}
+			) {
+				ordNum
+			}
+		}
+	`;
+
 	const handleClickEditConfirm = async (event) => {
 		event.preventDefault();
 
 		setCalled(true);
 		if (formErrors()) return;
 
-		const UPDATE_ORDER = gql`
-			mutation updateOrder(
-				$ordNum: Int!
-				$ordAMT: Float!
-				$advanceAMT: Float!
-				$agentCode: String!
-				$customerCode: String!
-				$ordDescription: String!
-			) {
-				updateOrder(
-					ordNum: $ordNum
-					order: {
-						ordAMT: $ordAMT
-						advanceAMT: $advanceAMT
-						agentCode: $agentCode
-						customerCode: $customerCode
-						ordDescription: $ordDescription
-					}
-				)
-			}
-		`;
-
 		const { data } = await client.mutate({
-			mutation: UPDATE_ORDER,
+			mutation: CREATE_OR_UPDATE_ORDER,
 			variables: {
-				ordNum: editMode && dataFromRow.ordNum,
+				ordNum: dataFromRow.ordNum,
 				ordAMT: ordAMT,
 				advanceAMT: advanceAMT,
 				agentCode: agentCode,
@@ -139,7 +141,7 @@ export default function OrderFormDialog({
 			},
 		});
 
-		if (data.updateOrder) {
+		if (data.createOrUpdateOrder.ordNum) {
 			setResult("edited");
 			handleClickYes();
 		} else {
@@ -153,31 +155,10 @@ export default function OrderFormDialog({
 		setCalled(true);
 		if (formErrors()) return;
 
-		const CREATE_ORDER = gql`
-			mutation createOrder(
-				$ordAMT: Float!
-				$advanceAMT: Float!
-				$agentCode: String!
-				$customerCode: String!
-				$ordDescription: String!
-			) {
-				createOrder(
-					order: {
-						ordAMT: $ordAMT
-						advanceAMT: $advanceAMT
-						agentCode: $agentCode
-						customerCode: $customerCode
-						ordDescription: $ordDescription
-					}
-				) {
-					ordNum
-				}
-			}
-		`;
-
 		const { data } = await client.mutate({
-			mutation: CREATE_ORDER,
+			mutation: CREATE_OR_UPDATE_ORDER,
 			variables: {
+				ordNum: null,
 				ordAMT: ordAMT,
 				advanceAMT: advanceAMT,
 				agentCode: agentCode,
@@ -186,7 +167,7 @@ export default function OrderFormDialog({
 			},
 		});
 
-		if (data.createOrder.ordNum) {
+		if (data.createOrUpdateOrder.ordNum) {
 			setResult("created");
 			handleClickYes();
 		} else {
@@ -214,14 +195,17 @@ export default function OrderFormDialog({
 			handleClose={handleClickNo}
 			InfoDialogBody={
 				<Box component="form" id="orderForm">
-					<Stack spacing={2} sx={{ mb: 3 }}>
-						{called && ordAMT < advanceAMT && (
+					{called && ordAMT < advanceAMT && (
+						<Stack spacing={2} sx={{ mb: 3 }}>
 							<Alert severity="error">{ordAmountAdvancedAmountErrorLabel}</Alert>
-						)}
-						{called && formErrors() && !(ordAMT < advanceAMT) && (
+						</Stack>
+					)}
+					{called && formErrors() && !(ordAMT < advanceAMT) && (
+						<Stack spacing={2} sx={{ mb: 3 }}>
 							<Alert severity="error">{requiredFieldLabel}</Alert>
-						)}
-					</Stack>
+						</Stack>
+					)}
+
 					<Stack spacing={2}>
 						<Stack direction="row" spacing={2}>
 							<TextField
@@ -251,7 +235,9 @@ export default function OrderFormDialog({
 
 						<Stack direction="row" spacing={2}>
 							<FormControl fullWidth>
-								<InputLabel id="customerLabel">{custCodeLabel}</InputLabel>
+								<InputLabel id="customerLabel" required>
+									{custCodeLabel}
+								</InputLabel>
 								<Select
 									labelId="customerLabel"
 									id="customer"
@@ -271,7 +257,9 @@ export default function OrderFormDialog({
 								</Select>
 							</FormControl>
 							<FormControl fullWidth>
-								<InputLabel id="agentLabel">{agentCodeLabel}</InputLabel>
+								<InputLabel id="agentLabel" required>
+									{agentCodeLabel}
+								</InputLabel>
 								<Select
 									labelId="agentLabel"
 									id="agent"

@@ -37,7 +37,12 @@ export default function OpenNewAgentDialogButton({ data, refetch }) {
 
 	return (
 		<div>
-			<Button variant="contained" color="success" startIcon={<AddRounded />} onClick={handleClickOpen}>
+			<Button
+				variant="contained"
+				color="success"
+				startIcon={<AddRounded />}
+				onClick={handleClickOpen}
+			>
 				{newAgentButtonLabel}
 			</Button>
 
@@ -54,9 +59,27 @@ export default function OpenNewAgentDialogButton({ data, refetch }) {
 					setResult={setNewAgentResult}
 				/>
 			)}
-			{newAgentResult === "created" && <SnackMessage text={newAgentSuccessSnackText} variant="filled" severity="success" />}
-			{newAgentResult === "error" && <SnackMessage text={newAgentErrorSnackText} variant="filled" severity="error" />}
-			{newAgentResult === "cancelled" && <SnackMessage text={actionCancelledSnackText} variant="outlined" severity="warning" />}
+			{newAgentResult === "created" && (
+				<SnackMessage
+					text={newAgentSuccessSnackText}
+					variant="filled"
+					severity="success"
+				/>
+			)}
+			{newAgentResult === "error" && (
+				<SnackMessage
+					text={newAgentErrorSnackText}
+					variant="filled"
+					severity="error"
+				/>
+			)}
+			{newAgentResult === "cancelled" && (
+				<SnackMessage
+					text={actionCancelledSnackText}
+					variant="outlined"
+					severity="warning"
+				/>
+			)}
 		</div>
 	);
 }

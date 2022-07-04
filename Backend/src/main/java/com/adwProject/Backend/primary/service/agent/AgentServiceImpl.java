@@ -62,8 +62,9 @@ public class AgentServiceImpl implements AgentService {
                 agentRepository.save(agent);
                 user.setActive(false);
                 userRepository.save(user);
+                return true;
             }
-            return true;
+            return false;
         }
         return false;
     }

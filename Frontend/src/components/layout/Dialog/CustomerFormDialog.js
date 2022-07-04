@@ -12,6 +12,7 @@ import {
 	MenuItem,
 	FormControl,
 	Alert,
+	Divider,
 } from "@mui/material";
 
 import InfoDialog from "./InfoDialog";
@@ -28,6 +29,9 @@ import {
 	outstandingAMTLabel,
 	agentCodeLabel,
 	requiredFieldLabel,
+	userTypeLabel,
+	noEmailFoundLabel,
+	noTypeFoundLabel,
 } from "../../../utils/strings";
 
 export default function CustomerFormDialog({
@@ -47,6 +51,7 @@ export default function CustomerFormDialog({
 
 	const [called, setCalled] = useState(false);
 
+	/* FORM FIELD */
 	const [custName, setCustName] = useState(
 		(editMode && dataFromRow.custName) || ""
 	);
@@ -63,22 +68,22 @@ export default function CustomerFormDialog({
 		(editMode && dataFromRow.custCountry) || ""
 	);
 
-	const [grade, setGrade] = useState((editMode && dataFromRow.grade) || "");
+	const [grade, setGrade] = useState((editMode && dataFromRow.grade) || 0);
 
 	const [openingAMT, setOpeningAMT] = useState(
-		parseFloat(editMode && dataFromRow.openingAMT) || ""
+		parseFloat(editMode && dataFromRow.openingAMT) || 0
 	);
 
 	const [receiveAMT, setReceiveAMT] = useState(
-		parseFloat(editMode && dataFromRow.receiveAMT) || ""
+		parseFloat(editMode && dataFromRow.receiveAMT) || 0
 	);
 
 	const [paymentAMT, setPaymentAMT] = useState(
-		parseFloat(editMode && dataFromRow.paymentAMT) || ""
+		parseFloat(editMode && dataFromRow.paymentAMT) || 0
 	);
 
 	const [outstandingAMT, setOutstandingAMT] = useState(
-		parseFloat(editMode && dataFromRow.outstandingAMT) || ""
+		parseFloat(editMode && dataFromRow.outstandingAMT) || 0
 	);
 
 	const [phoneNO, setPhoneNO] = useState(
@@ -89,6 +94,7 @@ export default function CustomerFormDialog({
 		(editMode && dataFromRow.agent.agentCode) || ""
 	);
 
+	/* FORM FIELD HANDLER */
 	const handleCustNameChange = (event) => {
 		setCalled(false);
 		setCustName(event.target.value);
@@ -144,6 +150,70 @@ export default function CustomerFormDialog({
 		setAgentCode(event.target.value);
 	};
 
+	const GET_AGENTS = gql`
+		query getAgents {
+			getAgents {
+				agentCode
+			}
+		}
+	`;
+
+	const agentsQueryResults = useQuery(GET_AGENTS);
+
+	/* FORM FIELD USER CREDENTIALS */
+
+	const GET_USER_INFO = gql`
+		query getUserInfo($code: String!) {
+			userById(code: $code) {
+				email
+				typology
+			}
+		}
+	`;
+
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [userType, setUserType] = useState("C");
+
+	const [userInfoCalled, setUserInfoCalled] = useState(false);
+	const getUserInfo = async (code) => {
+		setUserInfoCalled(true);
+
+		const { data } = await client.query({
+			query: GET_USER_INFO,
+			variables: {
+				code: dataFromRow.custCode,
+			},
+		});
+
+		if (data.userById) {
+			setEmail(data.userById.email);
+			setUserType(data.userById.typology);
+		} else {
+			setEmail(noEmailFoundLabel);
+			setUserType(noTypeFoundLabel);
+		}
+	};
+
+	if (editMode && !userInfoCalled) getUserInfo();
+
+	const handleEmailChange = (event) => {
+		setCalled(false);
+		setEmail(event.target.value);
+	};
+
+	const handlePasswordChange = (event) => {
+		setCalled(false);
+		setPassword(event.target.value);
+	};
+
+	const handleuserTypeChange = (event) => {
+		setCalled(false);
+		setUserType(event.target.value);
+	};
+
+	/* EXECUTION OF EDIT/NEW */
+
 	const formErrors = () => {
 		if (
 			custName === "" ||
@@ -162,53 +232,75 @@ export default function CustomerFormDialog({
 		}
 	};
 
+	const CREATE_OR_UPDATE_CUSTOMER = gql`
+		mutation createOrUpdateCustomer(
+			$custCode: String
+			$custName: String!
+			$custCity: String
+			$workingArea: String!
+			$custCountry: String!
+			$grade: Int
+			$openingAMT: Float!
+			$receiveAMT: Float!
+			$paymentAMT: Float!
+			$outstandingAMT: Float!
+			$phoneNO: String!
+			$agentCode: String!
+		) {
+			createOrUpdateCustomer(
+				custCode: $custCode
+				customer: {
+					custName: $custName
+					custCity: $custCity
+					workingArea: $workingArea
+					custCountry: $custCountry
+					grade: $grade
+					openingAMT: $openingAMT
+					receiveAMT: $receiveAMT
+					paymentAMT: $paymentAMT
+					outstandingAMT: $outstandingAMT
+					phoneNO: $phoneNO
+					agentCode: $agentCode
+					active: true
+				}
+			) {
+				custCode
+			}
+		}
+	`;
+
+	const CREATE_USER = gql`
+		mutation createUser(
+			$code: String!
+			$email: String!
+			$pw: String!
+			$typology: Typology!
+			$active: Boolean!
+		) {
+			createUser(
+				user: {
+					code: $code
+					email: $email
+					pw: $pw
+					typology: $typology
+					active: $active
+				}
+			) {
+				code
+			}
+		}
+	`;
+
 	const handleClickEditConfirm = async (event) => {
 		event.preventDefault();
 
 		setCalled(true);
 		if (formErrors()) return;
 
-		const UPDATE_CUSTOMER = gql`
-			mutation updateCustomerAllFields(
-				$custCode: String!
-				$custName: String!
-				$custCity: String
-				$workingArea: String!
-				$custCountry: String!
-				$grade: Int
-				$openingAMT: Float!
-				$receiveAMT: Float!
-				$paymentAMT: Float!
-				$outstandingAMT: Float!
-				$phoneNO: String!
-				$agentCode: String!
-			) {
-				updateCustomerAllFields(
-					custCode: $custCode
-					customer: {
-						custName: $custName
-						custCity: $custCity
-						workingArea: $workingArea
-						custCountry: $custCountry
-						grade: $grade
-						openingAMT: $openingAMT
-						receiveAMT: $receiveAMT
-						paymentAMT: $paymentAMT
-						outstandingAMT: $outstandingAMT
-						phoneNO: $phoneNO
-						agentCode: $agentCode
-					}
-				)
-			}
-		`;
-
-		console.log(dataFromRow.custCode);
-		console.log(agentCode);
-
 		const { data } = await client.mutate({
-			mutation: UPDATE_CUSTOMER,
+			mutation: CREATE_OR_UPDATE_CUSTOMER,
 			variables: {
-				custCode: editMode && dataFromRow.custCode,
+				custCode: dataFromRow.custCode,
 				custName: custName,
 				custCity: custCity,
 				workingArea: workingArea,
@@ -223,7 +315,7 @@ export default function CustomerFormDialog({
 			},
 		});
 
-		if (data.updateCustomerAllFields) {
+		if (data.createOrUpdateCustomer.custCode) {
 			setResult("edited");
 			handleClickYes();
 		} else {
@@ -231,58 +323,52 @@ export default function CustomerFormDialog({
 		}
 	};
 
-	const handleClickNewOrderConfirm = async (event) => {
-		// 	event.preventDefault();
-		// 	setCalled(true);
-		// 	if (formErrors()) return;
-		// 	const CREATE_ORDER = gql`
-		// 		mutation createOrder(
-		// 			$ordAMT: Float!
-		// 			$advanceAMT: Float!
-		// 			$agentId: String!
-		// 			$customerId: String!
-		// 			$ordDescription: String!
-		// 		) {
-		// 			createOrder(
-		// 				order: {
-		// 					ordAMT: $ordAMT
-		// 					advanceAMT: $advanceAMT
-		// 					agentId: $agentId
-		// 					customerId: $customerId
-		// 					ordDescription: $ordDescription
-		// 				}
-		// 			) {
-		// 				ordNum
-		// 			}
-		// 		}
-		// 	`;
-		// 	const { data } = await client.mutate({
-		// 		mutation: CREATE_ORDER,
-		// 		variables: {
-		// 			ordAMT: ordAMT,
-		// 			advanceAMT: advanceAMT,
-		// 			agentId: agentCode,
-		// 			customerId: custCode,
-		// 			ordDescription: ordDescription,
-		// 		},
-		// 	});
-		// 	if (data.createOrder.ordNum) {
-		// 		setResult("created");
-		// 		handleClickYes();
-		// 	} else {
-		// 		setResult("error");
-		// 	}
-	};
+	const handleClickNewCustomerConfirm = async (event) => {
+		event.preventDefault();
+		setCalled(true);
+		if (formErrors()) return;
 
-	const GET_AGENTS = gql`
-		query getAgents {
-			getAgents {
-				agentCode
+		const { data } = await client.mutate({
+			mutation: CREATE_OR_UPDATE_CUSTOMER,
+			variables: {
+				custCode: null,
+				custName: custName,
+				custCity: custCity,
+				workingArea: workingArea,
+				custCountry: custCountry,
+				grade: grade,
+				openingAMT: openingAMT,
+				receiveAMT: receiveAMT,
+				paymentAMT: paymentAMT,
+				outstandingAMT: outstandingAMT,
+				phoneNO: phoneNO,
+				agentCode: agentCode,
+			},
+		});
+
+		const code = data.createOrUpdateCustomer.custCode;
+
+		if (code) {
+			const { data } = await client.mutate({
+				mutation: CREATE_USER,
+				variables: {
+					code: code,
+					email: email,
+					pw: password,
+					typology: userType,
+					active: true,
+				},
+			});
+			if (data.createUser.code) {
+				setResult("created");
+				handleClickYes();
+			} else {
+				setResult("error");
 			}
+		} else {
+			setResult("error");
 		}
-	`;
-
-	const agentsQueryResults = useQuery(GET_AGENTS);
+	};
 
 	return (
 		<InfoDialog
@@ -292,11 +378,12 @@ export default function CustomerFormDialog({
 			handleClose={handleClickNo}
 			InfoDialogBody={
 				<Box component="form" id="customerForm">
-					<Stack spacing={2} sx={{ mb: 3 }}>
-						{called && formErrors() && (
+					{called && formErrors() && (
+						<Stack spacing={2} sx={{ mb: 3 }}>
 							<Alert severity="error">{requiredFieldLabel}</Alert>
-						)}
-					</Stack>
+						</Stack>
+					)}
+
 					<Stack spacing={2}>
 						<Stack direction="row" spacing={2}>
 							<TextField
@@ -365,6 +452,7 @@ export default function CustomerFormDialog({
 								variant="outlined"
 								type="number"
 								fullWidth
+								InputProps={{ inputProps: { min: 0, max: 10 } }}
 								value={grade}
 								onChange={handleGradeChange}
 							/>
@@ -422,7 +510,9 @@ export default function CustomerFormDialog({
 
 						<Stack direction="row" spacing={2}>
 							<FormControl fullWidth>
-								<InputLabel id="agentLabel">{agentCodeLabel}</InputLabel>
+								<InputLabel id="agentLabel" required>
+									{agentCodeLabel}
+								</InputLabel>
 								<Select
 									labelId="agentLabel"
 									id="agent"
@@ -443,6 +533,67 @@ export default function CustomerFormDialog({
 								</Select>
 							</FormControl>
 						</Stack>
+						<Divider />
+						<Stack direction="row" spacing={2}>
+							<TextField
+								id="newEmail"
+								label="Email"
+								variant="outlined"
+								type="email"
+								error={called && email === ""}
+								required
+								fullWidth
+								value={email}
+								onChange={handleEmailChange}
+								disabled={editMode}
+							/>
+							<FormControl fullWidth>
+								<InputLabel id="userType" required>
+									{userTypeLabel}
+								</InputLabel>
+								<Select
+									labelId="userType"
+									id="userType"
+									value={userType}
+									label={userTypeLabel}
+									onChange={handleuserTypeChange}
+									required
+									fullWidth
+									error={called && userType === ""}
+									disabled={editMode}
+								>
+									<MenuItem selected key="C" value="C">
+										Cliente
+									</MenuItem>
+									{editMode && (
+										<MenuItem key={noTypeFoundLabel} value={noTypeFoundLabel}>
+											{noTypeFoundLabel}
+										</MenuItem>
+									)}
+								</Select>
+							</FormControl>
+						</Stack>
+						{newMode && (
+							<Stack direction="row" spacing={2}>
+								<TextField
+									id="newPassword"
+									label="Password"
+									variant="outlined"
+									type="password"
+									error={called && password === ""}
+									required
+									fullWidth
+									value={password}
+									onChange={handlePasswordChange}
+									inputProps={{
+										autoComplete: "off",
+										form: {
+											autoComplete: "off",
+										},
+									}}
+								/>
+							</Stack>
+						)}
 					</Stack>
 				</Box>
 			}
@@ -460,7 +611,7 @@ export default function CustomerFormDialog({
 							form="customerForm"
 							onClick={
 								(editMode && handleClickEditConfirm) ||
-								(newMode && handleClickNewOrderConfirm)
+								(newMode && handleClickNewCustomerConfirm)
 							}
 							startIcon={startIconYes}
 						>
