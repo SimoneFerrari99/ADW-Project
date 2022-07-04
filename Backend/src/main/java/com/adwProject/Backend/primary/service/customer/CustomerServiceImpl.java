@@ -85,14 +85,15 @@ public class CustomerServiceImpl implements CustomerService {
             Customer customer = customerRepository.findById(custCode).orElse(null);
             User user = userRepository.findById(custCode).orElse(null);
 
-            if(customer != null && user != null) {
+            if(customer != null) {
                 customer.setActive(false);
                 customerRepository.save(customer);
-                user.setActive(false);
-                userRepository.save(user);
+                if(user != null) {
+                    user.setActive(false);
+                    userRepository.save(user);
+                }
                 return true;
             }
-            return false;
         }
         return false;
     }

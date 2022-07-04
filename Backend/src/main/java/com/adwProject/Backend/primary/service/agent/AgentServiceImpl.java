@@ -44,6 +44,7 @@ public class AgentServiceImpl implements AgentService {
     public Boolean deleteAgent(String agentCode) {
         List<Order> orders = orderRepository.findByAgentAgentCode(agentCode).orElse(null);
         List<Customer> customers = customerRepository.findCustomerByAgentAgentCode(agentCode).orElse(null);
+        boolean allCustomersDisabled = true;
 
         if(orders == null) {
             throw new GraphQLException("There is no Agent according with id: " + agentCode);
@@ -53,19 +54,30 @@ public class AgentServiceImpl implements AgentService {
             throw new GraphQLException("There is no Customer according with id: " + agentCode);
         }
 
-        if(orders.isEmpty() && customers.isEmpty() && agentRepository.existsById(agentCode)) {
+        if(orders.isEmpty() && agentRepository.existsById(agentCode)) {
             Agent agent = agentRepository.findById(agentCode).orElse(null);
             User user = userRepository.findById(agentCode).orElse(null);
 
-            if(agent != null && user != null) {
+            if(!customers.isEmpty()){
+                for (Customer c : customers){
+                    if (c.getActive()) {
+                        allCustomersDisabled = false;
+                        break;
+                    }
+                }
+            }
+
+            if(agent != null && allCustomersDisabled) {
                 agent.setActive(false);
                 agentRepository.save(agent);
-                user.setActive(false);
-                userRepository.save(user);
+                if (user != null){
+                    user.setActive(false);
+                    userRepository.save(user);
+                }
                 return true;
             }
-            return false;
         }
+
         return false;
     }
 
