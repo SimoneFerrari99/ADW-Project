@@ -1,3 +1,4 @@
 extend type Mutation {
     deleteAgent(agentCode: String!): Boolean!
+    createOrUpdateAgent(agentCode: String, agent: AgentInput!): Agent!
 }
