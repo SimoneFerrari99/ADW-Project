@@ -7,20 +7,20 @@ import { DeleteRounded } from "@mui/icons-material";
 
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
 import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
-import OpenEditCustomerDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditCustomerDialogButton";
-import OpenNewCustomerDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewCustomerDialogButton";
+import OpenEditAgentDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditAgentDialogButton";
+import OpenNewAgentDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewAgentDialogButton";
 import OpenConfirmationDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenConfirmationDialogButton";
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
-	allCustomerTitleTable,
+	allAgentTitleTable,
 	customerTablePaginationLabel,
 	confirmationDeleteTitle,
 	confirmationDeleteText,
 	cancelLabel,
 	confirmDeleteLabel,
-	deleteCustomerSuccessSnackText,
-	deleteCustomerErrorSnackText,
+	deleteAgentSuccessSnackText,
+	deleteAgentErrorSnackText,
 	actionCancelledSnackText,
 } from "../../../utils/strings";
 
@@ -28,11 +28,11 @@ import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
 const headCells = [
 	{
-		id: "custCode",
-		label: "Cliente",
+		id: "agentCode",
+		label: "Agente",
 	},
 	{
-		id: "custName",
+		id: "agentName",
 		label: "Nome",
 	},
 	{
@@ -40,8 +40,8 @@ const headCells = [
 		label: "Numero Telefono",
 	},
 	{
-		id: "agent.agentCode",
-		label: "Agente",
+		id: "commission",
+		label: "Commissione",
 	},
 	{
 		id: "actions",
@@ -49,7 +49,7 @@ const headCells = [
 	},
 ];
 
-export default function ManagerCustomersTable() {
+export default function ManagerAgentsTable() {
 	const client = useApolloClient();
 
 	const [order, setOrder] = useState("asc");
@@ -59,44 +59,36 @@ export default function ManagerCustomersTable() {
 
 	const [deleteResult, setDeleteResult] = useState("");
 
-	const GET_CUSTOMERS = gql`
-		query GetCustomers {
-			getCustomers {
-				custCode
-				custName
-				phoneNO
-				custCity
+	const GET_AGENTS = gql`
+		query GetAgents {
+			getAgents {
+				agentCode
+				agentName
 				workingArea
-				custCountry
-				grade
-				openingAMT
-				receiveAMT
-				paymentAMT
-				outstandingAMT
-				agent {
-					agentCode
-				}
+				commission
+				phoneNO
+				country
 			}
 		}
 	`;
 
-	const DELETE_CUSTOMER = gql`
-		mutation DeleteCustomer($custCode: String!) {
-			deleteCustomer(custCode: $custCode)
+	const DELETE_AGENT = gql`
+		mutation DeleteAgent($agentCode: String!) {
+			deleteAgent(agentCode: $agentCode)
 		}
 	`;
 
-	const { data, loading, error, refetch } = useQuery(GET_CUSTOMERS);
+	const { data, loading, error, refetch } = useQuery(GET_AGENTS);
 
-	const rows = !loading && !error && data.getCustomers;
+	const rows = !loading && !error && data.getAgents;
 
 	return (
 		<Fragment>
 			<Box sx={{ width: "100%", boxShadow: 4 }}>
 				<Paper sx={{ width: "100%", mb: 2 }}>
 					<HomepageTableBody
-						tableTitle={allCustomerTitleTable}
-						headerButtons={<OpenNewCustomerDialogButton refetch={refetch} />}
+						tableTitle={allAgentTitleTable}
+						headerButtons={<OpenNewAgentDialogButton refetch={refetch} />}
 						headCells={headCells}
 						loading={loading}
 						error={error}
@@ -112,7 +104,7 @@ export default function ManagerCustomersTable() {
 									const labelId = `RigaCliente-${index}`;
 
 									return (
-										<TableRow hover tabIndex={-1} key={row.custCode}>
+										<TableRow hover tabIndex={-1} key={row.agentCode}>
 											<TableCell
 												component="th"
 												id={labelId}
@@ -121,29 +113,27 @@ export default function ManagerCustomersTable() {
 												align="center"
 												sx={{ fontWeight: "bold" }}
 											>
-												{row.custCode}
+												{row.agentCode}
 											</TableCell>
-											<TableCell align="center">{row.custName}</TableCell>
+											<TableCell align="center">{row.agentName}</TableCell>
 											<TableCell align="center">{row.phoneNO}</TableCell>
-											<TableCell align="center">
-												<OpenPersonInfoDialogButton agentCode={row.agent.agentCode} />
-											</TableCell>
+											<TableCell align="center">{row.commission}</TableCell>
 											<TableCell align="center">
 												<Box sx={{ display: "flex" }}>
-													<OpenEditCustomerDialogButton data={row} refetch={refetch} />
+													<OpenEditAgentDialogButton data={row} refetch={refetch} />
 													<OpenConfirmationDialogButton
 														iconButton={<DeleteRounded color="error" />}
-														ariaLabel="elimina cliente"
+														ariaLabel="elimina agente"
 														confirmationTitle={confirmationDeleteTitle}
 														confirmationText={confirmationDeleteText}
 														handleConfirmation={async () => {
 															const { data } = await client.mutate({
-																mutation: DELETE_CUSTOMER,
+																mutation: DELETE_AGENT,
 																variables: {
-																	custCode: row.custCode,
+																	agentCode: row.agentCode,
 																},
 															});
-															if (data.deleteCustomer) {
+															if (data.deleteAgent) {
 																refetch();
 															} else {
 																setDeleteResult("error");
@@ -174,7 +164,7 @@ export default function ManagerCustomersTable() {
 			</Box>
 			{deleteResult === "confirmed" && (
 				<SnackMessage
-					text={deleteCustomerSuccessSnackText}
+					text={deleteAgentSuccessSnackText}
 					variant="filled"
 					severity="success"
 				/>
@@ -188,7 +178,7 @@ export default function ManagerCustomersTable() {
 			)}
 			{deleteResult === "error" && (
 				<SnackMessage
-					text={deleteCustomerErrorSnackText}
+					text={deleteAgentErrorSnackText}
 					variant="filled"
 					severity="error"
 				/>

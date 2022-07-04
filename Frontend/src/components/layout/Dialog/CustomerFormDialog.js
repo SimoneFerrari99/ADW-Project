@@ -47,27 +47,6 @@ export default function CustomerFormDialog({
 
 	const [called, setCalled] = useState(false);
 
-	// const GET_CUSTOMER_INFO = gql`
-	// 	query GetCustomerInfo($custCode: String!) {
-	// 		customerById(custCode: $custCode) {
-	// 			custCity
-	// 			workingArea
-	// 			custCountry
-	// 			grade
-	// 			openingAMT
-	// 			receiveAMT
-	// 			paymentAMT
-	// 			outstandingAMT
-	// 		}
-	// 	}
-	// `;
-
-	// const { data, loading, error } = useQuery(GET_CUSTOMER_INFO, {
-	// 	variables: {
-	// 		custCode: dataFromRow.custCode,
-	// 	},
-	// });
-
 	const [custName, setCustName] = useState(
 		(editMode && dataFromRow.custName) || ""
 	);
@@ -314,9 +293,6 @@ export default function CustomerFormDialog({
 			InfoDialogBody={
 				<Box component="form" id="customerForm">
 					<Stack spacing={2} sx={{ mb: 3 }}>
-						{/* {called && ordAMT < advanceAMT && (
-							<Alert severity="error">{ordAmountAdvancedAmountErrorLabel}</Alert>
-						)} */}
 						{called && formErrors() && (
 							<Alert severity="error">{requiredFieldLabel}</Alert>
 						)}

@@ -1,4 +1,5 @@
 /* GENERAL TEXT */
+// Error messages
 export const connectionError =
 	"Qualcosa è andato storto! Controlla la tua connessione internet e riprova.";
 export const loginErrorAlertText = "Email o password errati!";
@@ -7,6 +8,7 @@ export const userDisabledAlertText =
 export const wrongEmailLabel = "Email errata.";
 export const wrongPasswordLabel = "Password errata.";
 
+// Labels generiche
 export const modeLabel = "Modalità";
 export const lightModeLabel = "chiara";
 export const darkModeLabel = "scura";
@@ -15,11 +17,37 @@ export const loginTitle = "Accedi ad ADW Project!";
 export const loginSubtitle =
 	"Non hai un account? Scrivici a info@ADWProject.it";
 
-/* CUSTOMER LABEL */
 // Appbar
 export const myProfileLabel = "Il mio profilo";
 
-// Table
+// Snack text
+export const newOrderSuccessSnackText = "Ordine creato con successo!";
+export const newOrderErrorSnackText =
+	"Qualcosa è andato storto! L'ordine NON è stato creato.";
+export const editOrderSuccessSnackText = "Ordine modificato con successo!";
+export const editOrderErrorSnackText =
+	"Qualcosa è andato storto! L'ordine NON è stato modificato.";
+export const deleteOrderSuccessSnackText = "Ordine eliminato con successo!";
+export const actionCancelledSnackText = "Azione annullata.";
+export const passwordChangedSnackText = "Password cambiata con successo!";
+export const deleteCustomerErrorSnackText =
+	"Esistono ordini collegati a questo cliente. Non è possibile eliminarlo.";
+export const deleteCustomerSuccessSnackText = "Cliente eliminato con successo!";
+export const editCustomerSuccessSnackText = "Cliente modificato con successo!";
+export const editCustomerErrorSnackText =
+	"Qualcosa è andato storto! Il cliente NON è stato modificato.";
+export const deleteAgentErrorSnackText =
+	"Esistono ordini e/o clienti collegati a questo agente. Non è possibile eliminarlo.";
+export const deleteAgentSuccessSnackText = "Agente eliminato con successo!";
+export const newAgentErrorSnackText =
+	"Qualcosa è andato storto! L'agente NON è stato creato.";
+export const newAgentSuccessSnackText = "Agente creato con successo!";
+export const editAgentErrorSnackText =
+	"Qualcosa è andato storto! L'agente NON è stato modificato.";
+export const editAgentSuccessSnackText = "Agente modificato con successo!";
+
+/* CUSTOMER LABEL */
+// Tables
 export const myOrdersTitleTable = "I miei ordini";
 export const customerTablePaginationLabel = "Ordini per pagina";
 
@@ -38,8 +66,8 @@ export const agentTooltipLabel = "Agente di riferimento";
 
 // My profile dialog
 export const editPasswordLabel = "Cambia password";
-export const passwordMismatchLabel = "Le password non sono valide";
 export const confirmChangePasswordLabel = "Conferma cambio password";
+export const passwordMismatchLabel = "Le password non sono valide";
 
 /* AGENT LABEL */
 // Dialog
@@ -49,6 +77,7 @@ export const confirmationDeleteTitle = "Conferma eliminazione";
 export const editOrderTitle = "Ordine numero";
 export const ofLabel = "del";
 export const newOrderTitle = "Nuovo ordine";
+
 export const confirmationDeleteText =
 	"Sei sicuro di voler eliminare questo elemento?";
 export const cancelLabel = "Annulla";
@@ -68,17 +97,6 @@ export const ordDescriptionLabel = "Descrizione ordine";
 export const requiredFieldLabel = "I campi evidenziati sono obbligatori";
 export const ordAmountAdvancedAmountErrorLabel =
 	"Il totale deve essere maggiore o uguale all'anticipo";
-
-// Snack text
-export const newOrderSuccessSnackText = "Ordine creato con successo!";
-export const newOrderErrorSnackText =
-	"Qualcosa è andato storto! L'ordine NON è stato creato.";
-export const editOrderSuccessSnackText = "Ordine modificato con successo!";
-export const editOrderErrorSnackText =
-	"Qualcosa è andato storto! L'ordine NON è stato modificato.";
-export const deleteOrderSuccessSnackText = "Ordine eliminato con successo!";
-export const actionCancelledSnackText = "Azione annullata.";
-export const passwordChangedSnackText = "Password cambiata con successo!";
 
 /* MANAGER LABEL */
 // Orders table
@@ -101,10 +119,13 @@ export const receiveAMTLabel = "Receive";
 export const paymentAMTLabel = "Payment";
 export const outstandingAMTLabel = "Outstanding";
 
-// Snack text
-export const deleteCustomerErrorSnackText =
-	"Esistono ordini collegati a questo cliente. Non è possibile eliminarlo.";
-export const deleteCustomerSuccessSnackText = "Cliente eliminato con successo!";
-export const editCustomerSuccessSnackText = "Cliente modificato con successo!";
-export const editCustomerErrorSnackText =
-	"Qualcosa è andato storto! Il cliente NON è stato modificato.";
+// Agents table
+export const allAgentTitleTable = "Tutti gli agenti";
+export const newAgentLabel = "Nuovo agente";
+export const editAgentTitle = "Modifica agente";
+export const newAgentButtonLabel = "Nuovo agente";
+
+// Agent form label
+export const agentNameLabel = "Nome agente";
+export const commissionLabel = "Commissione";
+export const countryLabel = "Nazionalità";

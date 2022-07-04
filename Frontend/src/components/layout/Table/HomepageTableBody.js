@@ -41,15 +41,7 @@ export default function HomepageTableBody({
 	};
 
 	if (loading) {
-		return (
-			<Skeleton
-				variant="rectangular"
-				animation="wave"
-				width={"100%"}
-				height={200}
-				sx={{ borderRadius: 2 }}
-			/>
-		);
+		return <Skeleton variant="rectangular" animation="wave" width={"100%"} height={200} sx={{ borderRadius: 2 }} />;
 	}
 
 	if (error) {
@@ -62,8 +54,7 @@ export default function HomepageTableBody({
 		);
 	}
 
-	const emptyRows =
-		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+	const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
 	return (
 		<Box sx={{ width: "100%", boxShadow: 4 }}>
@@ -82,7 +73,7 @@ export default function HomepageTableBody({
 							{emptyRows > 0 && (
 								<TableRow
 									style={{
-										height: 69.5 * emptyRows,
+										height: 73 * emptyRows,
 									}}
 								>
 									<TableCell colSpan={headCells.length} />

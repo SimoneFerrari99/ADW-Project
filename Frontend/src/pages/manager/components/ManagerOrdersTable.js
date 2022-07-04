@@ -144,7 +144,7 @@ export default function ManagerOrdersTable() {
 													<OpenEditOrderDialogButton data={row} refetch={refetch} />
 													<OpenConfirmationDialogButton
 														iconButton={<DeleteRounded color="error" />}
-														ariaLabel="elimina"
+														ariaLabel="elimina ordine"
 														confirmationTitle={confirmationDeleteTitle}
 														confirmationText={confirmationDeleteText}
 														handleConfirmation={async () => {
