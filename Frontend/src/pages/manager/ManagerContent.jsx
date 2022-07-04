@@ -10,7 +10,10 @@ export default function ManagerContent() {
 		<main>
 			<Container maxWidth="xl">
 				<Box sx={{ mt: { xs: 2, sm: 3 } }}>
-					<TabPages tabs={[<ManagerOrdersTable />, <ManagerCustomersTable />]} />
+					<TabPages
+						tabs={[<ManagerOrdersTable />, <ManagerCustomersTable />]}
+						names={["test1", "test2"]}
+					/>
 				</Box>
 			</Container>
 		</main>

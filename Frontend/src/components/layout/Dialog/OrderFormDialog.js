@@ -110,8 +110,8 @@ export default function OrderFormDialog({
 				$ordNum: Int!
 				$ordAMT: Float!
 				$advanceAMT: Float!
-				$agentId: String!
-				$customerId: String!
+				$agentCode: String!
+				$customerCode: String!
 				$ordDescription: String!
 			) {
 				updateOrder(
@@ -119,8 +119,8 @@ export default function OrderFormDialog({
 					order: {
 						ordAMT: $ordAMT
 						advanceAMT: $advanceAMT
-						agentId: $agentId
-						customerId: $customerId
+						agentCode: $agentCode
+						customerCode: $customerCode
 						ordDescription: $ordDescription
 					}
 				)
@@ -133,8 +133,8 @@ export default function OrderFormDialog({
 				ordNum: editMode && dataFromRow.ordNum,
 				ordAMT: ordAMT,
 				advanceAMT: advanceAMT,
-				agentId: agentCode,
-				customerId: custCode,
+				agentCode: agentCode,
+				customerCode: custCode,
 				ordDescription: ordDescription,
 			},
 		});
@@ -157,16 +157,16 @@ export default function OrderFormDialog({
 			mutation createOrder(
 				$ordAMT: Float!
 				$advanceAMT: Float!
-				$agentId: String!
-				$customerId: String!
+				$agentCode: String!
+				$customerCode: String!
 				$ordDescription: String!
 			) {
 				createOrder(
 					order: {
 						ordAMT: $ordAMT
 						advanceAMT: $advanceAMT
-						agentId: $agentId
-						customerId: $customerId
+						agentCode: $agentCode
+						customerCode: $customerCode
 						ordDescription: $ordDescription
 					}
 				) {
@@ -180,8 +180,8 @@ export default function OrderFormDialog({
 			variables: {
 				ordAMT: ordAMT,
 				advanceAMT: advanceAMT,
-				agentId: agentCode,
-				customerId: custCode,
+				agentCode: agentCode,
+				customerCode: custCode,
 				ordDescription: ordDescription,
 			},
 		});
