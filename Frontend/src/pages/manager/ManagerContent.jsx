@@ -4,6 +4,7 @@ import TabPages from "../../components/layout/Tabs/TabPages";
 
 import ManagerOrdersTable from "./components/ManagerOrdersTable";
 import ManagerCustomersTable from "./components/ManagerCustomersTable";
+import ManagerAgentsTable from "./components/ManagerAgentsTable";
 
 export default function ManagerContent() {
 	return (
@@ -11,8 +12,12 @@ export default function ManagerContent() {
 			<Container maxWidth="xl">
 				<Box sx={{ mt: { xs: 2, sm: 3 } }}>
 					<TabPages
-						tabs={[<ManagerOrdersTable />, <ManagerCustomersTable />]}
-						names={["test1", "test2"]}
+						tabs={[
+							<ManagerOrdersTable />,
+							<ManagerCustomersTable />,
+							<ManagerAgentsTable />,
+						]}
+						names={["Ordini", "Clienti", "Agenti"]}
 					/>
 				</Box>
 			</Container>
