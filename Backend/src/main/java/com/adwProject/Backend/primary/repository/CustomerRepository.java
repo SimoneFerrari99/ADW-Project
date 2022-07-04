@@ -15,5 +15,5 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 
     @NotNull
     Optional<Customer> findById(String custCode);
-    Optional<List<Customer>> findAgentByAgentAgentCode(String agentCode);
+    Optional<List<Customer>> findCustomerByAgentAgentCode(String agentCode);
 }

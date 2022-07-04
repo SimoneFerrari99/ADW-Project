@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
     @RequestMapping(value="/primary")
     @Override
     public List<Customer> getCustomersByAgentCode(String agentCode) {
-        return customerRepository.findAgentByAgentAgentCode(agentCode).orElse(null);
+        return customerRepository.findCustomerByAgentAgentCode(agentCode).orElse(null);
     }
 
     @RequestMapping(value="/primary")
@@ -79,9 +79,13 @@ public class CustomerServiceImpl implements CustomerService {
         }
         if(orders.isEmpty() && customerRepository.existsById(custCode)) {
             User user = userRepository.findById(custCode).orElse(null);
+
             customerRepository.deleteById(custCode);
-            user.setActive(false);
-            userRepository.save(user);
+            if(user != null) {
+                user.setActive(false);
+                userRepository.save(user);
+            }
+
             return true;
         }
         return false;
