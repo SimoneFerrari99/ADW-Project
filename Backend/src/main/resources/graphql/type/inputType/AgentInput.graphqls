@@ -1,0 +1,7 @@
+input AgentInput {
+    agentName: String
+    workingArea: String
+    commission: Float
+    phoneNO: String
+    country: String
+}
