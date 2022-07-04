@@ -22,8 +22,8 @@ public class AgentServiceImpl implements AgentService {
 
     @RequestMapping(value="/primary")
     @Override
-    public Agent getById(String id) {
-        return agentRepository.findById(id).orElse(null);
+    public Agent getById(String agentCode) {
+        return agentRepository.findById(agentCode).orElse(null);
     }
 
     @RequestMapping(value="/primary")

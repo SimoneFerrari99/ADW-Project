@@ -5,7 +5,7 @@ import com.adwProject.Backend.primary.entity.Agent;
 import java.util.List;
 
 public interface AgentService {
-    Agent getById(String id);
+    Agent getById(String agentCode);
     List<Agent> getAgents();
     Boolean deleteAgent(String agentCode);
 }
