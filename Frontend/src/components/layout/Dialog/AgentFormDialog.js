@@ -8,6 +8,11 @@ import {
 	DialogActions,
 	Button,
 	Alert,
+	Divider,
+	FormControl,
+	InputLabel,
+	Select,
+	MenuItem,
 } from "@mui/material";
 
 import InfoDialog from "./InfoDialog";
@@ -18,6 +23,9 @@ import {
 	phoneNOLabel,
 	commissionLabel,
 	requiredFieldLabel,
+	noEmailFoundLabel,
+	noTypeFoundLabel,
+	userTypeLabel,
 } from "../../../utils/strings";
 
 export default function AgentFormDialog({
@@ -82,8 +90,67 @@ export default function AgentFormDialog({
 		setCountry(event.target.value);
 	};
 
+	/* FORM FIELD USER CREDENTIALS */
+
+	const GET_USER_INFO = gql`
+		query getUserInfo($code: String!) {
+			userById(code: $code) {
+				email
+				typology
+			}
+		}
+	`;
+
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [userType, setUserType] = useState("");
+
+	const [userInfoCalled, setUserInfoCalled] = useState(false);
+	const getUserInfo = async (code) => {
+		setUserInfoCalled(true);
+
+		const { data } = await client.query({
+			query: GET_USER_INFO,
+			variables: {
+				code: dataFromRow.agentCode,
+			},
+		});
+
+		if (data.userById) {
+			setEmail(data.userById.email);
+			setUserType(data.userById.typology);
+		} else {
+			setEmail(noEmailFoundLabel);
+			setUserType(noTypeFoundLabel);
+		}
+	};
+
+	if (editMode && !userInfoCalled) getUserInfo();
+
+	const handleEmailChange = (event) => {
+		setCalled(false);
+		setEmail(event.target.value);
+	};
+
+	const handlePasswordChange = (event) => {
+		setCalled(false);
+		setPassword(event.target.value);
+	};
+
+	const handleuserTypeChange = (event) => {
+		setCalled(false);
+		setUserType(event.target.value);
+	};
+
 	const formErrors = () => {
-		if (agentName === "" || phoneNO === "" || commission === "") {
+		if (
+			agentName === "" ||
+			phoneNO === "" ||
+			commission === "" ||
+			(newMode && email === "") ||
+			(newMode && password === "") ||
+			(newMode && userType === "")
+		) {
 			return true;
 		} else {
 			return false;
@@ -111,6 +178,28 @@ export default function AgentFormDialog({
 				}
 			) {
 				agentCode
+			}
+		}
+	`;
+
+	const CREATE_USER = gql`
+		mutation createUser(
+			$code: String!
+			$email: String!
+			$pw: String!
+			$typology: Typology!
+			$active: Boolean!
+		) {
+			createUser(
+				user: {
+					code: $code
+					email: $email
+					pw: $pw
+					typology: $typology
+					active: $active
+				}
+			) {
+				code
 			}
 		}
 	`;
@@ -158,9 +247,25 @@ export default function AgentFormDialog({
 			},
 		});
 
-		if (data.createOrUpdateAgent.agentCode) {
-			setResult("created");
-			handleClickYes();
+		const code = data.createOrUpdateAgent.agentCode;
+
+		if (code) {
+			const { data } = await client.mutate({
+				mutation: CREATE_USER,
+				variables: {
+					code: code,
+					email: email,
+					pw: password,
+					typology: userType,
+					active: true,
+				},
+			});
+			if (data.createUser.code) {
+				setResult("created");
+				handleClickYes();
+			} else {
+				setResult("error");
+			}
 		} else {
 			setResult("error");
 		}
@@ -245,6 +350,70 @@ export default function AgentFormDialog({
 								onChange={handleCommissionChange}
 							/>
 						</Stack>
+						<Divider />
+						<Stack direction="row" spacing={2}>
+							<TextField
+								id="newEmail"
+								label="Email"
+								variant="outlined"
+								type="email"
+								error={called && email === ""}
+								required
+								fullWidth
+								value={email}
+								onChange={handleEmailChange}
+								disabled={editMode}
+							/>
+							<FormControl fullWidth>
+								<InputLabel id="userType" required>
+									{userTypeLabel}
+								</InputLabel>
+								<Select
+									labelId="userType"
+									id="userType"
+									value={userType}
+									label={userTypeLabel}
+									onChange={handleuserTypeChange}
+									required
+									fullWidth
+									error={called && userType === ""}
+									disabled={editMode}
+								>
+									<MenuItem selected key="A" value="A">
+										Agente
+									</MenuItem>
+									<MenuItem selected key="D" value="D">
+										Dirigente
+									</MenuItem>
+									{editMode && (
+										<MenuItem key={noTypeFoundLabel} value={noTypeFoundLabel}>
+											{noTypeFoundLabel}
+										</MenuItem>
+									)}
+								</Select>
+							</FormControl>
+						</Stack>
+						{newMode && (
+							<Stack direction="row" spacing={2}>
+								<TextField
+									id="newPassword"
+									label="Password"
+									variant="outlined"
+									type="password"
+									error={called && password === ""}
+									required
+									fullWidth
+									value={password}
+									onChange={handlePasswordChange}
+									inputProps={{
+										autoComplete: "off",
+										form: {
+											autoComplete: "off",
+										},
+									}}
+								/>
+							</Stack>
+						)}
 					</Stack>
 				</Box>
 			}

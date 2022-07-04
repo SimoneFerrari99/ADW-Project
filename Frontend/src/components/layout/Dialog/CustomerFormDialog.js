@@ -224,7 +224,10 @@ export default function CustomerFormDialog({
 			paymentAMT === "" ||
 			outstandingAMT === "" ||
 			phoneNO === "" ||
-			agentCode === ""
+			agentCode === "" ||
+			(newMode && email === "") ||
+			(newMode && password === "") ||
+			(newMode && userType === "")
 		) {
 			return true;
 		} else {

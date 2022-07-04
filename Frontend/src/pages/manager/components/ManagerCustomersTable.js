@@ -179,6 +179,7 @@ export default function ManagerCustomersTable() {
 					text={deleteCustomerSuccessSnackText}
 					variant="filled"
 					severity="success"
+					reset={setDeleteResult}
 				/>
 			)}
 			{deleteResult === "cancelled" && (
@@ -186,6 +187,7 @@ export default function ManagerCustomersTable() {
 					text={actionCancelledSnackText}
 					variant="outlined"
 					severity="warning"
+					reset={setDeleteResult}
 				/>
 			)}
 			{deleteResult === "error" && (
@@ -193,6 +195,7 @@ export default function ManagerCustomersTable() {
 					text={deleteCustomerErrorSnackText}
 					variant="filled"
 					severity="error"
+					reset={setDeleteResult}
 				/>
 			)}
 		</Fragment>

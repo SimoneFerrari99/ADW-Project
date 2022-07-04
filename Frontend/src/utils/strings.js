@@ -31,13 +31,13 @@ export const deleteOrderSuccessSnackText = "Ordine eliminato con successo!";
 export const actionCancelledSnackText = "Azione annullata.";
 export const passwordChangedSnackText = "Password cambiata con successo!";
 export const deleteCustomerErrorSnackText =
-	"Esistono ordini collegati a questo cliente. Non è possibile eliminarlo.";
+	"Esistono ordini collegati a questo cliente. Non è possibile eliminarlo. Se il problema persiste, contattaci a help@ADWProject.it";
 export const deleteCustomerSuccessSnackText = "Cliente eliminato con successo!";
 export const editCustomerSuccessSnackText = "Cliente modificato con successo!";
 export const editCustomerErrorSnackText =
 	"Qualcosa è andato storto! Il cliente NON è stato modificato.";
 export const deleteAgentErrorSnackText =
-	"Esistono ordini e/o clienti collegati a questo agente. Non è possibile eliminarlo.";
+	"Esistono ordini e/o clienti collegati a questo agente. Non è possibile eliminarlo. Se il problema persiste, contattaci a help@ADWProject.it";
 export const deleteAgentSuccessSnackText = "Agente eliminato con successo!";
 export const newAgentErrorSnackText =
 	"Qualcosa è andato storto! L'agente NON è stato creato.";
