@@ -15,10 +15,7 @@ public class OrderMutationResolver implements GraphQLMutationResolver {
     public Boolean deleteOrder(int ordNum) {
         return orderService.deleteOrder(ordNum);
     }
-    public Order createOrder(OrderInput orderInput) {
-        return orderService.createOrder(orderInput);
-    }
-    public Boolean updateOrder(int ordNum, OrderInput orderInput) {
-        return orderService.modifyOrder(orderInput, ordNum);
+    public Order createOrUpdateOrder(Integer ordNum, OrderInput orderInput) {
+        return orderService.createOrUpdateOrder(ordNum, orderInput);
     }
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Component
 public class MapOrder {
-    public Order MapInputToOrder(OrderInput orderInput, Customer customer, Agent agent) {
+    public Order MapInputToCreateOrder(OrderInput orderInput, Customer customer, Agent agent) {
         Order order = new Order();
 
         order.setOrdAMT(orderInput.getOrdAMT());
@@ -24,7 +24,7 @@ public class MapOrder {
         return order;
     }
 
-    public Order MapInputToModifyOrder(OrderInput orderInput, Customer customer, Agent agent, Order order) {
+    public Order MapInputToUpdateOrder(OrderInput orderInput, Customer customer, Agent agent, Order order) {
 
         order.setOrdAMT(orderInput.getOrdAMT());
         order.setAdvanceAMT(orderInput.getAdvanceAMT());

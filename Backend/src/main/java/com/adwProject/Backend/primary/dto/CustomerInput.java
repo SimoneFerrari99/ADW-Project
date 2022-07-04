@@ -14,7 +14,7 @@ public class CustomerInput {
     private String custCity;
     private String workingArea;
     private String custCountry;
-    private int grade;
+    private Integer grade;
     private Float openingAMT;
     private Float receiveAMT;
     private Float paymentAMT;

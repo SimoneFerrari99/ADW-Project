@@ -10,7 +10,6 @@ public interface OrderService {
     List<Order> getByCustomerCustCode(String custCode);
     List<Order> getByAgentAgentCode(String agentCode);
     Boolean deleteOrder(int ordNum);
-    Order createOrder(OrderInput orderInput);
-    Boolean modifyOrder(OrderInput orderInput, int ordNum);
     List<Order> getOrders (String custCode, String agentCode);
+    Order createOrUpdateOrder(Integer ordNum, OrderInput orderInput);
 }

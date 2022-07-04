@@ -16,13 +16,13 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, name = "ord_num")
-    private int ordNum;
+    private Integer ordNum;
 
     @Column(name = "ord_amt")
-    private float ordAMT;
+    private Float ordAMT;
 
     @Column(name = "advance_amt")
-    private float advanceAMT;
+    private Float advanceAMT;
 
     @Column(name = "ord_date")
     private String ordDate;

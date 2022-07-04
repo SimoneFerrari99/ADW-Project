@@ -11,8 +11,8 @@ import lombok.Value;
 @Setter
 @Getter
 public class OrderInput {
-    private float ordAMT;
-    private float advanceAMT;
+    private Float ordAMT;
+    private Float advanceAMT;
     private String agentCode;
     private String customerCode;
     private String ordDescription;

@@ -27,7 +27,7 @@ public class Agent {
     private String workingArea;
 
     @Column(name = "commission")
-    private float commission;
+    private Float commission;
 
     @Column(name = "phone_no")
     private String phoneNO;

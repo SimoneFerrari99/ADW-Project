@@ -54,28 +54,6 @@ public class OrderServiceImpl implements OrderService{
 
     @RequestMapping(value="/primary")
     @Override
-    public Order createOrder(OrderInput orderInput) {
-        Order order = mapOrder.MapInputToOrder(orderInput, findCustomerById(orderInput.getCustomerCode()), findAgentById(orderInput.getAgentCode()));
-        return orderRepository.save(order);
-    }
-
-    @RequestMapping(value="/primary")
-    @Override
-    public Boolean modifyOrder(OrderInput orderInput, int ordNum) {
-        Optional<Order> optionalOrder = orderRepository.findById(ordNum);
-        Order order;
-
-        if(optionalOrder.isPresent()) {
-            order = optionalOrder.orElse(null);
-            mapOrder.MapInputToModifyOrder(orderInput, findCustomerById(orderInput.getCustomerCode()), findAgentById(orderInput.getAgentCode()), order);
-            orderRepository.save(order);
-            return true;
-        }
-        return false;
-    }
-
-    @RequestMapping(value="/primary")
-    @Override
     public List<Order> getOrders(String custCode, String agentCode) {
         if(custCode == null && agentCode == null) {
             return orderRepository.findAll();
@@ -86,6 +64,23 @@ public class OrderServiceImpl implements OrderService{
             }
             return orderRepository.findByAgentAgentCode(agentCode).orElse(null);
         }
+    }
+
+    @RequestMapping(value="/primary")
+    @Override
+    public Order createOrUpdateOrder(Integer ordNum, OrderInput orderInput) {
+        if(ordNum == null) {
+            Order order = mapOrder.MapInputToCreateOrder(orderInput, findCustomerById(orderInput.getCustomerCode()), findAgentById(orderInput.getAgentCode()));
+            orderRepository.save(order);
+            return order;
+        }
+        Order order = orderRepository.findById(ordNum).orElse(null);
+        if(order != null) {
+            mapOrder.MapInputToUpdateOrder(orderInput, findCustomerById(orderInput.getCustomerCode()), findAgentById(orderInput.getAgentCode()), order);
+            orderRepository.save(order);
+            return order;
+        }
+        throw new GraphQLException("There is no Order according with id: " + ordNum);
     }
 
     @RequestMapping(value="/primary")

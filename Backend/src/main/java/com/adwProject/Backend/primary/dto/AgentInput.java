@@ -14,7 +14,7 @@ public class AgentInput {
     private String agentCode;
     private String agentName;
     private String workingArea;
-    private float commission;
+    private Float commission;
     private String phoneNO;
     private String country;
 }
