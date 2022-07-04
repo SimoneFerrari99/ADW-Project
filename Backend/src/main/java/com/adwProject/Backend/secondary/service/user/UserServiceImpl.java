@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
 
     @RequestMapping(value="/secondary")
     @Override
-    public Boolean toggleActive(String code) {
+    public Boolean restoreUser(String code) {
         Optional<User> optionalUser = userRepository.findById(code);
         User user;
 

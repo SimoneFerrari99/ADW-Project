@@ -1,4 +1,5 @@
 type Mutation {
     createOrUpdateCustomer(custCode: String, customer: CustomerInput): Customer!
     deleteCustomer(custCode: String!): Boolean!
+    restoreCustomer(custCode: String!): Boolean!
 }

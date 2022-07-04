@@ -15,6 +15,7 @@ export default function OpenConfirmationDialogButton({
 	noText = "no",
 	yesText = "yes",
 	setResult,
+	yesColor,
 }) {
 	const [open, setOpen] = useState(false);
 
@@ -51,6 +52,7 @@ export default function OpenConfirmationDialogButton({
 					yesText={yesText}
 					startIconNo={startIconNo}
 					startIconYes={startIconYes}
+					yesColor={yesColor}
 				/>
 			)}
 		</div>

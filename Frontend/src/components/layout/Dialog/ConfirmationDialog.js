@@ -14,6 +14,7 @@ export default function ConfirmationDialog({
 	startIconYes,
 	noText,
 	yesText,
+	yesColor = "error",
 }) {
 	return (
 		<InfoDialog
@@ -40,7 +41,7 @@ export default function ConfirmationDialog({
 						<Button
 							autoFocus={true}
 							variant="contained"
-							color="error"
+							color={yesColor}
 							onClick={handleClickYes}
 							startIcon={startIconYes}
 						>

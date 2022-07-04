@@ -98,6 +98,24 @@ public class CustomerServiceImpl implements CustomerService {
         return false;
     }
 
+    @Override
+    public Boolean restoreCustomer(String custCode) {
+        Customer customer = customerRepository.findById(custCode).orElse(null);
+        User user = userRepository.findById(custCode).orElse(null);
+
+        if(customer != null) {
+            customer.setActive(true);
+            customerRepository.save(customer);
+            if(user != null) {
+                user.setActive(true);
+                userRepository.save(user);
+            }
+            return true;
+        }
+        return false;
+
+    }
+
     @RequestMapping(value="/primary")
     private Agent findAgentById(String agentCode) {
         Agent agent = agentRepository.findById(agentCode).orElse(null);

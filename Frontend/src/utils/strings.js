@@ -34,6 +34,10 @@ export const deleteCustomerErrorSnackText =
 	"Esistono ordini collegati a questo cliente. Non è possibile eliminarlo. Se il problema persiste, contattaci a help@ADWProject.it";
 export const deleteCustomerSuccessSnackText = "Cliente eliminato con successo!";
 export const editCustomerSuccessSnackText = "Cliente modificato con successo!";
+export const RestoreCustomerErrorSnackText =
+	"Il cliente NON è stato ripristinato. L'agente associato a questo cliente è stato cancellato. Per procedere, si prega di ripristinarlo.";
+export const RestoreCustomerSuccessSnackText =
+	"Cliente ripristinato con successo!";
 export const editCustomerErrorSnackText =
 	"Qualcosa è andato storto! Il cliente NON è stato modificato.";
 export const deleteAgentErrorSnackText =
@@ -75,15 +79,19 @@ export const passwordMismatchLabel = "Le password non sono valide";
 export const agentInfoDialogTitle = "Dettagli agente";
 export const customerInfoDialogTitle = "Dettagli cliente";
 export const confirmationDeleteTitle = "Conferma eliminazione";
+export const confirmationRestoreTitle = "Conferma il ripristino";
 export const editOrderTitle = "Ordine numero";
 export const ofLabel = "del";
 export const newOrderTitle = "Nuovo ordine";
 
 export const confirmationDeleteText =
 	"Sei sicuro di voler eliminare questo elemento?";
+export const confirmationRestoreText =
+	"Sei sicuro di voler effettuare il ripristino di questo elemento?";
 export const cancelLabel = "Annulla";
 export const confirmEditLabel = "Modifica";
 export const confirmDeleteLabel = "Elimina";
+export const confirmRestoreLabel = "Ripristina";
 export const insertOrderLabel = "Crea ordine";
 
 export const newOrderButtonLabel = "Nuovo ordine";

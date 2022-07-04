@@ -8,6 +8,6 @@ public interface UserService {
     User getById(String code);
     User userAuth(String email, String password);
     Boolean updatePassword(String code, String password);
-    Boolean toggleActive(String code);
+    Boolean restoreUser(String code);
     User createUser(UserInput userInput);
 }

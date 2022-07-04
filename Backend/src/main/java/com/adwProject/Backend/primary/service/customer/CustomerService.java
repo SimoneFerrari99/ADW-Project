@@ -12,5 +12,6 @@ public interface CustomerService {
     List<Customer> getCustomers();
     List<Customer> getCustomersByAgentCode(String agentCode);
     Boolean deleteCustomer(String custCode);
+    Boolean restoreCustomer(String custCode);
 
 }
