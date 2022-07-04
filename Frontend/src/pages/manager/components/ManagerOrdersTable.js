@@ -189,7 +189,7 @@ export default function ManagerOrdersTable() {
 			{deleteResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
-					variant="outlined"
+					variant="filled"
 					severity="warning"
 				/>
 			)}

@@ -77,7 +77,7 @@ export default function OpenNewCustomerDialogButton({ data, refetch }) {
 			{newCustomerResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
-					variant="outlined"
+					variant="filled"
 					severity="warning"
 				/>
 			)}

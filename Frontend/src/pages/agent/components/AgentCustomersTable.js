@@ -1,30 +1,18 @@
 import { Fragment, useState } from "react";
+import { ReactSession } from "react-client-session";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 
 import { Box, TableCell, Paper, TableRow } from "@mui/material";
 
-import { DeleteRounded } from "@mui/icons-material";
-
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
 import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
 import OpenEditCustomerDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditCustomerDialogButton";
-import OpenNewCustomerDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewCustomerDialogButton";
-import OpenConfirmationDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenConfirmationDialogButton";
 
 import { getComparator } from "../../../utils/functions/sorting";
 import {
 	allCustomerTitleTable,
 	customerTablePaginationLabel,
-	confirmationDeleteTitle,
-	confirmationDeleteText,
-	cancelLabel,
-	confirmDeleteLabel,
-	deleteCustomerSuccessSnackText,
-	deleteCustomerErrorSnackText,
-	actionCancelledSnackText,
 } from "../../../utils/strings";
-
-import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
 const headCells = [
 	{
@@ -49,7 +37,7 @@ const headCells = [
 	},
 ];
 
-export default function ManagerCustomersTable() {
+export default function AgentCustomersTable() {
 	const client = useApolloClient();
 
 	const [order, setOrder] = useState("asc");
@@ -57,11 +45,9 @@ export default function ManagerCustomersTable() {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
-	const [deleteResult, setDeleteResult] = useState("");
-
 	const GET_CUSTOMERS = gql`
-		query GetCustomers {
-			getCustomers {
+		query GetCustomersByAgentCode($agentCode: String!) {
+			customersByAgentCode(agentCode: $agentCode) {
 				custCode
 				custName
 				phoneNO
@@ -69,10 +55,6 @@ export default function ManagerCustomersTable() {
 				workingArea
 				custCountry
 				grade
-				openingAMT
-				receiveAMT
-				paymentAMT
-				outstandingAMT
 				agent {
 					agentCode
 				}
@@ -81,15 +63,11 @@ export default function ManagerCustomersTable() {
 		}
 	`;
 
-	const DELETE_CUSTOMER = gql`
-		mutation DeleteCustomer($custCode: String!) {
-			deleteCustomer(custCode: $custCode)
-		}
-	`;
+	const { data, loading, error, refetch } = useQuery(GET_CUSTOMERS, {
+		variables: { agentCode: ReactSession.get("code") },
+	});
 
-	const { data, loading, error, refetch } = useQuery(GET_CUSTOMERS);
-
-	const rows = !loading && !error && data.getCustomers;
+	const rows = !loading && !error && data.customersByAgentCode;
 
 	return (
 		<Fragment>
@@ -97,7 +75,7 @@ export default function ManagerCustomersTable() {
 				<Paper sx={{ width: "100%", mb: 2 }}>
 					<HomepageTableBody
 						tableTitle={allCustomerTitleTable}
-						headerButtons={<OpenNewCustomerDialogButton refetch={refetch} />}
+						headerButtons={null}
 						headCells={headCells}
 						loading={loading}
 						error={error}
@@ -131,32 +109,11 @@ export default function ManagerCustomersTable() {
 												<OpenPersonInfoDialogButton agentCode={row.agent.agentCode} />
 											</TableCell>
 											<TableCell align="center">
-												<Box sx={{ display: "flex" }}>
-													<OpenEditCustomerDialogButton data={row} refetch={refetch} />
-													<OpenConfirmationDialogButton
-														iconButton={<DeleteRounded color="error" />}
-														ariaLabel="elimina cliente"
-														confirmationTitle={confirmationDeleteTitle}
-														confirmationText={confirmationDeleteText}
-														handleConfirmation={async () => {
-															const { data } = await client.mutate({
-																mutation: DELETE_CUSTOMER,
-																variables: {
-																	custCode: row.custCode,
-																},
-															});
-															if (data.deleteCustomer) {
-																refetch();
-															} else {
-																setDeleteResult("error");
-															}
-														}}
-														noText={cancelLabel}
-														yesText={confirmDeleteLabel}
-														startIconYes={<DeleteRounded />}
-														setResult={setDeleteResult}
-													/>
-												</Box>
+												<OpenEditCustomerDialogButton
+													data={row}
+													refetch={refetch}
+													agentMode
+												/>
 											</TableCell>
 										</TableRow>
 									);
@@ -174,30 +131,6 @@ export default function ManagerCustomersTable() {
 					/>
 				</Paper>
 			</Box>
-			{deleteResult === "confirmed" && (
-				<SnackMessage
-					text={deleteCustomerSuccessSnackText}
-					variant="filled"
-					severity="success"
-					reset={setDeleteResult}
-				/>
-			)}
-			{deleteResult === "cancelled" && (
-				<SnackMessage
-					text={actionCancelledSnackText}
-					variant="filled"
-					severity="warning"
-					reset={setDeleteResult}
-				/>
-			)}
-			{deleteResult === "error" && (
-				<SnackMessage
-					text={deleteCustomerErrorSnackText}
-					variant="filled"
-					severity="error"
-					reset={setDeleteResult}
-				/>
-			)}
 		</Fragment>
 	);
 }

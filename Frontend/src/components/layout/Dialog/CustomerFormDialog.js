@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 
 import {
@@ -36,8 +36,9 @@ import {
 
 export default function CustomerFormDialog({
 	title,
-	editMode = null,
-	newMode = null,
+	editMode = false,
+	agentMode = false,
+	newMode = false,
 	dataFromRow,
 	open,
 	handleClickNo,
@@ -195,7 +196,7 @@ export default function CustomerFormDialog({
 		}
 	};
 
-	if (editMode && !userInfoCalled) getUserInfo();
+	if (!agentMode && editMode && !userInfoCalled) getUserInfo();
 
 	const handleEmailChange = (event) => {
 		setCalled(false);
@@ -225,9 +226,9 @@ export default function CustomerFormDialog({
 			outstandingAMT === "" ||
 			phoneNO === "" ||
 			agentCode === "" ||
-			(newMode && email === "") ||
-			(newMode && password === "") ||
-			(newMode && userType === "")
+			(!agentMode && newMode && email === "") ||
+			(!agentMode && newMode && password === "") ||
+			(!agentMode && newMode && userType === "")
 		) {
 			return true;
 		} else {
@@ -461,55 +462,59 @@ export default function CustomerFormDialog({
 							/>
 						</Stack>
 
-						<Stack direction="row" spacing={2}>
-							<TextField
-								id="openingAMT"
-								label={openingAMTLabel}
-								variant="outlined"
-								type="number"
-								error={called && openingAMT === ""}
-								required
-								fullWidth
-								value={openingAMT}
-								onChange={handleOpeningAMTChange}
-							/>
-							<TextField
-								id="receiveAMT"
-								label={receiveAMTLabel}
-								variant="outlined"
-								type="number"
-								error={called && receiveAMT === ""}
-								required
-								fullWidth
-								value={receiveAMT}
-								onChange={handleReceiveAMTChange}
-							/>
-						</Stack>
+						{!agentMode && (
+							<Stack direction="row" spacing={2}>
+								<TextField
+									id="openingAMT"
+									label={openingAMTLabel}
+									variant="outlined"
+									type="number"
+									error={called && openingAMT === ""}
+									required
+									fullWidth
+									value={openingAMT}
+									onChange={handleOpeningAMTChange}
+								/>
+								<TextField
+									id="receiveAMT"
+									label={receiveAMTLabel}
+									variant="outlined"
+									type="number"
+									error={called && receiveAMT === ""}
+									required
+									fullWidth
+									value={receiveAMT}
+									onChange={handleReceiveAMTChange}
+								/>
+							</Stack>
+						)}
 
-						<Stack direction="row" spacing={2}>
-							<TextField
-								id="paymentAMT"
-								label={paymentAMTLabel}
-								variant="outlined"
-								type="number"
-								error={called && paymentAMT === ""}
-								required
-								fullWidth
-								value={paymentAMT}
-								onChange={handlePaymentAMTChange}
-							/>
-							<TextField
-								id="outstandingAMT"
-								label={outstandingAMTLabel}
-								variant="outlined"
-								type="number"
-								error={called && outstandingAMT === ""}
-								required
-								fullWidth
-								value={outstandingAMT}
-								onChange={handleOutstandingAMTChange}
-							/>
-						</Stack>
+						{!agentMode && (
+							<Stack direction="row" spacing={2}>
+								<TextField
+									id="paymentAMT"
+									label={paymentAMTLabel}
+									variant="outlined"
+									type="number"
+									error={called && paymentAMT === ""}
+									required
+									fullWidth
+									value={paymentAMT}
+									onChange={handlePaymentAMTChange}
+								/>
+								<TextField
+									id="outstandingAMT"
+									label={outstandingAMTLabel}
+									variant="outlined"
+									type="number"
+									error={called && outstandingAMT === ""}
+									required
+									fullWidth
+									value={outstandingAMT}
+									onChange={handleOutstandingAMTChange}
+								/>
+							</Stack>
+						)}
 
 						<Stack direction="row" spacing={2}>
 							<FormControl fullWidth>
@@ -536,66 +541,70 @@ export default function CustomerFormDialog({
 								</Select>
 							</FormControl>
 						</Stack>
-						<Divider />
-						<Stack direction="row" spacing={2}>
-							<TextField
-								id="newEmail"
-								label="Email"
-								variant="outlined"
-								type="email"
-								error={called && email === ""}
-								required
-								fullWidth
-								value={email}
-								onChange={handleEmailChange}
-								disabled={editMode}
-							/>
-							<FormControl fullWidth>
-								<InputLabel id="userType" required>
-									{userTypeLabel}
-								</InputLabel>
-								<Select
-									labelId="userType"
-									id="userType"
-									value={userType}
-									label={userTypeLabel}
-									onChange={handleuserTypeChange}
-									required
-									fullWidth
-									error={called && userType === ""}
-									disabled={editMode}
-								>
-									<MenuItem selected key="C" value="C">
-										Cliente
-									</MenuItem>
-									{editMode && (
-										<MenuItem key={noTypeFoundLabel} value={noTypeFoundLabel}>
-											{noTypeFoundLabel}
-										</MenuItem>
-									)}
-								</Select>
-							</FormControl>
-						</Stack>
-						{newMode && (
-							<Stack direction="row" spacing={2}>
-								<TextField
-									id="newPassword"
-									label="Password"
-									variant="outlined"
-									type="password"
-									error={called && password === ""}
-									required
-									fullWidth
-									value={password}
-									onChange={handlePasswordChange}
-									inputProps={{
-										autoComplete: "off",
-										form: {
-											autoComplete: "off",
-										},
-									}}
-								/>
-							</Stack>
+						{!agentMode && (
+							<Fragment>
+								<Divider />
+								<Stack direction="row" spacing={2}>
+									<TextField
+										id="newEmail"
+										label="Email"
+										variant="outlined"
+										type="email"
+										error={called && email === ""}
+										required
+										fullWidth
+										value={email}
+										onChange={handleEmailChange}
+										disabled={editMode}
+									/>
+									<FormControl fullWidth>
+										<InputLabel id="userType" required>
+											{userTypeLabel}
+										</InputLabel>
+										<Select
+											labelId="userType"
+											id="userType"
+											value={userType}
+											label={userTypeLabel}
+											onChange={handleuserTypeChange}
+											required
+											fullWidth
+											error={called && userType === ""}
+											disabled={editMode}
+										>
+											<MenuItem selected key="C" value="C">
+												Cliente
+											</MenuItem>
+											{editMode && (
+												<MenuItem key={noTypeFoundLabel} value={noTypeFoundLabel}>
+													{noTypeFoundLabel}
+												</MenuItem>
+											)}
+										</Select>
+									</FormControl>
+								</Stack>
+								{newMode && (
+									<Stack direction="row" spacing={2}>
+										<TextField
+											id="newPassword"
+											label="Password"
+											variant="outlined"
+											type="password"
+											error={called && password === ""}
+											required
+											fullWidth
+											value={password}
+											onChange={handlePasswordChange}
+											inputProps={{
+												autoComplete: "off",
+												form: {
+													autoComplete: "off",
+												},
+											}}
+										/>
+									</Stack>
+								)}
+							</Fragment>
 						)}
 					</Stack>
 				</Box>

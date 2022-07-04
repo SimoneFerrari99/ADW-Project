@@ -174,7 +174,7 @@ export default function ManagerAgentsTable() {
 			{deleteResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
-					variant="outlined"
+					variant="filled"
 					severity="warning"
 				/>
 			)}
