@@ -103,7 +103,7 @@ export const ordAmountAdvancedAmountErrorLabel =
 export const ordersTableTitle = "Ordini";
 
 // Customers table
-export const allCustomerTitleTable = "Tutti i clienti";
+export const allCustomerTitleTable = "Clienti";
 export const editCustomerTitle = "Modifica cliente";
 export const newCustomerButtonLabel = "Nuovo cliente";
 

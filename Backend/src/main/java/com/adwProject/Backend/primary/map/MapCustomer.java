@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MapCustomer {
-    public Customer mapInputToCustomer(CustomerInput customerInput, Agent agent) {
+    public Customer mapInputToCreateCustomer(CustomerInput customerInput, Agent agent) {
         Customer customer = new Customer();
 
         customer.setCustName(customerInput.getCustName());
@@ -39,7 +39,7 @@ public class MapCustomer {
         customer.setAgent(agent);
     }
 
-    public void updateCustomerFields(Customer customer, CustomerInput customerInput) {
+    public void updateDataCustomerFields(Customer customer, CustomerInput customerInput) {
         customer.setCustName(customerInput.getCustName());
         customer.setCustCity(customerInput.getCustCity());
         customer.setWorkingArea(customerInput.getWorkingArea());

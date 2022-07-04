@@ -34,34 +34,38 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(custCode).orElse(null);
     }
 
-    @RequestMapping(value="/primary")
     @Override
-    public List<Customer> getCustomers() {
-        return customerRepository.findAll();
+    public Customer createOrUpdateCustomer(String custCode, CustomerInput customerInput) {
+        if(custCode == null) {
+            Customer customer = mapCustomer.mapInputToCreateCustomer(customerInput, findAgentById(customerInput.getAgentCode()));
+            customerRepository.save(customer);
+            return customer;
+        }
+        if(customerInput.getOpeningAMT() == null &&
+                customerInput.getReceiveAMT() == null &&
+                customerInput.getPaymentAMT() == null &&
+                customerInput.getOutstandingAMT() == null) {
+            Customer customer = customerRepository.findById(custCode).orElse(null);
+            if(customer != null) {
+                mapCustomer.updateDataCustomerFields(customer, customerInput);
+                customerRepository.save(customer);
+                return customer;
+            }
+            throw new GraphQLException("There is no Customer according with id: " + custCode);
+        }
+        Customer customer = customerRepository.findById(custCode).orElse(null);
+        if(customer != null) {
+            mapCustomer.updateAllCustomerFields(customer, customerInput, findAgentById(customerInput.getAgentCode()));
+            customerRepository.save(customer);
+            return customer;
+        }
+        throw new GraphQLException("There is no Customer according with id: " + custCode);
     }
 
     @RequestMapping(value="/primary")
     @Override
-    public Boolean update(String custCode, CustomerInput customerInput, Boolean allFields) {
-        Optional<Customer> optCustomer = customerRepository.findById(custCode);
-        Customer customer;
-
-        if(optCustomer.isPresent() && allFields) {
-            customer = optCustomer.get();
-            Agent agent = findAgentById(customerInput.getAgentCode());
-            mapCustomer.updateAllCustomerFields(customer, customerInput, agent);
-            customerRepository.save(customer);
-            return true;
-        }
-        else {
-            if(optCustomer.isPresent() && !allFields) {
-                customer = optCustomer.get();
-                mapCustomer.updateCustomerFields(customer, customerInput);
-                customerRepository.save(customer);
-                return true;
-            }
-        }
-        return false;
+    public List<Customer> getCustomers() {
+        return customerRepository.findAll();
     }
 
     @RequestMapping(value="/primary")

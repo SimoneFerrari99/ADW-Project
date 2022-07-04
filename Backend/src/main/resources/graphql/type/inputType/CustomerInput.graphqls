@@ -1,22 +1,13 @@
-input AllCustomerInput {
-    custName: String!
-    custCity:  String
-    workingArea: String!
-    custCountry: String!
-    grade: Int
-    openingAMT: Float!
-    receiveAMT: Float!
-    paymentAMT: Float!
-    outstandingAMT: Float!
-    phoneNO: String!
-    agentCode: String!
-}
-
 input CustomerInput {
     custName: String!
     custCity:  String
     workingArea: String!
     custCountry: String!
     grade: Int
+    openingAMT: Float # (null)
+    receiveAMT: Float # (null)
+    paymentAMT: Float # (null)
+    outstandingAMT: Float # (null)
     phoneNO: String!
+    agentCode: String!
 }

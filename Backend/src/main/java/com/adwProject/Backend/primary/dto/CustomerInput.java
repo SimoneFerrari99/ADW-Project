@@ -15,10 +15,10 @@ public class CustomerInput {
     private String workingArea;
     private String custCountry;
     private int grade;
-    private float openingAMT;
-    private float receiveAMT;
-    private float paymentAMT;
-    private float outstandingAMT;
+    private Float openingAMT;
+    private Float receiveAMT;
+    private Float paymentAMT;
+    private Float outstandingAMT;
     private String phoneNO;
     private String agentCode;
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CustomerService {
     Customer getById(String custCode);
-    Boolean update(String custCode, CustomerInput customerInput, Boolean AllFields);
+    Customer createOrUpdateCustomer(String custCode, CustomerInput customerInput);
     List<Customer> getCustomers();
     List<Customer> getCustomersByAgentCode(String agentCode);
     Boolean deleteCustomer(String custCode);

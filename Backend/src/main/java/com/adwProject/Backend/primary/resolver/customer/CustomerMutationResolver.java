@@ -13,12 +13,8 @@ public class CustomerMutationResolver implements GraphQLMutationResolver {
 
     private final CustomerService customerService;
 
-    public Boolean updateCustomerAllFields(String custCode, CustomerInput customerInput) {
-        return customerService.update(custCode, customerInput, true);
-    }
-
-    public Boolean updateCustomerDataFields(String custCode, CustomerInput customerInput) {
-        return customerService.update(custCode, customerInput, false);
+    public Customer createOrUpdateCustomer(String custCode, CustomerInput customerInput) {
+        return customerService.createOrUpdateCustomer(custCode, customerInput);
     }
 
     public Boolean deleteCustomer(String custCode) {

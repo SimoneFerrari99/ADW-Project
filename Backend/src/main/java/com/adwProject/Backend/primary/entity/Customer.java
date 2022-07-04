@@ -34,16 +34,16 @@ public class Customer {
     private int grade;
 
     @Column(name = "opening_amt")
-    private float openingAMT;
+    private Float openingAMT;
 
     @Column(name = "receive_amt")
-    private float receiveAMT;
+    private Float receiveAMT;
 
     @Column(name = "payment_amt")
-    private float paymentAMT;
+    private Float paymentAMT;
 
     @Column(name = "outstanding_amt")
-    private float outstandingAMT;
+    private Float outstandingAMT;
 
     @Column(name = "phone_no")
     private String phoneNO;
