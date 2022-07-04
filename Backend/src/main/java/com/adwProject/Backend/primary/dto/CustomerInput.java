@@ -1,10 +1,7 @@
 package com.adwProject.Backend.primary.dto;
 
-import com.adwProject.Backend.primary.entity.Agent;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
 
 
 @Setter

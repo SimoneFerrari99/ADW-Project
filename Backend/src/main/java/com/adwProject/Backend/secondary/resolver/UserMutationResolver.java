@@ -1,6 +1,7 @@
 package com.adwProject.Backend.secondary.resolver;
 
 import com.adwProject.Backend.secondary.dto.UserInput;
+import com.adwProject.Backend.secondary.entity.User;
 import com.adwProject.Backend.secondary.service.user.UserService;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,9 @@ public class UserMutationResolver implements GraphQLMutationResolver {
     }
     public Boolean toggleActive(String code) {
         return userService.toggleActive(code);
+    }
+    public User createUser(UserInput userInput) {
+        return userService.createUser(userInput);
     }
 
 }

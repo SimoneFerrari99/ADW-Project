@@ -13,6 +13,7 @@ import javax.persistence.Enumerated;
 @Setter
 @Getter
 public class UserInput {
+    private String code;
     @Enumerated(EnumType.STRING)
     @Column(length = 3)
     private Typology typology;

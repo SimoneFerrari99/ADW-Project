@@ -8,8 +8,6 @@ import lombok.Value;
 
 @Setter
 @Getter
-@Value
-@Builder
 public class AgentInput {
     private String agentCode;
     private String agentName;

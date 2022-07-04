@@ -15,8 +15,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, name = "code")
+    @Column(unique = true, name = "code", updatable = false, nullable = false)
     private String code;
 
     @Enumerated(EnumType.STRING)

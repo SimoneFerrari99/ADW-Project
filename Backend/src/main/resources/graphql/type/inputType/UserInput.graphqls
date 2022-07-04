@@ -1,4 +1,5 @@
 input UserInput {
+    code: String!
     typology: Typology!
     active: Boolean!
     email: String!

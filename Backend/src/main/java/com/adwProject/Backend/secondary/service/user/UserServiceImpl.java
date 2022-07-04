@@ -1,5 +1,6 @@
 package com.adwProject.Backend.secondary.service.user;
 
+import com.adwProject.Backend.secondary.dto.UserInput;
 import com.adwProject.Backend.secondary.entity.User;
 import com.adwProject.Backend.secondary.map.MapUser;
 import com.adwProject.Backend.secondary.repository.UserRepository;
@@ -49,6 +50,7 @@ public class UserServiceImpl implements UserService{
         return false;
     }
 
+    @RequestMapping(value="/secondary")
     @Override
     public Boolean toggleActive(String code) {
         Optional<User> optionalUser = userRepository.findById(code);
@@ -61,5 +63,13 @@ public class UserServiceImpl implements UserService{
             return true;
         }
         return false;
+    }
+
+    @RequestMapping(value="/secondary")
+    @Override
+    public User createUser(UserInput userInput) {
+        User user = mapUser.mapInputToCreateUser(userInput);
+        userRepository.save(user);
+        return user;
     }
 }
