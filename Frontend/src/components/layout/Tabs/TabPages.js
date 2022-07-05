@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-import { Tabs, Tab, Typography, Box } from "@mui/material/";
+import { Tabs, Tab, Typography, Box, tabsClasses } from "@mui/material/";
 
 function TabPanel({ children, value, index, ...other }) {
 	return (
@@ -13,7 +13,7 @@ function TabPanel({ children, value, index, ...other }) {
 			{...other}
 		>
 			{value === index && (
-				<Box sx={{ p: 3 }}>
+				<Box sx={{ pt: 2 }}>
 					<Typography variant="p">{children}</Typography>
 				</Box>
 			)}
@@ -44,7 +44,18 @@ export default function TabPages({ tabs, names }) {
 	return (
 		<Box sx={{ width: "100%" }}>
 			<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-				<Tabs value={value} onChange={handleChange} aria-label="Tabs della pagina">
+				<Tabs
+					value={value}
+					onChange={handleChange}
+					aria-label="Tabs della pagina"
+					variant="scrollable"
+					scrollButtons
+					sx={{
+						[`& .${tabsClasses.scrollButtons}`]: {
+							"&.Mui-disabled": { opacity: 0.3 },
+						},
+					}}
+				>
 					{names.map((name, index) => (
 						<Tab label={name} index={index} key={index} {...a11yProps(index)} />
 					))}

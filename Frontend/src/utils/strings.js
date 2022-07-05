@@ -132,7 +132,7 @@ export const noEmailFoundLabel = "Nessun email trovata";
 export const noTypeFoundLabel = "Nessun tipo trovato";
 
 // Agents table
-export const allAgentTitleTable = "Tutti gli agenti";
+export const allAgentTitleTable = "Agenti";
 export const newAgentLabel = "Nuovo agente";
 export const editAgentTitle = "Modifica agente";
 export const newAgentButtonLabel = "Nuovo agente";

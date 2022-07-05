@@ -129,7 +129,7 @@ export default function AgentFormDialog({
 
 	const handleEmailChange = (event) => {
 		setCalled(false);
-		setEmail(event.target.value);
+		setEmail(event.target.value.toLowerCase());
 	};
 
 	const handlePasswordChange = (event) => {

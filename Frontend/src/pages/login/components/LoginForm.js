@@ -34,7 +34,7 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 	const handleEmailChange = (event) => {
 		setLoginError(false);
 		setUserDisabled(false);
-		setEmail(event.target.value);
+		setEmail(event.target.value.toLowerCase());
 	};
 
 	const handlePasswordChange = (event) => {
@@ -71,8 +71,8 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 			}
 		} else {
 			setLoginError(true);
-			setEmail("");
-			setPassword("");
+			// setEmail("");
+			// setPassword("");
 		}
 	};
 

@@ -200,7 +200,7 @@ export default function CustomerFormDialog({
 
 	const handleEmailChange = (event) => {
 		setCalled(false);
-		setEmail(event.target.value);
+		setEmail(event.target.value.toLowerCase());
 	};
 
 	const handlePasswordChange = (event) => {
