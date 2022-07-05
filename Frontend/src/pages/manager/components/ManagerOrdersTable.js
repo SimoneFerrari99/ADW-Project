@@ -184,6 +184,7 @@ export default function ManagerOrdersTable() {
 					text={deleteOrderSuccessSnackText}
 					variant="filled"
 					severity="success"
+					reset={setDeleteResult}
 				/>
 			)}
 			{deleteResult === "cancelled" && (
@@ -191,6 +192,7 @@ export default function ManagerOrdersTable() {
 					text={actionCancelledSnackText}
 					variant="filled"
 					severity="warning"
+					reset={setDeleteResult}
 				/>
 			)}
 		</Fragment>

@@ -177,6 +177,7 @@ export default function ManagerRestoreCustomersTable() {
 					text={RestoreCustomerSuccessSnackText}
 					variant="filled"
 					severity="success"
+					reset={setRestoreResult}
 				/>
 			)}
 			{restoreResult === "cancelled" && (
@@ -184,6 +185,7 @@ export default function ManagerRestoreCustomersTable() {
 					text={actionCancelledSnackText}
 					variant="filled"
 					severity="warning"
+					reset={setRestoreResult}
 				/>
 			)}
 			{restoreResult === "error" && (
@@ -191,6 +193,7 @@ export default function ManagerRestoreCustomersTable() {
 					text={RestoreCustomerErrorSnackText}
 					variant="filled"
 					severity="info"
+					reset={setRestoreResult}
 				/>
 			)}
 		</Fragment>
