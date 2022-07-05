@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class OrderMutationResolver implements GraphQLMutationResolver {
     private final OrderService orderService;
 
-    public Boolean deleteOrder(int ordNum) {
+    public Boolean deleteOrder(Integer ordNum) {
         return orderService.deleteOrder(ordNum);
     }
     public Order createOrUpdateOrder(Integer ordNum, OrderInput orderInput) {
