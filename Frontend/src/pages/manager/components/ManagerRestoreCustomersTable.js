@@ -131,7 +131,7 @@ export default function ManagerRestoreCustomersTable() {
 											<TableCell align="center">
 												<OpenConfirmationDialogButton
 													iconButton={<RestoreFromTrashRounded color="info" />}
-													ariaLabel="restore cliente"
+													ariaLabel="ripristina cliente"
 													confirmationTitle={confirmationRestoreTitle}
 													confirmationText={confirmationRestoreText}
 													handleConfirmation={async () => {

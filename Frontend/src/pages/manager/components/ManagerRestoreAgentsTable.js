@@ -122,7 +122,7 @@ export default function ManagerRestoreAgentsTable() {
 											<TableCell align="center">
 												<OpenConfirmationDialogButton
 													iconButton={<RestoreFromTrashRounded color="info" />}
-													ariaLabel="restore agente"
+													ariaLabel="ripristina agente"
 													confirmationTitle={confirmationRestoreTitle}
 													confirmationText={confirmationRestoreText}
 													handleConfirmation={async () => {
