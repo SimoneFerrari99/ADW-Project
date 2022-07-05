@@ -1,7 +1,7 @@
 input UserInput {
     code: String!
-    typology: Typology!
+    typology: Typology
     active: Boolean
-    email: String!
+    email: String
     pw: String
 }

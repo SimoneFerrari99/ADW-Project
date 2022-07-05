@@ -1,7 +1,7 @@
 type User {
     code: String!
-    typology: Typology!
+    typology: Typology
     active: Boolean
-    email: String!
-    pw: String!
+    email: String
+    pw: String
 }
