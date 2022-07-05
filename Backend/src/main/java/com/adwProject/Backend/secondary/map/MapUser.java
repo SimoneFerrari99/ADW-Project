@@ -18,4 +18,13 @@ public class MapUser {
 
         return user;
     }
+
+    public User mapInputToUpdateUser(UserInput userInput, User user) {
+
+        user.setTypology(userInput.getTypology());
+        user.setActive(userInput.isActive());
+        user.setEmail(userInput.getEmail());
+
+        return user;
+    }
 }

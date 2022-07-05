@@ -5,6 +5,7 @@ import com.adwProject.Backend.secondary.entity.User;
 import com.adwProject.Backend.secondary.map.MapUser;
 import com.adwProject.Backend.secondary.repository.UserRepository;
 import com.adwProject.Backend.utility.Utility;
+import graphql.GraphQLException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,6 +69,15 @@ public class UserServiceImpl implements UserService{
     @RequestMapping(value="/secondary")
     @Override
     public User createOrUpdateUser(UserInput userInput) {
+        if(userInput.getPw() == null) {
+            User user = userRepository.findById(userInput.getCode()).orElse(null);
+            if(user != null) {
+                mapUser.mapInputToUpdateUser(userInput, user);
+                userRepository.save(user);
+                return user;
+            }
+            return null;
+        }
         User user = mapUser.mapInputToCreateUser(userInput);
         userRepository.save(user);
         return user;
