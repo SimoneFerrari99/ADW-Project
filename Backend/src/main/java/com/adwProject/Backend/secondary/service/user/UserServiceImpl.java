@@ -2,6 +2,7 @@ package com.adwProject.Backend.secondary.service.user;
 
 import com.adwProject.Backend.secondary.dto.UserInput;
 import com.adwProject.Backend.secondary.entity.User;
+import com.adwProject.Backend.secondary.entity.enums.Typology;
 import com.adwProject.Backend.secondary.map.MapUser;
 import com.adwProject.Backend.secondary.repository.UserRepository;
 import com.adwProject.Backend.utility.Utility;
@@ -9,6 +10,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Optional;
 
 @Service
@@ -68,7 +72,21 @@ public class UserServiceImpl implements UserService{
     @RequestMapping(value="/secondary")
     @Override
     public User createOrUpdateUser(UserInput userInput) {
-        User user = mapUser.mapInputToCreateUser(userInput);
+        String code = userInput.getCode();
+        Typology typology = userInput.getTypology();
+        boolean active = userInput.isActive();
+        String email = userInput.getEmail();
+        String pw = userInput.getPw();
+
+        User user = userRepository.findById(code).orElse(new User());
+
+        user.setCode(code);
+        user.setEmail(email);
+        user.setTypology(typology);
+        user.setActive(active);
+        if(pw != null){
+            user.setPw(Utility.hashPassword(pw));
+        }
         userRepository.save(user);
         return user;
     }

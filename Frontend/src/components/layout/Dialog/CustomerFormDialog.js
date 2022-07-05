@@ -169,6 +169,7 @@ export default function CustomerFormDialog({
 			userById(code: $code) {
 				email
 				typology
+				active
 			}
 		}
 	`;
@@ -176,6 +177,7 @@ export default function CustomerFormDialog({
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [userType, setUserType] = useState("C");
+	const [active, setActive] = useState(true);
 
 	const [userInfoCalled, setUserInfoCalled] = useState(false);
 	const getUserInfo = async (code) => {
@@ -190,6 +192,7 @@ export default function CustomerFormDialog({
 
 		if (data.userById) {
 			setEmail(data.userById.email);
+			setActive(data.userById.active);
 			setUserType(data.userById.typology);
 		} else {
 			setEmail(noEmailFoundLabel);
@@ -274,15 +277,15 @@ export default function CustomerFormDialog({
 		}
 	`;
 
-	const CREATE_USER = gql`
-		mutation createUser(
+	const CREATE_OR_UPDATE_USER = gql`
+		mutation createOrUpdateUser(
 			$code: String!
 			$email: String!
-			$pw: String!
+			$pw: String
 			$typology: Typology!
-			$active: Boolean!
+			$active: Boolean
 		) {
-			createUser(
+			createOrUpdateUser(
 				user: {
 					code: $code
 					email: $email
@@ -320,9 +323,24 @@ export default function CustomerFormDialog({
 			},
 		});
 
-		if (data.createOrUpdateCustomer.custCode) {
-			setResult("edited");
-			handleClickYes();
+		const code = data.createOrUpdateCustomer.custCode;
+
+		if (code) {
+			const { data } = await client.mutate({
+				mutation: CREATE_OR_UPDATE_USER,
+				variables: {
+					code: code,
+					email: email,
+					typology: userType,
+					active: active,
+				},
+			});
+			if (data.createOrUpdateUser.code) {
+				setResult("edited");
+				handleClickYes();
+			} else {
+				setResult("error");
+			}
 		} else {
 			setResult("error");
 		}
@@ -355,7 +373,7 @@ export default function CustomerFormDialog({
 
 		if (code) {
 			const { data } = await client.mutate({
-				mutation: CREATE_USER,
+				mutation: CREATE_OR_UPDATE_USER,
 				variables: {
 					code: code,
 					email: email,
@@ -364,7 +382,7 @@ export default function CustomerFormDialog({
 					active: true,
 				},
 			});
-			if (data.createUser.code) {
+			if (data.createOrUpdateUser.code) {
 				setResult("created");
 				handleClickYes();
 			} else {

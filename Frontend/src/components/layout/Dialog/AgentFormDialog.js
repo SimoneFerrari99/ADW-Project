@@ -192,7 +192,7 @@ export default function AgentFormDialog({
 		mutation createOrUpdateUser(
 			$code: String!
 			$email: String!
-			$pw: String!
+			$pw: String
 			$typology: Typology!
 			$active: Boolean
 		) {
@@ -229,7 +229,6 @@ export default function AgentFormDialog({
 		});
 
 		const code = data.createOrUpdateAgent.agentCode;
-		console.log(active);
 
 		if (code) {
 			const { data } = await client.mutate({
@@ -237,7 +236,6 @@ export default function AgentFormDialog({
 				variables: {
 					code: code,
 					email: email,
-					pw: password,
 					typology: userType,
 					active: active,
 				},

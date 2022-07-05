@@ -7,6 +7,8 @@ export const userDisabledAlertText =
 	"Il tuo account non è più attivo! Contattaci a info@ADWProject.com per maggiorni informazioni.";
 export const wrongEmailLabel = "Email errata.";
 export const wrongPasswordLabel = "Password errata.";
+export const generalApplicationError =
+	"Qualcosa è andato storto! Riprova. Se il problema persiste, contattaci a help@ADWProject.it";
 
 // Labels generiche
 export const modeLabel = "Modalità";
