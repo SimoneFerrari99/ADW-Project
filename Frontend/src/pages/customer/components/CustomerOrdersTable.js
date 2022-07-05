@@ -89,7 +89,7 @@ export default function CustomerOrdersTable() {
 										<TableCell
 											component="th"
 											id={labelId}
-											scope="row"
+											scope="col"
 											padding="normal"
 											align="center"
 											sx={{ fontWeight: "bold" }}
