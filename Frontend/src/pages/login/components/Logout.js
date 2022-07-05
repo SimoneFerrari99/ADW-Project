@@ -6,11 +6,12 @@ import { LogoutRounded } from "@mui/icons-material";
 
 export default function Logout({ setAuth }) {
 	const handleLogOut = () => {
-		//TODO: logica di eliminazione localstorage
+		//logica di eliminazione localstorage
 		ReactSession.set("auth", false);
 		ReactSession.set("code", null);
 		ReactSession.set("email", null);
 		ReactSession.set("userType", null);
+		setAuth(false);
 	};
 
 	return (
