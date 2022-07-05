@@ -179,6 +179,8 @@ export default function CustomerFormDialog({
 	const [userType, setUserType] = useState("C");
 	const [active, setActive] = useState(true);
 
+	const [NoUserFound, setNoUserFound] = useState(false);
+
 	const [userInfoCalled, setUserInfoCalled] = useState(false);
 	const getUserInfo = async (code) => {
 		setUserInfoCalled(true);
@@ -197,6 +199,7 @@ export default function CustomerFormDialog({
 		} else {
 			setEmail(noEmailFoundLabel);
 			setUserType(noTypeFoundLabel);
+			setNoUserFound(true);
 		}
 	};
 
@@ -277,15 +280,15 @@ export default function CustomerFormDialog({
 		}
 	`;
 
-	const CREATE_OR_UPDATE_USER = gql`
-		mutation createOrUpdateUser(
+	const CREATE_USER = gql`
+		mutation createUser(
 			$code: String!
 			$email: String!
-			$pw: String
+			$pw: String!
 			$typology: Typology!
-			$active: Boolean
+			$active: Boolean!
 		) {
-			createOrUpdateUser(
+			createUser(
 				user: {
 					code: $code
 					email: $email
@@ -293,6 +296,22 @@ export default function CustomerFormDialog({
 					typology: $typology
 					active: $active
 				}
+			) {
+				code
+			}
+		}
+	`;
+
+	const UPDATE_USER = gql`
+		mutation updateUser(
+			$code: String!
+			$email: String!
+			$typology: Typology
+			$active: Boolean
+		) {
+			updateUser(
+				code: $code
+				user: { code: $code, email: $email, typology: $typology, active: $active }
 			) {
 				code
 			}
@@ -327,15 +346,15 @@ export default function CustomerFormDialog({
 
 		if (code) {
 			const { data } = await client.mutate({
-				mutation: CREATE_OR_UPDATE_USER,
+				mutation: UPDATE_USER,
 				variables: {
 					code: code,
 					email: email,
-					typology: userType,
+					typology: NoUserFound ? null : userType,
 					active: active,
 				},
 			});
-			if (data.createOrUpdateUser.code) {
+			if (data.updateUser == null || data.updateUser.code) {
 				setResult("edited");
 				handleClickYes();
 			} else {
@@ -373,7 +392,7 @@ export default function CustomerFormDialog({
 
 		if (code) {
 			const { data } = await client.mutate({
-				mutation: CREATE_OR_UPDATE_USER,
+				mutation: CREATE_USER,
 				variables: {
 					code: code,
 					email: email,
@@ -382,7 +401,7 @@ export default function CustomerFormDialog({
 					active: true,
 				},
 			});
-			if (data.createOrUpdateUser.code) {
+			if (data.createUser.code) {
 				setResult("created");
 				handleClickYes();
 			} else {
@@ -592,12 +611,12 @@ export default function CustomerFormDialog({
 											required
 											fullWidth
 											error={called && userType === ""}
-											disabled={editMode}
+											disabled={editMode || NoUserFound}
 										>
 											<MenuItem selected key="C" value="C">
 												Cliente
 											</MenuItem>
-											{editMode && (
+											{editMode && NoUserFound && (
 												<MenuItem key={noTypeFoundLabel} value={noTypeFoundLabel}>
 													{noTypeFoundLabel}
 												</MenuItem>

@@ -188,15 +188,15 @@ export default function AgentFormDialog({
 		}
 	`;
 
-	const CREATE_OR_UPDATE_USER = gql`
-		mutation createOrUpdateUser(
+	const CREATE_USER = gql`
+		mutation createUser(
 			$code: String!
 			$email: String!
-			$pw: String
+			$pw: String!
 			$typology: Typology!
-			$active: Boolean
+			$active: Boolean!
 		) {
-			createOrUpdateUser(
+			createUser(
 				user: {
 					code: $code
 					email: $email
@@ -204,6 +204,22 @@ export default function AgentFormDialog({
 					typology: $typology
 					active: $active
 				}
+			) {
+				code
+			}
+		}
+	`;
+
+	const UPDATE_USER = gql`
+		mutation updateUser(
+			$code: String!
+			$email: String!
+			$typology: Typology
+			$active: Boolean
+		) {
+			updateUser(
+				code: $code
+				user: { code: $code, email: $email, typology: $typology, active: $active }
 			) {
 				code
 			}
@@ -232,15 +248,15 @@ export default function AgentFormDialog({
 
 		if (code) {
 			const { data } = await client.mutate({
-				mutation: CREATE_OR_UPDATE_USER,
+				mutation: UPDATE_USER,
 				variables: {
 					code: code,
 					email: email,
-					typology: userType,
+					typology: NoUserFound ? null : userType,
 					active: active,
 				},
 			});
-			if (data.createOrUpdateUser.code) {
+			if (data.updateUser == null || data.updateUser.code) {
 				setResult("edited");
 				handleClickYes();
 			} else {
@@ -272,7 +288,7 @@ export default function AgentFormDialog({
 
 		if (code) {
 			const { data } = await client.mutate({
-				mutation: CREATE_OR_UPDATE_USER,
+				mutation: CREATE_USER,
 				variables: {
 					code: code,
 					email: email,
@@ -281,7 +297,7 @@ export default function AgentFormDialog({
 					active: true,
 				},
 			});
-			if (data.createOrUpdateUser.code) {
+			if (data.createUser.code) {
 				setResult("created");
 				handleClickYes();
 			} else {
