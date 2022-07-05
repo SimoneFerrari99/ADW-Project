@@ -3,7 +3,7 @@ import { gql, useQuery, useApolloClient } from "@apollo/client";
 
 import { Box, TableCell, Paper, TableRow } from "@mui/material";
 
-import { DeleteRounded } from "@mui/icons-material";
+import { RestoreFromTrashRounded } from "@mui/icons-material";
 
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
 import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
@@ -15,12 +15,12 @@ import { getComparator } from "../../../utils/functions/sorting";
 import {
 	allAgentTitleTable,
 	customerTablePaginationLabel,
-	confirmationDeleteTitle,
-	confirmationDeleteText,
+	confirmationRestoreTitle,
+	confirmationRestoreText,
 	cancelLabel,
-	confirmDeleteLabel,
-	deleteAgentSuccessSnackText,
-	deleteAgentErrorSnackText,
+	confirmRestoreLabel,
+	RestoreAgentSuccessSnackText,
+	RestoreAgentErrorSnackText,
 	actionCancelledSnackText,
 } from "../../../utils/strings";
 
@@ -57,7 +57,7 @@ export default function ManagerRestoreAgentsTable() {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
-	const [deleteResult, setDeleteResult] = useState("");
+	const [restoreResult, setRestoreResult] = useState("");
 
 	const GET_AGENTS = gql`
 		query GetAgents {
@@ -73,9 +73,9 @@ export default function ManagerRestoreAgentsTable() {
 		}
 	`;
 
-	const DELETE_AGENT = gql`
-		mutation DeleteAgent($agentCode: String!) {
-			deleteAgent(agentCode: $agentCode)
+	const RESTORE_AGENT = gql`
+		mutation RestoreAgent($agentCode: String!) {
+			restoreAgent(agentCode: $agentCode)
 		}
 	`;
 
@@ -89,16 +89,15 @@ export default function ManagerRestoreAgentsTable() {
 				<Paper sx={{ width: "100%", mb: 2 }}>
 					<HomepageTableBody
 						tableTitle={allAgentTitleTable}
-						headerButtons={<OpenNewAgentDialogButton refetch={refetch} />}
 						headCells={headCells}
 						loading={loading}
 						error={error}
-						rows={!loading && !error && rows.filter((row) => row.active === true)}
+						rows={!loading && !error && rows.filter((row) => row.active === false)}
 						tableRows={
 							!loading &&
 							!error &&
 							rows
-								.filter((row) => row.active === true)
+								.filter((row) => row.active === false)
 								.slice()
 								.sort(getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -121,32 +120,30 @@ export default function ManagerRestoreAgentsTable() {
 											<TableCell align="center">{row.phoneNO}</TableCell>
 											<TableCell align="center">{row.commission}</TableCell>
 											<TableCell align="center">
-												<Box sx={{ display: "flex" }}>
-													<OpenEditAgentDialogButton data={row} refetch={refetch} />
-													<OpenConfirmationDialogButton
-														iconButton={<DeleteRounded color="error" />}
-														ariaLabel="elimina agente"
-														confirmationTitle={confirmationDeleteTitle}
-														confirmationText={confirmationDeleteText}
-														handleConfirmation={async () => {
-															const { data } = await client.mutate({
-																mutation: DELETE_AGENT,
-																variables: {
-																	agentCode: row.agentCode,
-																},
-															});
-															if (data.deleteAgent) {
-																refetch();
-															} else {
-																setDeleteResult("error");
-															}
-														}}
-														noText={cancelLabel}
-														yesText={confirmDeleteLabel}
-														startIconYes={<DeleteRounded />}
-														setResult={setDeleteResult}
-													/>
-												</Box>
+												<OpenConfirmationDialogButton
+													iconButton={<RestoreFromTrashRounded color="info" />}
+													ariaLabel="restore agente"
+													confirmationTitle={confirmationRestoreTitle}
+													confirmationText={confirmationRestoreText}
+													handleConfirmation={async () => {
+														const { data } = await client.mutate({
+															mutation: RESTORE_AGENT,
+															variables: {
+																agentCode: row.agentCode,
+															},
+														});
+														if (data.restoreAgent) {
+															refetch();
+														} else {
+															setRestoreResult("error");
+														}
+													}}
+													noText={cancelLabel}
+													yesText={confirmRestoreLabel}
+													startIconYes={<RestoreFromTrashRounded />}
+													setResult={setRestoreResult}
+													yesColor="info"
+												/>
 											</TableCell>
 										</TableRow>
 									);
@@ -164,25 +161,28 @@ export default function ManagerRestoreAgentsTable() {
 					/>
 				</Paper>
 			</Box>
-			{deleteResult === "confirmed" && (
+			{restoreResult === "confirmed" && (
 				<SnackMessage
-					text={deleteAgentSuccessSnackText}
+					text={RestoreAgentSuccessSnackText}
 					variant="filled"
 					severity="success"
+					reset={setRestoreResult}
 				/>
 			)}
-			{deleteResult === "cancelled" && (
+			{restoreResult === "cancelled" && (
 				<SnackMessage
 					text={actionCancelledSnackText}
 					variant="outlined"
 					severity="warning"
+					reset={setRestoreResult}
 				/>
 			)}
-			{deleteResult === "error" && (
+			{restoreResult === "error" && (
 				<SnackMessage
-					text={deleteAgentErrorSnackText}
+					text={RestoreAgentErrorSnackText}
 					variant="filled"
 					severity="error"
+					reset={setRestoreResult}
 				/>
 			)}
 		</Fragment>

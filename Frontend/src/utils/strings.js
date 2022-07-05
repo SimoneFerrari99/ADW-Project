@@ -38,10 +38,13 @@ export const RestoreCustomerErrorSnackText =
 	"Il cliente NON è stato ripristinato. L'agente associato a questo cliente è stato cancellato. Per procedere, si prega di ripristinarlo.";
 export const RestoreCustomerSuccessSnackText =
 	"Cliente ripristinato con successo!";
+export const RestoreAgentSuccessSnackText = "Agente ripristinato con successo!";
 export const editCustomerErrorSnackText =
 	"Qualcosa è andato storto! Il cliente NON è stato modificato.";
 export const deleteAgentErrorSnackText =
 	"Esistono ordini e/o clienti collegati a questo agente. Non è possibile eliminarlo. Se il problema persiste, contattaci a help@ADWProject.it";
+export const RestoreAgentErrorSnackText =
+	"L'agente NON è stato ripristinato. Se il problema persiste, contattaci a help@ADWProject.it";
 export const deleteAgentSuccessSnackText = "Agente eliminato con successo!";
 export const newAgentErrorSnackText =
 	"Qualcosa è andato storto! L'agente NON è stato creato.";

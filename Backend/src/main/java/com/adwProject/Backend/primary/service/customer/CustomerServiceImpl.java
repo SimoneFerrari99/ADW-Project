@@ -113,7 +113,6 @@ public class CustomerServiceImpl implements CustomerService {
             return true;
         }
         return false;
-
     }
 
     @RequestMapping(value="/primary")
