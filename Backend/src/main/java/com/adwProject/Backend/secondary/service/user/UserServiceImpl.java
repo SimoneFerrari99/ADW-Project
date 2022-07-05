@@ -6,6 +6,7 @@ import com.adwProject.Backend.secondary.entity.enums.Typology;
 import com.adwProject.Backend.secondary.map.MapUser;
 import com.adwProject.Backend.secondary.repository.UserRepository;
 import com.adwProject.Backend.utility.Utility;
+import graphql.GraphQLException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,21 +73,16 @@ public class UserServiceImpl implements UserService{
     @RequestMapping(value="/secondary")
     @Override
     public User createOrUpdateUser(UserInput userInput) {
-        String code = userInput.getCode();
-        Typology typology = userInput.getTypology();
-        boolean active = userInput.isActive();
-        String email = userInput.getEmail();
-        String pw = userInput.getPw();
-
-        User user = userRepository.findById(code).orElse(new User());
-
-        user.setCode(code);
-        user.setEmail(email);
-        user.setTypology(typology);
-        user.setActive(active);
-        if(pw != null){
-            user.setPw(Utility.hashPassword(pw));
+        if(userInput.getPw() == null) {
+            User user = userRepository.findById(userInput.getCode()).orElse(null);
+            if(user != null) {
+                mapUser.mapInputToUpdateUser(userInput, user);
+                userRepository.save(user);
+                return user;
+            }
+            return null;
         }
+        User user = mapUser.mapInputToCreateUser(userInput);
         userRepository.save(user);
         return user;
     }

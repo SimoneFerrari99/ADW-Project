@@ -13,8 +13,6 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     Optional<Order> findById(int ordNum);
-
     Optional<List<Order>> findByCustomerCustCode(String custCode);
-
     Optional<List<Order>> findByAgentAgentCode(String agentCode);
 }
