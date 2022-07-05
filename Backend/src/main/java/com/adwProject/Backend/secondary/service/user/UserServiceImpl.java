@@ -72,18 +72,21 @@ public class UserServiceImpl implements UserService{
 
     @RequestMapping(value="/secondary")
     @Override
-    public User createOrUpdateUser(UserInput userInput) {
-        if(userInput.getPw() == null) {
-            User user = userRepository.findById(userInput.getCode()).orElse(null);
-            if(user != null) {
-                mapUser.mapInputToUpdateUser(userInput, user);
-                userRepository.save(user);
-                return user;
-            }
-            return null;
-        }
+    public User createUser(UserInput userInput) {
         User user = mapUser.mapInputToCreateUser(userInput);
         userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public User updateUser(UserInput userInput, String code) {
+        User user = userRepository.findById(code).orElse(null);
+
+        if(user != null){
+            mapUser.mapInputToUpdateUser(userInput, user);
+            userRepository.save(user);
+            return user;
+        }
+        return null;
     }
 }

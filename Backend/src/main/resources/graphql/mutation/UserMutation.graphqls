@@ -1,5 +1,6 @@
 extend type Mutation {
     updatePsw(code: String!, password: String!): Boolean!
     restoreUser(code: String!): Boolean!
-    createOrUpdateUser(user: UserInput!): User!
+    createUser(user: UserInput!): User!
+    updateUser(user: UserInput!, code: String!): User
 }

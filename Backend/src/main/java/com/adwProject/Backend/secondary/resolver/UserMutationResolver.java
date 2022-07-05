@@ -19,8 +19,12 @@ public class UserMutationResolver implements GraphQLMutationResolver {
     public Boolean restoreUser(String code) {
         return userService.restoreUser(code);
     }
-    public User createOrUpdateUser(UserInput userInput) {
-        return userService.createOrUpdateUser(userInput);
+    public User createUser(UserInput userInput) {
+        return userService.createUser(userInput);
+    }
+
+    public User updateUser(UserInput userInput, String code) {
+        return userService.updateUser(userInput, code);
     }
 
 }
