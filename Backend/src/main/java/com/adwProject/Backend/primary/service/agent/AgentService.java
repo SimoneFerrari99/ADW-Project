@@ -10,4 +10,5 @@ public interface AgentService {
     List<Agent> getAgents();
     Boolean deleteAgent(String agentCode);
     Agent createOrUpdateAgent(String agentCode, AgentInput agentInput);
+    Boolean restoreAgent(String agentCode);
 }

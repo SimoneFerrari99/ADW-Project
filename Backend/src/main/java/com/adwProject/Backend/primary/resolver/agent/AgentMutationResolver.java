@@ -19,4 +19,7 @@ public class AgentMutationResolver implements GraphQLMutationResolver {
     public Agent createOrUpdateAgent(String agentCode, AgentInput agentInput) {
         return agentService.createOrUpdateAgent(agentCode, agentInput);
     }
+    public Boolean restoreAgent(String agentCode) {
+        return agentService.restoreAgent(agentCode);
+    }
 }

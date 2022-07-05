@@ -97,4 +97,22 @@ public class AgentServiceImpl implements AgentService {
         }
         throw new GraphQLException("There is no Agent according with id: " + agentCode);
     }
+
+    @RequestMapping(value="/primary")
+    @Override
+    public Boolean restoreAgent(String agentCode) {
+        Agent agent = agentRepository.findById(agentCode).orElse(null);
+        User user = userRepository.findById(agentCode).orElse(null);
+
+        if(agent != null) {
+            agent.setActive(true);
+            agentRepository.save(agent);
+            if(user != null) {
+                user.setActive(true);
+                userRepository.save(user);
+            }
+            return true;
+        }
+        return false;
+    }
 }
