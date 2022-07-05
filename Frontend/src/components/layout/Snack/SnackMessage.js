@@ -4,7 +4,12 @@ import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
-export default function SnackMessage({ text, variant, severity, reset }) {
+export default function SnackMessage({
+	text,
+	variant,
+	severity,
+	reset = () => {},
+}) {
 	const [open, setOpen] = useState(true);
 
 	const handleClose = () => {
@@ -23,7 +28,7 @@ export default function SnackMessage({ text, variant, severity, reset }) {
 						display: "flex",
 						alignItems: "center",
 						width: "100%",
-						fontSize: "1.1rem",
+						fontSize: "1rem",
 					}}
 				>
 					{text}

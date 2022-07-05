@@ -53,7 +53,7 @@ export default function ManagerAgentsTable() {
 	const client = useApolloClient();
 
 	const [order, setOrder] = useState("asc");
-	const [orderBy, setOrderBy] = useState("ordNum");
+	const [orderBy, setOrderBy] = useState("agentCode");
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 

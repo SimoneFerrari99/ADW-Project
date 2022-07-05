@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService{
 
     @RequestMapping(value="/secondary")
     @Override
-    public User createUser(UserInput userInput) {
+    public User createOrUpdateUser(UserInput userInput) {
         User user = mapUser.mapInputToCreateUser(userInput);
         userRepository.save(user);
         return user;

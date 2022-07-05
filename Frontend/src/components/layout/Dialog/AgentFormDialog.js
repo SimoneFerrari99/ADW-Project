@@ -97,6 +97,7 @@ export default function AgentFormDialog({
 			userById(code: $code) {
 				email
 				typology
+				active
 			}
 		}
 	`;
@@ -104,6 +105,9 @@ export default function AgentFormDialog({
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [userType, setUserType] = useState("");
+	const [active, setActive] = useState(true);
+
+	const [NoUserFound, setNoUserFound] = useState(false);
 
 	const [userInfoCalled, setUserInfoCalled] = useState(false);
 	const getUserInfo = async (code) => {
@@ -118,10 +122,12 @@ export default function AgentFormDialog({
 
 		if (data.userById) {
 			setEmail(data.userById.email);
+			setActive(data.userById.active);
 			setUserType(data.userById.typology);
 		} else {
 			setEmail(noEmailFoundLabel);
 			setUserType(noTypeFoundLabel);
+			setNoUserFound(true);
 		}
 	};
 
@@ -182,15 +188,15 @@ export default function AgentFormDialog({
 		}
 	`;
 
-	const CREATE_USER = gql`
-		mutation createUser(
+	const CREATE_OR_UPDATE_USER = gql`
+		mutation createOrUpdateUser(
 			$code: String!
 			$email: String!
 			$pw: String!
 			$typology: Typology!
-			$active: Boolean!
+			$active: Boolean
 		) {
-			createUser(
+			createOrUpdateUser(
 				user: {
 					code: $code
 					email: $email
@@ -222,9 +228,26 @@ export default function AgentFormDialog({
 			},
 		});
 
-		if (data.createOrUpdateAgent.agentCode) {
-			setResult("edited");
-			handleClickYes();
+		const code = data.createOrUpdateAgent.agentCode;
+		console.log(active);
+
+		if (code) {
+			const { data } = await client.mutate({
+				mutation: CREATE_OR_UPDATE_USER,
+				variables: {
+					code: code,
+					email: email,
+					pw: password,
+					typology: userType,
+					active: active,
+				},
+			});
+			if (data.createOrUpdateUser.code) {
+				setResult("edited");
+				handleClickYes();
+			} else {
+				setResult("error");
+			}
 		} else {
 			setResult("error");
 		}
@@ -251,7 +274,7 @@ export default function AgentFormDialog({
 
 		if (code) {
 			const { data } = await client.mutate({
-				mutation: CREATE_USER,
+				mutation: CREATE_OR_UPDATE_USER,
 				variables: {
 					code: code,
 					email: email,
@@ -260,7 +283,7 @@ export default function AgentFormDialog({
 					active: true,
 				},
 			});
-			if (data.createUser.code) {
+			if (data.createOrUpdateUser.code) {
 				setResult("created");
 				handleClickYes();
 			} else {
@@ -377,7 +400,7 @@ export default function AgentFormDialog({
 									required
 									fullWidth
 									error={called && userType === ""}
-									disabled={editMode}
+									disabled={NoUserFound}
 								>
 									<MenuItem selected key="A" value="A">
 										Agente
@@ -385,7 +408,7 @@ export default function AgentFormDialog({
 									<MenuItem selected key="D" value="D">
 										Dirigente
 									</MenuItem>
-									{editMode && (
+									{editMode && NoUserFound && (
 										<MenuItem key={noTypeFoundLabel} value={noTypeFoundLabel}>
 											{noTypeFoundLabel}
 										</MenuItem>

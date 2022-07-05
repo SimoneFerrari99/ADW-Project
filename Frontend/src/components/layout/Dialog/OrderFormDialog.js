@@ -179,6 +179,7 @@ export default function OrderFormDialog({
 		query getCustomersByAgentCode($agentCode: String!) {
 			customersByAgentCode(agentCode: $agentCode) {
 				custCode
+				active
 			}
 		}
 	`;
@@ -249,11 +250,14 @@ export default function OrderFormDialog({
 								>
 									{!loading &&
 										!error &&
-										data.customersByAgentCode.map((customer) => (
-											<MenuItem key={customer.custCode} value={customer.custCode}>
-												{customer.custCode}
-											</MenuItem>
-										))}
+										data.customersByAgentCode
+											.filter((customer) => customer.active === true)
+											.sort((a, b) => a.custCode.localeCompare(b.custCode))
+											.map((customer) => (
+												<MenuItem key={customer.custCode} value={customer.custCode}>
+													{customer.custCode}
+												</MenuItem>
+											))}
 								</Select>
 							</FormControl>
 							<FormControl fullWidth>

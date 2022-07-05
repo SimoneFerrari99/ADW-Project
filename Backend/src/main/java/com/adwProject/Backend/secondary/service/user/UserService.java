@@ -9,5 +9,5 @@ public interface UserService {
     User userAuth(String email, String password);
     Boolean updatePassword(String code, String password);
     Boolean restoreUser(String code);
-    User createUser(UserInput userInput);
+    User createOrUpdateUser(UserInput userInput);
 }

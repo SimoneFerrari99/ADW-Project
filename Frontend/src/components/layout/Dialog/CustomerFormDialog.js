@@ -155,6 +155,7 @@ export default function CustomerFormDialog({
 		query getAgents {
 			getAgents {
 				agentCode
+				active
 			}
 		}
 	`;
@@ -533,11 +534,14 @@ export default function CustomerFormDialog({
 								>
 									{!agentsQueryResults.loading &&
 										!agentsQueryResults.error &&
-										agentsQueryResults.data.getAgents.map((agent) => (
-											<MenuItem key={agent.agentCode} value={agent.agentCode}>
-												{agent.agentCode}
-											</MenuItem>
-										))}
+										agentsQueryResults.data.getAgents
+											.filter((agent) => agent.active === true)
+											.sort((a, b) => a.agentCode.localeCompare(b.agentCode))
+											.map((agent) => (
+												<MenuItem key={agent.agentCode} value={agent.agentCode}>
+													{agent.agentCode}
+												</MenuItem>
+											))}
 								</Select>
 							</FormControl>
 						</Stack>

@@ -28,18 +28,13 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const [loginError, setLoginError] = useState(false);
-	const [userDisabled, setUserDisabled] = useState(false);
+	const [loginResult, setLoginResult] = useState("");
 
 	const handleEmailChange = (event) => {
-		setLoginError(false);
-		setUserDisabled(false);
 		setEmail(event.target.value.toLowerCase());
 	};
 
 	const handlePasswordChange = (event) => {
-		setLoginError(false);
-		setUserDisabled(false);
 		setPassword(event.target.value);
 	};
 
@@ -67,12 +62,10 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 				ReactSession.set("userType", String(data.userAuth.typology));
 				setAuth(true);
 			} else {
-				setUserDisabled(true);
+				setLoginResult("disabled");
 			}
 		} else {
-			setLoginError(true);
-			// setEmail("");
-			// setPassword("");
+			setLoginResult("error");
 		}
 	};
 
@@ -105,8 +98,8 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 											label="Email"
 											variant="standard"
 											type="text"
-											error={loginError}
-											helperText={loginError && wrongEmailLabel}
+											error={loginResult}
+											helperText={loginResult && wrongEmailLabel}
 											required
 											fullWidth
 											autoFocus
@@ -122,8 +115,8 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 											label="Password"
 											variant="standard"
 											type="password"
-											error={loginError}
-											helperText={loginError && wrongPasswordLabel}
+											error={loginResult}
+											helperText={loginResult && wrongPasswordLabel}
 											required
 											fullWidth
 											value={password}
@@ -150,18 +143,20 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 					{darkModeButton}
 				</Box>
 			</Box>
-			{loginError && (
+			{loginResult === "error" && (
 				<SnackMessage
 					text={loginErrorAlertText}
-					variant={"filled"}
-					severity={"error"}
+					variant="filled"
+					severity="error"
+					reset={setLoginResult}
 				/>
 			)}
-			{userDisabled && (
+			{loginResult === "disabled" && (
 				<SnackMessage
 					text={userDisabledAlertText}
-					variant={"filled"}
-					severity={"warning"}
+					variant="filled"
+					severity="warning"
+					reset={setLoginResult}
 				/>
 			)}
 		</Fragment>

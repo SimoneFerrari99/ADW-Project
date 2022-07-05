@@ -11,7 +11,6 @@ export default function Logout({ setAuth }) {
 		ReactSession.set("code", null);
 		ReactSession.set("email", null);
 		ReactSession.set("userType", null);
-		setAuth(false);
 	};
 
 	return (
