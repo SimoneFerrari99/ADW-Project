@@ -1,4 +1,5 @@
 import { Fragment, useState, useContext } from "react";
+import { gql, useApolloClient } from "@apollo/client";
 import { ReactSession } from "react-client-session";
 
 import LoginContent from "./pages/login/LoginContent";
@@ -13,12 +14,46 @@ import ToggleColorModeButton from "./components/layout/Button/ToggleColorModeBut
 
 import { CssBaseline } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { generalApplicationError } from "./utils/strings";
 
 export default function App({ ColorModeContext }) {
-	const [auth, setAuth] = useState(ReactSession.get("auth"));
+	const client = useApolloClient();
 
+	const [auth, setAuth] = useState(ReactSession.get("auth"));
 	const userType = String(ReactSession.get("userType"));
 	const code = String(ReactSession.get("code"));
+
+	const GET_USER_INFO = gql`
+		query getUserInfo($code: String!) {
+			userById(code: $code) {
+				typology
+			}
+		}
+	`;
+
+	const checkAuth = async function () {
+		const { data } = await client.query({
+			query: GET_USER_INFO,
+			variables: {
+				code: code || "",
+			},
+		});
+		if (
+			auth &&
+			code &&
+			userType != null &&
+			data &&
+			userType !== data.userById.typology
+		) {
+			ReactSession.set("auth", false);
+			ReactSession.set("code", null);
+			ReactSession.set("email", null);
+			ReactSession.set("userType", null);
+			setAuth(false);
+		}
+	};
+
+	checkAuth();
 
 	const theme = useTheme();
 	const colorMode = useContext(ColorModeContext);
@@ -45,7 +80,7 @@ export default function App({ ColorModeContext }) {
 					) : (
 						() => {
 							setAuth(false);
-							return <SnackMessage />;
+							return <SnackMessage text={generalApplicationError} />;
 						}
 					)}
 				</Fragment>

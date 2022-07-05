@@ -98,8 +98,8 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 											label="Email"
 											variant="standard"
 											type="text"
-											error={loginResult}
-											helperText={loginResult && wrongEmailLabel}
+											error={loginResult === "error"}
+											helperText={loginResult === "error" && wrongEmailLabel}
 											required
 											fullWidth
 											autoFocus
@@ -115,8 +115,8 @@ export default function LoginForm({ setAuth, darkModeButton }) {
 											label="Password"
 											variant="standard"
 											type="password"
-											error={loginResult}
-											helperText={loginResult && wrongPasswordLabel}
+											error={loginResult === "error"}
+											helperText={loginResult === "error" && wrongPasswordLabel}
 											required
 											fullWidth
 											value={password}
