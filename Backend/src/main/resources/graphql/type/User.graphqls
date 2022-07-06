@@ -1,4 +1,4 @@
-type User {
+type User {             #GraphQL Object types for User
     code: String!
     typology: Typology
     active: Boolean

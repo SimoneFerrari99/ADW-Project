@@ -6,7 +6,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.List;
 
-public interface CustomerService {
+public interface CustomerService {          //The "CustomerService" interface contains a collection of methods that will be implemented in the "CustomerServiceImpl" class
     Customer getById(String custCode);
     Customer createOrUpdateCustomer(String custCode, CustomerInput customerInput);
     List<Customer> getCustomers();

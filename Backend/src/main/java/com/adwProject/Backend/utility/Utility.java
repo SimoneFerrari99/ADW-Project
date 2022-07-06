@@ -10,8 +10,7 @@ import java.util.Date;
 
 public class Utility {
 
-    @Nullable
-    public static String hashPassword(String password) {
+    public static String hashPassword(@NotNull String password) {                                               //Method used to hash the password before it is saved in the database
         try{
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(password.getBytes());
@@ -28,8 +27,7 @@ public class Utility {
         return null;
     }
 
-    @NotNull
-    public static String getCurrentDate() {
+    public static String getCurrentDate() {                                                                     //Method used for create a current date
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         return formatter.format(date);

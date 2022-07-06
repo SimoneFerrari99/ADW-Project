@@ -1,6 +1,6 @@
-extend type Query {
-    orderById(ordNum: Int!): Order
-    ordersByCustomerCustCode(custCode: String!): [Order]
-    ordersByAgentAgentCode(agentCode: String!): [Order]
-    getOrders(custCode: String, agentCode: String): [Order]
+extend type Query {     #List of available services/query for retrieve data
+    orderById(ordNum: Int!): Order                              #Order search by "ordNum" parameter
+    ordersByCustomerCustCode(custCode: String!): [Order]        #Order (List) search by "custCode" paramenter
+    ordersByAgentAgentCode(agentCode: String!): [Order]         #Order (List) search by "agentCode" paramenter
+    getOrders(custCode: String, agentCode: String): [Order]     #Order (List) search by "custCode" and "agentCode" paramenter
 }

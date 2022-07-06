@@ -1,5 +1,5 @@
-extend type Mutation {
-    deleteAgent(agentCode: String!): Boolean!
-    createOrUpdateAgent(agentCode: String, agent: AgentInput!): Agent!
-    restoreAgent(agentCode: String!): Boolean!
+extend type Mutation {      #Mutation are used to modify server-side data
+    deleteAgent(agentCode: String!): Boolean!                                   #Mutation used for delete an existing Agent
+    createOrUpdateAgent(agentCode: String, agent: AgentInput!): Agent!          #Mutation used for create a new Agent or update data Agent
+    restoreAgent(agentCode: String!): Boolean!                                  #Mutation used for restore a disabled Agent
 }

@@ -1,5 +1,5 @@
-extend type Query {
-    getCustomers: [Customer]
-    customerById(custCode: String!): Customer
-    customersByAgentCode(agentCode: String!): [Customer]
+extend type Query {     #List of available services/query for retrieve data
+    getCustomers: [Customer]                                    #List of all available Customer
+    customerById(custCode: String!): Customer                   #Customer search by "custCode" parameter
+    customersByAgentCode(agentCode: String!): [Customer]        #Customer (List) search by "agentCode" paramenter
 }

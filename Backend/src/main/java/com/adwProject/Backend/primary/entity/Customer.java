@@ -11,10 +11,10 @@ import javax.persistence.*;
 @Entity
 @ToString
 @Table(name = "customers", schema= "public")
-public class Customer {
+public class Customer {                                         //The JPA Entity (Java Persistence API) are used for managing relational data in Java applications.
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id                                                         //Annotation to indicate that the string "custCode" is a primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)         //Annotation used for generating new primary keys when needed
     @Column(unique = true, name = "cust_code")
     private String custCode;
 

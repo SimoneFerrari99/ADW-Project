@@ -1,5 +1,5 @@
-type Mutation {
-    createOrUpdateCustomer(custCode: String, customer: CustomerInput): Customer!
-    deleteCustomer(custCode: String!): Boolean!
-    restoreCustomer(custCode: String!): Boolean!
+type Mutation {         #Mutation are used to modify server-side data
+    createOrUpdateCustomer(custCode: String, customer: CustomerInput): Customer!        #Mutation used for create new Customer or update data Customer
+    deleteCustomer(custCode: String!): Boolean!                                         #Mutation used for delete an existing Customer
+    restoreCustomer(custCode: String!): Boolean!                                        #Mutation used for restore a disabled Customer
 }

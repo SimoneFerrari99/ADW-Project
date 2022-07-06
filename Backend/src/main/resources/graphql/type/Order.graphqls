@@ -1,4 +1,4 @@
-type Order {
+type Order {               #GraphQL Object types for Order
     ordNum: Int!
     ordAMT: Float!
     advanceAMT: Float!

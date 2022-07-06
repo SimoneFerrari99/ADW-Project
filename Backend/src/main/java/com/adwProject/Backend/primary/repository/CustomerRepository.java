@@ -11,7 +11,8 @@ import java.util.Optional;
 
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, String> {
+// TODO: Inserire tutte le query
+public interface CustomerRepository extends JpaRepository<Customer, String> {       //Repository is a mechanism for encapsulating storage, retrieval, and search behavior which emulates a collection of objects.
 
     @NotNull
     Optional<Customer> findById(String custCode);

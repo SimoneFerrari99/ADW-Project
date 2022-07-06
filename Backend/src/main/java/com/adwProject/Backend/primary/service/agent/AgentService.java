@@ -5,7 +5,7 @@ import com.adwProject.Backend.primary.entity.Agent;
 
 import java.util.List;
 
-public interface AgentService {
+public interface AgentService {         //The "AgentService" interface contains a collection of methods that will be implemented in the "AgentServiceImpl" class
     Agent getById(String agentCode);
     List<Agent> getAgents();
     Boolean deleteAgent(String agentCode);

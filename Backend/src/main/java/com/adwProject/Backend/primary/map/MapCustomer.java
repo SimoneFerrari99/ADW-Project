@@ -6,8 +6,8 @@ import com.adwProject.Backend.primary.entity.Customer;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MapCustomer {
-    public Customer mapInputToCreateCustomer(CustomerInput customerInput, Agent agent) {
+public class MapCustomer {                                                                                      //This class is used for mutations. It helps us map incoming data from the frontend (CustomerInput) to the Customer
+    public Customer mapInputToCreateCustomer(CustomerInput customerInput, Agent agent) {                        //Method used for map incoming data to the new Customer
         Customer customer = new Customer();
 
         customer.setCustName(customerInput.getCustName());
@@ -26,7 +26,7 @@ public class MapCustomer {
         return customer;
     }
 
-    public void updateAllCustomerFields(Customer customer, CustomerInput customerInput, Agent agent) {
+    public void updateAllCustomerFields(Customer customer, CustomerInput customerInput, Agent agent) {          //Method used for map incoming data to update all fields in Customer
         customer.setCustName(customerInput.getCustName());
         customer.setCustCity(customerInput.getCustCity());
         customer.setWorkingArea(customerInput.getWorkingArea());
@@ -40,7 +40,7 @@ public class MapCustomer {
         customer.setAgent(agent);
     }
 
-    public void updateDataCustomerFields(Customer customer, CustomerInput customerInput) {
+    public void updateDataCustomerFields(Customer customer, CustomerInput customerInput) {                      //Method used for map incoming data to update data in Customer
         customer.setCustName(customerInput.getCustName());
         customer.setCustCity(customerInput.getCustCity());
         customer.setWorkingArea(customerInput.getWorkingArea());

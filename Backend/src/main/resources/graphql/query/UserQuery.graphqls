@@ -1,7 +1,7 @@
 schema {
     query: Query
 }
-type Query {
-    userById(code: String!): User
-    userAuth(email: String!, password: String!): User
+type Query {        #List of available services/query for retrieve data
+    userById(code: String!): User                           #User search by "code" parameter
+    userAuth(email: String!, password: String!): User       #Identification phase of a User
 }

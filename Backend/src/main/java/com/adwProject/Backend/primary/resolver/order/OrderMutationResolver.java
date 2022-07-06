@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class OrderMutationResolver implements GraphQLMutationResolver {
+public class OrderMutationResolver implements GraphQLMutationResolver {                                     //The resolver, in this case GraphQLMutationResolver, is the penultimate step in executing the Mutation
     private final OrderService orderService;
 
-    public Boolean deleteOrder(Integer ordNum) {
+    public Boolean deleteOrder(Integer ordNum) {                                                            //Method used for delete an existing Order by Id ("ordNum"), if exist
         return orderService.deleteOrder(ordNum);
     }
-    public Order createOrUpdateOrder(Integer ordNum, OrderInput orderInput) {
+    public Order createOrUpdateOrder(Integer ordNum, OrderInput orderInput) {                               //Method used for create a new Order or update an existing Order
         return orderService.createOrUpdateOrder(ordNum, orderInput);
     }
 }

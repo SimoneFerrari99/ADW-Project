@@ -1,4 +1,4 @@
-extend type Query {
-    agentById(agentCode: String!): Agent
-    getAgents: [Agent]
+extend type Query {     #List of available services/query for retrieve data
+    agentById(agentCode: String!): Agent        #Agent search by "agentCode" parameter
+    getAgents: [Agent]                          #List of all available Agent
 }

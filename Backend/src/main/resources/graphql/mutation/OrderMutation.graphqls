@@ -1,4 +1,4 @@
-extend type Mutation {
-    deleteOrder(ordNum: Int!): Boolean!
-    createOrUpdateOrder(ordNum: Int, order: OrderInput): Order!
+extend type Mutation {      #Mutation are used to modify server-side data
+    deleteOrder(ordNum: Int!): Boolean!                                 #Mutation used for delete an Order
+    createOrUpdateOrder(ordNum: Int, order: OrderInput): Order!         #Mutation used for create new Order or update data Order
 }

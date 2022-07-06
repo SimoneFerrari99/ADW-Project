@@ -10,15 +10,14 @@ import java.util.List;
 
 
 @Component
-//@Slf4j
 @AllArgsConstructor
-public class AgentQueryResolver implements GraphQLQueryResolver {
+public class AgentQueryResolver implements GraphQLQueryResolver {                               //The resolver, in this case GraphQLQueryResolver, is the penultimate step in executing the Query
     private final AgentService agentService;
 
-    public Agent agentById(String agentCode) {
+    public Agent agentById(String agentCode) {                                                  //Method used for search an Agent by Id ("agentCode")
         return agentService.getById(agentCode);
     }
-    public List<Agent> getAgents() {
+    public List<Agent> getAgents() {                                                            //Method used for retrieve all existing Agent
         return agentService.getAgents();
     }
 

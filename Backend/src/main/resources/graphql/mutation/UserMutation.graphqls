@@ -1,6 +1,6 @@
-extend type Mutation {
-    updatePsw(code: String!, password: String!): Boolean!
-    restoreUser(code: String!): Boolean!
-    createUser(user: UserInput!): User!
-    updateUser(user: UserInput!, code: String!): User
+extend type Mutation {      #Mutation are used to modify server-side data
+    updatePsw(code: String!, password: String!): Boolean!       #Mutation used for update password
+    restoreUser(code: String!): Boolean!                        #Mutation used for restore a disabled User
+    createUser(user: UserInput!): User!                         #Mutation used for create new User
+    updateUser(user: UserInput!, code: String!): User           #Mutation used for update data User
 }

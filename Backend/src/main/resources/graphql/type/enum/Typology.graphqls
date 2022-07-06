@@ -1,4 +1,4 @@
-enum Typology {
+enum Typology {     #enum in a special scalar, restricted to a particular set of allowed values (A,C,D)
     A
     C
     D

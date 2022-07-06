@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class MapOrder {
-    public Order MapInputToCreateOrder(OrderInput orderInput, Customer customer, Agent agent) {
+public class MapOrder {                                                                                                 //This class is used for mutations. It helps us map incoming data from the frontend (OrderInput) to the Order
+    public Order MapInputToCreateOrder(OrderInput orderInput, Customer customer, Agent agent) {                         //Method used for map incoming data to the new Order
         Order order = new Order();
 
         order.setOrdAMT(orderInput.getOrdAMT());
@@ -24,7 +24,7 @@ public class MapOrder {
         return order;
     }
 
-    public Order MapInputToUpdateOrder(OrderInput orderInput, Customer customer, Agent agent, Order order) {
+    public Order MapInputToUpdateOrder(OrderInput orderInput, Customer customer, Agent agent, Order order) {            //Method used for map incoming data to update data in Order
 
         order.setOrdAMT(orderInput.getOrdAMT());
         order.setAdvanceAMT(orderInput.getAdvanceAMT());

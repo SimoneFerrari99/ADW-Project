@@ -1,4 +1,4 @@
-type Agent {
+type Agent {            #GraphQL Object types for Agent
     agentCode: String!
     agentName: String
     workingArea: String

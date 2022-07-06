@@ -1,4 +1,4 @@
-input UserInput {
+input UserInput {       #Complex object used in the case of mutations (UserInput)
     code: String!
     typology: Typology
     active: Boolean

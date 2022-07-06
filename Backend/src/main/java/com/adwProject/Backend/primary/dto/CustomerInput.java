@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CustomerInput {
+public class CustomerInput {        //Used for pass data with multiple attributes in one shot from client to server. The name of this DTO is CustomerInput
     private String custName;
     private String custCity;
     private String workingArea;
