@@ -1,3 +1,5 @@
+/* COMPONENTE PER IL DROPDOWN DEL PROFILO */
+
 import { Menu, MenuItem, Divider, Avatar } from "@mui/material";
 
 import Logout from "../../../pages/login/components/Logout";
@@ -31,6 +33,7 @@ export default function ProfileMenu({
 	);
 }
 
+/* Props per la finestra del menu */
 const menuProps = {
 	elevation: 0,
 	sx: {

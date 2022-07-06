@@ -1,3 +1,4 @@
+/* TABELLA DEGLI ORDINI DEL CLIENTE */
 import { useState } from "react";
 import { ReactSession } from "react-client-session";
 import { gql, useQuery } from "@apollo/client";
@@ -13,6 +14,7 @@ import {
 	customerTablePaginationLabel,
 } from "../../../utils/strings";
 
+/* Colonne della tabella */
 const headCells = [
 	{
 		id: "ordNum",
@@ -46,6 +48,7 @@ export default function CustomerOrdersTable() {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
+	/* Query per recuperare gli ordini del cliente */
 	const customerOrders = gql`
 		query GetOrdersByCustomerId {
 			ordersByCustomerCustCode(custCode: "${ReactSession.get("code")}") {

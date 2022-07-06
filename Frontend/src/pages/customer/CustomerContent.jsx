@@ -1,3 +1,4 @@
+/* PAGINA DEL CLIENTE */
 import { Container, Box } from "@mui/material";
 
 import AmountRow from "./components/AmountRow";

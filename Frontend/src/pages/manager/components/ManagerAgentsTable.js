@@ -1,3 +1,4 @@
+/* TABELLA DEGLI AGENTI PRESENTE NELLA PAGINA DEL MANAGER */
 import { Fragment, useState } from "react";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 
@@ -6,7 +7,6 @@ import { Box, TableCell, Paper, TableRow } from "@mui/material";
 import { DeleteRounded } from "@mui/icons-material";
 
 import HomepageTableBody from "../../../components/layout/Table/HomepageTableBody";
-import OpenPersonInfoDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenPersonInfoDialogButton";
 import OpenEditAgentDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditAgentDialogButton";
 import OpenNewAgentDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewAgentDialogButton";
 import OpenConfirmationDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenConfirmationDialogButton";
@@ -26,6 +26,7 @@ import {
 
 import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
+/* Colonne della tabella */
 const headCells = [
 	{
 		id: "agentCode",
@@ -59,6 +60,7 @@ export default function ManagerAgentsTable() {
 
 	const [deleteResult, setDeleteResult] = useState("");
 
+	/* Query per recuperare gli agenti */
 	const GET_AGENTS = gql`
 		query GetAgents {
 			getAgents {
@@ -73,6 +75,7 @@ export default function ManagerAgentsTable() {
 		}
 	`;
 
+	/* Query per cancellare un agente*/
 	const DELETE_AGENT = gql`
 		mutation DeleteAgent($agentCode: String!) {
 			deleteAgent(agentCode: $agentCode)

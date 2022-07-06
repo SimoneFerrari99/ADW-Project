@@ -1,3 +1,4 @@
+/* TABELLA ORDINI PRESENTE NELLA TABELLA ORDINI */
 import { Fragment, useState } from "react";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 
@@ -24,6 +25,7 @@ import {
 import OpenEditOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenEditOrderDialogButton";
 import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
+/* Celle della tabella */
 const headCells = [
 	{
 		id: "ordNum",
@@ -69,6 +71,7 @@ export default function ManagerOrdersTable() {
 
 	const [deleteResult, setDeleteResult] = useState("");
 
+	/* Query per recuperare gli ordini */
 	const GET_ORDERS = gql`
 		query GetOrders {
 			getOrders {
@@ -87,6 +90,7 @@ export default function ManagerOrdersTable() {
 		}
 	`;
 
+	/* Query per cancellare un ordine */
 	const DELETE_ORDER = gql`
 		mutation DeleteOrder($ordNum: Int!) {
 			deleteOrder(ordNum: $ordNum)

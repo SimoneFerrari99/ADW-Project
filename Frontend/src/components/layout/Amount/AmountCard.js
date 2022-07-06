@@ -1,6 +1,9 @@
+/* CARD PER GLI AMOUNT */
+
 import { Box, Card, Typography, CardContent, Skeleton } from "@mui/material";
 
 import SnackMessage from "../Snack/SnackMessage";
+
 import { connectionError } from "../../../utils/strings";
 
 export default function AmountCard({ title, icon, data, loading, error }) {

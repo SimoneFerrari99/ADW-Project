@@ -1,3 +1,5 @@
+/* COMPONENTE PER LA APP BAR */
+
 import { useState } from "react";
 import { ReactSession } from "react-client-session";
 import { useQuery, gql } from "@apollo/client";
@@ -17,6 +19,7 @@ export default function MenuAppBar({
 	setAuth,
 	darkModeButton,
 }) {
+	/* Query per prendere il nome utente */
 	const getUserName = gql`
 	query GetName {${userType === "C" ? "customerById" : "agentById"}(
 		${userType === "C" ? "custCode" : "agentCode"}: ${'"' + code + '"'}) {

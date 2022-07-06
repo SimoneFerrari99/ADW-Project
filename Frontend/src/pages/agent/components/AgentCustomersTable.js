@@ -1,3 +1,5 @@
+/* COMPONENTE PER LA TABELLA DEI CLIENTI ASSOCIATI ALL'AGENT */
+
 import { Fragment, useState } from "react";
 import { ReactSession } from "react-client-session";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
@@ -14,6 +16,7 @@ import {
 	customerTablePaginationLabel,
 } from "../../../utils/strings";
 
+/* Colonne della tabella */
 const headCells = [
 	{
 		id: "custCode",
@@ -37,14 +40,14 @@ const headCells = [
 	},
 ];
 
+/* Componente principale */
 export default function AgentCustomersTable() {
-	const client = useApolloClient();
-
 	const [order, setOrder] = useState("asc");
 	const [orderBy, setOrderBy] = useState("ordNum");
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
+	/* Query per recuperare i customers tramite agent code */
 	const GET_CUSTOMERS = gql`
 		query GetCustomersByAgentCode($agentCode: String!) {
 			customersByAgentCode(agentCode: $agentCode) {

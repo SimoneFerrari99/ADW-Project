@@ -1,3 +1,4 @@
+/* TABELLA PER RIPRISTINARE I CLIENTI */
 import { Fragment, useState } from "react";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 
@@ -24,6 +25,7 @@ import {
 
 import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
+/* Colonne della tabella*/
 const headCells = [
 	{
 		id: "custCode",
@@ -57,6 +59,7 @@ export default function ManagerRestoreCustomersTable() {
 
 	const [restoreResult, setRestoreResult] = useState("");
 
+	/* Query per recuperare i customers */
 	const GET_CUSTOMERS = gql`
 		query GetCustomers {
 			getCustomers {
@@ -80,6 +83,7 @@ export default function ManagerRestoreCustomersTable() {
 		}
 	`;
 
+	/* Query per ripristinare cliente*/
 	const RESTORE_CUSTOMER = gql`
 		mutation RestoreCustomer($custCode: String!) {
 			restoreCustomer(custCode: $custCode)

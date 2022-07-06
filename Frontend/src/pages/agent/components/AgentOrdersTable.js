@@ -1,3 +1,5 @@
+/* COMPONENTE PER LA TABELLA DEI ORDINI ASSOCIATI ALL'AGENT */
+
 import { Fragment, useState } from "react";
 import { ReactSession } from "react-client-session";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
@@ -26,6 +28,7 @@ import OpenEditOrderDialogButton from "../../../components/layout/Dialog/DialogO
 import OpenNewOrderDialogButton from "../../../components/layout/Dialog/DialogOpener/OpenNewOrderDialogButton";
 import SnackMessage from "../../../components/layout/Snack/SnackMessage";
 
+/* Colonne della tabella */
 const headCells = [
 	{
 		id: "ordNum",
@@ -57,6 +60,7 @@ const headCells = [
 	},
 ];
 
+/* Componente principale */
 export default function AgentOrdersTable() {
 	const client = useApolloClient();
 
@@ -67,6 +71,7 @@ export default function AgentOrdersTable() {
 
 	const [deleteResult, setDeleteResult] = useState("");
 
+	/* Query per recuperare gli ordini associati all'agente */
 	const agentOrders = gql`
 		query GetOrdersByAgentId($agentCode: String!) {
 			ordersByAgentAgentCode(agentCode: $agentCode) {

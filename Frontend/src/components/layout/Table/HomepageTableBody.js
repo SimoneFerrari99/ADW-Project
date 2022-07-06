@@ -1,3 +1,5 @@
+/* COMPONENTE PER IL BODY DELLA TABELLA PRINCIPLAE DELLA PAGINA UTENTI */
+
 import { Fragment } from "react";
 
 import { Box, TableCell, Paper, Skeleton, TableRow } from "@mui/material";
@@ -25,23 +27,34 @@ export default function HomepageTableBody({
 	rowsPerPage,
 	setRowsPerPage,
 }) {
+	/* Funzione per gestire la richiesta di sorting della tabella */
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
 		setOrder(isAsc ? "desc" : "asc");
 		setOrderBy(property);
 	};
 
+	/* Funzione per gestire la richiesta di cambio pagina */
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
 	};
 
+	/* Funzione per gestire la richiesta di cambio numero righe visualizzate */
 	const handleChangeRowsPerPage = (event) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
 
 	if (loading) {
-		return <Skeleton variant="rectangular" animation="wave" width={"100%"} height={200} sx={{ borderRadius: 2 }} />;
+		return (
+			<Skeleton
+				variant="rectangular"
+				animation="wave"
+				width={"100%"}
+				height={200}
+				sx={{ borderRadius: 2 }}
+			/>
+		);
 	}
 
 	if (error) {
@@ -54,7 +67,9 @@ export default function HomepageTableBody({
 		);
 	}
 
-	const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+	/* Calcolo di eventuale spazio da aggiugnere all'ultima pagina per fixare il "salto" del layout*/
+	const emptyRows =
+		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
 	return (
 		<Box sx={{ width: "100%", boxShadow: 4 }}>

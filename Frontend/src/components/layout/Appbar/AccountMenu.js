@@ -1,3 +1,5 @@
+/* COMPONENTE PER L'ICONA DEL PROFILO NELLA APP BAR*/
+
 import { useState, Fragment } from "react";
 
 import { Box, Avatar, IconButton, Tooltip } from "@mui/material";

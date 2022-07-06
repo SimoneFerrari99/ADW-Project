@@ -1,3 +1,4 @@
+/* RIGA DI AMOUNT CARD DELLA PAGINA CUSTOMER */
 import { useQuery, gql } from "@apollo/client";
 import { ReactSession } from "react-client-session";
 
@@ -19,6 +20,7 @@ import {
 	outstandingAmountCardLabel,
 } from "../../../utils/strings";
 
+/* Query per recuperare gli amount del cliente*/
 const amounts = gql`
 	query GetAmounts($custCode: String!) {
 		customerById(custCode: $custCode) {
@@ -31,6 +33,7 @@ const amounts = gql`
 `;
 
 export default function AmountRow() {
+	/* Esecuzione della query */
 	const { data, loading, error } = useQuery(amounts, {
 		variables: {
 			custCode: ReactSession.get("code"),

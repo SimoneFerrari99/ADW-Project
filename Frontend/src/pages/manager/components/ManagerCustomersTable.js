@@ -1,3 +1,4 @@
+/* TABELLA CLIENTI PRESENTE NELLA PAGINA DEL MANAGER */
 import { Fragment, useState } from "react";
 import { gql, useQuery, useApolloClient } from "@apollo/client";
 

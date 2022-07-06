@@ -1,3 +1,5 @@
+/* COMPONENTE PER LA STRUTTURA DELLA TABELLA PRINCPALE DELLA PAGINA UTENTE */
+
 import { Fragment } from "react";
 
 import { visuallyHidden } from "@mui/utils";
@@ -16,6 +18,7 @@ import {
 	Box,
 } from "@mui/material";
 
+/* HEADER DELLA TABELLA */
 function CustomTableHead({ order, orderBy, onRequestSort, headCells }) {
 	const createSortHandler = (property) => (event) => {
 		onRequestSort(event, property);
@@ -51,6 +54,7 @@ function CustomTableHead({ order, orderBy, onRequestSort, headCells }) {
 	);
 }
 
+/* TOOLBAR DELLA TABELLA */
 const CustomTableToolbar = ({ title, headerButtons }) => {
 	return (
 		<Toolbar
@@ -74,6 +78,7 @@ const CustomTableToolbar = ({ title, headerButtons }) => {
 	);
 };
 
+/* COMPONENTE PRINCIPALE */
 export default function HomepageTable({
 	headCells,
 	title,

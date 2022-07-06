@@ -1,3 +1,5 @@
+/* COMPONENTE PER LA GESTIONE DELLE TABS NELLA PAGINA PRINCIPALE */
+
 import { useState } from "react";
 import PropTypes from "prop-types";
 

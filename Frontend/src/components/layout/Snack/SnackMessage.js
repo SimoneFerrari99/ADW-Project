@@ -1,3 +1,5 @@
+/* COMPONENTE PER I MESSAGGI DI FEEDBACK */
+
 import { useState } from "react";
 
 import Box from "@mui/material/Box";

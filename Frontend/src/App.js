@@ -1,3 +1,4 @@
+/* COMPONENTE PRINCIPALE APPLICAZIONE */
 import { Fragment, useState, useContext } from "react";
 import { gql, useApolloClient } from "@apollo/client";
 import { ReactSession } from "react-client-session";
@@ -23,6 +24,7 @@ export default function App({ ColorModeContext }) {
 	const userType = String(ReactSession.get("userType"));
 	const code = String(ReactSession.get("code"));
 
+	/* Recupero info utente connesso */
 	const GET_USER_INFO = gql`
 		query getUserInfo($code: String!) {
 			userById(code: $code) {
@@ -31,6 +33,7 @@ export default function App({ ColorModeContext }) {
 		}
 	`;
 
+	/* Controlo se ancora autenticato */
 	const checkAuth = async function () {
 		const { data } = await client.query({
 			query: GET_USER_INFO,
