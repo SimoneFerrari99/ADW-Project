@@ -9,7 +9,6 @@ import java.util.Optional;
 
 
 @Repository
-// TODO: Inserire tutte le query
 public interface OrderRepository extends JpaRepository<Order, Integer> {        //Repository is a mechanism for encapsulating storage, retrieval, and search behavior which emulates a collection of objects.
 
     Optional<Order> findById(int ordNum);

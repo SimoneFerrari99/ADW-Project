@@ -2,18 +2,14 @@ package com.adwProject.Backend.secondary.service.user;
 
 import com.adwProject.Backend.secondary.dto.UserInput;
 import com.adwProject.Backend.secondary.entity.User;
-import com.adwProject.Backend.secondary.entity.enums.Typology;
 import com.adwProject.Backend.secondary.map.MapUser;
 import com.adwProject.Backend.secondary.repository.UserRepository;
 import com.adwProject.Backend.utility.Utility;
-import graphql.GraphQLException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
 import java.util.Optional;
 
 @Service
@@ -83,6 +79,16 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findById(code).orElse(null);
 
         if(user != null){
+            if(userInput.getTypology() != null) {
+                mapUser.mapInputToUpdateTypologyUser(userInput, user);
+                userRepository.save(user);
+                return user;
+            }
+            if(userInput.getPw() != null) {
+                mapUser.mapInputToUpdatePasswordUser(userInput, user);
+                userRepository.save(user);
+                return user;
+            }
             mapUser.mapInputToUpdateUser(userInput, user);
             userRepository.save(user);
             return user;
