@@ -3,6 +3,7 @@
 import { useState, Fragment } from "react";
 
 import { Box, Avatar, IconButton, Tooltip } from "@mui/material";
+import { purple } from "@mui/material/colors";
 
 import ProfileMenu from "./ProfileMenu";
 
@@ -32,7 +33,7 @@ export default function AccountMenu({
 						aria-haspopup="true"
 						aria-expanded={open ? "true" : undefined}
 					>
-						<Avatar sx={{ width: 32, height: 32 }}>
+						<Avatar sx={{ width: 32, height: 32, bgcolor: purple[500] }}>
 							{userName && userName.charAt(0).toUpperCase()}
 						</Avatar>
 					</IconButton>
