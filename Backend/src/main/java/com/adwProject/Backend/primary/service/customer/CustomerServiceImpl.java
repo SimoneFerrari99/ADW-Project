@@ -28,7 +28,6 @@ public class CustomerServiceImpl implements CustomerService {
     private final UserRepository userRepository;
     private final MapCustomer mapCustomer;
 
-    @RequestMapping(value="/primary")
     @Override
     public Customer getById(String custCode) {
         return customerRepository.findById(custCode).orElse(null);
@@ -62,19 +61,16 @@ public class CustomerServiceImpl implements CustomerService {
         throw new GraphQLException("There is no Customer according with id: " + custCode);
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public List<Customer> getCustomersByAgentCode(String agentCode) {
         return customerRepository.findCustomerByAgentAgentCode(agentCode).orElse(null);
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public Boolean deleteCustomer(String custCode) {
         List<Order> orders = orderRepository.findByCustomerCustCode(custCode).orElse(null);
@@ -115,7 +111,6 @@ public class CustomerServiceImpl implements CustomerService {
         return false;
     }
 
-    @RequestMapping(value="/primary")
     private Agent findAgentById(String agentCode) {
         Agent agent = agentRepository.findById(agentCode).orElse(null);
         if (agent == null)

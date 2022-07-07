@@ -26,19 +26,16 @@ public class AgentServiceImpl implements AgentService {
     private final UserRepository userRepository;
     private final MapAgent mapAgent;
 
-    @RequestMapping(value="/primary")
     @Override
     public Agent getById(String agentCode) {
         return agentRepository.findById(agentCode).orElse(null);
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public List<Agent> getAgents() {
         return agentRepository.findAll();
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public Boolean deleteAgent(String agentCode) {
         List<Order> orders = orderRepository.findByAgentAgentCode(agentCode).orElse(null);
@@ -80,7 +77,6 @@ public class AgentServiceImpl implements AgentService {
         return false;
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public Agent createOrUpdateAgent(String agentCode, AgentInput agentInput) {
         if(agentCode == null) {
@@ -97,7 +93,6 @@ public class AgentServiceImpl implements AgentService {
         throw new GraphQLException("There is no Agent according with id: " + agentCode);
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public Boolean restoreAgent(String agentCode) {
         Agent agent = agentRepository.findById(agentCode).orElse(null);

@@ -18,13 +18,11 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final MapUser mapUser;
 
-    @RequestMapping(value="/secondary")
     @Override
     public User getById(String code) {
         return userRepository.findById(code).orElse(null);
     }
 
-    @RequestMapping(value="/secondary")
     @Override
     public User userAuth(String email, String password) {
         User user = userRepository.findByEmail(email).orElse(null);
@@ -35,7 +33,6 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
-    @RequestMapping(value="/secondary")
     @Override
     public Boolean updatePassword(String code, String password) {
         Optional<User> optionalUser = userRepository.findById(code);
@@ -51,7 +48,6 @@ public class UserServiceImpl implements UserService{
         return false;
     }
 
-    @RequestMapping(value="/secondary")
     @Override
     public Boolean restoreUser(String code) {
         Optional<User> optionalUser = userRepository.findById(code);
@@ -66,7 +62,6 @@ public class UserServiceImpl implements UserService{
         return false;
     }
 
-    @RequestMapping(value="/secondary")
     @Override
     public User createUser(UserInput userInput) {
         User user = mapUser.mapInputToCreateUser(userInput);

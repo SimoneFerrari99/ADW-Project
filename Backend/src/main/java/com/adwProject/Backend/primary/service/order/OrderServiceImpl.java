@@ -24,25 +24,21 @@ public class OrderServiceImpl implements OrderService{
     private final AgentRepository agentRepository;
     private final MapOrder mapOrder;
 
-    @RequestMapping(value="/primary")
     @Override
     public Order getById(int ordNum) {
         return orderRepository.findById(ordNum).orElse(null);
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public List<Order> getByCustomerCustCode(String custCode) {
         return orderRepository.findByCustomerCustCode(custCode).orElse(null);
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public List<Order> getByAgentAgentCode(String agentCode) {
         return orderRepository.findByAgentAgentCode(agentCode).orElse(null);
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public Boolean deleteOrder(int ordNum) {
         if(orderRepository.existsById(ordNum)) {
@@ -52,7 +48,6 @@ public class OrderServiceImpl implements OrderService{
         return false;
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public List<Order> getOrders(String custCode, String agentCode) {
         if(custCode == null && agentCode == null) {
@@ -66,7 +61,6 @@ public class OrderServiceImpl implements OrderService{
         }
     }
 
-    @RequestMapping(value="/primary")
     @Override
     public Order createOrUpdateOrder(Integer ordNum, OrderInput orderInput) {
         if(ordNum == null) {
@@ -83,7 +77,6 @@ public class OrderServiceImpl implements OrderService{
         throw new GraphQLException("There is no Order according with id: " + ordNum);
     }
 
-    @RequestMapping(value="/primary")
     private Customer findCustomerById(String id) {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer == null)
@@ -92,7 +85,6 @@ public class OrderServiceImpl implements OrderService{
         return customer;
     }
 
-    @RequestMapping(value="/primary")
     private Agent findAgentById(String id) {
         Agent agent = agentRepository.findById(id).orElse(null);
         if (agent == null)
