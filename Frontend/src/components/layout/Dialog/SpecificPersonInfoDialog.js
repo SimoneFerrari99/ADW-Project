@@ -103,12 +103,18 @@ export default function SpecificPersonInfoDialog({
 									alignItems: "center",
 								}}
 							>
-								<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+								<Typography
+									variant="h3"
+									sx={{ fontSize: "1.3rem", fontWeight: "bold" }}
+								>
 									{(custCode && data.customerById.custName) ||
 										(agentCode && data.agentById.agentName)}
 								</Typography>
 
-								<Typography sx={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+								<Typography
+									variant="h4"
+									sx={{ fontSize: "1.3rem", fontWeight: "bold" }}
+								>
 									{custCode || agentCode}
 								</Typography>
 							</Box>

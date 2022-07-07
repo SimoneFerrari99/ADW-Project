@@ -2,7 +2,7 @@
 
 import { Fragment, useState } from "react";
 import { ReactSession } from "react-client-session";
-import { gql, useQuery, useApolloClient } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 import { Box, TableCell, Paper, TableRow } from "@mui/material";
 
