@@ -112,6 +112,17 @@ export default function HomepageTable({
 			<TablePagination
 				rowsPerPageOptions={[5, 10, 25, 50]}
 				labelRowsPerPage={paginationLabel}
+				getItemAriaLabel={(type) => {
+					if (type === "first") {
+						return "Prima pagina";
+					} else if (type === "last") {
+						return "Ultima pagina";
+					} else if (type === "next") {
+						return "Pagina successiva";
+					} else if (type === "previous") {
+						return "Pagina precedente";
+					}
+				}}
 				component="div"
 				count={rows.length}
 				rowsPerPage={rowsPerPage}
